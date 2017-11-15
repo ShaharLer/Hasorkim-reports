@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Hasorkim</string>
+    <string name="new_report">New Report</string>
+    <string name="title_activity_maps">Map</string>
 </resources>
