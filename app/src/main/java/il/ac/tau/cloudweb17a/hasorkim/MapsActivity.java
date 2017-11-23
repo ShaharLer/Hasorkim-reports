@@ -36,7 +36,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     // A default location (Tel Aviv, Israel) and default zoom to use when location permission is
     // not granted.
-    private final LatLng mDefaultLocation = new LatLng(32.0879122, 34.7272056);
+    private final LatLng mDefaultPoint = new LatLng(32.075776, 34.774243);
+    private final Location mDefaultLocation = new Location("");
     private static final int DEFAULT_ZOOM = 15;
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
     private boolean mLocationPermissionGranted;
@@ -72,6 +73,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        mDefaultLocation.setLatitude(mDefaultPoint.latitude);
+        mDefaultLocation.setLongitude(mDefaultPoint.longitude);
     }
 
     /**
@@ -121,6 +125,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                         if (task.isSuccessful()) {
                             // Set the map's camera position to the current location of the device.
                             mLastKnownLocation = task.getResult();
+                            if (mLastKnownLocation == null) {mLastKnownLocation = mDefaultLocation;}
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
                                     new LatLng(mLastKnownLocation.getLatitude(),
                                             mLastKnownLocation.getLongitude()), DEFAULT_ZOOM));
@@ -128,7 +133,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                             Log.d(TAG, "Current location is null. Using defaults.");
                             Log.e(TAG, "Exception: %s", task.getException());
                             mMap.moveCamera(CameraUpdateFactory
-                                    .newLatLngZoom(mDefaultLocation, DEFAULT_ZOOM));
+                                    .newLatLngZoom(mDefaultPoint, DEFAULT_ZOOM));
                             mMap.getUiSettings().setMyLocationButtonEnabled(false);
                         }
                     }
@@ -194,7 +199,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             } else {
                 mMap.setMyLocationEnabled(false);
                 mMap.getUiSettings().setMyLocationButtonEnabled(false);
-                mLastKnownLocation = null;
+                mLastKnownLocation = mDefaultLocation;
                 getLocationPermission();
             }
         } catch (SecurityException e)  {
