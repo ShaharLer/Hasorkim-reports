@@ -93,9 +93,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         // Prompt the user for permission.
         getLocationPermission();
 
-        // Turn on the My Location layer and the related control on the map.
-        updateLocationUI();
-
         // Get the current location of the device and set the position of the map.
         getDeviceLocation();
 
@@ -195,7 +192,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 mMap.setMyLocationEnabled(false);
                 mMap.getUiSettings().setMyLocationButtonEnabled(false);
                 mLastKnownLocation = null;
-                getLocationPermission();
             }
         } catch (SecurityException e)  {
             Log.e("Exception: %s", e.getMessage());

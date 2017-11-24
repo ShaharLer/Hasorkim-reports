@@ -15,3 +15,4 @@ app/build
 .idea/runConfigurations.xml
 .idea/vcs.xml
 app/google-services.json
+/app/src/debug/res/values/google_maps_api.xml
