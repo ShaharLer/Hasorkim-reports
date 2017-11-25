@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center"
-    tools:context="il.ac.tau.cloudweb17a.hasorkim.MainActivity">
+    tools:context="il.ac.tau.cloudweb17a.hasorkim.VetListActivity">
+
 
     <ImageView
         android:contentDescription="@string/logo_content_description"
@@ -14,7 +14,10 @@
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
         app:srcCompat="@drawable/full_logo"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp" />
+        />
 
+    <ListView
+        android:id="@+id/list_view_vets"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </LinearLayout>

@@ -62,9 +62,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             mCameraPosition = savedInstanceState.getParcelable(KEY_CAMERA_POSITION);
         }
 
-        setContentView(R.layout.activity_maps);
-
-        mCurrentLocationTextView = findViewById(R.id.tv_current_location);
+        setContentView(R.layout.activity_report_event);
 
         // Construct a FusedLocationProviderClient.
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
@@ -215,8 +213,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     @Override
     public void onCameraIdle() {
-        LatLng target = mMap.getCameraPosition().target;
-        mCurrentLocationTextView.setText(String.format("Current location:\n Lat: %s\n Lon: %s", Double.toString(target.latitude), Double.toString(target.longitude)));
+        //LatLng target = mMap.getCameraPosition().target;
+        //mCurrentLocationTextView.setText(String.format("Current location:\n Lat: %s\n Lon: %s", Double.toString(target.latitude), Double.toString(target.longitude)));
 
     }
 }

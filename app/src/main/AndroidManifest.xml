@@ -17,7 +17,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
-            
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <meta-data
@@ -26,14 +30,22 @@
 
         <activity
             android:name=".MapsActivity"
-            android:label="@string/title_activity_maps">
-
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:label="@string/title_activity_maps" />
+        <activity
+            android:name=".NewEventVetQuestionActivity"
+            android:label="@string/title_activity_new_report" />
+        <activity
+            android:name=".ReportEventActivity"
+            android:label="@string/title_activity_report_event" />
+        <activity
+            android:name=".VetListActivity"
+            android:label="@string/title_activity_vet_list" />
+        <activity
+            android:name=".NewEventHaveDogMsgActivity"
+            android:label="@string/title_activity_have_dog_msg" />
+        <activity
+            android:name=".NewEventMoreDetailsRequestActivity"
+            android:label="@string/title_more_details_request"/>
     </application>
 
 </manifest>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="new_report_size">36sp</dimen>
+    <dimen name="button_text_size">24sp</dimen>
+    <dimen name="standard_padding">16dp</dimen>
+    <dimen name="standard_text_size">24sp</dimen>
+</resources>

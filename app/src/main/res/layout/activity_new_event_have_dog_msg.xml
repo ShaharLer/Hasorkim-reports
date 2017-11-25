@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:paddingTop="@dimen/standard_padding"
+    android:paddingBottom="@dimen/standard_padding"
+    tools:context="il.ac.tau.cloudweb17a.hasorkim.NewEventHaveDogMsgActivity">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0sp"
+        android:layout_weight="3"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:textStyle="bold">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/standard_padding"
+            android:paddingBottom="@dimen/standard_padding"
+            android:text="@string/text_new_event_have_dog_msg_please"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textSize="@dimen/standard_text_size"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/standard_padding"
+            android:paddingBottom="@dimen/standard_padding"
+            android:text="@string/text_new_event_have_dog_msg_if"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textSize="@dimen/standard_text_size"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0sp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:paddingTop="@dimen/standard_padding"
+        android:gravity="bottom|center"
+        style="?android:attr/buttonBarStyle">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/button_new_event_have_dog_continue"
+            android:textSize="@dimen/button_text_size"
+            android:onClick="openMoreDetailsRequest"
+            style="?android:attr/buttonBarButtonStyle"
+            />
+    </LinearLayout>
+
+
+</LinearLayout>
