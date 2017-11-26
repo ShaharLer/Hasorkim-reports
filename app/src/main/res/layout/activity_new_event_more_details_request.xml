@@ -7,13 +7,15 @@
     android:orientation="vertical"
     android:paddingTop="@dimen/standard_padding"
     android:paddingBottom="@dimen/standard_padding"
+    android:paddingRight="@dimen/standard_padding"
+    android:paddingLeft="@dimen/standard_padding"
     android:gravity="center"
     tools:context="il.ac.tau.cloudweb17a.hasorkim.NewEventMoreDetailsRequestActivity">
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="0sp"
-        android:layout_weight="1"
+        android:layout_weight="2"
         android:orientation="vertical"
         android:gravity="center"
         android:textStyle="bold">
@@ -26,5 +28,78 @@
             android:textStyle="bold"
             android:gravity="center"
             android:textSize="@dimen/standard_text_size"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0sp"
+        android:layout_weight="2"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:textStyle="bold">
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="0sp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Please Enter phone number"
+            android:inputType="phone"
+            android:singleLine="true" />
+        <TextView
+            android:layout_width="0sp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/standard_padding"
+            android:paddingBottom="@dimen/standard_padding"
+            android:text=":Phone number"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textSize="@dimen/standard_text_size"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0sp"
+        android:layout_weight="2"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:paddingBottom="@dimen/standard_padding"
+        android:textStyle="bold">
+
+        <ImageButton
+            android:id="@+id/imageButtonReport"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            app:srcCompat="@android:drawable/ic_menu_camera"
+            android:onClick="pickPhotoFromGallery"/>
+
+        <TextView
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingBottom="@dimen/standard_padding"
+            android:paddingTop="@dimen/standard_padding"
+            android:text=":Image"
+            android:textSize="@dimen/standard_text_size"
+            android:textStyle="bold" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0sp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:textStyle="bold">
+
+        <Button
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/button_new_event_more_details_submit"
+            android:textSize="@dimen/button_text_size"
+            android:background="@android:color/holo_red_dark"
+            style="?android:attr/buttonBarButtonStyle"
+            android:onClick="openVetList"/>
     </LinearLayout>
 </LinearLayout>

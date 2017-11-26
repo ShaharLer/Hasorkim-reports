@@ -7,7 +7,7 @@
     <string name="title_activity_new_report">New Event</string>
     <string name="text_new_event_vet_found">Few Vet clinics have been found open in your area.</string>
     <string name="text_new_event_vet_question">Can you take the dog to one of the clinics?</string>
-    <string name="button_new_event_see_details">See details</string>
+    <string name="button_new_event_see_vet_list">See details</string>
     <string name="button_new_event_i_can_t">I can\'t</string>
     <string name="title_activity_vet_list">Veterinary clinics</string>
     <string name="logo_content_description">Logo</string>
@@ -17,4 +17,5 @@
     <string name="text_new_event_have_dog_msg_if">If the dog is not with you, we will not be able to send anyone to help</string>
     <string name="title_more_details_request">More details</string>
     <string name="text_new_event_we_will_check_report">We will check you report as soon as we have those details:</string>
+    <string name="button_new_event_more_details_submit">Submit report</string>
 </resources>
