@@ -3,6 +3,7 @@ package il.ac.tau.cloudweb17a.hasorkim;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -47,5 +48,11 @@ public class VetListActivity extends AppCompatActivity {
         startActivity(new Intent(VetListActivity.this, ReportEventActivity.class));
         finish();
 
+    }
+
+    public void openReportDetails(View view)
+    {
+        Intent intent = new Intent(VetListActivity.this, NewEventMoreDetailsRequestActivity.class);
+        startActivity(intent);
     }
 }

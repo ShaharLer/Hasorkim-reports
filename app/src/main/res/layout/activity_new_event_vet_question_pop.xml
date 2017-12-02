@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_alignParentBottom="true"
+    android:background="@android:color/holo_orange_light"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+    <!--xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"-->
+    <!--tools:context="il.ac.tau.cloudweb17a.hasorkim.NewEventVetQuestionActivity">-->
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="8sp"
+        android:paddingLeft="@dimen/standard_padding"
+        android:paddingRight="@dimen/standard_padding"
+        android:paddingTop="8sp"
+        android:text="@string/text_new_event_vet_found"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/standard_text_size"
+        android:textStyle="bold" />
+
+    <!--   <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="fill_parent"
+        android:layout_height="300sp"
+
+        tools:context="il.ac.tau.cloudweb17a.hasorkim.MapsActivity" />
+-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/standard_padding"
+        android:paddingRight="@dimen/standard_padding"
+        android:text="@string/text_new_event_vet_question"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/standard_text_size"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        style="?android:attr/buttonBarStyle"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/goToVetList"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="0sp"
+            android:layout_weight="1"
+            android:text="@string/button_new_event_see_vet_list"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/button_text_size" />
+
+        <Button
+            android:id="@+id/goToReportDetails"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="0sp"
+            android:layout_weight="1"
+            android:text="@string/button_new_event_i_can_t"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/button_text_size" />
+    </LinearLayout>
+
+
+</LinearLayout>

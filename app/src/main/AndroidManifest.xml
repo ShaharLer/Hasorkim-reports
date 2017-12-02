@@ -9,7 +9,13 @@
          location permissions for the 'MyLocation' functionality. 
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+         />
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+         />
 
     <application
         android:allowBackup="true"
@@ -34,20 +40,21 @@
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" />
         <activity
-            android:name=".NewEventVetQuestionActivity"
-            android:label="@string/title_activity_new_report" />
-        <activity
             android:name=".ReportEventActivity"
             android:label="@string/title_activity_report_event" />
         <activity
             android:name=".VetListActivity"
             android:label="@string/title_activity_vet_list" />
         <activity
-            android:name=".NewEventHaveDogMsgActivity"
-            android:label="@string/title_activity_have_dog_msg" />
-        <activity
             android:name=".NewEventMoreDetailsRequestActivity"
-            android:label="@string/title_more_details_request"/>
+            android:label="@string/title_more_details_request" />
+        <activity
+            android:name=".ActiveReportActivity"
+            android:label="Active report" />
+        <activity
+            android:name=".BaseActivity"
+            android:label="@string/title_activity_base"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

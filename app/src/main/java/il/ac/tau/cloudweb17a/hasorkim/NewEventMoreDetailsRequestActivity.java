@@ -9,27 +9,50 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
 import java.io.File;
 
-public class NewEventMoreDetailsRequestActivity extends AppCompatActivity {
+public class NewEventMoreDetailsRequestActivity extends BaseActivity {
 
     public static final int PHOTO_INTENT_REQUEST_CODE = 10;
     public static final int EXTERNAL_STORAGE_PERMISSION_REQUEST_CODE = 20;
 
+    private LayoutInflater layoutInflater;
+    private ViewGroup thisContainer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_event_more_details_request);
-    }
+        //setContentView(R.layout.activity_new_event_more_details_request);
 
-    public void pickPhotoFromGallery(View view)
-    {
-        requestPermission();
+        layoutInflater = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
 
+        thisContainer = (ViewGroup) layoutInflater.inflate(R.layout.activity_new_event_more_details_request, null);
+
+        mDrawer.addView(thisContainer, 0);
+
+        ImageButton imageButtonReport = thisContainer.findViewById(R.id.imageButtonReport);
+        imageButtonReport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                requestPermission();
+            }
+        });
+
+        Button submitReport = thisContainer.findViewById(R.id.submitReport);
+        submitReport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(NewEventMoreDetailsRequestActivity.this, ActiveReportActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void createPhotoIntent() {
@@ -63,7 +86,7 @@ public class NewEventMoreDetailsRequestActivity extends AppCompatActivity {
         if (resultCode == RESULT_OK){
             if (requestCode == PHOTO_INTENT_REQUEST_CODE){
                 Uri photoUri = data.getData();
-                ImageButton imageButton = (ImageButton) findViewById(R.id.imageButtonReport);
+                ImageButton imageButton = (ImageButton) thisContainer.findViewById(R.id.imageButtonReport);
                 imageButton.setImageURI(photoUri);
             }
         }
@@ -85,4 +108,5 @@ public class NewEventMoreDetailsRequestActivity extends AppCompatActivity {
 
 
     }
+
 }
