@@ -46,7 +46,7 @@ public class ReportEventActivity extends BaseActivity {
 
                 popupWindow = new PopupWindow(container, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, false);
                 popupWindow.showAtLocation(mDrawer, Gravity.NO_GRAVITY, 100, 700);
-                //mDrawer.setAlpha(0.5F);
+                mDrawer.setAlpha(0.5F);
                 //container.getBackground().setAlpha(120);
                 //container.setBackgroundColor(Color.GRAY);
 

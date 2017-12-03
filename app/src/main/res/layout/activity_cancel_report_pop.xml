@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_alignParentBottom="true"
+    android:background="@android:color/holo_orange_light"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:textStyle="bold"
+        android:layout_marginTop="32sp"
+        android:layout_marginLeft="64sp"
+        android:layout_marginRight="64sp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text=":What happend?"
+            android:textSize="@dimen/standard_text_size"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:layout_marginBottom="@dimen/double_padding"/>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Reason for canceling"
+            android:inputType="textMultiLine"
+            android:layout_marginBottom="@dimen/double_padding"/>
+
+        <Button
+            android:id="@+id/confirmCancelReport"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Cancel Report"
+            android:layout_gravity="center"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/button_text_size" />
+    </LinearLayout>
+
+
+
+</LinearLayout>
