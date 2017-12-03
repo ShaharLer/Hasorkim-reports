@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text=":What happend?"
+            android:text="למה ברצונך לבטל?"
             android:textSize="@dimen/standard_text_size"
             android:textStyle="bold"
             android:textColor="@android:color/black"
@@ -33,7 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="Reason for canceling"
+            android:hint="סיבה לביטול הדיווח"
             android:inputType="textMultiLine"
             android:layout_marginBottom="@dimen/double_padding"/>
 
@@ -43,7 +43,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Cancel Report"
+            android:text="בטל דיווח"
             android:layout_gravity="center"
             android:textColor="@android:color/black"
             android:textSize="@dimen/button_text_size" />

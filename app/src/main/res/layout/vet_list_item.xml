@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:gravity="right"
             android:paddingRight="@dimen/standard_padding"
-            android:text=":Name"
+            android:text="שם המרפאה:"
             android:textSize="@dimen/standard_padding"
             android:textStyle="bold" />
 
@@ -51,7 +51,7 @@
             android:layout_height="wrap_content"
             android:gravity="right"
             android:paddingRight="@dimen/standard_padding"
-            android:text=":Address"
+            android:text="כתובת"
             android:textSize="@dimen/standard_padding"
             android:textStyle="bold" />
 
@@ -76,7 +76,7 @@
             android:layout_height="wrap_content"
             android:gravity="right"
             android:paddingRight="@dimen/standard_padding"
-            android:text=":Openning_hours"
+            android:text="שעות פתיחה"
             android:textSize="@dimen/standard_padding"
             android:textStyle="bold" />
 

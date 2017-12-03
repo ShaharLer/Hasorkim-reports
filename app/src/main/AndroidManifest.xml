@@ -45,7 +45,7 @@
             android:label="@string/title_more_details_request" />
         <activity
             android:name=".ActiveReportActivity"
-            android:label="Active report" />
+            android:label="דיווח פעיל" />
         <activity
             android:name=".BaseActivity"
             android:label="@string/title_activity_base"

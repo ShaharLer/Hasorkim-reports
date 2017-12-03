@@ -13,11 +13,11 @@
     <string name="logo_content_description">Logo</string>
     <string name="title_activity_have_dog_msg">Is the dog with you?</string>
     <string name="button_new_event_have_dog_continue">Continue</string>
-    <string name="text_new_event_have_dog_msg_please">The dog is with me and he cannot escape.</string>
+    <string name="text_new_event_have_dog_msg_please">הכלב נמצא איתי ואינו יכול לברוח</string>
     <string name="text_new_event_have_dog_msg_if">If the dog is not with you, we will not be able to send anyone to help</string>
-    <string name="title_more_details_request">More details</string>
-    <string name="text_new_event_we_will_check_report">Report details:</string>
-    <string name="button_new_event_more_details_submit">Submit report</string>
+    <string name="title_more_details_request">פרטי דיווח</string>
+    <string name="text_new_event_we_will_check_report">פרטי הדיווח:</string>
+    <string name="button_new_event_more_details_submit">שלח דיווח</string>
     <string name="title_activity_base">BaseActivity</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
