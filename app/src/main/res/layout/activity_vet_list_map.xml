@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="il.ac.tau.cloudweb17a.hasorkim.VetListActivity">
+    tools:context="il.ac.tau.cloudweb17a.hasorkim.VetListMapActivity">
 
 
     <ImageView
@@ -17,16 +17,12 @@
         android:layout_marginTop="50sp"
         />
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="5"
-        android:fillViewport="true">
-        <ListView
-            android:id="@+id/list_view_vets"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </ScrollView>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/logo_content_description"
+        android:src="@drawable/temp_map_vets" />
 
 
     <LinearLayout
@@ -38,23 +34,25 @@
         android:gravity="center_vertical">
         <Button
             style="?android:attr/buttonBarButtonStyle"
-            android:id="@+id/openVetMapButton"
+            android:id="@+id/openVetListButton"
             android:layout_width="0sp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="על מפה"
+            android:text="לפרטים"
             android:textColor="@android:color/black"
-            android:textSize="@dimen/button_text_size"/>
+            android:textSize="@dimen/button_text_size" />
 
         <Button
             style="?android:attr/buttonBarButtonStyle"
-            android:id="@+id/openReportDetailsButton"
+
+            android:id="@+id/mapOpenReportDetailsButton"
             android:layout_width="0sp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="המשך לדווח"
             android:textColor="@android:color/black"
             android:textSize="@dimen/button_text_size" />
+
     </LinearLayout>
 
 </LinearLayout>

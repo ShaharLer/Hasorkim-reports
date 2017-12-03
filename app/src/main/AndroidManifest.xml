@@ -50,7 +50,11 @@
             android:name=".BaseActivity"
             android:label="@string/title_activity_base"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ReportListActivity"></activity>
+        <activity android:name=".ReportListActivity" />
+
+        <activity
+            android:name=".VetListMapActivity"
+            android:label="@string/title_activity_vet_list" />
     </application>
 
 </manifest>
