@@ -34,8 +34,8 @@
 
             <LinearLayout
                 android:layout_width="fill_parent"
-                android:layout_height="0sp"
-                android:layout_weight="2"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:gravity="center"
                 android:orientation="horizontal"
                 android:textStyle="bold"
@@ -46,26 +46,31 @@
                     android:layout_width="0sp"
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
-                    android:hint="Name"
+                    android:hint="Shahar"
                     android:inputType="textPersonName"
                     android:singleLine="true"
-                    android:paddingTop="0sp"
+                    android:paddingBottom="4sp"
+                    android:gravity="center_vertical"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@android:color/black"
                     />
 
                 <TextView
                     android:layout_width="0sp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:gravity="center"
                     android:text=":Name"
+                    android:gravity="center"
                     android:textSize="@dimen/standard_text_size"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:alpha="0.2"
+                    />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="fill_parent"
-                android:layout_height="0sp"
-                android:layout_weight="2"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:gravity="center"
                 android:orientation="horizontal"
                 android:textStyle="bold"
@@ -77,11 +82,13 @@
                     android:layout_width="0sp"
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
-                    android:ems="10"
-                    android:hint="Phone number"
+                    android:hint="0544764751"
                     android:inputType="phone"
                     android:singleLine="true"
-                    android:paddingTop="0sp"/>
+                    android:paddingBottom="4sp"
+                    android:gravity="center_vertical"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@android:color/black" />
 
                 <TextView
                     android:layout_width="0sp"
@@ -90,18 +97,19 @@
                     android:gravity="center"
                     android:text=":Phone number"
                     android:textSize="@dimen/standard_text_size"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:alpha="0.2"/>
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="fill_parent"
-                android:layout_height="0sp"
-                android:layout_weight="4"
+                android:layout_height="wrap_content"
+                android:layout_weight="8"
                 android:gravity="center"
                 android:orientation="horizontal"
-                android:layout_marginBottom="@dimen/double_padding"
-                android:layout_marginTop="@dimen/double_padding"
+                android:layout_marginBottom="@dimen/standard_padding"
+                android:layout_marginTop="@dimen/standard_padding"
                 android:textStyle="bold">
 
                 <ImageButton
@@ -118,17 +126,19 @@
                     android:gravity="center"
                     android:text=":Image"
                     android:textSize="@dimen/standard_text_size"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:textColor="@android:color/black"
+                    />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="fill_parent"
-                android:layout_height="0sp"
-                android:layout_weight="4"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
                 android:gravity="center"
                 android:orientation="horizontal"
-                android:layout_margin="@dimen/standard_padding"
-                android:layout_marginTop="@dimen/double_padding"
+                android:layout_marginBottom="@dimen/standard_padding"
+                android:layout_marginTop="@dimen/standard_padding"
                 >
 
                 <CheckBox
@@ -143,13 +153,23 @@
 
             <LinearLayout
                 android:layout_width="fill_parent"
-                android:layout_height="0sp"
+                android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:gravity="center"
                 android:orientation="horizontal"
                 android:textStyle="bold"
                 android:layout_marginBottom="@dimen/standard_padding"
-                android:layout_marginTop="@dimen/double_padding">
+                android:layout_marginTop="@dimen/standard_padding"
+                android:alpha="0.2">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Street Sokolov 14, City Ramat-Gan"
+                    android:gravity="left"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/standard_text_size"/>
 
                 <TextView
                     android:layout_width="0dp"
@@ -164,7 +184,7 @@
 
             <LinearLayout
                 android:layout_width="fill_parent"
-                android:layout_height="0sp"
+                android:layout_height="wrap_content"
                 android:layout_weight="4"
                 android:gravity="center"
                 android:orientation="horizontal"
@@ -186,7 +206,8 @@
                     android:gravity="center"
                     android:text=":More information"
                     android:textSize="@dimen/standard_text_size"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:textColor="@android:color/black"/>
             </LinearLayout>
 
         </LinearLayout>

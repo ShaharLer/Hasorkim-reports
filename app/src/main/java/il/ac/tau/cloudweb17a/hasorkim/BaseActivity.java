@@ -1,5 +1,6 @@
 package il.ac.tau.cloudweb17a.hasorkim;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.design.widget.FloatingActionButton;
@@ -13,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 
 public class BaseActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -88,11 +90,15 @@ public class BaseActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.newReport) {
-            // Handle the camera action
+            Intent intent = new Intent(BaseActivity.this, NewEventMoreDetailsRequestActivity.class);
+            startActivity(intent);
         } else if (id == R.id.myreports) {
+            Intent intent = new Intent(BaseActivity.this, ReportListActivity.class);
+            startActivity(intent);
 
         } else if (id == R.id.vetList) {
-
+            Intent intent = new Intent(BaseActivity.this, VetListActivity.class);
+            startActivity(intent);
         } else if (id == R.id.whoAreWe) {
 
         }

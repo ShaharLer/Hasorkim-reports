@@ -18,6 +18,7 @@ public class VetListActivity extends AppCompatActivity {
 
 
         ArrayList<VeterinaryClinic> vetList = new ArrayList<>();
+
         vetList.add(new VeterinaryClinic("Name1", "Address1",
                 "OpeningHours1"));
         vetList.add(new VeterinaryClinic("Name2", "Address2",

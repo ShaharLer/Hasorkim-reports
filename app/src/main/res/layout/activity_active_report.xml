@@ -71,14 +71,14 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="This that street 4, city lalala"
+                    android:text="Street Sokolov 14, City Ramat-Gan"
                     android:gravity="left"
                     android:textStyle="bold"/>
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:text=":Report location:"
                     android:gravity="right"
                     android:textStyle="bold"
@@ -153,7 +153,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="I have more information"
+                    android:text="Dog looks a bit sick"
                     android:gravity="left"
                     android:textStyle="bold" />
 
