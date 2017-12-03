@@ -5,21 +5,25 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/home"
+            android:icon="@android:drawable/ic_menu_mapmode"
+            android:title="מפה" />
+        <item
             android:id="@+id/newReport"
             android:icon="@drawable/ic_menu_camera"
-            android:title="New Report" />
+            android:title="דיווח חדש" />
         <item
             android:id="@+id/myreports"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="My reports" />
+            android:title="רשימת דיווחים" />
         <item
             android:id="@+id/vetList"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Vet list" />
+            android:icon="@drawable/ic_dog_checked_by_a_veterinary"
+            android:title="רשימת ווטרינרים" />
         <item
             android:id="@+id/whoAreWe"
             android:icon="@drawable/ic_menu_manage"
-            android:title="Who are we" />
+            android:title="מי אנחנו" />
     </group>
 
     <item android:title="Communicate">

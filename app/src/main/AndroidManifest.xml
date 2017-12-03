@@ -50,7 +50,9 @@
             android:name=".BaseActivity"
             android:label="@string/title_activity_base"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ReportListActivity" />
+        <activity
+            android:name=".ReportListActivity"
+            android:label="רשימת דיווחים"/>
 
         <activity
             android:name=".VetListMapActivity"

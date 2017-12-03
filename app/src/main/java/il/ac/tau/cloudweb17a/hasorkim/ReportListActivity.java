@@ -35,22 +35,22 @@ public class ReportListActivity extends BaseActivity {
         ArrayList<Report> reportList = new ArrayList<>();
 
         reportList.add(new Report(1,"Shahar", "1-12-2017 13:52:45", "Street Sokolov 14, City Ramat-Gan",
-                "Scaners on the way", "Dog looks a bit sick", 544764751, "C58",
+                "הסורקים בדרך", "Dog looks a bit sick", 544764751, "C58",
          7));
         reportList.add(new Report(2, "Bar",  "1-12-2017 13:32:08", "Street Arlozorov 51, City Tel-Aviv",
-                "New - Checking", "", 503724771, "",
+                "חדש - בבדיקה", "", 503724771, "",
                 4));
         reportList.add(new Report(3, "Chan", "1-12-2017 07:01:12", "Street Hod 33, City Arad",
-                "Scaners on the way", "Dog is in my yard", 544999701, "S4",
+                "הסורקים בדרך", "Dog is in my yard", 544999701, "S4",
                 1));
         reportList.add(new Report(4, "Boris", "29-11-2017 13:09:16", "Street Tpuach 18, City Tesod Hamahla",
-                "Not found", "Dog is sad", 523864011, "N1",
+                "הכלב לא נמצא", "Dog is sad", 523864011, "N1",
                 3));
         reportList.add(new Report(5, "Momo",  "29-11-2017 18:18:59", "Street Shlavim 27, City Petach Tikva",
-                "Scaners - returned", "", 524710723, "E12",
+                "נסרק - הוחזר", "", 524710723, "E12",
                 13));
         reportList.add(new Report(6,"Gamba", "28-11-2017 19:48:36", "Street Sokolov 4, City Kiryat-Bialic",
-                "Scaned - returned", "I love dogs", 544444891, "N10",
+                "נסרק - נמצא בית", "I love dogs", 544444891, "N10",
                 6));
 
         ReportAdapter adapter = new ReportAdapter(

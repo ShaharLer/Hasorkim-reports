@@ -1,11 +1,7 @@
 package il.ac.tau.cloudweb17a.hasorkim;
 
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Layout;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,7 +38,7 @@ public class ReportEventActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 //layoutInflater = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
-                ViewGroup container = (ViewGroup) layoutInflater.inflate(R.layout.activity_new_event_vet_question_pop, null);
+                ViewGroup container = (ViewGroup) layoutInflater.inflate(R.layout.new_event_vet_question_pop, null);
 
                 popupWindow = new PopupWindow(container, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, false);
                 popupWindow.showAtLocation(mDrawer, Gravity.NO_GRAVITY, 100, 700);

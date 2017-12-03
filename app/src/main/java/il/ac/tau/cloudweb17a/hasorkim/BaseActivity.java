@@ -88,8 +88,11 @@ public class BaseActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
-        if (id == R.id.newReport) {
+        if (id == R.id.home) {
+            Intent intent = new Intent(BaseActivity.this, ReportEventActivity.class);
+            startActivity(intent);
+        }
+        else if (id == R.id.newReport) {
             Intent intent = new Intent(BaseActivity.this, NewEventMoreDetailsRequestActivity.class);
             startActivity(intent);
         } else if (id == R.id.myreports) {

@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:gravity="right"
             android:paddingRight="@dimen/standard_padding"
-            android:text=":Status"
+            android:text="סטטוס:"
             android:textSize="@dimen/standard_padding"
             android:textStyle="bold" />
 
@@ -53,7 +53,7 @@
             android:layout_height="wrap_content"
             android:gravity="right"
             android:paddingRight="@dimen/standard_padding"
-            android:text=":Address"
+            android:text="כתובת:"
             android:textSize="@dimen/standard_padding"
             android:textStyle="bold" />
 
@@ -78,7 +78,7 @@
             android:layout_height="wrap_content"
             android:gravity="right"
             android:paddingRight="@dimen/standard_padding"
-            android:text=":Report time"
+            android:text="זמן הדיווח:"
             android:textSize="@dimen/standard_padding"
             android:textStyle="bold" />
 
