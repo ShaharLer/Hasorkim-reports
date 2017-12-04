@@ -63,9 +63,13 @@ public class ReportListActivity extends BaseActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
 
-                Object o = ((ListView)parent).getItemAtPosition(position);
-                Intent intent = new Intent(ReportListActivity.this, ActiveReportActivity.class);
-                startActivity(intent);
+                //Object o = ((ListView)parent).getItemAtPosition(position);
+                if (position == 0)
+                {
+                    Intent intent = new Intent(ReportListActivity.this, ActiveReportActivity.class);
+                    startActivity(intent);
+                }
+
 
             }
         });
