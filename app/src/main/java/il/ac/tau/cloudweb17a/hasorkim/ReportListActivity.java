@@ -43,7 +43,7 @@ public class ReportListActivity extends BaseActivity {
         reportList.add(new Report(3, "Chan", "1-12-2017 07:01:12", "Street Hod 33, City Arad",
                 "הסורקים בדרך", "Dog is in my yard", 544999701, "S4",
                 1));
-        reportList.add(new Report(4, "Boris", "29-11-2017 13:09:16", "Street Tpuach 18, City Tesod Hamahla",
+        reportList.add(new Report(4, "Boris", "29-11-2017 13:09:16", "Street Tpuach 18, City Yesod Hamahla",
                 "הכלב לא נמצא", "Dog is sad", 523864011, "N1",
                 3));
         reportList.add(new Report(5, "Momo",  "29-11-2017 18:18:59", "Street Shlavim 27, City Petach Tikva",
