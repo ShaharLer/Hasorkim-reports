@@ -18,6 +18,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
@@ -36,7 +37,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     // A default location (Tel Aviv, Israel) and default zoom to use when location permission is
     // not granted.
-    private final LatLng mDefaultLocation = new LatLng(32.0879122, 34.7272056);
+    private final LatLng mDefaultPoint = new LatLng(32.075776, 34.774243);
+    private final Location mDefaultLocation = new Location("");
     private static final int DEFAULT_ZOOM = 15;
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
     private boolean mLocationPermissionGranted;
@@ -60,18 +62,20 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             mCameraPosition = savedInstanceState.getParcelable(KEY_CAMERA_POSITION);
         }
 
-        setContentView(R.layout.activity_maps);
-
-        mCurrentLocationTextView = findViewById(R.id.tv_current_location);
+        setContentView(R.layout.activity_report_event);
 
         // Construct a FusedLocationProviderClient.
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
+
+        //SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+        //        .findFragmentById(R.id.map);
+        //mapFragment.getMapAsync(this);
+
+        mDefaultLocation.setLatitude(mDefaultPoint.latitude);
+        mDefaultLocation.setLongitude(mDefaultPoint.longitude);
     }
 
     /**
@@ -118,19 +122,25 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 locationResult.addOnCompleteListener(this, new OnCompleteListener<Location>() {
                     @Override
                     public void onComplete(@NonNull Task<Location> task) {
-                        if (task.isSuccessful()) {
+                        if (task.isSuccessful() && task.getResult() != null) {
                             // Set the map's camera position to the current location of the device.
                             mLastKnownLocation = task.getResult();
+                            LatLng mCurrentPoint = new LatLng(mLastKnownLocation.getLatitude(),
+                                    mLastKnownLocation.getLongitude());
+
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
-                                    new LatLng(mLastKnownLocation.getLatitude(),
-                                            mLastKnownLocation.getLongitude()), DEFAULT_ZOOM));
+                                    mCurrentPoint, DEFAULT_ZOOM));
+                            mMap.addMarker(new MarkerOptions().position(mCurrentPoint));
                         } else {
                             Log.d(TAG, "Current location is null. Using defaults.");
                             Log.e(TAG, "Exception: %s", task.getException());
+                            mMap.addMarker(new MarkerOptions().position(mDefaultPoint));
                             mMap.moveCamera(CameraUpdateFactory
-                                    .newLatLngZoom(mDefaultLocation, DEFAULT_ZOOM));
+                                    .newLatLngZoom(mDefaultPoint, DEFAULT_ZOOM));
                             mMap.getUiSettings().setMyLocationButtonEnabled(false);
                         }
+
+
                     }
                 });
             }
@@ -194,7 +204,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             } else {
                 mMap.setMyLocationEnabled(false);
                 mMap.getUiSettings().setMyLocationButtonEnabled(false);
-                mLastKnownLocation = null;
+                mLastKnownLocation = mDefaultLocation;
                 getLocationPermission();
             }
         } catch (SecurityException e)  {
@@ -204,8 +214,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     @Override
     public void onCameraIdle() {
-        LatLng target = mMap.getCameraPosition().target;
-        mCurrentLocationTextView.setText(String.format("Current location:\n Lat: %s\n Lon: %s", Double.toString(target.latitude), Double.toString(target.longitude)));
+        //LatLng target = mMap.getCameraPosition().target;
+        //mCurrentLocationTextView.setText(String.format("Current location:\n Lat: %s\n Lon: %s", Double.toString(target.latitude), Double.toString(target.longitude)));
 
     }
 }
