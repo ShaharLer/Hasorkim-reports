@@ -24,4 +24,10 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+    <string name="new_report">דיווח חדש</string>
+    <string name="address_not_found">Address not found</string>
+    <string name="icon_of_a_dog">Icon of a dog</string>
+    <string name="no_network_error">Error while trying to get address - Service not available</string>
+    <string name="invalid_lat_long">Invalid lat long arguments</string>
+    <string name="address_not_found_to_user">כתובת לא נמצאה</string>
 </resources>
