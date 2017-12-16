@@ -2,7 +2,6 @@
     <string name="app_name">הסורקים</string>
     <string name="button_report_event_new_report">דווח</string>
     <string name="title_activity_maps">Map</string>
-    <string name="google_maps_key">AIzaSyD-LCTPPgFDqC0_EG_qTfTLTR8d9ZW04M8</string>
     <string name="title_activity_report_event">דווח על אירוע</string>
     <string name="title_activity_new_report">New Event</string>
     <string name="text_new_event_vet_found">יש מרפאות ווטרינריות פתוחות באזור!</string>
@@ -30,4 +29,5 @@
     <string name="no_network_error">Error while trying to get address - Service not available</string>
     <string name="invalid_lat_long">Invalid lat long arguments</string>
     <string name="address_not_found_to_user">כתובת לא נמצאה</string>
+    <string name="unknown_address">כתובת לא ידועה</string>
 </resources>

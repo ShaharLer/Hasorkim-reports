@@ -12,10 +12,18 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
+import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.places.AutocompleteFilter;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlaceAutocomplete;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -24,7 +32,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
-public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnCameraIdleListener {
+public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnCameraIdleListener, View.OnClickListener {
 
     private static final String TAG = MapsActivity.class.getSimpleName();
     private GoogleMap mMap;
@@ -49,11 +57,18 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private static final String KEY_CAMERA_POSITION = "camera_position";
     private static final String KEY_LOCATION = "location";
 
+    int PLACE_AUTOCOMPLETE_REQUEST_CODE = 777;
+
 
     private AddressResultReceiver mResultReceiver;
 
     private TextView mAddress;
     private Toolbar mToolbar;
+    private ImageView mEdit;
+
+    private String mStreetName;
+    private String mStreetNumber;
+    private String mStreetCity;
 
 
     @Override
@@ -80,7 +95,11 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         mResultReceiver = new AddressResultReceiver(new android.os.Handler());
 
         mAddress = findViewById(R.id.tv_current_location);
+        mAddress.setSelected(true);
         mToolbar = findViewById(R.id.my_toolbar);
+        mEdit = findViewById(R.id.im_edit);
+
+        mEdit.setOnClickListener(this);
 
         setSupportActionBar(mToolbar);
     }
@@ -218,12 +237,47 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     }
 
-
     protected void startIntentService() {
         Intent intent = new Intent(this, FetchAddressIntentService.class);
         intent.putExtra(Constants.RECEIVER, mResultReceiver);
         intent.putExtra(Constants.LOCATION_DATA_EXTRA, mMap.getCameraPosition().target);
         startService(intent);
+    }
+
+    @Override
+    public void onClick(View view) {
+        try {
+            AutocompleteFilter typeFilter = new AutocompleteFilter.Builder()
+                    .setTypeFilter(AutocompleteFilter.TYPE_FILTER_ADDRESS)
+                    .setCountry("IL")
+                    .build();
+
+            Intent intent = new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_OVERLAY).setFilter(typeFilter).build(this);
+            startActivityForResult(intent, PLACE_AUTOCOMPLETE_REQUEST_CODE);
+        } catch (GooglePlayServicesRepairableException e) {
+            // TODO: Handle the error.
+        } catch (GooglePlayServicesNotAvailableException e) {
+            // TODO: Handle the error.
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == PLACE_AUTOCOMPLETE_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                Place place = PlaceAutocomplete.getPlace(this, data);
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(place.getLatLng(), DEFAULT_ZOOM));
+                startIntentService();
+                Log.i(TAG, "Place: " + place.getName());
+            } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
+                Status status = PlaceAutocomplete.getStatus(this, data);
+                // TODO: Handle the error.
+                Log.i(TAG, status.getStatusMessage());
+
+            } else if (resultCode == RESULT_CANCELED) {
+                // The user canceled the operation.
+            }
+        }
     }
 
     class AddressResultReceiver extends ResultReceiver {
@@ -234,10 +288,35 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         @Override
         protected void onReceiveResult(int resultCode, Bundle resultData) {
 
-            // Display the mAddress string
-            // or an error message sent from the intent service.
-            Log.d(TAG, String.format("Current mAddress: %s", resultData.getString(Constants.RESULT_DATA_KEY)));
-            mAddress.setText(resultData.getString(Constants.RESULT_DATA_KEY));
+            if (resultCode == Constants.SUCCESS_RESULT) {
+                mStreetName = resultData.getString(Constants.STREET_NAME);
+                mStreetNumber = resultData.getString(Constants.STREET_NUMBER);
+                mStreetCity = resultData.getString(Constants.STREET_CITY);
+
+                String displayStreet = getDisplayStreet();
+                // Display the mAddress string
+                // or an error message sent from the intent service.
+                Log.d(TAG, String.format("Current mAddress: %s", displayStreet));
+                mAddress.setText(displayStreet);
+            }
         }
     }
+
+    private String getDisplayStreet() {
+        StringBuilder builder = new StringBuilder();
+        if (mStreetName != null) {
+            builder.append(mStreetName);
+            if (mStreetNumber != null) {
+                builder.append(" ").append(mStreetNumber);
+            }
+            if (mStreetCity != null) {
+                builder.append(", ").append(mStreetCity);
+            }
+            return builder.toString();
+        } else {
+            return getString(R.string.unknown_address);
+        }
+
+    }
+
 }

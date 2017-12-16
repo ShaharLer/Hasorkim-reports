@@ -10,4 +10,8 @@ public final class Constants {
             ".RESULT_DATA_KEY";
     public static final String LOCATION_DATA_EXTRA = PACKAGE_NAME +
             ".LOCATION_DATA_EXTRA";
+    public static final String STREET_NAME = "STREET_NAME";
+    public static final String STREET_NUMBER = "STREET_NUMBER";
+    public static final String STREET_CITY = "STREET_CITY";
+
 }

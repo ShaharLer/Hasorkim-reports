@@ -6,13 +6,11 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
 import android.os.ResultReceiver;
-import android.text.TextUtils;
 import android.util.Log;
 
 import com.google.android.gms.maps.model.LatLng;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -68,25 +66,21 @@ public class FetchAddressIntentService extends IntentService {
                 errorMessage = getString(R.string.address_not_found);
                 Log.e(TAG, errorMessage);
             }
-            deliverResultToReceiver(Constants.FAILURE_RESULT, getString(R.string.address_not_found_to_user));
+            deliverResultToReceiver(Constants.FAILURE_RESULT, null);
         } else {
             Address address = addresses.get(0);
-            ArrayList<String> addressFragments = new ArrayList<>();
-            for (int i = 0; i <= address.getMaxAddressLineIndex(); i++) {
-                addressFragments.add(String.format("%s %s, %s", address.getThoroughfare() != null ? address.getThoroughfare() : "",
-                        address.getSubThoroughfare() != null ? address.getSubThoroughfare() : "",
-                        address.getLocality() != null ? address.getLocality() : ""));
-            }
             Log.d(TAG, "Address found");
-            deliverResultToReceiver(Constants.SUCCESS_RESULT,
-                    TextUtils.join(System.getProperty("line.separator"),
-                            addressFragments));
+            deliverResultToReceiver(Constants.SUCCESS_RESULT, address);
         }
     }
 
-    private void deliverResultToReceiver(int resultCode, String message) {
+    private void deliverResultToReceiver(int resultCode, Address address) {
         Bundle bundle = new Bundle();
-        bundle.putString(Constants.RESULT_DATA_KEY, message);
+        if (address != null) {
+            bundle.putString(Constants.STREET_NAME, address.getThoroughfare());
+            bundle.putString(Constants.STREET_CITY, address.getLocality());
+            bundle.putString(Constants.STREET_NUMBER, address.getSubThoroughfare());
+        }
         mReceiver.send(resultCode, bundle);
     }
 

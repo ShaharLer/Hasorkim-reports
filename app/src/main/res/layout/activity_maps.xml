@@ -16,10 +16,10 @@
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/frame_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="il.ac.tau.cloudweb17a.hasorkim.MapsActivity"
-        android:id="@+id/frame_layout">
+        tools:context="il.ac.tau.cloudweb17a.hasorkim.MapsActivity">
 
         <fragment xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
@@ -45,15 +45,28 @@
 
             <TextView
                 android:id="@+id/tv_current_location"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_width="wrap_content"
+                android:maxWidth="300dp"
+                android:layout_height="wrap_content"
                 android:layout_above="@+id/button2"
-                android:layout_alignParentStart="true"
-                android:layout_gravity="bottom"
-                android:layout_marginBottom="12dp"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="30dp"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:singleLine="true"
                 android:text=""
                 android:textAlignment="center"
                 android:textSize="25sp" />
+
+            <ImageView
+                android:id="@+id/im_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/tv_current_location"
+                android:layout_marginEnd="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_toStartOf="@+id/tv_current_location"
+                android:src="@drawable/ic_create_black_24dp" />
 
             <Button
                 android:id="@+id/button2"
