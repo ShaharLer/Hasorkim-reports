@@ -7,7 +7,6 @@ import android.net.Uri;
 import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +15,12 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Calendar;
 
 public class NewEventMoreDetailsRequestActivity extends BaseActivity {
 
@@ -49,6 +53,33 @@ public class NewEventMoreDetailsRequestActivity extends BaseActivity {
         submitReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                //Log.d("MyActivity", "asdasd");
+
+                //FirebaseDatabase database = FirebaseDatabase.getInstance();
+
+                //DatabaseReference myRef = database.getReference("message");
+                //Date currentTime =
+                //myRef.setValue(currentTime+":Hello, World!");
+
+                DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+
+                //mDatabase.child("reports").child("id1").setValue(report);
+
+                DatabaseReference reportsRef = ref.child("reports");
+                Report_v2 report = new Report_v2();
+
+                report.status = "NEW";
+                report.date= Calendar.getInstance().getTime().toString();
+                report.address= "אלנבי 9, תל אביב";
+
+                //report.imagesLocations= new ArrayList<>();
+                //report.reporter_id= "user_id_1";  //TODO
+                //report.ready_scanners=new ArrayList<>();
+                //report.comment="";
+
+                reportsRef.push().setValue(report);
+
                 Intent intent = new Intent(NewEventMoreDetailsRequestActivity.this, ActiveReportActivity.class);
                 startActivity(intent);
             }

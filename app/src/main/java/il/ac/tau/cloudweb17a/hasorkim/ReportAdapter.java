@@ -40,3 +40,27 @@ public class ReportAdapter extends ArrayAdapter<Report> {
     }
 
 }
+
+
+//mDrawer.addView(thisContainer, 0);
+
+/*
+ReportAdapter adapter = new ReportAdapter(
+        this,
+        R.layout.report_list_item,
+        reportList
+);
+
+ListView listView = (ListView) findViewById(R.id.list_view_reports);
+listView.setAdapter(adapter);
+listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+    public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
+
+        //Object o = ((ListView)parent).getItemAtPosition(position);
+        if (position == 0)
+        {
+            Intent intent = new Intent(ReportListActivity.this, ActiveReportActivity.class);
+            startActivity(intent);
+        }
+    }
+});*/

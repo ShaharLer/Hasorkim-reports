@@ -17,6 +17,20 @@
         android:layout_marginTop="50sp"
         />
 
+    <TextView
+        android:id="@+id/viewDebug"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/standard_text_size"
+        android:textStyle="bold" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/my_recycler_view"
+        android:scrollbars="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+<!--
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -27,5 +41,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </ScrollView>
+-->
 
 </LinearLayout>

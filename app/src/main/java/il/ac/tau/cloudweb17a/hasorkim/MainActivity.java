@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 public class MainActivity extends AppCompatActivity {
-    private static int TIME_OUT = 2500;
+    private static int TIME_OUT = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
