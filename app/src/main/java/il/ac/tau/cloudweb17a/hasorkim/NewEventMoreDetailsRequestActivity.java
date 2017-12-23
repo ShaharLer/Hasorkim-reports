@@ -14,9 +14,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
+import java.util.Calendar;
 
 public class NewEventMoreDetailsRequestActivity extends BaseActivity {
 
@@ -50,7 +52,17 @@ public class NewEventMoreDetailsRequestActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
 
+                reportyName = (TextView) findViewById(R.id.reportyName);
+                Report new_report = new Report( reportyName.getText().toString(),
+                        Calendar.getInstance().getTime().toString(),
+                        );
 
+
+
+
+                //Report(int id, String reportyName, String startTime, String address, String status,
+                //        String freeText, long phoneNumber, String assignedScanner,
+                //int availableScanners)
 
                 Intent intent = new Intent(NewEventMoreDetailsRequestActivity.this, ActiveReportActivity.class);
                 startActivity(intent);

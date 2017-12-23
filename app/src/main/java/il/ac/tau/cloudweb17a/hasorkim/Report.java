@@ -23,10 +23,9 @@ public class Report {
         this.address = address;
     }
 
-    Report(int id, String reportyName, String startTime, String address, String status,
+    Report(String reportyName, String startTime, String address, String status,
            String freeText, long phoneNumber, String assignedScanner,
            int availableScanners) {
-        this.id = id;
         this.reportyName = reportyName;
         this.startTime = startTime;
         this.address = address;
