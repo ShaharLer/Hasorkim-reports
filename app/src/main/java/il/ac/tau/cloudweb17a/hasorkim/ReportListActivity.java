@@ -28,24 +28,24 @@ public class ReportListActivity extends BaseActivity {
 
         ArrayList<Report> reportList = new ArrayList<>();
 
-        reportList.add(new Report("Shahar", "1-12-2017 13:52:45", "Street Sokolov 14, City Ramat-Gan",
-                "הסורקים בדרך", "Dog looks a bit sick", 544764751, "C58",
-         7));
-        reportList.add(new Report("Bar",  "1-12-2017 13:32:08", "Street Arlozorov 51, City Tel-Aviv",
-                "חדש - בבדיקה", "", 503724771, "",
-                4));
-        reportList.add(new Report("Chan", "1-12-2017 07:01:12", "Street Hod 33, City Arad",
-                "הסורקים בדרך", "Dog is in my yard", 544999701, "S4",
-                1));
-        reportList.add(new Report("Boris", "29-11-2017 13:09:16", "Street Tpuach 18, City Yesod Hamahla",
-                "הכלב לא נמצא", "Dog is sad", 523864011, "N1",
-                3));
-        reportList.add(new Report("Momo",  "29-11-2017 18:18:59", "Street Shlavim 27, City Petach Tikva",
-                "נסרק - הוחזר", "", 524710723, "E12",
-                13));
-        reportList.add(new Report("Gamba", "28-11-2017 19:48:36", "Street Sokolov 4, City Kiryat-Bialic",
-                "נסרק - נמצא בית", "I love dogs", 544444891, "N10",
-                6));
+        reportList.add(new Report("Shahar", "Street Sokolov 14, City Ramat-Gan",
+                "Dog looks a bit sick", "544764751"
+        ));
+        reportList.add(new Report("Bar", "Street Arlozorov 51, City Tel-Aviv",
+                "", "503724771"
+        ));
+        reportList.add(new Report("Chan", "Street Hod 33, City Arad",
+                "Dog is in my yard", "544999701"
+        ));
+        reportList.add(new Report("Boris", "Street Tpuach 18, City Yesod Hamahla",
+                "Dog is sad", "523864011"
+        ));
+        reportList.add(new Report("Momo", "Street Shlavim 27, City Petach Tikva",
+                "", "524710723"
+        ));
+        reportList.add(new Report("Gamba", "Street Sokolov 4, City Kiryat-Bialic",
+                "I love dogs", "544444891"
+        ));
 
         ReportAdapter adapter = new ReportAdapter(
                 this,

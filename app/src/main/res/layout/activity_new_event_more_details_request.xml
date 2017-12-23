@@ -92,7 +92,7 @@
                 android:layout_marginTop="@dimen/double_padding">
 
                 <EditText
-                    android:id="@+id/reportExtraInfo"
+                    android:id="@+id/reportExtraText"
                     android:layout_width="0sp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -157,7 +157,7 @@
                 android:layout_marginBottom="@dimen/standard_padding">
 
                 <EditText
-                    android:id="@+id/phoneIn"
+                    android:id="@+id/reportyPhoneNumber"
                     android:layout_width="0sp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -192,6 +192,7 @@
                 android:alpha="0.2">
 
                 <TextView
+                    android:id="@+id/reportyLoction"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

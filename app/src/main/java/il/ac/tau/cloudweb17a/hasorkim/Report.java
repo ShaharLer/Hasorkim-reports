@@ -1,5 +1,10 @@
 package il.ac.tau.cloudweb17a.hasorkim;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.Calendar;
+
 /**
  * Created by workhourse on 12/2/17.
  */
@@ -13,7 +18,7 @@ public class Report {
     private final String address;
     private String[] imageUrls;
     private String freeText;
-    private long phoneNumber;
+    private String phoneNumber;
     private String assignedScanner;
     private int availableScanners;
 
@@ -23,21 +28,43 @@ public class Report {
         this.address = address;
     }
 
-    Report(String reportyName, String startTime, String address, String status,
-           String freeText, long phoneNumber, String assignedScanner,
-           int availableScanners) {
+
+    Report(String reportyName, String address, String freeText, String phoneNumber) {
         this.reportyName = reportyName;
-        this.startTime = startTime;
+        this.startTime = Calendar.getInstance().getTime().toString();
         this.address = address;
-        this.status = status;
+        this.status = "NEW";
         this.freeText = freeText;
         this.phoneNumber = phoneNumber;
-        this.assignedScanner = assignedScanner;
-        this.availableScanners = availableScanners;
+        this.assignedScanner = "";
+        this.availableScanners = 0;
+    }
+
+    public String getReportyName() {
+        return reportyName;
+    }
+
+    public String getFreeText() {
+        return freeText;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public String getAssignedScanner() {
+        return assignedScanner;
     }
 
     public String getStatus() { return this.status; }
     public String getStartTime() { return this.startTime; }
     public String getAddress() { return this.address; }
     public int getAvailableScanners() { return this.availableScanners; }
+
+
+    public void persistReport(){
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference reportsRef = ref.child("reports");
+        reportsRef.push().setValue(this);
+    }
 }

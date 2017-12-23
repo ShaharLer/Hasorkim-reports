@@ -7,7 +7,6 @@ import android.net.Uri;
 import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
-import java.util.Calendar;
+import java.util.Objects;
 
 public class NewEventMoreDetailsRequestActivity extends BaseActivity {
 
@@ -52,17 +51,27 @@ public class NewEventMoreDetailsRequestActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
 
-                reportyName = (TextView) findViewById(R.id.reportyName);
-                Report new_report = new Report( reportyName.getText().toString(),
-                        Calendar.getInstance().getTime().toString(),
+                TextView reportyName = (TextView) findViewById(R.id.reportyName);
+                String reportyNameText = reportyName.getText().toString();
+                if (Objects.equals(reportyNameText, ""))
+                    reportyNameText = reportyName.getHint().toString();
+
+                TextView reportExtraText = (TextView) findViewById(R.id.reportExtraText);
+
+                TextView reportyPhoneNumber = (TextView) findViewById(R.id.reportyPhoneNumber);
+                String reportyPhoneNumberText = reportyPhoneNumber.getText().toString();
+                if (Objects.equals(reportyPhoneNumberText, ""))
+                    reportyPhoneNumberText = reportyPhoneNumber.getHint().toString();
+
+                TextView reportyLoction = (TextView) findViewById(R.id.reportyLoction);
+
+                Report new_report = new Report( reportyNameText,
+                        reportyLoction.getText().toString(),
+                        reportExtraText.getText().toString(),
+                        reportyPhoneNumberText
                         );
 
-
-
-
-                //Report(int id, String reportyName, String startTime, String address, String status,
-                //        String freeText, long phoneNumber, String assignedScanner,
-                //int availableScanners)
+                new_report.persistReport();
 
                 Intent intent = new Intent(NewEventMoreDetailsRequestActivity.this, ActiveReportActivity.class);
                 startActivity(intent);
