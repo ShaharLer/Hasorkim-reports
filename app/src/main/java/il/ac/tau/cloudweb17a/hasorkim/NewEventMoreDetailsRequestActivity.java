@@ -49,6 +49,9 @@ public class NewEventMoreDetailsRequestActivity extends BaseActivity {
         submitReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
+
                 Intent intent = new Intent(NewEventMoreDetailsRequestActivity.this, ActiveReportActivity.class);
                 startActivity(intent);
             }
