@@ -2,18 +2,29 @@ package il.ac.tau.cloudweb17a.hasorkim;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
+import java.util.Collections;
 
 
 public class ReportListActivity extends BaseActivity {
 
     private LayoutInflater layoutInflater;
     private ViewGroup thisContainer;
+    private ArrayList<Report> reportsList;
+    private static final String TAG = "ReportListActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,44 +37,45 @@ public class ReportListActivity extends BaseActivity {
 
         mDrawer.addView(thisContainer, 0);
 
-        ArrayList<Report> reportList = new ArrayList<>();
+        reportsList = new ArrayList<>();
 
-        reportList.add(new Report("Shahar", "Street Sokolov 14, City Ramat-Gan",
-                "Dog looks a bit sick", "544764751"
-        ));
-        reportList.add(new Report("Bar", "Street Arlozorov 51, City Tel-Aviv",
-                "", "503724771"
-        ));
-        reportList.add(new Report("Chan", "Street Hod 33, City Arad",
-                "Dog is in my yard", "544999701"
-        ));
-        reportList.add(new Report("Boris", "Street Tpuach 18, City Yesod Hamahla",
-                "Dog is sad", "523864011"
-        ));
-        reportList.add(new Report("Momo", "Street Shlavim 27, City Petach Tikva",
-                "", "524710723"
-        ));
-        reportList.add(new Report("Gamba", "Street Sokolov 4, City Kiryat-Bialic",
-                "I love dogs", "544444891"
-        ));
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("reports");
+        ref.orderByChild("startTime").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot messageSnapshot: dataSnapshot.getChildren()) {
 
-        ReportAdapter adapter = new ReportAdapter(
-                this,
-                R.layout.report_list_item,
-                reportList
-        );
-        ListView listView = (ListView) findViewById(R.id.list_view_reports);
-        listView.setAdapter(adapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
-
-                //Object o = ((ListView)parent).getItemAtPosition(position);
-                if (position == 0)
-                {
-                    Intent intent = new Intent(ReportListActivity.this, ActiveReportActivity.class);
-                    startActivity(intent);
+                    Report report = messageSnapshot.getValue(Report.class);
+                    report.setId(messageSnapshot.getKey());
+                    reportsList.add(report);
                 }
 
+                Collections.reverse(reportsList);
+
+                ReportAdapter adapter = new ReportAdapter(
+                        ReportListActivity.this,
+                        R.layout.report_list_item,
+                        reportsList
+                );
+                ListView listView = (ListView) findViewById(R.id.list_view_reports);
+                listView.setAdapter(adapter);
+
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
+
+                        Report report = (Report) ((ListView)parent).getItemAtPosition(position);
+
+                        Intent intent = new Intent(ReportListActivity.this, ActiveReportActivity.class);
+                        intent.putExtra("Report", report);
+                        startActivity(intent);
+                    }
+                });
+
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
 
             }
         });

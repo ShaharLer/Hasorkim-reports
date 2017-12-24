@@ -100,6 +100,7 @@
                 android:layout_margin="@dimen/standard_padding">
 
                 <TextView
+                    android:id="@+id/ActiveReportExtraText"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -129,6 +130,7 @@
                 android:layout_margin="@dimen/standard_padding">
 
                 <TextView
+                    android:id="@+id/ActiveReportyPhoneNumber"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -158,6 +160,7 @@
                 android:layout_margin="@dimen/standard_padding">
 
                 <TextView
+                    android:id="@+id/ActiveReportyLoction"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
