@@ -8,12 +8,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.PopupWindow;
+import android.widget.TextView;
 
 public class ActiveReportActivity extends BaseActivity {
 
     private LayoutInflater layoutInflater;
     private ViewGroup thisContainer;
     private PopupWindow popupWindow;
+    private ViewGroup popupContainer;
+    private Report report;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,24 +29,41 @@ public class ActiveReportActivity extends BaseActivity {
 
         mDrawer.addView(thisContainer, 0);
 
+        report = (Report) getIntent().getSerializableExtra("Report");
+
+        TextView activeReportExtraText = (TextView) findViewById(R.id.ActiveReportExtraText);
+        activeReportExtraText.setText((CharSequence) report.getFreeText());
+
+        TextView activeReportyPhoneNumber = (TextView) findViewById(R.id.ActiveReportyPhoneNumber);
+        activeReportyPhoneNumber.setText((CharSequence) report.getPhoneNumber());
+
+        TextView activeReportyLoction = (TextView) findViewById(R.id.ActiveReportyLoction);
+        activeReportyLoction.setText((CharSequence) report.getAddress());
+
         Button cancelReportButton = findViewById(R.id.cancelReport);
 
         cancelReportButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //layoutInflater = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
-                ViewGroup container = (ViewGroup) layoutInflater.inflate(R.layout.cancel_report_pop, null);
+                final ViewGroup popupContainer = (ViewGroup) layoutInflater.inflate(R.layout.cancel_report_pop, null);
 
-                popupWindow = new PopupWindow(container, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
+                popupWindow = new PopupWindow(popupContainer, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
                 popupWindow.showAtLocation(mDrawer, Gravity.NO_GRAVITY, 140, 700);
                 //mDrawer.setAlpha(0.5F);
                 //container.getBackground().setAlpha(120);
                 //container.setBackgroundColor(Color.GRAY);
 
-                Button confirmCancelReportButton = container.findViewById(R.id.confirmCancelReport);
+                Button confirmCancelReportButton = popupContainer.findViewById(R.id.confirmCancelReport);
                 confirmCancelReportButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        TextView cancelReport = (TextView) popupContainer.findViewById(R.id.cancelReportText);
+                        String cancelReportText = cancelReport.getText().toString();
+
+                        report.ReportUpdateCancellationText(cancelReportText);
+                        report.ReportUpdateStatus("CANCELED");
+
                         Intent intent = new Intent(ActiveReportActivity.this, ReportListActivity.class);
                         ActiveReportActivity.this.startActivity(intent);
                     }
