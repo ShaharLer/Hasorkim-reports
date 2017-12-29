@@ -1,7 +1,9 @@
 package il.ac.tau.cloudweb17a.hasorkim;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
@@ -9,10 +11,12 @@ import android.os.ResultReceiver;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -28,14 +32,18 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+
+import java.util.Locale;
 
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnCameraIdleListener, View.OnClickListener {
 
     private static final String TAG = MapsActivity.class.getSimpleName();
     private GoogleMap mMap;
+    CameraPosition mCameraPosition;
 
     // The entry point to the Fused Location Provider.
     private FusedLocationProviderClient mFusedLocationProviderClient;
@@ -65,6 +73,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private TextView mAddress;
     private Toolbar mToolbar;
     private ImageView mEdit;
+    private Button mButton;
 
     private String mStreetName;
     private String mStreetNumber;
@@ -75,9 +84,17 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        Locale locale = new Locale("iw");
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.locale = locale;
+        getApplicationContext().getResources().updateConfiguration(config, getApplicationContext().getResources().getDisplayMetrics());
+
+
         // Retrieve location and camera position from saved instance state.
         if (savedInstanceState != null) {
             mLastKnownLocation = savedInstanceState.getParcelable(KEY_LOCATION);
+            mCameraPosition = savedInstanceState.getParcelable(KEY_CAMERA_POSITION);
         }
 
         // Retrieve the content view that renders the map.
@@ -98,6 +115,14 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         mAddress.setSelected(true);
         mToolbar = findViewById(R.id.my_toolbar);
         mEdit = findViewById(R.id.im_edit);
+        mButton = findViewById(R.id.new_report_button);
+
+        mButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                suggestVet();
+            }
+        });
 
         mEdit.setOnClickListener(this);
 
@@ -151,9 +176,13 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                         if (task.isSuccessful()) {
                             // Set the map's camera position to the current location of the device.
                             mLastKnownLocation = task.getResult();
-                            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
-                                    new LatLng(mLastKnownLocation.getLatitude(),
-                                            mLastKnownLocation.getLongitude()), DEFAULT_ZOOM));
+                            if (mCameraPosition != null) {
+                                mMap.moveCamera(CameraUpdateFactory.newCameraPosition(mCameraPosition));
+                            } else {
+                                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
+                                        new LatLng(mLastKnownLocation.getLatitude(),
+                                                mLastKnownLocation.getLongitude()), DEFAULT_ZOOM));
+                            }
                         } else {
                             Log.d(TAG, "Current location is null. Using defaults.");
                             Log.e(TAG, "Exception: %s", task.getException());
@@ -316,7 +345,20 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         } else {
             return getString(R.string.unknown_address);
         }
+    }
 
+    private void suggestVet() {
+        new AlertDialog.Builder(this).setMessage(R.string.vet_dialog_message)
+                .setTitle(R.string.vet_dialog_title)
+                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // User clicked OK button
+                    }
+                }).setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // User cancelled the dialog
+            }
+        }).create().show();
     }
 
 }

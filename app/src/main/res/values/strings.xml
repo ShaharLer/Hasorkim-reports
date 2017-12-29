@@ -30,4 +30,8 @@
     <string name="invalid_lat_long">Invalid lat long arguments</string>
     <string name="address_not_found_to_user">כתובת לא נמצאה</string>
     <string name="unknown_address">כתובת לא ידועה</string>
+    <string name="ok">עבור לרשימת וטרינרים</string>
+    <string name="cancel">המשך לדיווח</string>
+    <string name="vet_dialog_title">מצאנו מרפאה וטרינרית קרובה!</string>
+    <string name="vet_dialog_message">האם ברצונך לעבור לרשימת הוטרינרים הקרובים? שים לב, הבאת הכלב לסריקה אצל וטרינר תהפוך את התהליך ולנוח ומהיר יותר</string>
 </resources>
