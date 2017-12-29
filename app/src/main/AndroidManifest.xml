@@ -42,18 +42,25 @@
             android:label="@string/title_activity_vet_list" />
         <activity
             android:name=".MapsActivity"
-            android:label="@string/title_activity_maps">
+            android:label="@string/title_activity_maps" />
+
+        <service
+            android:name=".FetchAddressIntentService"
+            android:exported="false" />
+
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/title_activity_settings"
+            android:parentActivityName=".MapsActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="il.ac.tau.cloudweb17a.hasorkim.MapsActivity" />
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <service
-            android:name=".FetchAddressIntentService"
-            android:exported="false" />
-
     </application>
 
 </manifest>
