@@ -21,22 +21,8 @@
         android:layout_height="0sp"
         android:adjustViewBounds="true"
         android:cropToPadding="false"
-        android:src="@drawable/temp_map_open" />
-    <!--
-        <com.google.android.gms.maps.MapView
-            android:id="@+id/map"
-            android:layout_width="fill_parent"
-            android:layout_height="0sp"
-            android:layout_weight="5"
-            />
+         />
 
-       <fragment
-            android:id="@+id/map"
-            class="com.google.android.gms.maps.SupportMapFragment"
-            android:layout_width="fill_parent"
-            android:layout_height="0sp"
-            android:layout_weight="5"
-             />
     -->
     <Button
         android:layout_width="fill_parent"

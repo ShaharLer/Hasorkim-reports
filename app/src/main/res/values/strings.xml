@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">הסורקים</string>
     <string name="button_report_event_new_report">דווח</string>
-    <string name="title_activity_maps">Map</string>
+    <string name="title_activity_maps">הסורקים</string>
     <string name="title_activity_report_event">דווח על אירוע</string>
     <string name="title_activity_new_report">New Event</string>
     <string name="text_new_event_vet_found">יש מרפאות ווטרינריות פתוחות באזור!</string>
@@ -22,7 +22,7 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">הגדרות</string>
     <string name="new_report">דיווח חדש</string>
     <string name="address_not_found">Address not found</string>
     <string name="icon_of_a_dog">Icon of a dog</string>
@@ -51,4 +51,9 @@
     <string name="pref_title_ringtone">צליל</string>
     <string name="pref_ringtone_silent">שקט</string>
     <string name="pref_title_vibrate">רטט</string>
+    <string name="my_reports">הדיווחים שלי</string>
+    <string name="nearby_vet">וטרינרים בסביבה</string>
+    <string name="Community">קהילה</string>
+    <string name="Share">שתף</string>
+    <string name="Who_are_we">מי אנחנו</string>
 </resources>

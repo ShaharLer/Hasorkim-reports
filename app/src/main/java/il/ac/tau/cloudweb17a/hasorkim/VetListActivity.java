@@ -12,7 +12,7 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-public class VetListActivity extends BaseActivity {
+public class VetListActivity extends AppCompatActivity {
 
     private LayoutInflater layoutInflater;
     private ViewGroup thisContainer;
@@ -25,8 +25,6 @@ public class VetListActivity extends BaseActivity {
         layoutInflater = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
 
         thisContainer = (ViewGroup) layoutInflater.inflate(R.layout.activity_vet_list, null);
-
-        mDrawer.addView(thisContainer, 0);
 
         Button openVetMapButton = thisContainer.findViewById(R.id.openVetMapButton);
         openVetMapButton.setOnClickListener(new View.OnClickListener() {

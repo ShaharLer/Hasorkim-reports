@@ -2,6 +2,7 @@ package il.ac.tau.cloudweb17a.hasorkim;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +11,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 
-public class ReportEventActivity extends BaseActivity {
+public class ReportEventActivity extends AppCompatActivity {
 
     private PopupWindow popupWindow;
     private LayoutInflater layoutInflater;
@@ -26,8 +27,6 @@ public class ReportEventActivity extends BaseActivity {
 
         ViewGroup thisContainer = (ViewGroup) layoutInflater.inflate(R.layout.activity_report_event, null);
 
-        mDrawer.addView(thisContainer, 0);
-
         //setContentView(R.layout.activity_report_event);
         //startActivity(new Intent(ReportEventActivity.this, MapsActivity.class));
 
@@ -41,8 +40,8 @@ public class ReportEventActivity extends BaseActivity {
                 ViewGroup container = (ViewGroup) layoutInflater.inflate(R.layout.new_event_vet_question_pop, null);
 
                 popupWindow = new PopupWindow(container, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, false);
-                popupWindow.showAtLocation(mDrawer, Gravity.NO_GRAVITY, 100, 700);
-                mDrawer.setAlpha(0.5F);
+                //popupWindow.showAtLocation(mDrawer, Gravity.NO_GRAVITY, 100, 700);
+                //mDrawer.setAlpha(0.5F);
                 //container.getBackground().setAlpha(120);
                 //container.setBackgroundColor(Color.GRAY);
 

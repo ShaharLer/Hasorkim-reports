@@ -16,7 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 
-public class ReportListActivity extends BaseActivity {
+public class ReportListActivity extends AppCompatActivity {
 
     private LayoutInflater layoutInflater;
     private ViewGroup thisContainer;
@@ -29,8 +29,6 @@ public class ReportListActivity extends BaseActivity {
         layoutInflater = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
 
         thisContainer = (ViewGroup) layoutInflater.inflate(R.layout.activity_report_list, null);
-
-        mDrawer.addView(thisContainer, 0);
 
         ArrayList<Report> reportList = new ArrayList<>();
 
