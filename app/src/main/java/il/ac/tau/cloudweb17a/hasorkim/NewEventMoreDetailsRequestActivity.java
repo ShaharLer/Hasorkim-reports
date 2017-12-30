@@ -8,11 +8,13 @@ import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
@@ -22,13 +24,18 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import static il.ac.tau.cloudweb17a.hasorkim.User.getUser;
+
 public class NewEventMoreDetailsRequestActivity extends BaseActivity {
 
     public static final int PHOTO_INTENT_REQUEST_CODE = 10;
     public static final int EXTERNAL_STORAGE_PERMISSION_REQUEST_CODE = 20;
+    private static final String TAG = "Send Report";
 
     private LayoutInflater layoutInflater;
     private ViewGroup thisContainer;
+    private String address;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +47,25 @@ public class NewEventMoreDetailsRequestActivity extends BaseActivity {
         thisContainer = (ViewGroup) layoutInflater.inflate(R.layout.activity_new_event_more_details_request, null);
 
         mDrawer.addView(thisContainer, 0);
+
+        address = getIntent().getStringExtra("address");
+        if(address==null){
+            Log.w(TAG, "no report wes received from the previous activity");
+            address="";
+        }
+
+
+
+        user = getUser();
+        TextView reporterName = findViewById(R.id.reporterName);
+        TextView reporterPhoneNumber = (TextView) findViewById(R.id.reporterPhoneNumber);
+        TextView reportLocation = findViewById(R.id.reportLocation);
+
+        reporterName.setText(user.getName());
+        reporterPhoneNumber.setText(user.getPhoneNumber());
+        reportLocation.setText(address);
+
+
 
         ImageButton imageButtonReport = thisContainer.findViewById(R.id.imageButtonReport);
         imageButtonReport.setOnClickListener(new View.OnClickListener() {
@@ -54,33 +80,32 @@ public class NewEventMoreDetailsRequestActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
 
-                //Log.d("MyActivity", "asdasd");
 
-                //FirebaseDatabase database = FirebaseDatabase.getInstance();
 
-                //DatabaseReference myRef = database.getReference("message");
-                //Date currentTime =
-                //myRef.setValue(currentTime+":Hello, World!");
+                //String reportyNameText = reportyName.getText().toString();
+                //if (Objects.equals(reportyNameText, ""))
+                //    reportyNameText = reportyName.getHint().toString();
 
-                DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+                //TextView reportExtraText = (TextView) findViewById(R.id.reportExtraText);
 
-                //mDatabase.child("reports").child("id1").setValue(report);
+                //TextView reportyPhoneNumber = (TextView) findViewById(R.id.reportyPhoneNumber);
+                //String reportyPhoneNumberText = reportyPhoneNumber.getText().toString();
+                //if (Objects.equals(reportyPhoneNumberText, ""))
+                //    reportyPhoneNumberText = reportyPhoneNumber.getHint().toString();
 
-                DatabaseReference reportsRef = ref.child("reports");
-                Report_v2 report = new Report_v2();
+                //TextView reportyLoction = (TextView) findViewById(R.id.reportyLoction);
 
-                report.status = "NEW";
-                report.date= Calendar.getInstance().getTime().toString();
-                report.address= "אלנבי 9, תל אביב";
+                if(address.equals("")){
+                    address="אלנבי 9, תל אביב";
+                }
 
-                //report.imagesLocations= new ArrayList<>();
-                //report.reporter_id= "user_id_1";  //TODO
-                //report.ready_scanners=new ArrayList<>();
-                //report.comment="";
-
-                reportsRef.push().setValue(report);
-
+                Report new_report = new Report( "אלעד",
+                        address,
+                       "","050-8888888"
+                );
+                new_report.persistReport();
                 Intent intent = new Intent(NewEventMoreDetailsRequestActivity.this, ActiveReportActivity.class);
+                intent.putExtra("Report", new_report);
                 startActivity(intent);
             }
         });
@@ -133,7 +158,7 @@ public class NewEventMoreDetailsRequestActivity extends BaseActivity {
                     createPhotoIntent();
                 } else Toast.makeText(this, "Gallery Permission Denied :(",
                         Toast.LENGTH_SHORT).show();
-                return;
+
             }
         }
 

@@ -15,7 +15,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -23,7 +22,7 @@ import java.util.ArrayList;
  * Created by hen on 18/12/2017.
  */
 
-public class ReportAdapter_v2 extends RecyclerView.Adapter<ReportAdapter_v2.ReportViewHolder> {
+public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ReportViewHolder> {
     private ArrayList<Report> mDataset= new ArrayList<>();
     final String TAG = "ReportAdapter";
 
@@ -70,15 +69,15 @@ public class ReportAdapter_v2 extends RecyclerView.Adapter<ReportAdapter_v2.Repo
 
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public ReportAdapter_v2(Query query) {
+    public ReportAdapter(Query query) {
         DatabaseReference reportsRef = FirebaseDatabase.getInstance().getReference().child("reports");
-        Query lastQuery = reportsRef.limitToLast(10);
+        Query lastQuery = reportsRef.orderByChild("startTime").limitToLast(10);
         lastQuery.addChildEventListener(new ChildEventListener() {
             /* @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 for (DataSnapshot querySnapshot : dataSnapshot.getChildren()) {
-                    Report_v2 report = querySnapshot.getValue(Report_v2.class);
+                    Report report = querySnapshot.getValue(Report.class);
                     mDataset.add(report);
                 }
                 notifyDataSetChanged();
@@ -87,13 +86,33 @@ public class ReportAdapter_v2 extends RecyclerView.Adapter<ReportAdapter_v2.Repo
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String previousChildName) {
                 Report report = dataSnapshot.getValue(Report.class);
+                String key = dataSnapshot.getKey();
+                report.setId(key);
                 mDataset.add(report);
                 notifyDataSetChanged();
             }
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String previousChildName) {
-                Log.w(TAG, "======================"+previousChildName); //TODO
+                Report report = dataSnapshot.getValue(Report.class);
+                String key = dataSnapshot.getKey();
+                report.setId(key);
+                //Log.w(TAG, "======================" + key);
+                int index = -1;
+                for (int i = 0; i < mDataset.size(); i++) {
+                    //Log.w(TAG, "======================" + mDataset.get(i).getId());
+                    if (mDataset.get(i)!=null&&mDataset.get(i).getId()!=null&&mDataset.get(i).getId().equals(key)) {
+                        index = i;
+                    }
+                }
+                if (index != -1){
+                    mDataset.set(index, report);
+                    notifyDataSetChanged();
+                }
+                else{
+                    Log.w(TAG, "Failed to find value in local report list");
+                }
+
             }
 
             @Override

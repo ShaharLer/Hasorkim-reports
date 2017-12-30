@@ -16,7 +16,7 @@
     <string name="text_new_event_have_dog_msg_please">הכלב נמצא איתי ואינו יכול לברוח</string>
     <string name="text_new_event_have_dog_msg_if">If the dog is not with you, we will not be able to send anyone to help</string>
     <string name="title_more_details_request">פרטי דיווח</string>
-    <string name="text_new_event_we_will_check_report">פרטי הדיווח:</string>
+    <string name="text_new_event_we_will_check_report">פרטי הדיווח</string>
     <string name="button_new_event_more_details_submit">שלח דיווח</string>
     <string name="title_activity_base">BaseActivity</string>
 
@@ -24,4 +24,8 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+    <string name="addReportPhone">טלפון</string>
+    <string name="newReportAddInformation">מידע נוסף</string>
+    <string name="NewReportReporterName">שם המדווח</string>
+    <string name="newReportMyLocation">המיקום שלי</string>
 </resources>

@@ -43,7 +43,8 @@
             android:label="@string/title_activity_vet_list" />
         <activity
             android:name=".NewEventMoreDetailsRequestActivity"
-            android:label="@string/title_more_details_request" />
+            android:label="@string/title_more_details_request"
+            android:windowSoftInputMode="stateHidden"/>
         <activity
             android:name=".ActiveReportActivity"
             android:label="דיווח פעיל" />

@@ -1,22 +1,14 @@
 package il.ac.tau.cloudweb17a.hasorkim;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ListView;
-import java.util.ArrayList;
-
-import android.widget.TextView;
 
 
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 
 
 public class ReportListActivity extends BaseActivity {
@@ -47,6 +39,7 @@ public class ReportListActivity extends BaseActivity {
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         RecyclerView.Adapter mAdapter = new ReportAdapter(FirebaseDatabase.getInstance().getReference().child("reports").limitToLast(70));
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         mRecyclerView.setAdapter(mAdapter);
 
         /*
@@ -55,12 +48,12 @@ public class ReportListActivity extends BaseActivity {
                 .child("reports")
                 .limitToLast(50);
 
-        FirebaseRecyclerOptions<Report_v2> options =
-                new FirebaseRecyclerOptions.Builder<Report_v2>()
-                        .setQuery(query, Report_v2.class)
+        FirebaseRecyclerOptions<Report> options =
+                new FirebaseRecyclerOptions.Builder<Report>()
+                        .setQuery(query, Report.class)
                         .build();
 
-        adapter = new FirebaseRecyclerAdapter<Report_v2, reportListViewHolder>(options) {
+        adapter = new FirebaseRecyclerAdapter<Report, reportListViewHolder>(options) {
             @Override
             public reportListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
                 // Create a new instance of the ViewHolder, in this case we are using a custom
@@ -71,7 +64,7 @@ public class ReportListActivity extends BaseActivity {
             }
 
             @Override
-            protected void onBindViewHolder(reportListViewHolder holder, int position, Report_v2 model) {
+            protected void onBindViewHolder(reportListViewHolder holder, int position, Report model) {
                 holder.StatusView.setText(model.status);
                 holder.AddressView.setText(model.address);
                 holder.timeView.setText(model.date);
@@ -132,7 +125,7 @@ public class ReportListActivity extends BaseActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 for (DataSnapshot querySnapshot : dataSnapshot.getChildren()) {
-                    Report_v2 report = querySnapshot.getValue(Report_v2.class);
+                    Report report = querySnapshot.getValue(Report.class);
                     Log.d(TAG, report.getClass().getName());
                     Log.d(TAG, report.date);
                     TextView textView = findViewById(R.id.viewDebug);

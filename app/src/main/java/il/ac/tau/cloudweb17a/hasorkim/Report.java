@@ -15,7 +15,6 @@ import java.util.Map;
 public class Report implements  java.io.Serializable{
 
 
-
     private String id;
     private String reportyName;
     private String status;
@@ -44,6 +43,7 @@ public class Report implements  java.io.Serializable{
         this.availableScanners = 0;
     }
 
+    public String getId() {return id;   }
     public String getReportyName() {
         return reportyName;
     }
