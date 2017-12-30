@@ -370,7 +370,11 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .setTitle(R.string.vet_dialog_title)
                 .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        // User clicked OK button
+                        Intent vet_intent = new Intent(getApplicationContext(), VetListActivity.class);
+                        vet_intent.putExtra("lat", mMap.getCameraPosition().target.latitude);
+                        vet_intent.putExtra("long", mMap.getCameraPosition().target.longitude);
+                        vet_intent.putExtra("from", "dialog");
+                        startActivity(vet_intent);
                     }
                 }).setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
@@ -421,6 +425,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         } else if (id == R.id.nav_my_reports) {
 
         } else if (id == R.id.nav_nearby_vet) {
+            Intent vet_intent = new Intent(this, VetListActivity.class);
+            vet_intent.putExtra("from", "menu");
+            startActivity(vet_intent);
 
         } else if (id == R.id.nav_share) {
 

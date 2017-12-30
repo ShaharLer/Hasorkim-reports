@@ -23,12 +23,12 @@
             android:label="@string/title_activity_report_event" />
         <activity
             android:name=".VetListActivity"
-            android:label="@string/title_activity_vet_list">
-        </activity>
+            android:label="@string/title_activity_vet_list"
+            android:parentActivityName=".MapsActivity" />
 
         <activity
             android:name=".VeterinaryClinicMoreDetailsActivity"
-            android:label="@string/title_activity_veterinay_clinic_more_details"/>
+            android:label="@string/title_activity_veterinay_clinic_more_details" />
 
         <activity
             android:name=".NewEventMoreDetailsRequestActivity"
@@ -42,6 +42,8 @@
         <activity
             android:name=".VetListMapActivity"
             android:label="@string/title_activity_vet_list" />
+
+
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps"
