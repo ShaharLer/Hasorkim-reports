@@ -46,7 +46,7 @@ public class ReportListActivity extends BaseActivity {
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        RecyclerView.Adapter mAdapter = new ReportAdapter_v2(FirebaseDatabase.getInstance().getReference().child("reports").limitToLast(70));
+        RecyclerView.Adapter mAdapter = new ReportAdapter(FirebaseDatabase.getInstance().getReference().child("reports").limitToLast(70));
         mRecyclerView.setAdapter(mAdapter);
 
         /*
