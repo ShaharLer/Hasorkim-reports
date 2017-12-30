@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * Created by workhourse on 12/2/17.
@@ -16,7 +17,7 @@ public class Report implements  java.io.Serializable{
 
 
     private String id;
-    private String reportyName;
+    private String reporterName;
     private String status;
     private String startTime;
     private String address;
@@ -26,26 +27,30 @@ public class Report implements  java.io.Serializable{
     private String assignedScanner;
     private int availableScanners;
     private String cancellationText;
+    private String userId;
 
     public Report(){
         // Default constructor required for calls to DataSnapshot.getValue(Post.class)
     }
 
 
-    public Report(String reportyName, String address, String freeText, String phoneNumber) {
-        this.reportyName = reportyName;
+    public Report(String address, String freeText, User user) {
+
         this.startTime = Calendar.getInstance().getTime().toString();
         this.address = address;
         this.status = "NEW";
         this.freeText = freeText;
-        this.phoneNumber = phoneNumber;
+
         this.assignedScanner = "";
         this.availableScanners = 0;
+        this.reporterName = user.getName();
+        this.phoneNumber = user.getPhoneNumber();
+        this.userId = user.getId();
     }
 
     public String getId() {return id;   }
     public String getReportyName() {
-        return reportyName;
+        return reporterName;
     }
 
     public String getFreeText() {
@@ -63,6 +68,7 @@ public class Report implements  java.io.Serializable{
     public String getStatus() { return this.status; }
     public String getStartTime() { return this.startTime; }
     public String getAddress() { return this.address; }
+    public String getUserId() {return userId;   }
     public int getAvailableScanners() { return this.availableScanners; }
     public String getCancellationText() {
         return cancellationText;
@@ -113,7 +119,7 @@ public class Report implements  java.io.Serializable{
     public String toString() {
         return "Report{" +
                 "id='" + id + '\'' +
-                ", reportyName='" + reportyName + '\'' +
+                ", reportyName='" + reporterName + '\'' +
                 ", status='" + status + '\'' +
                 ", startTime='" + startTime + '\'' +
                 ", address='" + address + '\'' +
@@ -123,5 +129,20 @@ public class Report implements  java.io.Serializable{
                 ", assignedScanner='" + assignedScanner + '\'' +
                 ", availableScanners=" + availableScanners +
                 '}';
+    }
+
+    public boolean isOpenReport(){
+        if ((Objects.equals(this.status, "CANCELED")) || (Objects.equals(this.status, "CLOSED")))
+            return false;
+        else return true;
+    }
+
+    public String statusInHebrew(){
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("NEW", "הדיווח בטיפול מנהל");
+        map.put("CLOSED", "הטיפול בדיווח הסתיים");
+        map.put("CANCELED", "הדיווח בוטל");
+        map.put("SCANER_ON_THE_WAY", "סורק בדרך אליך");
+        return map.get(this.status);
     }
 }

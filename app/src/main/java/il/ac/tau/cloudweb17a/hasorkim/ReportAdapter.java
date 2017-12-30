@@ -52,10 +52,15 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ReportView
         @Override
         public void onClick(View v) {
 
-            Intent intent = new Intent(context, ActiveReportActivity.class);
+            Intent intent;
+
+            if (mReport.isOpenReport())
+                intent = new Intent(context, ActiveReportActivity.class);
+            else
+                intent = new Intent(context, ClosedReportActivity.class);
+
             intent.putExtra("Report", mReport);
             context.startActivity(intent);
-            Log.d(TAG, mReport.getStartTime());
         }
 
         public void bindReport(Report report) {

@@ -50,15 +50,14 @@ public class NewEventMoreDetailsRequestActivity extends BaseActivity {
 
         address = getIntent().getStringExtra("address");
         if(address==null){
-            Log.w(TAG, "no report wes received from the previous activity");
+            Log.w(TAG, "no address wes received from the previous activity");
             address="";
         }
 
 
-
-        user = getUser();
+        user = getUser(thisContainer.getContext());
         TextView reporterName = findViewById(R.id.reporterName);
-        TextView reporterPhoneNumber = (TextView) findViewById(R.id.reporterPhoneNumber);
+        TextView reporterPhoneNumber = findViewById(R.id.reporterPhoneNumber);
         TextView reportLocation = findViewById(R.id.reportLocation);
 
         reporterName.setText(user.getName());
@@ -79,8 +78,8 @@ public class NewEventMoreDetailsRequestActivity extends BaseActivity {
         submitReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
+                //String name = user.getName();
+                //String phoneNumber = user.getPhoneNumber();
 
                 //String reportyNameText = reportyName.getText().toString();
                 //if (Objects.equals(reportyNameText, ""))
@@ -95,14 +94,23 @@ public class NewEventMoreDetailsRequestActivity extends BaseActivity {
 
                 //TextView reportyLoction = (TextView) findViewById(R.id.reportyLoction);
 
+
+                TextView moreInformation = findViewById(R.id.moreInformation);
+                TextView reporterName = findViewById(R.id.reporterName);
+                TextView reporterPhoneNumber = findViewById(R.id.reporterPhoneNumber);
+                TextView reportLocation = findViewById(R.id.reportLocation);
+                address = reportLocation.getText().toString();
+
                 if(address.equals("")){
                     address="אלנבי 9, תל אביב";
                 }
 
-                Report new_report = new Report( "אלעד",
-                        address,
-                       "","050-8888888"
-                );
+                user.setName(reporterName.getText().toString());
+                user.setPhoneNumber(reporterPhoneNumber.getText().toString());
+
+                Report new_report = new Report(address,moreInformation.getText().toString(),user);
+                Log.d(TAG, "report userId "+new_report.getUserId());
+
                 new_report.persistReport();
                 Intent intent = new Intent(NewEventMoreDetailsRequestActivity.this, ActiveReportActivity.class);
                 intent.putExtra("Report", new_report);
