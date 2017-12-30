@@ -23,7 +23,13 @@
             android:label="@string/title_activity_report_event" />
         <activity
             android:name=".VetListActivity"
-            android:label="@string/title_activity_vet_list" />
+            android:label="@string/title_activity_vet_list">
+        </activity>
+
+        <activity
+            android:name=".VeterinaryClinicMoreDetailsActivity"
+            android:label="@string/title_activity_veterinay_clinic_more_details"/>
+
         <activity
             android:name=".NewEventMoreDetailsRequestActivity"
             android:label="@string/title_more_details_request" />

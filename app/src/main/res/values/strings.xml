@@ -2,6 +2,8 @@
     <string name="app_name">הסורקים</string>
     <string name="button_report_event_new_report">דווח</string>
     <string name="title_activity_maps">הסורקים</string>
+    <string name="google_maps_key">AIzaSyD-LCTPPgFDqC0_EG_qTfTLTR8d9ZW04M8</string>
+    <string name="google_places_key">AIzaSyBcSLd55VIpNE_MRmt5GyRini-d7cENn1w</string>
     <string name="title_activity_report_event">דווח על אירוע</string>
     <string name="title_activity_new_report">New Event</string>
     <string name="text_new_event_vet_found">יש מרפאות ווטרינריות פתוחות באזור!</string>
@@ -18,9 +20,20 @@
     <string name="text_new_event_we_will_check_report">פרטי הדיווח:</string>
     <string name="button_new_event_more_details_submit">שלח דיווח</string>
     <string name="title_activity_base">BaseActivity</string>
-
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="vet_clinic_name">שם:</string>
+    <string name="vet_clinic_address">כתובת:</string>
+    <string name="vet_clinic_walking_distance">מרחק:</string>
+    <string name="vet_clinic_search">veterinary_care</string>
+    <string name="for_more_details"><u>לפרטים נוספים</u></string>
+    <string name="vet_clinic_phone_number">טלפון:</string>
+    <string name="vet_clinic_opening_hours"><u>שעות פתיחה:</u></string>
+    <string name="vet_clinic_website">אתר:</string>
+    <string name="vet_list_back_to_report">המשך בכל זאת לדיווח</string>
+    <string name="phone_call">חייג</string>
+    <string name="get_route">מסלול</string>
+    <string name="title_activity_veterinay_clinic_more_details">פרטי מרפאה</string>
 
     <string name="action_settings">הגדרות</string>
     <string name="new_report">דיווח חדש</string>
