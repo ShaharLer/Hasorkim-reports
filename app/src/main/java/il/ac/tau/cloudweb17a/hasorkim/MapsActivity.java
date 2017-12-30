@@ -196,10 +196,16 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                             mLastKnownLocation = task.getResult();
                             if (mCameraPosition != null) {
                                 mMap.moveCamera(CameraUpdateFactory.newCameraPosition(mCameraPosition));
-                            } else {
+                            } else if (mLastKnownLocation != null) {
                                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
                                         new LatLng(mLastKnownLocation.getLatitude(),
                                                 mLastKnownLocation.getLongitude()), DEFAULT_ZOOM));
+                            } else {
+                                Log.d(TAG, "Current location is null. Using defaults.");
+                                Log.e(TAG, "Exception: %s", task.getException());
+                                mMap.moveCamera(CameraUpdateFactory
+                                        .newLatLngZoom(mDefaultLocation, DEFAULT_ZOOM));
+                                mMap.getUiSettings().setMyLocationButtonEnabled(false);
                             }
                         } else {
                             Log.d(TAG, "Current location is null. Using defaults.");
