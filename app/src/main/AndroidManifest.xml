@@ -51,6 +51,15 @@
             android:name=".FetchAddressIntentService"
             android:exported="false" />
 
+        <service
+            android:name=".MessagingService"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
         <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings"
@@ -59,6 +68,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="il.ac.tau.cloudweb17a.hasorkim.MapsActivity" />
         </activity>
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/dog_icon" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/colorAccent" />
+
     </application>
 
 </manifest>
