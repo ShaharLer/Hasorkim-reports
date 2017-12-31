@@ -61,7 +61,6 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ReportView
 
             intent.putExtra("Report", mReport);
             context.startActivity(intent);
-            Log.d(TAG, mReport.getStartTime());
         }
 
         public void bindReport(Report report) {

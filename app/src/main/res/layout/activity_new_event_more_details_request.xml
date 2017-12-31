@@ -138,6 +138,7 @@
                 android:textStyle="bold">
 
                 <EditText
+                    android:id="@+id/moreInformation"
                     android:layout_width="162dp"
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
