@@ -58,7 +58,9 @@
         <activity
             android:name=".VetListMapActivity"
             android:label="@string/title_activity_vet_list" />
-        <activity android:name=".ClosedReportActivity"></activity>
+        <activity
+            android:name=".ClosedReportActivity"
+            android:label="דיווח לא פעיל" />
     </application>
 
 </manifest>

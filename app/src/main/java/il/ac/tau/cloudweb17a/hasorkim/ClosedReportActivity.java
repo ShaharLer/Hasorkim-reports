@@ -1,12 +1,11 @@
 package il.ac.tau.cloudweb17a.hasorkim;
 
-import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.view.Gravity;
+import android.os.StrictMode;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
@@ -17,11 +16,15 @@ public class ClosedReportActivity extends BaseActivity {
     private PopupWindow popupWindow;
     private ViewGroup popupContainer;
     private Report report;
+    private Bitmap bitmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_active_report);
+
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
 
         layoutInflater = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
 
@@ -31,14 +34,28 @@ public class ClosedReportActivity extends BaseActivity {
 
         report = (Report) getIntent().getSerializableExtra("Report");
 
-        TextView activeReportExtraText = (TextView) findViewById(R.id.ClosedReportExtraText);
-        activeReportExtraText.setText((CharSequence) report.getFreeText());
+        TextView closedReportystatus = (TextView) findViewById(R.id.closedReportStatus);
+        closedReportystatus.setText((CharSequence) report.statusInHebrew());
 
-        TextView activeReportyPhoneNumber = (TextView) findViewById(R.id.ClosedReportyPhoneNumber);
-        activeReportyPhoneNumber.setText((CharSequence) report.getPhoneNumber());
+        ImageView closedReportImage = (ImageView) findViewById(R.id.closedReportImageView);
+        bitmap = report.getBitmapFromURL("https://3milliondogs.com/blog-assets-two/2014/02/Fotolia_37994094_Subscription_Monthly_XL.jpg");
+        closedReportImage.setImageBitmap(bitmap);
 
-        TextView activeReportyLoction = (TextView) findViewById(R.id.ClosedReportyLoction);
-        activeReportyLoction.setText((CharSequence) report.getAddress());
+        TextView closedReportExtraDate = (TextView) findViewById(R.id.closedReportDate);
+        closedReportExtraDate.setText((CharSequence) report.getStartTime());
+
+        TextView closedReportyLoction = (TextView) findViewById(R.id.closedReportyLoction);
+        closedReportyLoction.setText((CharSequence) report.getAddress());
+
+        TextView closedReportExtraText = (TextView) findViewById(R.id.closedReportExtraText);
+        closedReportExtraText.setText((CharSequence) report.getFreeText());
+
+        TextView closedReportyPhoneNumber = (TextView) findViewById(R.id.closedReportyPhoneNumber);
+        closedReportyPhoneNumber.setText((CharSequence) report.getPhoneNumber());
+
+
+
+
 
     }
 }
