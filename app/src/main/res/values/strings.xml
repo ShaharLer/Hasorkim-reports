@@ -28,4 +28,5 @@
     <string name="newReportAddInformation">מידע נוסף</string>
     <string name="NewReportReporterName">שם המדווח</string>
     <string name="newReportMyLocation">המיקום שלי</string>
+    <string name="closed_report_details_headline"><u> פרטי הדוח:</u></string>
 </resources>

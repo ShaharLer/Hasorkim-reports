@@ -38,7 +38,7 @@ public class ClosedReportActivity extends BaseActivity {
         closedReportystatus.setText((CharSequence) report.statusInHebrew());
 
         ImageView closedReportImage = (ImageView) findViewById(R.id.closedReportImageView);
-        bitmap = report.getBitmapFromURL("https://3milliondogs.com/blog-assets-two/2014/02/Fotolia_37994094_Subscription_Monthly_XL.jpg");
+        bitmap = report.getBitmapFromURL("https://dingo.care2.com/pictures/greenliving/1414/1413160.large.jpg");
         closedReportImage.setImageBitmap(bitmap);
 
         TextView closedReportExtraDate = (TextView) findViewById(R.id.closedReportDate);
@@ -49,9 +49,6 @@ public class ClosedReportActivity extends BaseActivity {
 
         TextView closedReportExtraText = (TextView) findViewById(R.id.closedReportExtraText);
         closedReportExtraText.setText((CharSequence) report.getFreeText());
-
-        TextView closedReportyPhoneNumber = (TextView) findViewById(R.id.closedReportyPhoneNumber);
-        closedReportyPhoneNumber.setText((CharSequence) report.getPhoneNumber());
 
 
 

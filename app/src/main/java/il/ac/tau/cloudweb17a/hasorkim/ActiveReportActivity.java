@@ -49,8 +49,8 @@ public class ActiveReportActivity extends BaseActivity {
         TextView activeReportystatus = (TextView) findViewById(R.id.activeReportStatus);
         activeReportystatus.setText((CharSequence) report.statusInHebrew());
 
-        TextView activeReportExtraText = (TextView) findViewById(R.id.activeReportExtraText);
-        activeReportExtraText.setText((CharSequence) report.getFreeText());
+        //TextView activeReportExtraText = (TextView) findViewById(R.id.activeReportExtraText);
+        //activeReportExtraText.setText((CharSequence) report.getFreeText());
 
         TextView activeReportyPhoneNumber = (TextView) findViewById(R.id.activeReportyPhoneNumber);
         activeReportyPhoneNumber.setText((CharSequence) report.getPhoneNumber());
@@ -58,9 +58,9 @@ public class ActiveReportActivity extends BaseActivity {
         TextView activeReportyLoction = (TextView) findViewById(R.id.activeReportyLoction);
         activeReportyLoction.setText((CharSequence) report.getAddress());
 
-        ImageView activeReportImage = (ImageView) findViewById(R.id.activeReportImageView);
-        bitmap = report.getBitmapFromURL("https://3milliondogs.com/blog-assets-two/2014/02/Fotolia_37994094_Subscription_Monthly_XL.jpg");
-        activeReportImage.setImageBitmap(bitmap);
+        //ImageView activeReportImage = (ImageView) findViewById(R.id.activeReportImageView);
+        //bitmap = report.getBitmapFromURL("https://3milliondogs.com/blog-assets-two/2014/02/Fotolia_37994094_Subscription_Monthly_XL.jpg");
+        //activeReportImage.setImageBitmap(bitmap);
 
         Button cancelReportButton = findViewById(R.id.cancelReport);
 
