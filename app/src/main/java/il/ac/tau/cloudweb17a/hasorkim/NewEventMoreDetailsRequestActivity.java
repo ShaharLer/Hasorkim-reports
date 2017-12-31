@@ -103,6 +103,7 @@ public class NewEventMoreDetailsRequestActivity extends BaseActivity {
                         address,
                        "","050-8888888"
                 );
+
                 new_report.persistReport();
                 Intent intent = new Intent(NewEventMoreDetailsRequestActivity.this, ActiveReportActivity.class);
                 intent.putExtra("Report", new_report);

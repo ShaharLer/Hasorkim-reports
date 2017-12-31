@@ -61,8 +61,8 @@ public class ActiveReportActivity extends BaseActivity {
                         TextView cancelReport = (TextView) popupContainer.findViewById(R.id.cancelReportText);
                         String cancelReportText = cancelReport.getText().toString();
 
-                        report.ReportUpdateCancellationText(cancelReportText);
-                        report.ReportUpdateStatus("CANCELED");
+                        report.reportUpdateCancellationText(cancelReportText);
+                        report.reportUpdateStatus("CANCELED");
 
                         Intent intent = new Intent(ActiveReportActivity.this, ReportListActivity.class);
                         ActiveReportActivity.this.startActivity(intent);
