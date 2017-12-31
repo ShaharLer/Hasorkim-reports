@@ -39,6 +39,7 @@ public class Report implements  java.io.Serializable{
     private String[] imageUrls;
     private String freeText;
     private String phoneNumber;
+    private String extraPhoneNumber;
     private String assignedScanner;
     private int availableScanners;
     private String cancellationText;
@@ -81,6 +82,10 @@ public class Report implements  java.io.Serializable{
         return phoneNumber;
     }
 
+    public String getExtraPhoneNumber() {
+        return extraPhoneNumber;
+    }
+
     public String getAssignedScanner() {
         return assignedScanner;
     }
@@ -103,6 +108,10 @@ public class Report implements  java.io.Serializable{
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
         DatabaseReference reportsRef = ref.child("reports");
         reportsRef.push().setValue(this);
+    }
+
+    public void setExtraPhoneNumber(String extraPhoneNumber) {
+        this.extraPhoneNumber = extraPhoneNumber;
     }
 
     public void setId(String id) {
@@ -153,6 +162,14 @@ public class Report implements  java.io.Serializable{
         reportsRef.setValue(status);
     }
 
+    public void reportUpdateExtraPhoneNumber(){
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference reportsRef = ref.child("reports").child(this.id);
+        Map<String,Object> reportMap = new HashMap<String,Object>();
+        reportMap.put("extraPhoneNumber", this.extraPhoneNumber);
+        reportsRef.updateChildren(reportMap);
+    }
+
     public void reportUpdateIncrementalReportId(){
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
         DatabaseReference reportsRef = ref.child("reports").child(this.id).child("incrementalReportId");
@@ -193,6 +210,7 @@ public class Report implements  java.io.Serializable{
                 ", imageUrls=" + Arrays.toString(imageUrls) +
                 ", freeText='" + freeText + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
+                ", extraPhoneNumber='" + extraPhoneNumber + '\'' +
                 ", assignedScanner='" + assignedScanner + '\'' +
                 ", availableScanners=" + availableScanners +
                 '}';

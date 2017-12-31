@@ -5,13 +5,17 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
@@ -58,9 +62,46 @@ public class ActiveReportActivity extends BaseActivity {
         TextView activeReportyLoction = (TextView) findViewById(R.id.activeReportyLoction);
         activeReportyLoction.setText((CharSequence) report.getAddress());
 
+        if (report.getExtraPhoneNumber() != null){
+            LinearLayout linearLayout = findViewById(R.id.addAnotherPhoneLinearLayout);
+            linearLayout.setVisibility(LinearLayout.VISIBLE);
+            EditText addAnotherPhoneNumber = (EditText) findViewById(R.id.addAnotherPhoneNumber);
+            addAnotherPhoneNumber.setText((CharSequence) report.getExtraPhoneNumber());
+
+
+        }
         //ImageView activeReportImage = (ImageView) findViewById(R.id.activeReportImageView);
         //bitmap = report.getBitmapFromURL("https://3milliondogs.com/blog-assets-two/2014/02/Fotolia_37994094_Subscription_Monthly_XL.jpg");
         //activeReportImage.setImageBitmap(bitmap);
+
+        ImageButton addPhoneNumber = findViewById(R.id.addPhoneNumber);
+
+        addPhoneNumber.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LinearLayout linearLayout = findViewById(R.id.addAnotherPhoneLinearLayout);
+                if (linearLayout.getVisibility() == LinearLayout.GONE)
+                    linearLayout.setVisibility(LinearLayout.VISIBLE);
+                else
+                    linearLayout.setVisibility(LinearLayout.GONE);
+            }
+
+        });
+
+        ImageButton savePhoneNumber = findViewById(R.id.saveAnotherPhoneNumber);
+
+        savePhoneNumber.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TextView extraPhoneNumber = findViewById(R.id.addAnotherPhoneNumber);
+                report.setExtraPhoneNumber(extraPhoneNumber.getText().toString());
+                report.reportUpdateExtraPhoneNumber();
+
+            }
+
+        });
+
+
 
         Button cancelReportButton = findViewById(R.id.cancelReport);
 
