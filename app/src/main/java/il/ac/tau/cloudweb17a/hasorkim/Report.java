@@ -26,7 +26,6 @@ public class Report implements  java.io.Serializable{
     private String id;
     private String reporterName;
     private int incrementalReportId;
-    private String reportyName;
     private String status;
     private String startTime;
     private String address;
@@ -190,18 +189,4 @@ public class Report implements  java.io.Serializable{
                 '}';
     }
 
-    public boolean isOpenReport(){
-        if ((Objects.equals(this.status, "CANCELED")) || (Objects.equals(this.status, "CLOSED")))
-            return false;
-        else return true;
-    }
-
-    public String statusInHebrew(){
-        Map<String, String> map = new HashMap<String, String>();
-        map.put("NEW", "הדיווח בטיפול מנהל");
-        map.put("CLOSED", "הטיפול בדיווח הסתיים");
-        map.put("CANCELED", "הדיווח בוטל");
-        map.put("SCANER_ON_THE_WAY", "סורק בדרך אליך");
-        return map.get(this.status);
-    }
 }
