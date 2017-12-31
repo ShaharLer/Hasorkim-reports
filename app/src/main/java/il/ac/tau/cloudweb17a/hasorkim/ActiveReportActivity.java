@@ -1,14 +1,25 @@
 package il.ac.tau.cloudweb17a.hasorkim;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.StrictMode;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+
+import java.io.InputStream;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class ActiveReportActivity extends BaseActivity {
 
@@ -17,11 +28,15 @@ public class ActiveReportActivity extends BaseActivity {
     private PopupWindow popupWindow;
     private ViewGroup popupContainer;
     private Report report;
+    private Bitmap bitmap;
+    private static final String TAG = "Send Report";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_active_report);
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
 
         layoutInflater = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
 
@@ -31,14 +46,20 @@ public class ActiveReportActivity extends BaseActivity {
 
         report = (Report) getIntent().getSerializableExtra("Report");
 
-        TextView activeReportExtraText = (TextView) findViewById(R.id.ActiveReportExtraText);
+        TextView activeReportExtraText = (TextView) findViewById(R.id.activeReportExtraText);
         activeReportExtraText.setText((CharSequence) report.getFreeText());
 
-        TextView activeReportyPhoneNumber = (TextView) findViewById(R.id.ActiveReportyPhoneNumber);
+        TextView activeReportyPhoneNumber = (TextView) findViewById(R.id.activeReportyPhoneNumber);
         activeReportyPhoneNumber.setText((CharSequence) report.getPhoneNumber());
 
-        TextView activeReportyLoction = (TextView) findViewById(R.id.ActiveReportyLoction);
+        TextView activeReportyLoction = (TextView) findViewById(R.id.activeReportyLoction);
         activeReportyLoction.setText((CharSequence) report.getAddress());
+
+        ImageView activeReportImage = (ImageView) findViewById(R.id.activeReportImageView);
+
+        bitmap = getBitmapFromURL("https://3milliondogs.com/blog-assets-two/2014/02/Fotolia_37994094_Subscription_Monthly_XL.jpg");
+
+        activeReportImage.setImageBitmap(bitmap);
 
         Button cancelReportButton = findViewById(R.id.cancelReport);
 
@@ -92,6 +113,27 @@ public class ActiveReportActivity extends BaseActivity {
                 });
             }
         });
+    }
+
+    public Bitmap getBitmapFromURL (String src){
+        try{
+            URL url = new URL(src);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setDoInput(true);
+            connection.connect();
+            InputStream input = connection.getInputStream();
+            Bitmap myBitmap = BitmapFactory.decodeStream(input);
+            return myBitmap;
+        } catch (Exception e){
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            e.printStackTrace(pw);
+            String sStackTrace = sw.toString();
+            Log.w(TAG, sStackTrace);
+            return null;
+        }
+
+
     }
 }
 
