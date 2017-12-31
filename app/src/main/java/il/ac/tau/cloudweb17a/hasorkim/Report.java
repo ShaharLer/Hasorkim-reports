@@ -1,5 +1,7 @@
 package il.ac.tau.cloudweb17a.hasorkim;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 
 import com.google.firebase.database.DataSnapshot;
@@ -10,6 +12,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.InputStream;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -38,6 +45,8 @@ public class Report implements  java.io.Serializable{
     private String userId;
 
     private int nextIncrementalId;
+    private static final String TAG = "Report";
+
     public Report(){
         // Default constructor required for calls to DataSnapshot.getValue(Report.class)
     }
@@ -189,4 +198,25 @@ public class Report implements  java.io.Serializable{
                 '}';
     }
 
+
+    public Bitmap getBitmapFromURL (String src){
+        try{
+            URL url = new URL(src);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setDoInput(true);
+            connection.connect();
+            InputStream input = connection.getInputStream();
+            Bitmap myBitmap = BitmapFactory.decodeStream(input);
+            return myBitmap;
+        } catch (Exception e){
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            e.printStackTrace(pw);
+            String sStackTrace = sw.toString();
+            Log.w(TAG, sStackTrace);
+            return null;
+        }
+
+
+    }
 }

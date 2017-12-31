@@ -34,7 +34,7 @@ public class ActiveReportActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_active_report);
+
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
@@ -46,6 +46,9 @@ public class ActiveReportActivity extends BaseActivity {
 
         report = (Report) getIntent().getSerializableExtra("Report");
 
+        TextView activeReportystatus = (TextView) findViewById(R.id.activeReportStatus);
+        activeReportystatus.setText((CharSequence) report.statusInHebrew());
+
         TextView activeReportExtraText = (TextView) findViewById(R.id.activeReportExtraText);
         activeReportExtraText.setText((CharSequence) report.getFreeText());
 
@@ -56,9 +59,7 @@ public class ActiveReportActivity extends BaseActivity {
         activeReportyLoction.setText((CharSequence) report.getAddress());
 
         ImageView activeReportImage = (ImageView) findViewById(R.id.activeReportImageView);
-
-        bitmap = getBitmapFromURL("https://3milliondogs.com/blog-assets-two/2014/02/Fotolia_37994094_Subscription_Monthly_XL.jpg");
-
+        bitmap = report.getBitmapFromURL("https://3milliondogs.com/blog-assets-two/2014/02/Fotolia_37994094_Subscription_Monthly_XL.jpg");
         activeReportImage.setImageBitmap(bitmap);
 
         Button cancelReportButton = findViewById(R.id.cancelReport);
@@ -115,26 +116,7 @@ public class ActiveReportActivity extends BaseActivity {
         });
     }
 
-    public Bitmap getBitmapFromURL (String src){
-        try{
-            URL url = new URL(src);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setDoInput(true);
-            connection.connect();
-            InputStream input = connection.getInputStream();
-            Bitmap myBitmap = BitmapFactory.decodeStream(input);
-            return myBitmap;
-        } catch (Exception e){
-            StringWriter sw = new StringWriter();
-            PrintWriter pw = new PrintWriter(sw);
-            e.printStackTrace(pw);
-            String sStackTrace = sw.toString();
-            Log.w(TAG, sStackTrace);
-            return null;
-        }
 
-
-    }
 }
 
 
