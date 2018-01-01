@@ -25,6 +25,13 @@
         android:layout_height="0dp"
         android:layout_weight="8"
         android:fillViewport="true">
+
+
+
+
+
+
+
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -32,6 +39,17 @@
             android:orientation="vertical"
             android:scrollbars="vertical"
             android:layout_marginTop="@dimen/standard_padding">
+
+            <TextView
+                android:id="@+id/errorMessage"
+                android:layout_height="wrap_content"
+                android:layout_width="162dp"
+                android:textAlignment="viewEnd"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/standard_text_size"
+                android:textStyle="bold"
+                android:visibility="gone"/>
+
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -199,6 +217,7 @@
                 android:orientation="horizontal">
 
                 <CheckBox
+                    android:id="@+id/reportCheckbox"
                     android:layout_width="71dp"
                     android:layout_height="match_parent"
                     android:textAlignment="textEnd"

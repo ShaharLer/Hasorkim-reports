@@ -13,17 +13,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Calendar;
 
+import static android.view.View.VISIBLE;
 import static il.ac.tau.cloudweb17a.hasorkim.User.getUser;
 
 public class NewEventMoreDetailsRequestActivity extends BaseActivity {
@@ -36,6 +34,7 @@ public class NewEventMoreDetailsRequestActivity extends BaseActivity {
     private ViewGroup thisContainer;
     private String address;
     private User user;
+    private Report report;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,19 +77,6 @@ public class NewEventMoreDetailsRequestActivity extends BaseActivity {
         submitReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //String name = user.getName();
-                //String phoneNumber = user.getPhoneNumber();
-
-                //String reportyNameText = reportyName.getText().toString();
-                //if (Objects.equals(reportyNameText, ""))
-                //    reportyNameText = reportyName.getHint().toString();
-
-                //TextView reportExtraText = (TextView) findViewById(R.id.reportExtraText);
-
-                //TextView reportyPhoneNumber = (TextView) findViewById(R.id.reportyPhoneNumber);
-                //String reportyPhoneNumberText = reportyPhoneNumber.getText().toString();
-                //if (Objects.equals(reportyPhoneNumberText, ""))
-                //    reportyPhoneNumberText = reportyPhoneNumber.getHint().toString();
 
                 //TextView reportyLoction = (TextView) findViewById(R.id.reportyLoction);
 
@@ -105,18 +91,36 @@ public class NewEventMoreDetailsRequestActivity extends BaseActivity {
                     address="אלנבי 9, תל אביב";
                 }
 
-                user.setName(reporterName.getText().toString());
-                user.setPhoneNumber(reporterPhoneNumber.getText().toString());
+                report.setReporterName(reporterName.getText().toString(),user);
+                report.setPhoneNumber(reporterPhoneNumber.getText().toString(),user);
+                report.setMoreInformation(moreInformation.getText().toString());
+                report.setAddress(address);
 
-                Report new_report = new Report(address,moreInformation.getText().toString(),user);
-                Log.d(TAG, "report userId "+new_report.getUserId());
 
-                new_report.persistReport();
-                Intent intent = new Intent(NewEventMoreDetailsRequestActivity.this, ActiveReportActivity.class);
-                intent.putExtra("Report", new_report);
-                startActivity(intent);
+                //Report new_report = new Report(address,moreInformation.getText().toString(),user);
+                //Log.d(TAG, "report userId "+new_report.getUserId());
+
+                CheckBox cb = findViewById(R.id.reportCheckbox);
+                String error =report.validate(cb.isChecked());
+                if(error.equals("")){
+
+                    report.persistReport();
+                    Intent intent = new Intent(NewEventMoreDetailsRequestActivity.this, ActiveReportActivity.class);
+                    intent.putExtra("Report", report);
+                    startActivity(intent);
+                }
+                else{
+                    TextView errorMessage = findViewById(R.id.errorMessage);
+                    errorMessage.setText(error);
+                    errorMessage.setVisibility(VISIBLE);
+
+                }
+
+
             }
         });
+
+        report = new Report(address,"",user);
     }
 
     private void createPhotoIntent() {

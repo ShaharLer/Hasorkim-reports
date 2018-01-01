@@ -17,6 +17,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -44,6 +45,7 @@ public class Report implements  java.io.Serializable{
     private int availableScanners;
     private String cancellationText;
     private String userId;
+    private boolean hasSimilarReports;
 
     private int nextIncrementalId;
     private static final String TAG = "Report";
@@ -66,11 +68,46 @@ public class Report implements  java.io.Serializable{
         this.phoneNumber = user.getPhoneNumber();
         this.userId = user.getId();
         //this.incrementalReportId = this.setIncrementalReportId();
+
+        this.hasSimilarReports=false;
+        setLisetnerOnReportWithUserId();
     }
+
+    private void setLisetnerOnReportWithUserId() {
+        if(userId!=null) {
+            // Initialize Database
+            Query sameReportQuery = FirebaseDatabase.getInstance().getReference()
+                    .child("reports").orderByChild("userId").equalTo(userId);
+
+
+            ValueEventListener postListener = new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    Log.d(TAG, userId);
+                    Log.d(TAG, String.valueOf(dataSnapshot.getChildrenCount()));
+                    if (dataSnapshot.getChildrenCount() > 0) {
+                        hasSimilarReports = true;
+                    } else {
+                        hasSimilarReports = false;
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    //do nothing
+                }
+            };
+
+
+            sameReportQuery.addValueEventListener(postListener);
+
+        }
+    }
+
 
     public String getId() {return id;   }
 
-    public String getReportyName() {
+    public String getReporterName() {
         return reporterName;
     }
 
@@ -114,8 +151,23 @@ public class Report implements  java.io.Serializable{
         this.extraPhoneNumber = extraPhoneNumber;
     }
 
+    public void setReporterName(String reporterName,User user) {
+        this.reporterName = reporterName;
+        user.setName(reporterName);
+    }
+
+    public void setPhoneNumber(String phoneNumber, User user) {
+        this.phoneNumber=phoneNumber;
+        user.setPhoneNumber(phoneNumber);
+    }
+
+    public void setMoreInformation(String moreInformation) {
+        this.freeText = moreInformation;
+    }
+
     public void setId(String id) {
         this.id = id;
+        setLisetnerOnReportWithUserId();
     }
 
     public void setStatus(String status) {
@@ -198,6 +250,33 @@ public class Report implements  java.io.Serializable{
         map.put("SCANER_ON_THE_WAY", "סורק בדרך אליך");
         return map.get(this.status);
     }
+
+    public String validate(boolean checked){
+        String error ="";
+        if(reporterName.equals("")){
+            error = error+ "חסר שם ";
+        }
+        if(phoneNumber.equals("")){
+            error = error+ "חסר מספר טלפון ";
+        }else {
+            if (!phoneNumber.matches("^([0-9]{10})|([0-9]{3}-[0-9]{7})|([0-9]{2}-[0-9]{7})$")) {
+                error = error + "מספר טלפון לא תקין";
+            }
+        }
+        if(address.equals("")){
+            error = error+ "חסרה כתובת ";
+        }
+        if(!checked){
+            error =error+ " צ'קבוקס לא מסומן ";
+        }
+
+        if(hasSimilarReports){
+            error =error+ "בקשה על שימך כבר נמצאת במערכת";
+        }
+        return error;
+    }
+
+
 
     @Override
     public String toString() {
