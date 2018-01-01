@@ -1,42 +1,71 @@
 package il.ac.tau.cloudweb17a.hasorkim;
 
-import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import java.util.List;
 
-public class VeterinaryClinicAdapter extends ArrayAdapter<VeterinaryClinic> {
-    private final int listLayout;
-
-    public VeterinaryClinicAdapter(Context context,
-                                   int listLayout,
-                                   ArrayList<VeterinaryClinic> veterinaryClinics) {
-        super(context, listLayout, veterinaryClinics);
-        this.listLayout = listLayout;
+public class VeterinaryClinicAdapter extends RecyclerView.Adapter<VeterinaryClinicAdapter.ViewHolder> {
+    public interface OnItemClickListener {
+        void onItemClick(VeterinaryClinic item);
     }
 
+    private List<VeterinaryClinic> vetClinicsDataset;
+    private final OnItemClickListener listener;
+    private static final String MINUTES_DRIVING = " דקות נסיעה";
+
+    // Provide a suitable constructor (depends on the kind of dataset)
+    public VeterinaryClinicAdapter(List<VeterinaryClinic> vetClinicsDataset, OnItemClickListener listener) {
+        this.vetClinicsDataset = vetClinicsDataset;
+        this.listener = listener;
+    }
+
+    // Create new views (invoked by the layout manager)
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        // Get the data item for this position
-        VeterinaryClinic veterinaryClinic = getItem(position);
-        // Check if an existing view is being reused, otherwise inflate the view
-        if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(listLayout, parent, false);
-        }
-        // Lookup view for data population
-        TextView vetName = (TextView) convertView.findViewById(R.id.vet_name);
-        TextView vetAddress = (TextView) convertView.findViewById(R.id.vet_address);
-        TextView vetOpeningHours = (TextView) convertView.findViewById(R.id.vet_opening_hours);
-        // Populate the data into the template view using the data object
-        vetName.setText(veterinaryClinic.getName());
-        vetAddress.setText(veterinaryClinic.getAddress());
-        vetOpeningHours.setText(veterinaryClinic.getOpeningHours());
-        // Return the completed view to render on screen
-        return convertView;
+    public VeterinaryClinicAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.vet_list_item, parent, false);
+        return new ViewHolder(view);
     }
 
+    // Replace the contents of a view (invoked by the layout manager)
+    @Override
+    public void onBindViewHolder(ViewHolder holder, int position) {
+        holder.bind(vetClinicsDataset.get(position), listener);
+    }
+
+    // Return the size of your dataset (invoked by the layout manager)
+    @Override
+    public int getItemCount() {
+        return vetClinicsDataset.size();
+    }
+
+    public static class ViewHolder extends RecyclerView.ViewHolder  {
+        // each data item is just a string in this case
+        TextView vetNameTextView;
+        TextView vetAddressTextView;
+        TextView vetDistanceFromOriginTextView;
+
+        public ViewHolder(View view) {
+            super(view);
+            vetNameTextView               = view.findViewById(R.id.vet_name);
+            vetAddressTextView            = view.findViewById(R.id.vet_address);
+            vetDistanceFromOriginTextView = view.findViewById(R.id.vet_distance_from_origin);
+        }
+
+        public void bind(final VeterinaryClinic item, final OnItemClickListener listener) {
+            vetNameTextView.setText(item.getName());
+            vetAddressTextView.setText(item.getAddress());
+            vetDistanceFromOriginTextView.setText("כ-" + item.getDistanceFromOrigin() + MINUTES_DRIVING);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onItemClick(item);
+                }
+            });
+        }
+    }
 }

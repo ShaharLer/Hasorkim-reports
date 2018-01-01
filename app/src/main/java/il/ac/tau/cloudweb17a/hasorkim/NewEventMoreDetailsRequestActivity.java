@@ -18,7 +18,7 @@ import android.widget.Toast;
 
 import java.io.File;
 
-public class NewEventMoreDetailsRequestActivity extends BaseActivity {
+public class NewEventMoreDetailsRequestActivity extends AppCompatActivity {
 
     public static final int PHOTO_INTENT_REQUEST_CODE = 10;
     public static final int EXTERNAL_STORAGE_PERMISSION_REQUEST_CODE = 20;
@@ -34,8 +34,6 @@ public class NewEventMoreDetailsRequestActivity extends BaseActivity {
         layoutInflater = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
 
         thisContainer = (ViewGroup) layoutInflater.inflate(R.layout.activity_new_event_more_details_request, null);
-
-        mDrawer.addView(thisContainer, 0);
 
         ImageButton imageButtonReport = thisContainer.findViewById(R.id.imageButtonReport);
         imageButtonReport.setOnClickListener(new View.OnClickListener() {
