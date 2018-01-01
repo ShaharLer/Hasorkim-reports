@@ -47,8 +47,8 @@ public class VetListActivity extends AppCompatActivity {
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
     private static final OkHttpClient client = new OkHttpClient();
     private static final String TAG  = VetListActivity.class.getSimpleName();
-    private static final String DEFAULT_LATITUDE  = "32.0820748";  // TODO handle this
-    private static final String DEFAULT_LONGITUDE = "34.7717487"; // TODO handle this
+    private static final double DEFAULT_LATITUDE  = 32.0820748;  // TODO handle this
+    private static final double DEFAULT_LONGITUDE = 34.7717487; // TODO handle this
 
     public static final String PLACE_ID          = "com.example.hasorkim.place_id";
     public static final String NAME              = "com.example.hasorkim.name";
@@ -65,13 +65,15 @@ public class VetListActivity extends AppCompatActivity {
     private RecyclerView vetListRecyclerView;
     private List<VeterinaryClinic> allVetsList;
     private List<VeterinaryClinic> openVetsList;
-    private String currLatitude  = DEFAULT_LATITUDE;  // TODO handle this after checking GPS
-    private String currLongitude = DEFAULT_LONGITUDE; // TODO handle this after checking GPS
+    private double currLatitude  = DEFAULT_LATITUDE;  // TODO handle this after checking GPS
+    private double currLongitude = DEFAULT_LONGITUDE; // TODO handle this after checking GPS
 
     /********************************** New variables *****************************************/
     private FusedLocationProviderClient mFusedLocationProviderClient;
     private boolean mLocationPermissionGranted = false;
     /******************************************************************************************/
+
+    Intent recievedIntent;
 
     public enum QueryType {
         NEARBY_SEARCH_ALL, NEARBY_SEARCH_OPEN, DISTANCE_SEARCH_ALL, DISTANCE_SEARCH_OPEN
@@ -103,14 +105,14 @@ public class VetListActivity extends AppCompatActivity {
         VetListItemDecoration decoration = new VetListItemDecoration(this, Color.LTGRAY, 1f);
         vetListRecyclerView.addItemDecoration(decoration);
 
-        Intent intent = getIntent();
-        String sourceActivity = intent.getStringExtra("from");
+        recievedIntent = getIntent();
+        String sourceActivity = recievedIntent.getStringExtra("from");
 
         if (sourceActivity.equals("dialog")) {
             System.out.println("from DIALOG");
-            currLatitude = intent.getStringExtra("lat");
-            currLongitude = intent.getStringExtra("long");
-            System.out.println("Latitude is: " + currLatitude + ", Longitude is: " + currLongitude);
+            currLatitude = recievedIntent.getDoubleExtra("lat",DEFAULT_LATITUDE);
+            currLongitude = recievedIntent.getDoubleExtra("long", DEFAULT_LONGITUDE);
+            System.out.println("Latitude is: " +  currLatitude + ", Longitude is: " + currLongitude);
             getNearbyVets(false);
             getNearbyVets(true);
         }
@@ -127,7 +129,11 @@ public class VetListActivity extends AppCompatActivity {
      * The listener for the "Back to report" button
      */
     public void OnButtonClick(View v) {
-        Toast.makeText(getApplicationContext(), "Will return to report", Toast.LENGTH_SHORT).show();
+        Intent newReportIntent = new Intent(this, NewEventMoreDetailsRequestActivity.class);
+        newReportIntent.putExtra("lat", currLatitude);
+        newReportIntent.putExtra("long", currLongitude);
+        newReportIntent.putExtra("address", recievedIntent.getStringExtra("address"));
+        startActivity(newReportIntent);
     }
 
     /**
@@ -192,8 +198,8 @@ public class VetListActivity extends AppCompatActivity {
                         if (task.isSuccessful() && (task.getResult() != null)) {
                             // Set the map's camera position to the current location of the device.
                             Location mLastKnownLocation = task.getResult();
-                            currLatitude = Double.toString(mLastKnownLocation.getLatitude());
-                            currLongitude = Double.toString(mLastKnownLocation.getLongitude());
+                            currLatitude = mLastKnownLocation.getLatitude();
+                            currLongitude = mLastKnownLocation.getLongitude();
                         }
                         else {
                             System.out.println("Current location is null. Using defaults.");

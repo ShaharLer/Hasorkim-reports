@@ -14,8 +14,6 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class ReportListActivity extends AppCompatActivity {
 
-    private LayoutInflater layoutInflater;
-    private ViewGroup thisContainer;
     final String TAG = "ReportListActivity";
 
     private RecyclerView mRecyclerView;
@@ -25,10 +23,8 @@ public class ReportListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_report_list);
 
-        layoutInflater = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
-        thisContainer = (ViewGroup) layoutInflater.inflate(R.layout.activity_report_list, null);
+        setContentView(R.layout.activity_report_list);
 
         mRecyclerView = findViewById(R.id.my_recycler_view);
         mRecyclerView.setHasFixedSize(true);

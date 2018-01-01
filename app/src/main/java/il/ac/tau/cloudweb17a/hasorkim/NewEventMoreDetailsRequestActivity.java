@@ -39,12 +39,9 @@ public class NewEventMoreDetailsRequestActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_new_event_more_details_request);
-
-        layoutInflater = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
-
-        thisContainer = (ViewGroup) layoutInflater.inflate(R.layout.activity_new_event_more_details_request, null);
+        setContentView(R.layout.activity_new_event_more_details_request);
 
         address = getIntent().getStringExtra("address");
         if(address==null){
@@ -53,7 +50,7 @@ public class NewEventMoreDetailsRequestActivity extends AppCompatActivity {
         }
 
 
-        user = getUser(thisContainer.getContext());
+        user = getUser(getApplicationContext());
         TextView reporterName = findViewById(R.id.reporterName);
         TextView reporterPhoneNumber = findViewById(R.id.reporterPhoneNumber);
         TextView reportLocation = findViewById(R.id.reportLocation);
@@ -64,7 +61,7 @@ public class NewEventMoreDetailsRequestActivity extends AppCompatActivity {
 
 
 
-        ImageButton imageButtonReport = thisContainer.findViewById(R.id.imageButtonReport);
+        ImageButton imageButtonReport = findViewById(R.id.imageButtonReport);
         imageButtonReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -72,7 +69,7 @@ public class NewEventMoreDetailsRequestActivity extends AppCompatActivity {
             }
         });
 
-        Button submitReport = thisContainer.findViewById(R.id.submitReport);
+        Button submitReport = findViewById(R.id.submitReport);
         submitReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

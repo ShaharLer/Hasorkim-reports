@@ -376,15 +376,20 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .setTitle(R.string.vet_dialog_title)
                 .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        Intent vet_intent = new Intent(getApplicationContext(), VetListActivity.class);
-                        vet_intent.putExtra("lat", Double.toString(mMap.getCameraPosition().target.latitude));
-                        vet_intent.putExtra("long", Double.toString(mMap.getCameraPosition().target.longitude));
-                        vet_intent.putExtra("from", "dialog");
-                        startActivity(vet_intent);
+                        Intent vetIntent = new Intent(getApplicationContext(), VetListActivity.class);
+                        vetIntent.putExtra("lat", Double.toString(mMap.getCameraPosition().target.latitude));
+                        vetIntent.putExtra("long", Double.toString(mMap.getCameraPosition().target.longitude));
+                        vetIntent.putExtra("address", getDisplayStreet());
+                        vetIntent.putExtra("from", "dialog");
+                        startActivity(vetIntent);
                     }
                 }).setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                // User cancelled the dialog
+                Intent newReportIntent = new Intent(getApplicationContext(), NewEventMoreDetailsRequestActivity.class);
+                newReportIntent.putExtra("lat", Double.toString(mMap.getCameraPosition().target.latitude));
+                newReportIntent.putExtra("long", Double.toString(mMap.getCameraPosition().target.longitude));
+                newReportIntent.putExtra("address", getDisplayStreet());
+                startActivity(newReportIntent);
             }
         }).create().show();
     }
@@ -426,9 +431,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_new_report) {
-            // Handle the camera action
-        } else if (id == R.id.nav_my_reports) {
+        if (id == R.id.nav_my_reports) {
+            startActivity(new Intent(this, ReportListActivity.class));
 
         } else if (id == R.id.nav_nearby_vet) {
             Intent vet_intent = new Intent(this, VetListActivity.class);

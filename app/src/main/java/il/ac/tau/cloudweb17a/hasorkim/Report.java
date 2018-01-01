@@ -17,16 +17,11 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-
-/**
- * Created by workhourse on 12/2/17.
- */
 
 public class Report implements  java.io.Serializable{
 
