@@ -17,7 +17,7 @@
     <string name="text_new_event_have_dog_msg_please">הכלב נמצא איתי ואינו יכול לברוח</string>
     <string name="text_new_event_have_dog_msg_if">If the dog is not with you, we will not be able to send anyone to help</string>
     <string name="title_more_details_request">פרטי דיווח</string>
-    <string name="text_new_event_we_will_check_report">פרטי הדיווח:</string>
+    <string name="text_new_event_we_will_check_report">פרטי הדיווח</string>
     <string name="button_new_event_more_details_submit">שלח דיווח</string>
     <string name="title_activity_base">BaseActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -35,7 +35,12 @@
     <string name="get_route">מסלול</string>
     <string name="title_activity_veterinay_clinic_more_details">פרטי המרפאה</string>
 
-    <string name="action_settings">הגדרות</string>
+    <string name="action_settings">Settings</string>
+    <string name="addReportPhone">טלפון</string>
+    <string name="newReportAddInformation">מידע נוסף</string>
+    <string name="NewReportReporterName">שם המדווח</string>
+    <string name="newReportMyLocation">המיקום שלי</string>
+    <string name="closed_report_details_headline"><u> פרטי הדוח:</u></string>
     <string name="new_report">דיווח חדש</string>
     <string name="address_not_found">Address not found</string>
     <string name="icon_of_a_dog">Icon of a dog</string>

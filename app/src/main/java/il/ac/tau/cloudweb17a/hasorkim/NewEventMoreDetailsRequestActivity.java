@@ -7,24 +7,35 @@ import android.net.Uri;
 import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
+import java.util.ArrayList;
+
+import static android.view.View.VISIBLE;
+import static il.ac.tau.cloudweb17a.hasorkim.User.getUser;
 
 public class NewEventMoreDetailsRequestActivity extends AppCompatActivity {
 
     public static final int PHOTO_INTENT_REQUEST_CODE = 10;
     public static final int EXTERNAL_STORAGE_PERMISSION_REQUEST_CODE = 20;
+    private static final String TAG = "Send Report";
 
     private LayoutInflater layoutInflater;
     private ViewGroup thisContainer;
+    private String address;
+    private User user;
+    private Report report;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +45,24 @@ public class NewEventMoreDetailsRequestActivity extends AppCompatActivity {
         layoutInflater = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
 
         thisContainer = (ViewGroup) layoutInflater.inflate(R.layout.activity_new_event_more_details_request, null);
+
+        address = getIntent().getStringExtra("address");
+        if(address==null){
+            Log.w(TAG, "no address wes received from the previous activity");
+            address="";
+        }
+
+
+        user = getUser(thisContainer.getContext());
+        TextView reporterName = findViewById(R.id.reporterName);
+        TextView reporterPhoneNumber = findViewById(R.id.reporterPhoneNumber);
+        TextView reportLocation = findViewById(R.id.reportLocation);
+
+        reporterName.setText(user.getName());
+        reporterPhoneNumber.setText(user.getPhoneNumber());
+        reportLocation.setText(address);
+
+
 
         ImageButton imageButtonReport = thisContainer.findViewById(R.id.imageButtonReport);
         imageButtonReport.setOnClickListener(new View.OnClickListener() {
@@ -47,10 +76,50 @@ public class NewEventMoreDetailsRequestActivity extends AppCompatActivity {
         submitReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(NewEventMoreDetailsRequestActivity.this, ActiveReportActivity.class);
-                startActivity(intent);
+
+                //TextView reportyLoction = (TextView) findViewById(R.id.reportyLoction);
+
+
+                TextView moreInformation = findViewById(R.id.moreInformation);
+                TextView reporterName = findViewById(R.id.reporterName);
+                TextView reporterPhoneNumber = findViewById(R.id.reporterPhoneNumber);
+                TextView reportLocation = findViewById(R.id.reportLocation);
+                address = reportLocation.getText().toString();
+
+                if(address.equals("")){
+                    address="אלנבי 9, תל אביב";
+                }
+
+                report.setReporterName(reporterName.getText().toString(),user);
+                report.setPhoneNumber(reporterPhoneNumber.getText().toString(),user);
+                report.setMoreInformation(moreInformation.getText().toString());
+                report.setAddress(address);
+
+
+                //Report new_report = new Report(address,moreInformation.getText().toString(),user);
+                //Log.d(TAG, "report userId "+new_report.getUserId());
+
+                CheckBox cb = findViewById(R.id.reportCheckbox);
+                String error =report.validate(cb.isChecked());
+                if(error.equals("")){
+
+                    report.persistReport();
+                    Intent intent = new Intent(NewEventMoreDetailsRequestActivity.this, ActiveReportActivity.class);
+                    intent.putExtra("Report", report);
+                    startActivity(intent);
+                }
+                else{
+                    TextView errorMessage = findViewById(R.id.errorMessage);
+                    errorMessage.setText(error);
+                    errorMessage.setVisibility(VISIBLE);
+
+                }
+
+
             }
         });
+
+        report = new Report(address,"",user);
     }
 
     private void createPhotoIntent() {
@@ -100,7 +169,7 @@ public class NewEventMoreDetailsRequestActivity extends AppCompatActivity {
                     createPhotoIntent();
                 } else Toast.makeText(this, "Gallery Permission Denied :(",
                         Toast.LENGTH_SHORT).show();
-                return;
+
             }
         }
 

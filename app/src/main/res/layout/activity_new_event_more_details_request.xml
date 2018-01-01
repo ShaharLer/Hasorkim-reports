@@ -12,18 +12,26 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="0sp"
+        android:layout_marginTop="50sp"
         android:layout_weight="1"
         android:gravity="center"
         android:text="@string/text_new_event_we_will_check_report"
+        android:textAlignment="center"
         android:textSize="@dimen/standard_text_size"
-        android:textStyle="bold"
-        android:layout_marginTop="50sp"/>
+        android:textStyle="bold" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="8"
         android:fillViewport="true">
+
+
+
+
+
+
+
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -32,19 +40,30 @@
             android:scrollbars="vertical"
             android:layout_marginTop="@dimen/standard_padding">
 
+            <TextView
+                android:id="@+id/errorMessage"
+                android:layout_height="wrap_content"
+                android:layout_width="162dp"
+                android:textAlignment="viewEnd"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/standard_text_size"
+                android:textStyle="bold"
+                android:visibility="gone"/>
+
+
             <LinearLayout
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="55dp"
+                android:layout_marginBottom="@dimen/standard_padding"
+                android:layout_marginTop="@dimen/standard_padding"
                 android:layout_weight="8"
                 android:gravity="center"
                 android:orientation="horizontal"
-                android:layout_marginBottom="@dimen/standard_padding"
-                android:layout_marginTop="@dimen/standard_padding"
                 android:textStyle="bold">
 
                 <ImageButton
                     android:id="@+id/imageButtonReport"
-                    android:layout_width="0dp"
+                    android:layout_width="162dp"
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
                     app:srcCompat="@android:drawable/ic_menu_camera" />
@@ -53,162 +72,169 @@
                     android:layout_width="0sp"
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
-                    android:gravity="center"
                     android:text="תמונה:"
-                    android:textSize="@dimen/standard_text_size"
-                    android:textStyle="bold"
+                    android:textAlignment="viewEnd"
                     android:textColor="@android:color/black"
-                    />
+                    android:textSize="@dimen/standard_text_size"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:gravity="center"
-                android:orientation="horizontal"
+                android:layout_height="55dp"
                 android:layout_marginBottom="@dimen/standard_padding"
                 android:layout_marginTop="@dimen/standard_padding"
-                >
-
-                <CheckBox
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/text_new_event_have_dog_msg_please"
-                    android:gravity="right"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/standard_text_size" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:textStyle="bold"
-                android:layout_marginBottom="@dimen/standard_padding"
-                android:layout_marginTop="@dimen/double_padding">
-
-                <EditText
-                    android:layout_width="0sp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:hint="מידע נוסף"
-                    android:gravity="center_horizontal"
-                    android:inputType="textMultiLine" />
-
-                <TextView
-                    android:layout_width="0sp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="מידע נוסף:"
-                    android:textSize="@dimen/standard_text_size"
-                    android:textStyle="bold"
-                    android:textColor="@android:color/black"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:orientation="horizontal"
-                android:textStyle="bold"
-                android:layout_marginTop="@dimen/standard_padding"
-                android:layout_marginBottom="@dimen/standard_padding">
+                android:textStyle="bold">
 
                 <EditText
-                    android:layout_width="0sp"
+                    android:id="@+id/reporterName"
+                    android:layout_width="162dp"
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
-                    android:hint="שחר"
+                    android:gravity="center_horizontal"
                     android:inputType="textPersonName"
-                    android:singleLine="true"
                     android:paddingBottom="6sp"
-                    android:gravity="center_horizontal"
-                    android:textColor="@android:color/black"
-                    />
-
-                <TextView
-                    android:layout_width="0sp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="שם המדווח:"
-                    android:gravity="center"
-                    android:textSize="@dimen/standard_text_size"
-                    android:textStyle="bold"
-                    android:alpha="0.2"
-                    />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:textStyle="bold"
-                android:layout_marginTop="@dimen/standard_padding"
-                android:layout_marginBottom="@dimen/standard_padding">
-
-                <EditText
-                    android:id="@+id/phoneIn"
-                    android:layout_width="0sp"
-                    android:layout_height="fill_parent"
-                    android:layout_weight="1"
-                    android:hint="0544764751"
-                    android:inputType="phone"
                     android:singleLine="true"
-                    android:paddingBottom="6sp"
-                    android:gravity="center_horizontal"
                     android:textColor="@android:color/black" />
 
                 <TextView
                     android:layout_width="0sp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="fill_parent"
                     android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="טלפון:"
+                    android:text="@string/NewReportReporterName"
+                    android:textAlignment="viewEnd"
+                    android:textColor="@android:color/black"
                     android:textSize="@dimen/standard_text_size"
-                    android:textStyle="bold"
-                    android:alpha="0.2"/>
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:textStyle="bold"
+                android:layout_height="55dp"
                 android:layout_marginBottom="@dimen/standard_padding"
                 android:layout_marginTop="@dimen/standard_padding"
-                android:alpha="0.2">
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:textStyle="bold">
+
+                <EditText
+                    android:id="@+id/reporterPhoneNumber"
+                    android:layout_width="162dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:inputType="phone"
+                    android:paddingBottom="6sp"
+                    android:singleLine="true"
+                    android:textColor="@android:color/black" />
 
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="0sp"
+                    android:layout_height="fill_parent"
                     android:layout_weight="1"
-                    android:text="Street Sokolov 14, City Ramat-Gan"
-                    android:gravity="left"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/standard_text_size"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="המיקום שלי:"
-                    android:gravity="right"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/standard_text_size"/>
+                    android:text="@string/addReportPhone"
+                    android:textAlignment="viewEnd"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/standard_text_size"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="55dp"
+                android:layout_marginBottom="@dimen/standard_padding"
+                android:layout_marginTop="@dimen/double_padding"
+                android:layout_weight="4"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:textStyle="bold">
+
+                <EditText
+                    android:id="@+id/moreInformation"
+                    android:layout_width="162dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:inputType="textMultiLine"
+                    android:selectAllOnFocus="false" />
+
+
+                <TextView
+                    android:layout_width="0sp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:text="@string/newReportAddInformation"
+                    android:textAlignment="viewEnd"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/standard_text_size"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="55dp"
+                android:layout_marginBottom="@dimen/standard_padding"
+                android:layout_marginTop="@dimen/standard_padding"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:textStyle="bold">
+
+                <TextView
+                    android:id="@+id/reportLocation"
+                    android:layout_width="162dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:textSize="@dimen/standard_text_size"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="0sp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:text="@string/newReportMyLocation"
+                    android:textAlignment="viewEnd"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/standard_text_size"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/standard_padding"
+                android:layout_marginTop="@dimen/standard_padding"
+                android:layout_weight="8"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/reportCheckbox"
+                    android:layout_width="71dp"
+                    android:layout_height="match_parent"
+                    android:textAlignment="textEnd"
+                    android:textSize="@dimen/standard_text_size"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/text_new_event_have_dog_msg_please"
+                    android:textAlignment="viewEnd"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/standard_text_size"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
 
 
         </LinearLayout>
