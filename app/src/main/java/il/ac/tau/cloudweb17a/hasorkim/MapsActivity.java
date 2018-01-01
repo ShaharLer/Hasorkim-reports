@@ -377,8 +377,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         Intent vet_intent = new Intent(getApplicationContext(), VetListActivity.class);
-                        vet_intent.putExtra("lat", mMap.getCameraPosition().target.latitude);
-                        vet_intent.putExtra("long", mMap.getCameraPosition().target.longitude);
+                        vet_intent.putExtra("lat", Double.toString(mMap.getCameraPosition().target.latitude));
+                        vet_intent.putExtra("long", Double.toString(mMap.getCameraPosition().target.longitude));
                         vet_intent.putExtra("from", "dialog");
                         startActivity(vet_intent);
                     }
@@ -438,7 +438,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
-
+            Intent who_we_are_intent = new Intent(this, WhoWeAreActivity.class);
+            startActivity(who_we_are_intent);
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

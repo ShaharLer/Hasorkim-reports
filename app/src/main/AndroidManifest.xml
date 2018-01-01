@@ -31,6 +31,11 @@
             android:label="@string/title_activity_veterinay_clinic_more_details" />
 
         <activity
+            android:name=".WhoWeAreActivity"
+            android:label="מי אנחנו"
+            android:parentActivityName=".MapsActivity"/>
+
+        <activity
             android:name=".NewEventMoreDetailsRequestActivity"
             android:label="@string/title_more_details_request" />
         <activity

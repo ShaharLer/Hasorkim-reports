@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.LinearLayout;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -42,17 +42,17 @@ public class VeterinaryClinicMoreDetailsActivity extends AppCompatActivity {
     private static final OkHttpClient client  = new OkHttpClient();
 
     private ProgressBar progressBar;
-    private RelativeLayout vetListLayout;
+    private RelativeLayout vetListDetails;
     private TextView phoneNumberTextView;
-    private TextView websiteTextView;
     private String parsedVetPhoneNumber;
+    private String vetWebsite;
     private String originLatitude;
     private String originLongitude;
     private String destLatitude;
     private String destLongitude;
-    private LinearLayout phoneCallLayout;
-    private LinearLayout websiteLayout;
-    private LinearLayout routeLayout;
+    private Button phoneCallButton;
+    private Button websiteButton;
+    private Button routeButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,21 +63,20 @@ public class VeterinaryClinicMoreDetailsActivity extends AppCompatActivity {
         originLongitude = intent.getStringExtra(VetListActivity.ORIGIN_LONGITUDE);
 
         progressBar = findViewById(R.id.vet_more_details_progress_bar);
-        vetListLayout = findViewById(R.id.vet_more_details_layout);
+        vetListDetails = findViewById(R.id.vet_more_details_layout);
 
         TextView nameTextView = findViewById(R.id.vet_more_details_name);
-        phoneNumberTextView = findViewById(R.id.vet_more_details_phone_number);
-
         TextView addressTextView = findViewById(R.id.vet_more_details_address);
-        websiteTextView = findViewById(R.id.vet_more_details_website);
+        phoneNumberTextView = findViewById(R.id.vet_more_details_phone_number);
+        //websiteTextView = findViewById(R.id.vet_more_details_website);
 
         // Setting the received text for the text views
         nameTextView.setText(intent.getStringExtra(VetListActivity.NAME));
         addressTextView.setText(intent.getStringExtra(VetListActivity.ADDRESS));
 
-        phoneCallLayout = findViewById(R.id.call_button_layout);
-        websiteLayout   = findViewById(R.id.website_button_layout);
-        routeLayout     = findViewById(R.id.route_button_layout);
+        phoneCallButton = findViewById(R.id.call_button);
+        websiteButton   = findViewById(R.id.website_button);
+        routeButton     = findViewById(R.id.route_button);
 
         /*************************************/
         /*** Run Google Places for Details ***/
@@ -148,20 +147,15 @@ public class VeterinaryClinicMoreDetailsActivity extends AppCompatActivity {
                 if (phoneNumber != null) {
                     phoneNumberTextView.setText(phoneNumber);
                     parsedVetPhoneNumber = parsePhoneNumber(phoneNumber);
-                    // TODO change visibility to VIEW.VISIBLE
                 }
                 else {
                     phoneNumberTextView.setText(UNKNOWN);
-                    phoneCallLayout.setVisibility(View.GONE);
+                    phoneCallButton.setVisibility(View.GONE);
                 }
 
-                String website = (String) placeDetails.get(WEBSITE);
-                if (website != null)
-                    websiteTextView.setText(website);
-                else {
-                    websiteTextView.setText(UNKNOWN);
-                    websiteLayout.setVisibility(View.GONE);
-                }
+                vetWebsite = (String) placeDetails.get(WEBSITE);
+                if (vetWebsite == null)
+                    websiteButton.setVisibility(View.GONE);
 
                 String[] openingHours = (String[]) placeDetails.get(OPENING_HOURS);
                 if (openingHours != null)
@@ -178,11 +172,11 @@ public class VeterinaryClinicMoreDetailsActivity extends AppCompatActivity {
                     destLongitude = vetLongitude;
                 }
                 else
-                    routeLayout.setVisibility(View.GONE);
+                    routeButton.setVisibility(View.GONE);
 
                 // change visibility after information is ready
                 progressBar.setVisibility(View.GONE);
-                vetListLayout.setVisibility(View.VISIBLE);
+                vetListDetails.setVisibility(View.VISIBLE);
             }
         });
     }
@@ -259,7 +253,8 @@ public class VeterinaryClinicMoreDetailsActivity extends AppCompatActivity {
      * @param view
      */
     public void OnWebsiteButtonClick(View view) {
-        Intent websiteIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(websiteTextView.getText().toString()));
+        //Intent websiteIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(websiteTextView.getText().toString()));
+        Intent websiteIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(vetWebsite));
         if (websiteIntent.resolveActivity(getPackageManager()) != null)
             startActivity(websiteIntent);
     }
@@ -268,8 +263,6 @@ public class VeterinaryClinicMoreDetailsActivity extends AppCompatActivity {
      * @param view
      */
     public void OnRouteButtonClick(View view) {
-        // TODO take it off after debug (directly goes to google maps
-
         Uri.Builder urlRoute = new Uri.Builder()
                 .scheme("https")
                 .authority("maps.google.com")

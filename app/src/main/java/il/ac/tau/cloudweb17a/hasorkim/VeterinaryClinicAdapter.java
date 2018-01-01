@@ -58,7 +58,8 @@ public class VeterinaryClinicAdapter extends RecyclerView.Adapter<VeterinaryClin
         public void bind(final VeterinaryClinic item, final OnItemClickListener listener) {
             vetNameTextView.setText(item.getName());
             vetAddressTextView.setText(item.getAddress());
-            vetDistanceFromOriginTextView.setText("כ-" + item.getDistanceFromOrigin() + MINUTES_DRIVING);
+            String distanceFromOrigin = ("כ-" + item.getDistanceFromOrigin() + MINUTES_DRIVING);
+            vetDistanceFromOriginTextView.setText(distanceFromOrigin);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

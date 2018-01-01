@@ -29,11 +29,11 @@
     <string name="for_more_details"><u>לפרטים נוספים</u></string>
     <string name="vet_clinic_phone_number">טלפון:</string>
     <string name="vet_clinic_opening_hours"><u>שעות פתיחה:</u></string>
-    <string name="vet_clinic_website">אתר:</string>
+    <string name="vet_clinic_website">אתר</string>
     <string name="vet_list_back_to_report">המשך בכל זאת לדיווח</string>
     <string name="phone_call">חייג</string>
     <string name="get_route">מסלול</string>
-    <string name="title_activity_veterinay_clinic_more_details">פרטי מרפאה</string>
+    <string name="title_activity_veterinay_clinic_more_details">פרטי המרפאה</string>
 
     <string name="action_settings">הגדרות</string>
     <string name="new_report">דיווח חדש</string>
@@ -69,4 +69,8 @@
     <string name="Community">קהילה</string>
     <string name="Share">שתף</string>
     <string name="Who_are_we">מי אנחנו</string>
+    <string name="open_vets">מרפאות פתוחות</string>
+    <string name="all_vets">כל המרפאות</string>
+    <string name="to_organization_website">לאתר העמותה לחצו <a href="http://www.hasorkim.co.il"><b>כאן</b></a></string>
+    <string name="organization_description">הסבר על העמותה</string>
 </resources>

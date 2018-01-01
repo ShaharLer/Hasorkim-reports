@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="@dimen/title_padding"
-    android:paddingStart="@dimen/place_details_list_layout_padding"
     android:paddingEnd="@dimen/place_details_list_layout_padding"
+    android:paddingStart="@dimen/place_details_list_layout_padding"
+    android:paddingTop="@dimen/title_padding"
+    android:background="@color/backgroundColor"
     tools:context="il.ac.tau.cloudweb17a.hasorkim.VeterinaryClinicMoreDetailsActivity">
 
     <ProgressBar
@@ -15,14 +15,14 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:indeterminate="true"
-        android:theme="@style/ProgressTheme"
-        android:visibility="gone"/>
+        android:theme="@style/ProgressTheme" />
 
     <RelativeLayout
         android:id="@+id/vet_more_details_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="gone">
 
         <TextView
             android:id="@+id/vet_more_details_name"
@@ -31,380 +31,384 @@
             android:gravity="center_horizontal"
             android:paddingBottom="@dimen/double_padding"
             android:textColor="@android:color/holo_blue_dark"
+            android:textIsSelectable="true"
             android:textSize="22sp"
-            android:textStyle="bold"
-            android:textIsSelectable="true" />
+            android:textStyle="bold" />
 
-        <LinearLayout
-            android:id="@+id/vet_more_details_address_layout"
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/vet_more_details_name"
-            android:orientation="horizontal"
-            android:layout_gravity="center"
-            android:paddingBottom="@dimen/place_details_list_between_items_padding">
+            android:scrollbars="vertical">
 
-            <TextView
-                android:layout_width="0dp"
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/vet_clinic_address"
-                android:gravity="start"
-                android:textSize="17sp"
-                android:textStyle="bold" />
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/vet_more_details_address"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="4.5"
-                android:textDirection="rtl"
-                android:textSize="17sp"
-                android:textIsSelectable="true"
-                android:selectAllOnFocus="true" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/vet_more_details_phone_number_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/vet_more_details_address_layout"
-            android:orientation="horizontal"
-            android:paddingBottom="@dimen/place_details_list_between_items_padding">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/vet_clinic_phone_number"
-                android:textSize="17sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/vet_more_details_phone_number"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="4.5"
-                android:textSize="17sp"
-                android:textIsSelectable="true"
-                android:selectAllOnFocus="true" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/vet_more_details_website_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/vet_more_details_phone_number_layout"
-            android:orientation="horizontal"
-            android:paddingBottom="@dimen/place_details_list_between_items_padding">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/vet_clinic_website"
-                android:gravity="start"
-                android:textSize="17sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/vet_more_details_website"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="4.5"
-                android:gravity="right"
-                android:textSize="17sp"
-                android:autoLink="web"
-                android:textColorLink="@android:color/holo_blue_light"
-                android:textIsSelectable="true" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/vet_more_details_opening_hours_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/vet_more_details_website_layout"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/vet_clinic_opening_hours"
-                android:textSize="19sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/vet_opening_hours_unknown"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.7"
-                android:textSize="18sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/vet_more_details_sunday_hours_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/vet_more_details_opening_hours_layout"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/sundayLabel"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:textSize="17sp"
-                android:gravity="center_vertical"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/vet_opening_hours_sunday"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2.5"
-                android:textSize="17sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/vet_more_details_monday_hours_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/vet_more_details_sunday_hours_layout"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/mondayLabel"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/vet_opening_hours_monday"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2.5"
-                android:textSize="17sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/vet_more_details_tuesday_hours_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/vet_more_details_monday_hours_layout"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/tuesdayLabel"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/vet_opening_hours_tuesday"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2.5"
-                android:textSize="17sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/vet_more_details_wednesday_hours_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/vet_more_details_tuesday_hours_layout"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/wednesdayLabel"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/vet_opening_hours_wednesday"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2.5"
-                android:textSize="17sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/vet_more_details_thursday_hours_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/vet_more_details_wednesday_hours_layout"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/thursdayLabel"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/vet_opening_hours_thursday"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2.5"
-                android:textSize="17sp" />
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:id="@+id/vet_more_details_friday_hours_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/vet_more_details_thursday_hours_layout"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/fridayLabel"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/vet_opening_hours_friday"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2.5"
-                android:textSize="17sp" />
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:id="@+id/vet_more_details_saturday_hours_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/vet_more_details_friday_hours_layout"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/saturdayLabel"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/vet_opening_hours_saturday"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2.5"
-                android:textSize="17sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/vet_more_details_saturday_hours_layout"
-            android:orientation="horizontal"
-            android:paddingTop="@dimen/place_details_buttons_padding"
-            android:paddingStart="@dimen/place_details_list_between_items_padding"
-            android:paddingEnd="@dimen/place_details_list_between_items_padding">
-
-            <LinearLayout
-                android:id="@+id/call_button_layout"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center">
-
-                <Button
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:id="@+id/vet_more_details_address_layout"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingBottom="@dimen/vet_list_padding">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="start"
+                        android:text="@string/vet_clinic_address"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/vet_more_details_address"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="4.5"
+                        android:selectAllOnFocus="true"
+                        android:textDirection="rtl"
+                        android:textIsSelectable="true"
+                        android:textSize="17sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/vet_more_details_phone_number_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/vet_more_details_address_layout"
+                    android:orientation="horizontal"
+                    android:paddingBottom="@dimen/place_details_list_between_items_padding">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/vet_clinic_phone_number"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/vet_more_details_phone_number"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="4.5"
+                        android:selectAllOnFocus="true"
+                        android:textIsSelectable="true"
+                        android:textSize="17sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/vet_more_details_opening_hours_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/vet_more_details_phone_number_layout"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/vet_clinic_opening_hours"
+                        android:textSize="19sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/vet_opening_hours_unknown"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.7"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/vet_more_details_sunday_hours_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/vet_more_details_opening_hours_layout"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/sundayLabel"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/vet_opening_hours_sunday"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2.5"
+                        android:textSize="17sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/vet_more_details_monday_hours_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/vet_more_details_sunday_hours_layout"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/mondayLabel"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/vet_opening_hours_monday"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2.5"
+                        android:textSize="17sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/vet_more_details_tuesday_hours_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/vet_more_details_monday_hours_layout"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tuesdayLabel"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/vet_opening_hours_tuesday"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2.5"
+                        android:textSize="17sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/vet_more_details_wednesday_hours_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/vet_more_details_tuesday_hours_layout"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/wednesdayLabel"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/vet_opening_hours_wednesday"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2.5"
+                        android:textSize="17sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/vet_more_details_thursday_hours_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/vet_more_details_wednesday_hours_layout"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/thursdayLabel"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/vet_opening_hours_thursday"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2.5"
+                        android:textSize="17sp" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/vet_more_details_friday_hours_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/vet_more_details_thursday_hours_layout"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/fridayLabel"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/vet_opening_hours_friday"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2.5"
+                        android:textSize="17sp" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/vet_more_details_saturday_hours_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/vet_more_details_friday_hours_layout"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/saturdayLabel"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/vet_opening_hours_saturday"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2.5"
+                        android:textSize="17sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/vet_more_details_saturday_hours_layout"
                     android:gravity="center"
-                    android:drawableTop="@drawable/ic_call_black_24dp"
-                    android:text="@string/phone_call"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:onClick="OnCallButtonClick"/>
-            </LinearLayout>
+                    android:orientation="horizontal"
+                    android:paddingTop="@dimen/place_details_buttons_padding">
+                    <!--
+                    android:paddingStart="@dimen/place_details_list_between_items_padding"
+                    android:paddingEnd="@dimen/place_details_list_between_items_padding"-->
 
-            <LinearLayout
-                android:id="@+id/website_button_layout"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:paddingStart="@dimen/vet_list_padding"
-                android:paddingEnd="@dimen/vet_list_padding">
+                    <Button
+                        android:id="@+id/call_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/vet_list_padding"
+                        android:layout_marginStart="@dimen/vet_list_padding"
+                        android:drawableTop="@drawable/ic_call_black_24dp"
+                        android:gravity="center"
+                        android:onClick="OnCallButtonClick"
+                        android:text="@string/phone_call"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:drawableTop="@drawable/ic_public_black_24dp"
-                    android:text="אתר"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:onClick="OnWebsiteButtonClick"/>
-            </LinearLayout>
+                    <Button
+                        android:id="@+id/website_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/vet_list_padding"
+                        android:layout_marginStart="@dimen/vet_list_padding"
+                        android:drawableTop="@drawable/ic_public_black_24dp"
+                        android:gravity="center"
+                        android:onClick="OnWebsiteButtonClick"
+                        android:text="@string/vet_clinic_website"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
-            <LinearLayout
-                android:id="@+id/route_button_layout"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center">
+                    <Button
+                        android:id="@+id/route_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="top"
+                        android:layout_marginEnd="@dimen/vet_list_padding"
+                        android:layout_marginStart="@dimen/vet_list_padding"
+                        android:drawableTop="@drawable/ic_navigation_black_24dp"
+                        android:onClick="OnRouteButtonClick"
+                        android:text="@string/get_route"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
 
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="top"
-                    android:drawableTop="@drawable/ic_navigation_black_24dp"
-                    android:text="@string/get_route"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:onClick="OnRouteButtonClick"/>
-            </LinearLayout>
+            </RelativeLayout>
 
-        </LinearLayout>
+        </ScrollView>
 
     </RelativeLayout>
 
 </FrameLayout>
 
-<!--
-<LinearLayout
-            android:id="@+id/website_button_layout"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center">
 
-        </LinearLayout>
+    <!--
+            <LinearLayout
+                android:id="@+id/vet_more_details_website_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/vet_more_details_phone_number_layout"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/place_details_list_between_items_padding">
 
-<LinearLayout
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/vet_clinic_website"
+                    android:gravity="start"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/vet_more_details_website"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4.5"
+                    android:gravity="right"
+                    android:textSize="17sp"
+                    android:autoLink="web"
+                    android:textColorLink="@android:color/holo_blue_light"
+                    android:textIsSelectable="true" />
+            </LinearLayout>
+            -->
+
+    <!--
+    <LinearLayout
                 android:id="@+id/website_button_layout"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center">
 
-                <Button
-                    android:id="@+id/website_vet_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:drawableTop="@android:drawable/ic_s"
-                    android:text="אתר"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:onClick="OnWebsiteButtonClick"/>
             </LinearLayout>
 
-            "@android:drawable/ic_menu_call
--->
+    <LinearLayout
+                    android:id="@+id/website_button_layout"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                    <Button
+                        android:id="@+id/website_vet_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:drawableTop="@android:drawable/ic_s"
+                        android:text="אתר"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:onClick="OnWebsiteButtonClick"/>
+                </LinearLayout>
+
+                "@android:drawable/ic_menu_call
+    -->
