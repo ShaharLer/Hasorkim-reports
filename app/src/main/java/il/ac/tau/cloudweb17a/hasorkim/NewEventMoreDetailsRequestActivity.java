@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Environment;
@@ -15,6 +16,7 @@ import android.os.Bundle;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Layout;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -145,8 +147,16 @@ public class NewEventMoreDetailsRequestActivity extends AppCompatActivity {
     }
 
     private void popUpNotChecked() {
-        AlertDialog dialog = new AlertDialog.Builder(this).setMessage(R.string.not_checked_dialog_message)
-                .setTitle(R.string.not_checked_dialog_title)
+
+        TextView title = new TextView(this);
+        title.setText(R.string.not_checked_dialog_title);
+        title.setPadding(10, 50, 64, 9);
+        title.setTextColor(Color.BLACK);
+        title.setTextSize(20);
+        title.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
+
+        new AlertDialog.Builder(this).setMessage(R.string.not_checked_dialog_message)
+                //.setTitle(R.string.not_checked_dialog_title)
                 .setPositiveButton(R.string.ok_not_checked, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         report.saveReport(bitmap);
@@ -157,28 +167,25 @@ public class NewEventMoreDetailsRequestActivity extends AppCompatActivity {
                 }).setNegativeButton(R.string.cancel_not_checked, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
             }
-        }).create();
+        }).setCustomTitle(title).create().show();
 
-        rightJustifyAndShow(dialog);
 
-    }
-
-    private void rightJustifyAndShow(AlertDialog dialog) {
-
-        dialog.show();
-        TextView messageView = dialog.findViewById(android.R.id.message);
-        messageView.setGravity(Gravity.END);
-
-        TextView titleView = dialog.findViewById(getApplicationContext().getResources().getIdentifier("alertTitle", "id", "android"));
-        if (titleView != null) {
-            titleView.setGravity(Gravity.END);
-        }
 
     }
+
 
     private void popUpSimilarReport() {
-        AlertDialog dialog =new AlertDialog.Builder(this).setMessage(R.string.similar_report_dialog_message)
-                .setTitle(R.string.similar_report_dialog_title)
+
+        TextView title = new TextView(this);
+        title.setText(R.string.similar_report_dialog_title);
+        title.setPadding(10, 50, 64, 9);
+        title.setTextColor(Color.BLACK);
+        title.setTextSize(20);
+        title.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
+
+        new AlertDialog.Builder(this).setMessage(R.string.similar_report_dialog_message)
+                //.setTitle(R.string.similar_report_dialog_title)
+                .setCustomTitle(title)
                 .setPositiveButton(R.string.ok_similar_report, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
 
@@ -196,9 +203,8 @@ public class NewEventMoreDetailsRequestActivity extends AppCompatActivity {
                 }).setNegativeButton(R.string.cancel_similar_report, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                     }
-        }).create();
+        }).create().show();
 
-        rightJustifyAndShow(dialog);
     }
 
 
