@@ -252,7 +252,7 @@ public class VetListActivity extends AppCompatActivity {
     /**
      * @param vetList
      */
-    private void distancesApiCall(List<VeterinaryClinic> vetList, QueryType distanceSearchType) {
+    private String distancesApiCall(List<VeterinaryClinic> vetList) {
         int listSize = vetList.size();
         Log.d(TAG, "Vet list size is: " + listSize);
 
@@ -280,11 +280,12 @@ public class VetListActivity extends AppCompatActivity {
         String currentUrlDistances = urlMaps.build().toString();
         Log.d(TAG, currentUrlDistances);
 
-        try {
+        return currentUrlDistances;
+      /*  try {
             run(currentUrlDistances, distanceSearchType);
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     /**
@@ -318,12 +319,12 @@ public class VetListActivity extends AppCompatActivity {
                     switch (parseType) {
                         case NEARBY_SEARCH_ALL:
                             allVetsList = DataParser.parsePlaces(returnedString);
-                            distancesApiCall(allVetsList, DISTANCE_SEARCH_ALL);
+                            run(distancesApiCall(allVetsList), DISTANCE_SEARCH_ALL);
                             break;
 
                         case NEARBY_SEARCH_OPEN:
                             openVetsList = DataParser.parsePlaces(returnedString);
-                            distancesApiCall(openVetsList, DISTANCE_SEARCH_OPEN);
+                            run(distancesApiCall(openVetsList), DISTANCE_SEARCH_OPEN);
                             break;
 
                         case DISTANCE_SEARCH_ALL:
