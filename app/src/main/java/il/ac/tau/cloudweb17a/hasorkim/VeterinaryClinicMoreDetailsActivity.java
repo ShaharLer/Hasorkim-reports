@@ -37,7 +37,6 @@ public class VeterinaryClinicMoreDetailsActivity extends AppCompatActivity {
     private static final String FRIDAY        = "יום שישי";
     private static final String SATURDAY      = "יום שבת";
     private static final String DASH          = "–";
-    private static final String OPEN_WITH     = "פתח באמצעות";
     private static final String TAG           = VetListActivity.class.getSimpleName();
     private static final OkHttpClient client  = new OkHttpClient();
 
@@ -58,6 +57,7 @@ public class VeterinaryClinicMoreDetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_veterinary_clinic_more_details);
+
         Intent intent = getIntent();
         originLatitude  = intent.getStringExtra(VetListActivity.ORIGIN_LATITUDE);
         originLongitude = intent.getStringExtra(VetListActivity.ORIGIN_LONGITUDE);
@@ -68,7 +68,6 @@ public class VeterinaryClinicMoreDetailsActivity extends AppCompatActivity {
         TextView nameTextView = findViewById(R.id.vet_more_details_name);
         TextView addressTextView = findViewById(R.id.vet_more_details_address);
         phoneNumberTextView = findViewById(R.id.vet_more_details_phone_number);
-        //websiteTextView = findViewById(R.id.vet_more_details_website);
 
         // Setting the received text for the text views
         nameTextView.setText(intent.getStringExtra(VetListActivity.NAME));
@@ -91,7 +90,7 @@ public class VeterinaryClinicMoreDetailsActivity extends AppCompatActivity {
                 .appendPath("json")
                 .appendQueryParameter("placeid", intent.getStringExtra(VetListActivity.PLACE_ID))
                 .appendQueryParameter("language", "iw")
-                .appendQueryParameter("key", getString(R.string.google_places_key));
+                .appendQueryParameter("key", getString(R.string.google_maps_key));
 
         String currentUrlPlaces = urlPlaces.build().toString();
         Log.d(TAG, currentUrlPlaces);
@@ -167,7 +166,7 @@ public class VeterinaryClinicMoreDetailsActivity extends AppCompatActivity {
 
                 String vetLatitude  = (String) placeDetails.get(VET_LATITUDE);
                 String vetLongitude = (String) placeDetails.get(VET_LONGITUDE);
-                if ((vetLatitude != null) && (vetLongitude != null)) {
+                if ((vetLatitude != null) && (vetLongitude != null) && (originLatitude != null) && (originLongitude != null)) {
                     destLatitude = vetLatitude;
                     destLongitude = vetLongitude;
                 }
@@ -186,11 +185,11 @@ public class VeterinaryClinicMoreDetailsActivity extends AppCompatActivity {
      * @return
      */
     private String parsePhoneNumber(String phoneNumber) {
-        // parsing the phone number
         StringBuilder parsedNumber = new StringBuilder(phoneNumber);
 
         boolean keepParsing = (parsedNumber.indexOf(DASH) >= 0);
 
+        // parsing the phone number
         while (keepParsing) {
             parsedNumber.deleteCharAt(parsedNumber.indexOf(DASH));
             keepParsing = (parsedNumber.indexOf(DASH) >= 0);
@@ -253,7 +252,6 @@ public class VeterinaryClinicMoreDetailsActivity extends AppCompatActivity {
      * @param view
      */
     public void OnWebsiteButtonClick(View view) {
-        //Intent websiteIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(websiteTextView.getText().toString()));
         Intent websiteIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(vetWebsite));
         if (websiteIntent.resolveActivity(getPackageManager()) != null)
             startActivity(websiteIntent);
@@ -288,6 +286,6 @@ public class VeterinaryClinicMoreDetailsActivity extends AppCompatActivity {
             startActivity(routeIntent);
         }
         else
-            Toast.makeText(getApplicationContext(), "זמנית לא ניתן לספק מסלול", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), R.string.route_unavailable, Toast.LENGTH_LONG).show();
     }
 }

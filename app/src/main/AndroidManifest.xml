@@ -19,21 +19,28 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+
         <activity
             android:name=".ReportEventActivity"
             android:label="@string/title_activity_report_event" />
         <activity
             android:name=".VetListActivity"
             android:label="@string/title_activity_vet_list"
+            android:screenOrientation="portrait"
             android:parentActivityName=".MapsActivity" />
 
         <activity
             android:name=".VeterinaryClinicMoreDetailsActivity"
-            android:label="@string/title_activity_veterinay_clinic_more_details" />
+            android:label="@string/title_activity_veterinay_clinic_more_details"
+            android:screenOrientation="portrait"/>
 
         <activity
             android:name=".WhoWeAreActivity"
             android:label="מי אנחנו"
+            android:screenOrientation="portrait"
             android:parentActivityName=".MapsActivity"/>
 
         <activity

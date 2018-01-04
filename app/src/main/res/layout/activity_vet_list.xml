@@ -57,14 +57,16 @@
 
         <Button
             android:id="@+id/going_to_report_btn"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1.3"
             android:layout_gravity="center"
             android:onClick="OnButtonClick"
             android:text="@string/vet_list_back_to_report"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+            android:textSize="23sp"
+            android:textStyle="bold"
+            android:textColor="@color/backgroundColor"
+            style="@style/Widget.AppCompat.Button.Colored"/>
     </LinearLayout>
 
 </FrameLayout>

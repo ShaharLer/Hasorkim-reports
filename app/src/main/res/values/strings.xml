@@ -51,17 +51,12 @@
     <string name="ok">עבור לרשימת וטרינרים</string>
     <string name="cancel">המשך לדיווח</string>
     <string name="vet_dialog_title">מצאנו מרפאה וטרינרית קרובה!</string>
-    <string name="vet_dialog_message">האם ברצונך לעבור לרשימת הוטרינרים הקרובים? שים לב, הבאת הכלב לסריקה אצל וטרינר תהפוך את התהליך ולנוח ומהיר יותר</string>
+    <string name="vet_dialog_message">האם ברצונך לעבור לרשימת הוטרינרים הקרובים? שים לב, הבאת הכלב לסריקה אצל וטרינר תהפוך את התהליך לנוח ומהיר יותר</string>
     <string name="title_activity_settings">Settings</string>
-
-
     <string name="not_checked_dialog_title">שים לב!</string>
     <string name="not_checked_dialog_message">נוכל לשלוח סורק רק במידה והכלב נמצא איתך ואינו יכול לברוח</string>
     <string name="ok_not_checked">המשך בכל מקרה</string>
     <string name="cancel_not_checked">ביטול</string>
-
-
-
     <string name="similar_report_dialog_title">שים לב!</string>
     <string name="similar_report_dialog_message">קיימת בקשה פתוחה על שימך כבר במערכת, ואת/ה הולכ/ת לפתוח בקשה נוספת</string>
     <string name="ok_similar_report">המשך בכל מקרה</string>
@@ -94,6 +89,7 @@
     <string name="text_new_event_have_dog_msg_please_make_sure">שימ/י לב, לא נוכל לשלוח סורק במידה ולא</string>
     <string name="ImageString">תמונה</string>
     <string name="add_photo">add photo</string>
-
-
+    <string name="searching_chips_website">http://www.moag.gov.il/Pages/DogSearch.aspx</string>
+    <string name="route_unavailable">זמנית לא ניתן לספק מסלול</string>
+    <string name="facebook_app_id">537334766627732</string>
 </resources>
