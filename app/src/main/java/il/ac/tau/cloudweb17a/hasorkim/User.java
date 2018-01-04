@@ -3,7 +3,7 @@ package il.ac.tau.cloudweb17a.hasorkim;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import java.util.UUID;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 /**
  * Created by hen on 30/12/2017.
@@ -11,65 +11,53 @@ import java.util.UUID;
 
 public class User {
 
+    private static User user;
+
     private String id;
     private String name;
     private String phoneNumber;
-    private static User user;
+    private Context applicationContext;
+    public static final String USER_NAME = "USER_NAME";
+    public static final String USER_PHONE_NUMBER = "USER_PHONE_NUMBER";
 
 
 
-    private User(String id){
-        this.id=id;
-        this.name="";
-        this.phoneNumber="";
+
+    private User(Context applicationContext){
+        this.applicationContext=applicationContext;
+        this.id= FirebaseInstanceId.getInstance().getToken();
+        this.name = applicationContext.getSharedPreferences(USER_NAME, Context.MODE_PRIVATE).getString(USER_NAME, null);
+        this.phoneNumber=applicationContext.getSharedPreferences(USER_PHONE_NUMBER, Context.MODE_PRIVATE).getString(USER_PHONE_NUMBER, null);
     }
 
     public String getId() {
         return id;
     }
-
     public String getName() {
         return name;
     }
-
     public String getPhoneNumber() {
         return phoneNumber;
     }
 
     public void setName(String name) {
-         this.name=name;
+        SharedPreferences.Editor editor = applicationContext.getSharedPreferences(USER_NAME, Context.MODE_PRIVATE).edit();
+        editor.putString(USER_NAME, name);
+        editor.apply();
+        this.name=name;
     }
 
     public void setPhoneNumber(String number) {
+        SharedPreferences.Editor editor = applicationContext.getSharedPreferences(USER_PHONE_NUMBER, Context.MODE_PRIVATE).edit();
+        editor.putString(USER_PHONE_NUMBER, number);
+        editor.apply();
         this.phoneNumber=number;
     }
 
-    static User getUser(Context context){
+    public static User getUser(Context applicationContext){
         if(user==null){
-            String id = id(context);
-            user = new User(id);
+            user = new User(applicationContext);
         }
         return user;
     }
-
-
-
-
-    private static String uniqueID = null;
-    private static final String PREF_UNIQUE_ID = "PREF_UNIQUE_ID";
-    public synchronized static String id(Context context) {
-        if (uniqueID == null) {
-            SharedPreferences sharedPrefs = context.getSharedPreferences(
-                    PREF_UNIQUE_ID, Context.MODE_PRIVATE);
-            uniqueID = sharedPrefs.getString(PREF_UNIQUE_ID, null);
-            if (uniqueID == null) {
-                uniqueID = UUID.randomUUID().toString();
-                SharedPreferences.Editor editor = sharedPrefs.edit();
-                editor.putString(PREF_UNIQUE_ID, uniqueID);
-                editor.commit();
-            }
-        }
-        return uniqueID;
-    }
-
 }

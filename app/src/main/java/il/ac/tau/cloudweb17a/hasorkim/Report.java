@@ -2,8 +2,12 @@ package il.ac.tau.cloudweb17a.hasorkim;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -11,14 +15,20 @@ import com.google.firebase.database.Exclude;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Arrays;
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -30,9 +40,8 @@ public class Report implements  java.io.Serializable{
     private String reporterName;
     private int incrementalReportId;
     private String status;
-    private String startTime;
+    private long startTime;
     private String address;
-    private String[] imageUrls;
     private String freeText;
     private String phoneNumber;
     private String extraPhoneNumber;
@@ -41,6 +50,14 @@ public class Report implements  java.io.Serializable{
     private String cancellationText;
     private String userId;
     private boolean hasSimilarReports;
+    private boolean isDogWithReporter;
+    private String imageUrl;
+
+
+
+    private double Lat;
+    private double Long;
+
 
     private int nextIncrementalId;
     private static final String TAG = "Report";
@@ -50,25 +67,46 @@ public class Report implements  java.io.Serializable{
     }
 
 
-    public Report(String address, String freeText, User user) {
+    public Report(String address, String freeText, User user, double Lat, double Long) {
 
-        this.startTime = Calendar.getInstance().getTime().toString();
+        this.startTime =  -Calendar.getInstance().getTime().getTime();
         this.address = address;
         this.status = "NEW";
         this.freeText = freeText;
 
         this.assignedScanner = "";
         this.availableScanners = 0;
-        this.reporterName = user.getName();
-        this.phoneNumber = user.getPhoneNumber();
+
+        if(user.getName()!=null)
+            this.reporterName = user.getName();
+        else
+            this.reporterName="";
+
+        if(user.getPhoneNumber()!=null)
+            this.phoneNumber = user.getPhoneNumber();
+        else
+            this.phoneNumber="";
+
         this.userId = user.getId();
         //this.incrementalReportId = this.setIncrementalReportId();
 
         this.hasSimilarReports=false;
-        setLisetnerOnReportWithUserId();
+
+        this.Lat=Lat;
+        this.Long=Long;
+
+        setListenerOnReportWithUserId();
     }
 
-    private void setLisetnerOnReportWithUserId() {
+    public void setIsDogWithReporter(boolean isDogWithReporter) {
+        this.isDogWithReporter = isDogWithReporter;
+    }
+
+    public boolean getIsDogWithReporter() {
+        return isDogWithReporter;
+    }
+
+    private void setListenerOnReportWithUserId() {
         if(userId!=null) {
             // Initialize Database
             Query sameReportQuery = FirebaseDatabase.getInstance().getReference()
@@ -78,13 +116,17 @@ public class Report implements  java.io.Serializable{
             ValueEventListener postListener = new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    Log.d(TAG, userId);
-                    Log.d(TAG, String.valueOf(dataSnapshot.getChildrenCount()));
-                    if (dataSnapshot.getChildrenCount() > 0) {
-                        hasSimilarReports = true;
-                    } else {
-                        hasSimilarReports = false;
+                    //Log.d(TAG, userId);
+                    //Log.d(TAG, String.valueOf(dataSnapshot.getChildrenCount()));
+                    hasSimilarReports = false;
+                    for(DataSnapshot reportSnapShot : dataSnapshot.getChildren()){
+                        Report report = reportSnapShot.getValue(Report.class);
+                        if(report.isOpenReport()){
+                            hasSimilarReports = true;
+                            return;
+                        }
                     }
+
                 }
 
                 @Override
@@ -124,7 +166,13 @@ public class Report implements  java.io.Serializable{
 
     public String getStatus() { return this.status; }
 
-    public String getStartTime() { return this.startTime; }
+    public long getStartTime(){
+        return this.startTime;
+    }
+    public String getStartTimeAsString() {
+        Format format = new SimpleDateFormat("HH:mm dd/MM/yyyy");
+        return format.format(new Date(-this.startTime));
+    }
 
     public String getAddress() { return this.address; }
     public String getUserId() {return userId;   }
@@ -162,15 +210,15 @@ public class Report implements  java.io.Serializable{
 
     public void setId(String id) {
         this.id = id;
-        setLisetnerOnReportWithUserId();
+        setListenerOnReportWithUserId();
     }
 
     public void setStatus(String status) {
         this.status = status;
     }
 
-    public void setStartTime(String startTime) {
-        this.startTime = startTime;
+    public void setStartTime() {
+        this.startTime =  -Calendar.getInstance().getTime().getTime();
     }
 
     public void setAddress(String address) {
@@ -180,6 +228,15 @@ public class Report implements  java.io.Serializable{
     public void setCancellationText(String cancellationText) {
         this.cancellationText = cancellationText;
     }
+
+    public double getLat() {
+        return Lat;
+    }
+
+    public double getLong() {
+        return Long;
+    }
+
 
     @Exclude
     public void setIncrementalReportId() {
@@ -233,7 +290,7 @@ public class Report implements  java.io.Serializable{
 
     public boolean isOpenReport(){
         if ((Objects.equals(this.status, "CANCELED")) || (Objects.equals(this.status, "CLOSED")))
-                return false;
+            return false;
         else return true;
     }
 
@@ -246,7 +303,7 @@ public class Report implements  java.io.Serializable{
         return map.get(this.status);
     }
 
-    public String validate(boolean checked){
+    public String validate(){
         String error ="";
         if(reporterName.equals("")){
             error = error+ "חסר שם ";
@@ -261,14 +318,11 @@ public class Report implements  java.io.Serializable{
         if(address.equals("")){
             error = error+ "חסרה כתובת ";
         }
-        if(!checked){
-            error =error+ " צ'קבוקס לא מסומן ";
-        }
-
-        if(hasSimilarReports){
-            error =error+ "בקשה על שימך כבר נמצאת במערכת";
-        }
         return error;
+    }
+
+    public boolean isHasSimilarReports(){
+        return this.hasSimilarReports;
     }
 
 
@@ -281,7 +335,6 @@ public class Report implements  java.io.Serializable{
                 ", status='" + status + '\'' +
                 ", startTime='" + startTime + '\'' +
                 ", address='" + address + '\'' +
-                ", imageUrls=" + Arrays.toString(imageUrls) +
                 ", freeText='" + freeText + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", extraPhoneNumber='" + extraPhoneNumber + '\'' +
@@ -308,7 +361,40 @@ public class Report implements  java.io.Serializable{
             Log.w(TAG, sStackTrace);
             return null;
         }
+    }
 
+    public void saveReport(Bitmap bitmap){
+        if(bitmap !=null) {
+            StorageReference imagesRef = FirebaseStorage.getInstance().getReference().child("images");
+            String fileName = getUserId()+"_"+String.valueOf(new Date().getTime());
+            StorageReference imageRef = imagesRef.child(fileName);
 
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+            byte[] data = baos.toByteArray();
+
+            UploadTask uploadTask = imageRef.putBytes(data);
+            uploadTask.addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception exception) {
+                    // Handle unsuccessful uploads
+                }
+            }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
+                    Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                    imageUrl = downloadUrl.toString();
+                    persistReport();
+                }
+            });
+        }
+        else
+            persistReport();
+
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
     }
 }

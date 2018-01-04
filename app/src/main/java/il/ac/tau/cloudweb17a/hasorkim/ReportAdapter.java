@@ -67,7 +67,7 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ReportView
             mReport = report;
             StatusView.setText(report.getStatus());
             AddressView.setText(report.getAddress());
-            timeView.setText(report.getStartTime());
+            timeView.setText(report.getStartTimeAsString());
         }
 
     }
@@ -99,17 +99,22 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ReportView
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String previousChildName) {
+
+                //getting key of report to update
                 Report report = dataSnapshot.getValue(Report.class);
                 String key = dataSnapshot.getKey();
                 report.setId(key);
-                //Log.w(TAG, "======================" + key);
+
+
+                //looking for report to update
                 int index = -1;
                 for (int i = 0; i < mDataset.size(); i++) {
-                    //Log.w(TAG, "======================" + mDataset.get(i).getId());
                     if (mDataset.get(i)!=null&&mDataset.get(i).getId()!=null&&mDataset.get(i).getId().equals(key)) {
                         index = i;
                     }
                 }
+
+                //updating
                 if (index != -1){
                     mDataset.set(index, report);
                     notifyDataSetChanged();

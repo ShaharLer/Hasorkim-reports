@@ -8,8 +8,9 @@
     <dimen name="place_details_list_layout_padding">12dp</dimen>
     <dimen name="place_details_buttons_padding">52dp</dimen>
     <dimen name="title_padding">24dp</dimen>
-    <dimen name="standard_text_size">24sp</dimen>
+    <dimen name="standard_text_size">18sp</dimen>
     <dimen name="double_padding">32sp</dimen>
+    <dimen name="report_padding">28sp</dimen>
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>

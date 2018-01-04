@@ -4,10 +4,8 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
-import android.view.ViewGroup;
+import android.view.View;
 import android.widget.ImageView;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 
 public class ClosedReportActivity extends AppCompatActivity {
@@ -30,11 +28,17 @@ public class ClosedReportActivity extends AppCompatActivity {
         closedReportystatus.setText(report.statusInHebrew());
 
         ImageView closedReportImage = findViewById(R.id.closedReportImageView);
-        bitmap = report.getBitmapFromURL("https://dingo.care2.com/pictures/greenliving/1414/1413160.large.jpg");
-        closedReportImage.setImageBitmap(bitmap);
+        if(report.getImageUrl()!=null) {
+            bitmap = report.getBitmapFromURL(report.getImageUrl());
+            closedReportImage.setImageBitmap(bitmap);
+        }
+        else{
+            View imageContainer= findViewById(R.id.closedReportImageViewContainer);
+            imageContainer.setVisibility(View.GONE);
+        }
 
         TextView closedReportExtraDate = findViewById(R.id.closedReportDate);
-        closedReportExtraDate.setText(report.getStartTime());
+        closedReportExtraDate.setText(report.getStartTimeAsString());
 
         TextView closedReportyLoction = findViewById(R.id.closedReportyLoction);
         closedReportyLoction.setText(report.getAddress());
@@ -48,6 +52,5 @@ public class ClosedReportActivity extends AppCompatActivity {
 
     }
 }
-
 
 
