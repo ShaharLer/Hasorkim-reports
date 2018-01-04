@@ -304,20 +304,18 @@ public class Report implements  java.io.Serializable{
     }
 
     public String validate(){
-        String error ="";
-        if(reporterName.equals("")){
-            error = error+ "חסר שם ";
-        }
-        if(phoneNumber.equals("")){
-            error = error+ "חסר מספר טלפון ";
-        }else {
-            if (!phoneNumber.matches("^([0-9]{10})|([0-9]{3}-[0-9]{7})|([0-9]{2}-[0-9]{7})$")) {
-                error = error + "מספר טלפון לא תקין";
-            }
-        }
-        if(address.equals("")){
-            error = error+ "חסרה כתובת ";
-        }
+        String error = "";
+        if (reporterName.equals(""))
+            error += "חסר שם ";
+
+        if (phoneNumber.equals(""))
+            error += "חסר מספר טלפון ";
+        else if (!phoneNumber.matches("^(0[57][0-9]{8})|(0[57]-[0-9]{8})|(0[23489][0-9]{7})|(0[23489]-[0-9]{7})$"))
+                error += "מספר טלפון לא תקין";
+
+        if (address.equals(""))
+            error += "חסרה כתובת ";
+
         return error;
     }
 

@@ -8,4 +8,5 @@
     <color name="backgroundColor">#FAFAFA</color>
     <color name="moreDetailsButtonTextColor">#FAFAFA</color>
     <color name="distanceToVetColor">#2979FF</color>
+    <color name="errorColor">#C62828</color>
 </resources>

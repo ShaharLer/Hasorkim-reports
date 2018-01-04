@@ -23,6 +23,7 @@ public class DataParser {
     private static final int FRIDAY = 5;
     private static final int SATURDAY = 6;
     private static final String TAG = DataParser.class.getSimpleName();
+    private static final int MAXIMUM_PLACES = 10;
 
     static List<VeterinaryClinic> parsePlaces(String jsonData) {
         List<VeterinaryClinic> vetsList = new ArrayList<>();
@@ -30,9 +31,9 @@ public class DataParser {
         try {
             JSONObject jsonObject = new JSONObject(jsonData);
             JSONArray jsonArray = jsonObject.getJSONArray("results");
-            int placesCount = jsonArray.length();
+            int maximumVetPlaces = Math.min(jsonArray.length(), MAXIMUM_PLACES);
 
-            for (int i = 0; i < placesCount; i++)
+            for (int i = 0; i < maximumVetPlaces; i++)
                 vetsList.add(getPlace((JSONObject) jsonArray.get(i)));
         } catch (JSONException e) {
             e.printStackTrace();
@@ -57,16 +58,6 @@ public class DataParser {
 
             if (!googlePlaceJson.isNull("vicinity"))
                 vicinity = googlePlaceJson.getString("vicinity");
-
-            // TODO delete this
-            /*
-            if (!googlePlaceJson.isNull("opening_hours")) {
-                googlePlaceJson = googlePlaceJson.getJSONObject("opening_hours");
-
-                if ((!googlePlaceJson.isNull("open_now")) && (googlePlaceJson.getString("open_now").equals("true")))
-                    openNow = true;
-            }
-            */
 
             vetPlace = new VeterinaryClinic(place_id, placeName, vicinity);
             Log.d(TAG, vetPlace.getPlaceId());
@@ -151,12 +142,6 @@ public class DataParser {
             placeDetails.put(VeterinaryClinicMoreDetailsActivity.PHONE_NUMBER, phoneNumber);
             placeDetails.put(VeterinaryClinicMoreDetailsActivity.WEBSITE, website);
             placeDetails.put(VeterinaryClinicMoreDetailsActivity.OPENING_HOURS, openingHours);
-
-            // TODO take it off
-            System.out.println("Vet latitude is: " + vetLatitude);
-            System.out.println("Vet longitude is: " + vetLongitude);
-            System.out.println("Phone number is: " + phoneNumber);
-            System.out.println("Website is: " + website);
         } catch (JSONException e) {
             e.printStackTrace();
         } catch (NullPointerException ignored) {

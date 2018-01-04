@@ -250,44 +250,6 @@ public class VetListActivity extends AppCompatActivity {
     }
 
     /**
-     * @param vetList
-     */
-    private void distancesApiCall(List<VeterinaryClinic> vetList, QueryType distanceSearchType) {
-        int listSize = vetList.size();
-        Log.d(TAG, "Vet list size is: " + listSize);
-
-        StringBuilder nearVetsID = new StringBuilder();
-        for (int i = 0; i < listSize; i++) {
-            nearVetsID.append("place_id:" + vetList.get(i).getPlaceId());
-
-            if (i < (listSize - 1))
-                nearVetsID.append("|");
-        }
-
-        Uri.Builder urlMaps = new Uri.Builder()
-                .scheme("https")
-                .authority("maps.googleapis.com")
-                .appendPath("maps")
-                .appendPath("api")
-                .appendPath("distancematrix")
-                .appendPath("json")
-                .appendQueryParameter("origins", (Double.toString(currLatitude) + "," + Double.toString(currLongitude)))
-                .appendQueryParameter("destinations", nearVetsID.toString())
-                .appendQueryParameter("mode","driving")
-                .appendQueryParameter("language", "iw")
-                .appendQueryParameter("key", getString(R.string.google_maps_key));
-
-        String currentUrlDistances = urlMaps.build().toString();
-        Log.d(TAG, currentUrlDistances);
-
-        try {
-            run(currentUrlDistances, distanceSearchType);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
      * @param url
      * @param parseType
      * @throws IOException
@@ -318,12 +280,14 @@ public class VetListActivity extends AppCompatActivity {
                     switch (parseType) {
                         case NEARBY_SEARCH_ALL:
                             allVetsList = DataParser.parsePlaces(returnedString);
-                            distancesApiCall(allVetsList, DISTANCE_SEARCH_ALL);
+                            //distancesApiCall(allVetsList, DISTANCE_SEARCH_ALL);
+                            run(distancesApiCall(allVetsList), DISTANCE_SEARCH_ALL);
                             break;
 
                         case NEARBY_SEARCH_OPEN:
                             openVetsList = DataParser.parsePlaces(returnedString);
-                            distancesApiCall(openVetsList, DISTANCE_SEARCH_OPEN);
+                            //distancesApiCall(openVetsList, DISTANCE_SEARCH_OPEN);
+                            run(distancesApiCall(openVetsList), DISTANCE_SEARCH_OPEN);
                             break;
 
                         case DISTANCE_SEARCH_ALL:
@@ -337,6 +301,49 @@ public class VetListActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    /**
+     * @param vetList
+     */
+    //private void distancesApiCall(List<VeterinaryClinic> vetList, QueryType distanceSearchType) {
+    private String distancesApiCall(List<VeterinaryClinic> vetList) {
+        int listSize = vetList.size();
+        Log.d(TAG, "Vet list size is: " + listSize);
+
+        StringBuilder nearVetsID = new StringBuilder();
+        for (int i = 0; i < listSize; i++) {
+            nearVetsID.append("place_id:" + vetList.get(i).getPlaceId());
+
+            if (i < (listSize - 1))
+                nearVetsID.append("|");
+        }
+
+        Uri.Builder urlMaps = new Uri.Builder()
+                .scheme("https")
+                .authority("maps.googleapis.com")
+                .appendPath("maps")
+                .appendPath("api")
+                .appendPath("distancematrix")
+                .appendPath("json")
+                .appendQueryParameter("origins", (Double.toString(currLatitude) + "," + Double.toString(currLongitude)))
+                .appendQueryParameter("destinations", nearVetsID.toString())
+                .appendQueryParameter("mode","driving")
+                .appendQueryParameter("language", "iw")
+                .appendQueryParameter("key", getString(R.string.google_maps_key));
+
+        String currentUrlDistances = urlMaps.build().toString();
+        Log.d(TAG, currentUrlDistances);
+
+        /*
+        try {
+            run(currentUrlDistances, distanceSearchType);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        */
+
+        return currentUrlDistances;
     }
 
     /**

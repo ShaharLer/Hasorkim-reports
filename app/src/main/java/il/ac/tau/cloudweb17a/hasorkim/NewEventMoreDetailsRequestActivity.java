@@ -246,7 +246,7 @@ public class NewEventMoreDetailsRequestActivity extends AppCompatActivity {
         if (resultCode == RESULT_OK){
             if (requestCode == PHOTO_INTENT_REQUEST_CODE){
                 Uri photoUri = data.getData();
-                ImageButton imageButton = (ImageButton) thisContainer.findViewById(R.id.imageButtonReport);
+                ImageButton imageButton = thisContainer.findViewById(R.id.imageButtonReport);
                 imageButton.setImageURI(photoUri);
             }
             if (requestCode == REQUEST_IMAGE_CAPTURE) {
