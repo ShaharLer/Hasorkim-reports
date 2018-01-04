@@ -17,6 +17,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
+import static il.ac.tau.cloudweb17a.hasorkim.User.getUserWOContext;
 
 /**
  * Created by hen on 18/12/2017.
@@ -73,27 +77,31 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ReportView
     }
 
 
+    class SortbyId implements Comparator<Report>
+    {
+        // Used for sorting in ascending order of
+        // roll number
+        public int compare(Report a, Report b)
+        {
+            return (int) (a.getStartTime() - b.getStartTime());
+        }
+    }
+
     // Provide a suitable constructor (depends on the kind of dataset)
     public ReportAdapter(Query query) {
         DatabaseReference reportsRef = FirebaseDatabase.getInstance().getReference().child("reports");
-        Query lastQuery = reportsRef.orderByChild("startTime").limitToLast(10);
+        Query lastQuery = reportsRef
+                .orderByChild("userId").equalTo(getUserWOContext().getId());
+                //.orderByChild("startTime")
+                //.limitToLast(10);
         lastQuery.addChildEventListener(new ChildEventListener() {
-            /* @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                for (DataSnapshot querySnapshot : dataSnapshot.getChildren()) {
-                    Report report = querySnapshot.getValue(Report.class);
-                    mDataset.add(report);
-                }
-                notifyDataSetChanged();
-            }*/
-
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String previousChildName) {
                 Report report = dataSnapshot.getValue(Report.class);
                 String key = dataSnapshot.getKey();
                 report.setId(key);
                 mDataset.add(report);
+                Collections.sort(mDataset, new SortbyId());
                 notifyDataSetChanged();
             }
 
@@ -161,10 +169,6 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ReportView
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ReportViewHolder holder, int position) {
-        //mDataset.get(position).getAddress();
-        //holder.StatusView.setText(mDataset.get(position).getStatus());
-        //holder.AddressView.setText(mDataset.get(position).getAddress());
-        //holder.timeView.setText(.getDate());
         holder.bindReport(mDataset.get(position));
     }
 

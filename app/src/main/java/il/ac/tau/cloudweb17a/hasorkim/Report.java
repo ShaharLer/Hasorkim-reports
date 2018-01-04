@@ -27,6 +27,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.Format;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -290,7 +291,7 @@ public class Report implements  java.io.Serializable{
 
     public boolean isOpenReport(){
         if ((Objects.equals(this.status, "CANCELED")) || (Objects.equals(this.status, "CLOSED")))
-            return false;
+                return false;
         else return true;
     }
 

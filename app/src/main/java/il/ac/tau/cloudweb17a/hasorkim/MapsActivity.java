@@ -373,6 +373,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     private void suggestVet() {
+
         TextView title = new TextView(this);
         title.setText(R.string.vet_dialog_title);
         title.setPadding(10, 50, 64, 9);
@@ -386,8 +387,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         Intent vetIntent = new Intent(getApplicationContext(), VetListActivity.class);
-                        vetIntent.putExtra("lat", mMap.getCameraPosition().target.latitude);
-                        vetIntent.putExtra("long", mMap.getCameraPosition().target.longitude);
+                        vetIntent.putExtra("lat", Double.toString(mMap.getCameraPosition().target.latitude));
+                        vetIntent.putExtra("long", Double.toString(mMap.getCameraPosition().target.longitude));
                         vetIntent.putExtra("address", getDisplayStreet());
                         vetIntent.putExtra("from", "dialog");
                         startActivity(vetIntent);
@@ -395,8 +396,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 }).setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 Intent newReportIntent = new Intent(getApplicationContext(), NewEventMoreDetailsRequestActivity.class);
-                newReportIntent.putExtra("lat", mMap.getCameraPosition().target.latitude);
-                newReportIntent.putExtra("long", mMap.getCameraPosition().target.longitude);
+                newReportIntent.putExtra("lat", Double.toString(mMap.getCameraPosition().target.latitude));
+                newReportIntent.putExtra("long", Double.toString(mMap.getCameraPosition().target.longitude));
                 newReportIntent.putExtra("address", getDisplayStreet());
                 startActivity(newReportIntent);
             }

@@ -8,14 +8,17 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
-import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.os.Bundle;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Layout;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +27,7 @@ import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
 
 import java.io.File;
 
@@ -197,8 +201,8 @@ public class NewEventMoreDetailsRequestActivity extends AppCompatActivity {
                         }
                     }
                 }).setNegativeButton(R.string.cancel_similar_report, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-            }
+                    public void onClick(DialogInterface dialog, int id) {
+                    }
         }).create().show();
 
     }
@@ -269,7 +273,7 @@ public class NewEventMoreDetailsRequestActivity extends AppCompatActivity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode,
-                                           String permissions[], int[] grantResults){
+                                            String permissions[], int[] grantResults){
         switch (requestCode){
             case EXTERNAL_STORAGE_PERMISSION_REQUEST_CODE: {
                 if ((grantResults.length > 0) &&
