@@ -63,4 +63,8 @@ public class User {
         }
         return user;
     }
+
+    public static User getUserWOContext(){
+        return user;
+    }
 }
