@@ -11,8 +11,8 @@
         android:id="@+id/vet_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@android:color/holo_blue_dark"
-        android:gravity="start"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_gravity="start"
         android:textSize="17sp"
         android:textStyle="bold" />
 
@@ -26,16 +26,16 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/vet_clinic_address"
-            android:textSize="16sp"
+            android:textSize="17sp"
             android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/vet_address"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="5"
+            android:layout_weight="4.7"
             android:textDirection="rtl"
-            android:textSize="16sp" />
+            android:textSize="17sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -48,14 +48,15 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/vet_clinic_walking_distance"
-            android:textSize="16sp"
+            android:textSize="17sp"
             android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/vet_distance_from_origin"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="5"
-            android:textSize="16sp" />
+            android:layout_weight="4.7"
+            android:textSize="17sp"
+            android:textColor="@color/distanceToVetColor"/>
     </LinearLayout>
 </LinearLayout>

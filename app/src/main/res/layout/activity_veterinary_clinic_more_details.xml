@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:paddingBottom="@dimen/double_padding"
-            android:textColor="@android:color/holo_blue_dark"
+            android:textColor="@color/colorPrimaryDark"
             android:textIsSelectable="true"
             android:textSize="22sp"
             android:textStyle="bold" />
@@ -294,9 +294,6 @@
                     android:gravity="center"
                     android:orientation="horizontal"
                     android:paddingTop="@dimen/place_details_buttons_padding">
-                    <!--
-                    android:paddingStart="@dimen/place_details_list_between_items_padding"
-                    android:paddingEnd="@dimen/place_details_list_between_items_padding"-->
 
                     <Button
                         android:id="@+id/call_button"
@@ -308,9 +305,10 @@
                         android:gravity="center"
                         android:onClick="OnCallButtonClick"
                         android:text="@string/phone_call"
-                        android:textColor="@color/colorPrimary"
                         android:textSize="18sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:textColor="@color/backgroundColor"
+                        style="@style/Widget.AppCompat.Button.Colored"/>
 
                     <Button
                         android:id="@+id/website_button"
@@ -322,23 +320,25 @@
                         android:gravity="center"
                         android:onClick="OnWebsiteButtonClick"
                         android:text="@string/vet_clinic_website"
-                        android:textColor="@color/colorPrimary"
                         android:textSize="18sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:textColor="@color/backgroundColor"
+                        style="@style/Widget.AppCompat.Button.Colored"/>
 
                     <Button
                         android:id="@+id/route_button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="top"
+                        android:layout_gravity="center"
                         android:layout_marginEnd="@dimen/vet_list_padding"
                         android:layout_marginStart="@dimen/vet_list_padding"
                         android:drawableTop="@drawable/ic_navigation_black_24dp"
                         android:onClick="OnRouteButtonClick"
                         android:text="@string/get_route"
-                        android:textColor="@color/colorPrimary"
                         android:textSize="18sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:textColor="@color/backgroundColor"
+                        style="@style/Widget.AppCompat.Button.Colored"/>
                 </LinearLayout>
 
             </RelativeLayout>
@@ -348,67 +348,3 @@
     </RelativeLayout>
 
 </FrameLayout>
-
-
-    <!--
-            <LinearLayout
-                android:id="@+id/vet_more_details_website_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/vet_more_details_phone_number_layout"
-                android:orientation="horizontal"
-                android:paddingBottom="@dimen/place_details_list_between_items_padding">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/vet_clinic_website"
-                    android:gravity="start"
-                    android:textSize="17sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/vet_more_details_website"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="4.5"
-                    android:gravity="right"
-                    android:textSize="17sp"
-                    android:autoLink="web"
-                    android:textColorLink="@android:color/holo_blue_light"
-                    android:textIsSelectable="true" />
-            </LinearLayout>
-            -->
-
-    <!--
-    <LinearLayout
-                android:id="@+id/website_button_layout"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center">
-
-            </LinearLayout>
-
-    <LinearLayout
-                    android:id="@+id/website_button_layout"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center">
-
-                    <Button
-                        android:id="@+id/website_vet_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:drawableTop="@android:drawable/ic_s"
-                        android:text="אתר"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:onClick="OnWebsiteButtonClick"/>
-                </LinearLayout>
-
-                "@android:drawable/ic_menu_call
-    -->

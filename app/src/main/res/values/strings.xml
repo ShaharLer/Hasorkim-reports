@@ -51,7 +51,7 @@
     <string name="ok">עבור לרשימת וטרינרים</string>
     <string name="cancel">המשך לדיווח</string>
     <string name="vet_dialog_title">מצאנו מרפאה וטרינרית קרובה!</string>
-    <string name="vet_dialog_message">האם ברצונך לעבור לרשימת הוטרינרים הקרובים? שים לב, הבאת הכלב לסריקה אצל וטרינר תהפוך את התהליך ולנוח ומהיר יותר</string>
+    <string name="vet_dialog_message">האם ברצונך לעבור לרשימת הוטרינרים הקרובים? שים לב, הבאת הכלב לסריקה אצל וטרינר תהפוך את התהליך לנוח ומהיר יותר</string>
     <string name="title_activity_settings">Settings</string>
 
     <!-- Strings related to Settings -->
@@ -78,4 +78,7 @@
     <string name="all_vets">כל המרפאות</string>
     <string name="to_organization_website">לאתר העמותה לחצו <a href="http://www.hasorkim.co.il"><b>כאן</b></a></string>
     <string name="organization_description">הסבר על העמותה</string>
+    <string name="searching_chips_website">http://www.moag.gov.il/Pages/DogSearch.aspx</string>
+    <string name="route_unavailable">זמנית לא ניתן לספק מסלול</string>
+    <string name="facebook_app_id">537334766627732</string>
 </resources>

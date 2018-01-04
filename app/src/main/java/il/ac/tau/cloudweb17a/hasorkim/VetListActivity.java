@@ -21,7 +21,6 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -59,9 +58,9 @@ public class VetListActivity extends AppCompatActivity {
     // TODO should I declare them here or inside OcCreate
     private ProgressBar progressBar;
     private RadioGroup vetTypeButtons;
+    private RadioButton all_vets_button;
     private RadioButton open_vets_button;
     private LinearLayout vetListLayout;
-    private Button backToReport;
     private RecyclerView vetListRecyclerView;
     private List<VeterinaryClinic> allVetsList;
     private List<VeterinaryClinic> openVetsList;
@@ -73,7 +72,7 @@ public class VetListActivity extends AppCompatActivity {
     private boolean mLocationPermissionGranted = false;
     /******************************************************************************************/
 
-    Intent recievedIntent;
+    Intent receivedIntent;
 
     public enum QueryType {
         NEARBY_SEARCH_ALL, NEARBY_SEARCH_OPEN, DISTANCE_SEARCH_ALL, DISTANCE_SEARCH_OPEN
@@ -89,10 +88,11 @@ public class VetListActivity extends AppCompatActivity {
         // Connecting to the XML widgets
         progressBar = findViewById(R.id.vet_list_progress_bar);
         vetTypeButtons = findViewById(R.id.vet_type_buttons_group);
+        all_vets_button = findViewById(R.id.all_vets_button);
         open_vets_button = findViewById(R.id.open_vets_button);
         vetListLayout = findViewById(R.id.vet_list_layout);
         vetListRecyclerView = findViewById(R.id.vet_list_recycler_view);
-        backToReport = findViewById(R.id.going_to_report_btn);
+        Button backToReport = findViewById(R.id.going_to_report_btn);
 
         // We use this setting to improve performance because changes
         // in content do not change the layout size of the RecyclerView
@@ -105,21 +105,18 @@ public class VetListActivity extends AppCompatActivity {
         VetListItemDecoration decoration = new VetListItemDecoration(this, Color.LTGRAY, 1f);
         vetListRecyclerView.addItemDecoration(decoration);
 
-        recievedIntent = getIntent();
-        String sourceActivity = recievedIntent.getStringExtra("from");
+        receivedIntent = getIntent();
+        String sourceActivity = receivedIntent.getStringExtra("from");
 
         if (sourceActivity.equals("dialog")) {
-            System.out.println("from DIALOG");
-            currLatitude = recievedIntent.getDoubleExtra("lat",DEFAULT_LATITUDE);
-            currLongitude = recievedIntent.getDoubleExtra("long", DEFAULT_LONGITUDE);
-            System.out.println("Latitude is: " +  currLatitude + ", Longitude is: " + currLongitude);
+            currLatitude = receivedIntent.getDoubleExtra("lat",DEFAULT_LATITUDE);
+            currLongitude = receivedIntent.getDoubleExtra("long", DEFAULT_LONGITUDE);
             getNearbyVets(false);
             getNearbyVets(true);
         }
         else {
             backToReport.setVisibility(View.GONE);
-            System.out.println("from MENU");
-            // Construct a FusedLocationProviderClient.
+            // Construct a FusedLocationProviderClient
             mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
             getLocationPermission();
         }
@@ -132,7 +129,7 @@ public class VetListActivity extends AppCompatActivity {
         Intent newReportIntent = new Intent(this, NewEventMoreDetailsRequestActivity.class);
         newReportIntent.putExtra("lat", currLatitude);
         newReportIntent.putExtra("long", currLongitude);
-        newReportIntent.putExtra("address", recievedIntent.getStringExtra("address"));
+        newReportIntent.putExtra("address", receivedIntent.getStringExtra("address"));
         startActivity(newReportIntent);
     }
 
@@ -150,11 +147,9 @@ public class VetListActivity extends AppCompatActivity {
         if ((ContextCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_FINE_LOCATION)   == PackageManager.PERMISSION_GRANTED) &&
             (ContextCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED)    ) {
                 mLocationPermissionGranted = true;
-                System.out.println("There is permission");
                 getDeviceLocation(); // TODO check is should stay here
         }
         else {
-            System.out.println("There is NOT permission");
             ActivityCompat.requestPermissions(this,
                         new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION,
                                 android.Manifest.permission.ACCESS_COARSE_LOCATION},
@@ -235,7 +230,7 @@ public class VetListActivity extends AppCompatActivity {
                 .appendQueryParameter("type", "veterinary_care")
                 .appendQueryParameter("rankby", "distance")
                 .appendQueryParameter("language", "iw")
-                .appendQueryParameter("key", getString(R.string.google_places_key));
+                .appendQueryParameter("key", getString(R.string.google_maps_key));
 
 
         if (onlyOpen)
@@ -276,11 +271,11 @@ public class VetListActivity extends AppCompatActivity {
                 .appendPath("api")
                 .appendPath("distancematrix")
                 .appendPath("json")
-                .appendQueryParameter("origins", (currLatitude + "," + currLongitude))
+                .appendQueryParameter("origins", (Double.toString(currLatitude) + "," + Double.toString(currLongitude)))
                 .appendQueryParameter("destinations", nearVetsID.toString())
                 .appendQueryParameter("mode","driving")
                 .appendQueryParameter("language", "iw")
-                .appendQueryParameter("key", getString(R.string.google_places_key));
+                .appendQueryParameter("key", getString(R.string.google_maps_key));
 
         String currentUrlDistances = urlMaps.build().toString();
         Log.d(TAG, currentUrlDistances);
@@ -358,19 +353,16 @@ public class VetListActivity extends AppCompatActivity {
                         intent.putExtra(PLACE_ID, vetClinic.getPlaceId());
                         intent.putExtra(NAME, vetClinic.getName());
                         intent.putExtra(ADDRESS, vetClinic.getAddress());
-                        intent.putExtra(ORIGIN_LATITUDE, currLatitude);
-                        intent.putExtra(ORIGIN_LONGITUDE, currLongitude);
+                        intent.putExtra(ORIGIN_LATITUDE, Double.toString(currLatitude));
+                        intent.putExtra(ORIGIN_LONGITUDE, Double.toString(currLongitude));
                         startActivity(intent);
                     }
                 };
 
-                vetListRecyclerView.setAdapter(new VeterinaryClinicAdapter(allVetsList, buttonsListener));
-
+                vetTypeButtons.clearCheck();
                 vetTypeButtons.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(RadioGroup group, int checkedId) {
-                        System.out.println("Got inside cause radio button changed");
-
                         switch (checkedId) {
                             case R.id.all_vets_button:
                                 vetListRecyclerView.setAdapter(new VeterinaryClinicAdapter(allVetsList, buttonsListener));
@@ -383,8 +375,12 @@ public class VetListActivity extends AppCompatActivity {
                 });
 
                 // updating the screen with the open clinics showed
-                vetTypeButtons.clearCheck();
-                open_vets_button.setChecked(true);
+
+                if (openVetsList.isEmpty())
+                    all_vets_button.setChecked(true);
+                else
+                    open_vets_button.setChecked(true);
+
                 progressBar.setVisibility(View.GONE);
                 vetListLayout.setVisibility(View.VISIBLE);
             }
@@ -392,10 +388,12 @@ public class VetListActivity extends AppCompatActivity {
     }
 
     /****************************************************************************************************/
+    /*
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(VetListActivity.this, MapsActivity.class));
+        startActivity(new Intent(this, MapsActivity.class));
         //finish(); // TODO what is this method???
     }
+    */
 }
