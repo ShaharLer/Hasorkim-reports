@@ -1,9 +1,14 @@
 package il.ac.tau.cloudweb17a.hasorkim;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Layout;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +24,7 @@ public class ActiveReportActivity extends AppCompatActivity {
 
     private LayoutInflater layoutInflater;
     private ViewGroup thisContainer;
+
     private PopupWindow popupWindow;
     private Report report;
     private static final String TAG = "Send Report";
@@ -30,6 +36,9 @@ public class ActiveReportActivity extends AppCompatActivity {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
+        layoutInflater = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+
+
         setContentView(R.layout.activity_active_report);
 
         report = (Report) getIntent().getSerializableExtra("Report");
@@ -40,11 +49,11 @@ public class ActiveReportActivity extends AppCompatActivity {
         //TextView activeReportExtraText = (TextView) findViewById(R.id.activeReportExtraText);
         //activeReportExtraText.setText((CharSequence) report.getFreeText());
 
-        TextView activeReportPhoneNumber = findViewById(R.id.activeReportPhoneNumber);
-        activeReportPhoneNumber.setText(report.getPhoneNumber());
+        //TextView activeReportPhoneNumber = findViewById(R.id.activeReportPhoneNumber);
+        //activeReportPhoneNumber.setText(report.getPhoneNumber());
 
-        TextView activeReportLocation = findViewById(R.id.activeReportLocation);
-        activeReportLocation.setText(report.getAddress());
+        //TextView activeReportLocation = findViewById(R.id.activeReportLocation);
+        //activeReportLocation.setText(report.getAddress());
 
         if (report.getExtraPhoneNumber() != null) {
             LinearLayout linearLayout = findViewById(R.id.addAnotherPhoneLinearLayout);
@@ -78,8 +87,21 @@ public class ActiveReportActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 TextView extraPhoneNumber = findViewById(R.id.addAnotherPhoneNumber);
-                report.setExtraPhoneNumber(extraPhoneNumber.getText().toString());
-                report.reportUpdateExtraPhoneNumber();
+                String extraPhoneNumberString = extraPhoneNumber.getText().toString();
+                String error = report.validatePhone(extraPhoneNumberString);
+                if (error.equals("")){
+                    report.setExtraPhoneNumber(extraPhoneNumberString);
+                    report.reportUpdateExtraPhoneNumber();
+
+                    Drawable myIcon = getResources().getDrawable(R.drawable.ic_done_24pp);
+                    myIcon.setBounds(0, 0, myIcon.getIntrinsicWidth(), myIcon.getIntrinsicHeight());
+                    extraPhoneNumber.setError("הטלפון נשמר", myIcon);
+                }
+                else{
+                    extraPhoneNumber.setError(error);
+                }
+
+
 
             }
 
@@ -93,10 +115,11 @@ public class ActiveReportActivity extends AppCompatActivity {
             public void onClick(View view) {
                 //layoutInflater = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
                 final ViewGroup popupContainer = (ViewGroup) layoutInflater.inflate(R.layout.cancel_report_pop, null);
+                LinearLayout activity_active_report =  (LinearLayout) findViewById(R.id.activity_active_report);
 
-                //popupWindow = new PopupWindow(popupContainer, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
-                //popupWindow.showAtLocation(mDrawer, Gravity.NO_GRAVITY, 140, 700);
-                //mDrawer.setAlpha(0.5F);
+                popupWindow = new PopupWindow(popupContainer, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
+                popupWindow.showAtLocation(activity_active_report, Gravity.NO_GRAVITY, 140, 700);
+                //activity_active_report.setAlpha(0.5F);
                 //container.getBackground().setAlpha(120);
                 //container.setBackgroundColor(Color.GRAY);
 
@@ -108,6 +131,7 @@ public class ActiveReportActivity extends AppCompatActivity {
                         String cancelReportText = cancelReport.getText().toString();
 
                         report.reportUpdateCancellationText(cancelReportText);
+                        report.reportUpdateCancellationUserType();
                         report.reportUpdateStatus("CANCELED");
 
                         Intent intent = new Intent(ActiveReportActivity.this, ReportListActivity.class);
@@ -123,9 +147,10 @@ public class ActiveReportActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 ViewGroup container = (ViewGroup) layoutInflater.inflate(R.layout.what_now_pop, null);
+                LinearLayout activity_active_report =  (LinearLayout) findViewById(R.id.activity_active_report);
 
-                //popupWindow = new PopupWindow(container, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
-                //popupWindow.showAtLocation(mDrawer, Gravity.NO_GRAVITY, 120, 400);
+                popupWindow = new PopupWindow(container, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
+                popupWindow.showAtLocation(activity_active_report, Gravity.NO_GRAVITY, 120, 400);
 
                 Button confirmCancelReportButton = container.findViewById(R.id.whatNowgoToReportList);
                 confirmCancelReportButton.setOnClickListener(new View.OnClickListener() {

@@ -53,6 +53,7 @@ public class Report implements  java.io.Serializable{
     private boolean isDogWithReporter;
     private String imageUrl;
 
+    private String cancellationUserType;
 
 
     private double Lat;
@@ -166,6 +167,10 @@ public class Report implements  java.io.Serializable{
 
     public String getStatus() { return this.status; }
 
+    public String getCancellationUserType() {
+        return cancellationUserType;
+    }
+
     public long getStartTime(){
         return this.startTime;
     }
@@ -229,6 +234,10 @@ public class Report implements  java.io.Serializable{
         this.cancellationText = cancellationText;
     }
 
+    public void setCancellationUserType(String cancellationUserType) {
+        this.cancellationUserType = cancellationUserType;
+    }
+
     public double getLat() {
         return Lat;
     }
@@ -288,6 +297,14 @@ public class Report implements  java.io.Serializable{
         reportsRef.updateChildren(reportMap);
     }
 
+    public void reportUpdateCancellationUserType(){
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference reportsRef = ref.child("reports").child(this.id);
+        Map<String,Object> reportMap = new HashMap<String,Object>();
+        reportMap.put("cancellationUserType", "מדווח");
+        reportsRef.updateChildren(reportMap);
+    }
+
     public boolean isOpenReport(){
         if ((Objects.equals(this.status, "CANCELED")) || (Objects.equals(this.status, "CLOSED")))
                 return false;
@@ -296,10 +313,14 @@ public class Report implements  java.io.Serializable{
 
     public String statusInHebrew(){
         Map<String, String> map = new HashMap<String, String>();
-        map.put("NEW", "הדיווח בטיפול מנהל");
-        map.put("CLOSED", "הטיפול בדיווח הסתיים");
-        map.put("CANCELED", "הדיווח בוטל");
-        map.put("SCANER_ON_THE_WAY", "סורק בדרך אליך");
+        map.put("NEW", "דיווח חדש");
+        map.put("SCANNER_ENLISTED", "דיווח חדש");
+        map.put("MANAGER_ENLISTED", "בטיפול מנהל");
+        map.put("MANAGER_ASSIGNED_SCANNER", "נמצא סורק בקרבתך, ניצור קשר בהקדם");
+        map.put("SCANNER_ON_THE_WAY", "סורק בדרך אליך");
+        map.put("CLOSED", "סגור");
+        map.put("CANCELED", "בוטל");
+
         return map.get(this.status);
     }
 

@@ -2,7 +2,7 @@
     <string name="app_name">הסורקים</string>
     <string name="button_report_event_new_report">דווח</string>
     <string name="title_activity_maps">הסורקים</string>
-    <string name="google_maps_key">AIzaSyD-LCTPPgFDqC0_EG_qTfTLTR8d9ZW04M8</string>
+    <string name="google_maps_key">AIzaSyCUlK4p2XDeYowxS67p6gC2GjqEHzLfSCo</string>
     <string name="google_places_key">AIzaSyBcSLd55VIpNE_MRmt5GyRini-d7cENn1w</string>
     <string name="title_activity_report_event">דווח על אירוע</string>
     <string name="title_activity_new_report">New Event</string>

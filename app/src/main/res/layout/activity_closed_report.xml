@@ -107,6 +107,31 @@
             </LinearLayout>
 
             <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/closed_report_details_headline"
+                android:orientation="horizontal"
+                android:textStyle="bold">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="נסגר על ידי:"
+                    android:textSize="@dimen/standard_text_size"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/closed_report_cancellation_user_type"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:paddingStart="@dimen/standard_padding"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/closed_report_address_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
