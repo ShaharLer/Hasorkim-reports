@@ -7,13 +7,13 @@
     android:layout_height="match_parent"
     android:background="@color/backgroundColor"
     android:orientation="vertical"
-    android:padding="@dimen/vet_list_padding"
+    android:padding="@dimen/nav_header_vertical_spacing"
     tools:context="il.ac.tau.cloudweb17a.hasorkim.NewEventMoreDetailsRequestActivity">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="9"
+        android:layout_weight="8.5"
         android:scrollbars="vertical">
 
         <RelativeLayout
@@ -30,17 +30,17 @@
                 <CheckBox
                     android:id="@+id/reportCheckbox"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:layout_gravity="center"
-                    android:gravity="center"
+                    android:gravity="top|center_horizontal"
                     android:textSize="@dimen/standard_text_size"
                     android:textStyle="bold" />
 
                 <RelativeLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="7"
+                    android:layout_weight="8"
                     android:orientation="vertical">
 
                     <TextView
@@ -48,9 +48,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/text_new_event_have_dog_msg_please"
-                        android:textAlignment="viewEnd"
                         android:textColor="@android:color/black"
-                        android:textSize="@dimen/standard_text_size"
+                        android:textSize="19sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -58,7 +57,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/dog_is_with_me"
                         android:text="@string/text_new_event_have_dog_msg_please_make_sure"
-                        android:textColor="@android:color/black"
+                        android:textColor="@color/attentionColor"
                         android:textSize="14sp"
                         android:textStyle="bold" />
                 </RelativeLayout>
@@ -73,15 +72,30 @@
                 android:paddingBottom="@dimen/report_padding"
                 android:orientation="horizontal">
 
-                <TextView
+                <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/image_report_padding"
-                    android:layout_gravity="center"
-                    android:text="@string/ImageString"
-                    android:textColor="@android:color/black"
-                    android:textSize="19sp"
-                    android:textStyle="bold" />
+                    android:orientation="vertical"
+                    android:layout_marginEnd="@dimen/image_report_padding">
+
+                    <TextView
+                        android:id="@+id/report_details_photo_headline"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/ImageString"
+                        android:textColor="@android:color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/report_details_photo_headline"
+                        android:text="@string/report_photo_recommended"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
 
                 <ImageButton
                     android:id="@+id/imageButtonReport"
@@ -89,7 +103,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/image_report_padding"
                     android:contentDescription="@string/add_photo"
-                    android:gravity="center"
                     app:srcCompat="@drawable/ic_add_a_photo_black_24dp"
                     style="@style/Widget.AppCompat.Button.Colored"/>
             </LinearLayout>
@@ -109,17 +122,18 @@
                     android:layout_weight="1"
                     android:text="@string/NewReportReporterName"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/standard_text_size"
+                    android:textSize="@dimen/active_report_text_size"
                     android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/reporterName"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2.3"
+                    android:layout_weight="1.8"
                     android:gravity="center"
                     android:inputType="textPersonName"
-                    android:singleLine="true" />
+                    android:singleLine="true"
+                    android:hint="@string/reporter_name_hint"/>
             </LinearLayout>
 
             <LinearLayout
@@ -137,17 +151,19 @@
                     android:layout_weight="1"
                     android:text="@string/addReportPhone"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/standard_text_size"
+                    android:textSize="@dimen/active_report_text_size"
                     android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/reporterPhoneNumber"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2.3"
+                    android:layout_weight="1.8"
                     android:gravity="center"
                     android:inputType="phone"
-                    android:singleLine="true" />
+                    android:singleLine="true"
+                    android:hint="@string/reporter_phone_number_hint"/>
+
             </LinearLayout>
 
             <LinearLayout
@@ -165,14 +181,14 @@
                     android:layout_weight="1"
                     android:text="@string/newReportMyLocation"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/standard_text_size"
+                    android:textSize="@dimen/active_report_text_size"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/reportLocation"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2.3"
+                    android:layout_weight="1.8"
                     android:gravity="center"
                     android:textSize="@dimen/standard_text_size"
                     android:textStyle="bold" />
@@ -192,29 +208,19 @@
                     android:layout_weight="1"
                     android:text="@string/newReportAddInformation"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/standard_text_size"
+                    android:textSize="@dimen/active_report_text_size"
                     android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/moreInformation"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2.3"
+                    android:layout_weight="1.8"
                     android:gravity="center"
                     android:inputType="textMultiLine"
-                    android:selectAllOnFocus="false" />
+                    android:selectAllOnFocus="false"
+                    android:hint="@string/reporter_extra_info_hint"/>
             </LinearLayout>
-
-            <TextView
-                android:id="@+id/errorMessage"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/more_info_layout"
-                android:textColor="@color/errorColor"
-                android:textSize="@dimen/standard_text_size"
-                android:textStyle="bold"
-                android:paddingBottom="@dimen/title_padding"
-                android:visibility="gone" />
 
         </RelativeLayout>
 
@@ -228,7 +234,7 @@
         android:layout_weight="1"
         android:text="@string/button_new_event_more_details_submit"
         android:textColor="@color/backgroundColor"
-        android:textSize="23sp"
+        android:textSize="24sp"
         android:textStyle="bold"
         style="@style/Widget.AppCompat.Button.Colored"/>
 

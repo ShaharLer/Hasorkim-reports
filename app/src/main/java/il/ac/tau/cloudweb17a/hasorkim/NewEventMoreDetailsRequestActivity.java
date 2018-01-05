@@ -27,7 +27,6 @@ import android.widget.Toast;
 
 import java.io.File;
 
-import static android.view.View.VISIBLE;
 import static il.ac.tau.cloudweb17a.hasorkim.User.getUser;
 
 public class NewEventMoreDetailsRequestActivity extends AppCompatActivity {
@@ -109,29 +108,36 @@ public class NewEventMoreDetailsRequestActivity extends AppCompatActivity {
                 report.setAddress(address);
                 report.setIsDogWithReporter(cb.isChecked());
 
+                String nameError = report.validateName(report.getReporterName());
+                String phoneError = report.validatePhone(report.getPhoneNumber());
 
-                String error = report.validate();
-                if (error.equals("")) {
+                if (nameError.equals("") && phoneError.equals("")) {
                     if (report.isHasSimilarReports()) {
                         popUpSimilarReport();
                         return;
                     }
+
                     if (!report.getIsDogWithReporter()) {
                         popUpNotChecked();
                         return;
                     }
+
                     report.saveReport(bitmap);
                     Intent intent = new Intent(NewEventMoreDetailsRequestActivity.this, ActiveReportActivity.class);
                     intent.putExtra("Report", report);
                     startActivity(intent);
-                } else {
-                    TextView errorMessage = findViewById(R.id.errorMessage);
-                    errorMessage.setText(error);
-                    errorMessage.setVisibility(VISIBLE);
-
                 }
+                else {
+                    if (!phoneError.equals("")) {
+                        reporterPhoneNumber.setError(phoneError);
+                        reporterPhoneNumber.requestFocus();
+                    }
 
-
+                    if (!nameError.equals("")) {
+                        reporterName.setError(nameError);
+                        reporterName.requestFocus();
+                    }
+                }
             }
         });
 

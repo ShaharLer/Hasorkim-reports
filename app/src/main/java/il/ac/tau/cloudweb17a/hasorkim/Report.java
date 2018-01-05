@@ -303,18 +303,20 @@ public class Report implements  java.io.Serializable{
         return map.get(this.status);
     }
 
-    public String validate(){
+    public String validatePhone(String phoneNumberToCheck) {
         String error = "";
-        if (reporterName.equals(""))
-            error += "חסר שם ";
+        if (phoneNumberToCheck.equals(""))
+            error += "חסר מספר טלפון";
+        else if (!phoneNumberToCheck.matches("^(0[57][0-9]{8})|(0[57]-[0-9]{8})|(0[23489][0-9]{7})|(0[23489]-[0-9]{7})$"))
+            error += "מספר טלפון לא תקין";
 
-        if (phoneNumber.equals(""))
-            error += "חסר מספר טלפון ";
-        else if (!phoneNumber.matches("^(0[57][0-9]{8})|(0[57]-[0-9]{8})|(0[23489][0-9]{7})|(0[23489]-[0-9]{7})$"))
-                error += "מספר טלפון לא תקין";
+        return error;
+    }
 
-        if (address.equals(""))
-            error += "חסרה כתובת ";
+    public String validateName(String phoneNumberToCheck) {
+        String error = "";
+        if (phoneNumberToCheck.equals(""))
+            error += "שם המדווח/ת חסר";
 
         return error;
     }
