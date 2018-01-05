@@ -65,6 +65,7 @@
 
             </LinearLayout>
 
+
             <LinearLayout
                 android:id="@+id/image_layout"
                 android:layout_width="match_parent"
@@ -119,7 +120,7 @@
                     android:layout_weight="2.3"
                     android:gravity="center"
                     android:inputType="textPersonName"
-                    android:singleLine="true" />
+                    android:singleLine="true"/>
             </LinearLayout>
 
             <LinearLayout
