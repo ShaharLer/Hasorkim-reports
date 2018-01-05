@@ -6,8 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.google.firebase.database.FirebaseDatabase;
-
 
 public class ReportListActivity extends AppCompatActivity {
     final String TAG = "ReportListActivity";
@@ -31,7 +29,8 @@ public class ReportListActivity extends AppCompatActivity {
         //setting up a user object for the list
         User.getUser(getApplicationContext());
 
-        RecyclerView.Adapter mAdapter = new ReportAdapter(FirebaseDatabase.getInstance().getReference().child("reports").limitToLast(70));
+        RecyclerView.Adapter mAdapter = new ReportAdapter();
+        //RecyclerView.Adapter mAdapter = new ReportAdapter(FirebaseDatabase.getInstance().getReference().child("reports").limitToLast(70)); TODO delete after debug
         //mRecyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL)); TODO delete this after debug
         mRecyclerView.setAdapter(mAdapter);
 

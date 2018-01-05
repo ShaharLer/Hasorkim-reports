@@ -95,7 +95,7 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ReportView
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public ReportAdapter(Query query) {
+    public ReportAdapter() {
         DatabaseReference reportsRef = FirebaseDatabase.getInstance().getReference().child("reports");
         Query lastQuery = reportsRef
                 .orderByChild("userId").equalTo(getUserWOContext().getId());

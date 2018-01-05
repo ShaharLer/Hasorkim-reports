@@ -6,6 +6,7 @@ import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class ClosedReportActivity extends AppCompatActivity {
@@ -24,32 +25,33 @@ public class ClosedReportActivity extends AppCompatActivity {
 
         report = (Report) getIntent().getSerializableExtra("Report");
 
-        TextView closedReportystatus = findViewById(R.id.closedReportStatus);
-        closedReportystatus.setText(report.statusInHebrew());
+        TextView closedReportStatus = findViewById(R.id.closedReportStatus);
+        closedReportStatus.setText(report.statusInHebrew());
 
-        ImageView closedReportImage = findViewById(R.id.closedReportImageView);
-        if(report.getImageUrl()!=null) {
+        if (report.getImageUrl() != null) {
+            //TextView imageHeadline= findViewById(R.id.closed_report_image_headline);
             bitmap = report.getBitmapFromURL(report.getImageUrl());
+            ImageView closedReportImage = findViewById(R.id.closedReportImageView);
             closedReportImage.setImageBitmap(bitmap);
-        }
-        else{
-            View imageContainer= findViewById(R.id.closedReportImageViewContainer);
-            imageContainer.setVisibility(View.GONE);
+            //imageHeadline.setVisibility(View.VISIBLE);
+            closedReportImage.setVisibility(View.VISIBLE);
         }
 
         TextView closedReportExtraDate = findViewById(R.id.closedReportDate);
-        closedReportExtraDate.setText(report.getStartTimeAsString());
+        String reportDate = report.getStartTimeAsString();
+        reportDate = reportDate.substring(6,reportDate.length());
+        closedReportExtraDate.setText(reportDate);
 
-        TextView closedReportyLoction = findViewById(R.id.closedReportyLoction);
-        closedReportyLoction.setText(report.getAddress());
+        TextView closedReportLocation = findViewById(R.id.closedReportLocation);
+        closedReportLocation.setText(report.getAddress());
 
-        TextView closedReportExtraText = findViewById(R.id.closedReportExtraText);
-        closedReportExtraText.setText(report.getFreeText());
-
-
-
-
-
+        String comments = report.getFreeText();
+        if (comments == null) {
+            LinearLayout commentsLayout = findViewById(R.id.comments_layout);
+            TextView closedReportExtraText = findViewById(R.id.closedReportExtraText);
+            closedReportExtraText.setText(report.getFreeText());
+            commentsLayout.setVisibility(View.VISIBLE);
+        }
     }
 }
 
