@@ -1,6 +1,7 @@
 package il.ac.tau.cloudweb17a.hasorkim;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
@@ -78,8 +79,21 @@ public class ActiveReportActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 TextView extraPhoneNumber = findViewById(R.id.addAnotherPhoneNumber);
-                report.setExtraPhoneNumber(extraPhoneNumber.getText().toString());
-                report.reportUpdateExtraPhoneNumber();
+                String extraPhoneNumberString = extraPhoneNumber.getText().toString();
+                String error = report.validatePhone(extraPhoneNumberString);
+                if (error.equals("")){
+                    report.setExtraPhoneNumber(extraPhoneNumberString);
+                    report.reportUpdateExtraPhoneNumber();
+
+                    Drawable myIcon = getResources().getDrawable(R.drawable.ic_done_24pp);
+                    myIcon.setBounds(0, 0, myIcon.getIntrinsicWidth(), myIcon.getIntrinsicHeight());
+                    extraPhoneNumber.setError("הטלפון נשמר", myIcon);
+                }
+                else{
+                    extraPhoneNumber.setError(error);
+                }
+
+
 
             }
 
