@@ -92,4 +92,13 @@
     <string name="searching_chips_website">http://www.moag.gov.il/Pages/DogSearch.aspx</string>
     <string name="route_unavailable">זמנית לא ניתן לספק מסלול</string>
     <string name="facebook_app_id">537334766627732</string>
+    <string name="report_status">סטטוס:</string>
+    <string name="report_address">כתובת:</string>
+    <string name="time_of_report">זמן הדיווח:</string>
+    <string name="active_report_status">סטטוס</string>
+    <string name="active_report_address">כתובת</string>
+    <string name="active_report_phone">טלפון</string>
+    <string name="active_report_extra_phone">טלפון נוסף</string>
+    <string name="delete_report">בטל דיווח</string>
+    <string name="so_what_now">מה קורה עכשיו?</string>
 </resources>

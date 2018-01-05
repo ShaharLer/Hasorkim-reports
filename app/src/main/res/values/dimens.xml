@@ -7,14 +7,18 @@
     <dimen name="place_details_list_between_items_padding">16dp</dimen>
     <dimen name="place_details_list_layout_padding">12dp</dimen>
     <dimen name="place_details_buttons_padding">52dp</dimen>
+    <dimen name="image_report_padding">60dp</dimen>
     <dimen name="title_padding">24dp</dimen>
     <dimen name="standard_text_size">18sp</dimen>
+    <dimen name="active_report_text_size">17sp</dimen>
     <dimen name="double_padding">32sp</dimen>
     <dimen name="report_padding">28sp</dimen>
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="nav_header_vertical_spacing">8dp</dimen>
+    <dimen name="report_date_padding">5dp</dimen>
     <dimen name="details_buttons_padding">4dp</dimen>
+    <dimen name="report_list_padding">2dp</dimen>
     <dimen name="nav_header_height">176dp</dimen>
 </resources>

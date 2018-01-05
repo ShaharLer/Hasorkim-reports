@@ -1,12 +1,9 @@
 package il.ac.tau.cloudweb17a.hasorkim;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.google.firebase.iid.FirebaseInstanceId;
-
-import java.util.UUID;
 
 /**
  * Created by hen on 30/12/2017.

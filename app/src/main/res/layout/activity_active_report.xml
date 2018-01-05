@@ -1,199 +1,169 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="il.ac.tau.cloudweb17a.hasorkim.ActiveReportActivity"
+    android:background="@color/backgroundColor"
     android:orientation="vertical"
-    android:gravity="center">
-
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="2dp"
-        android:background="#c0c0c0" />
+    android:padding="@dimen/vet_list_padding"
+    tools:context="il.ac.tau.cloudweb17a.hasorkim.ActiveReportActivity">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="8"
-        android:fillViewport="true"
-        android:layout_marginTop="55sp">
+        android:scrollbars="vertical">
 
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:animateLayoutChanges="true"
-            android:orientation="vertical"
-            android:scrollbars="vertical">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/status_headline"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/active_report_status"
+                android:textSize="32sp"
+                android:textStyle="bold"
+                android:paddingBottom="@dimen/nav_header_vertical_spacing"/>
+
+            <TextView
+                android:id="@+id/activeReportStatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/status_headline"
+                android:gravity="center"
+                android:textSize="40sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:background="@drawable/status_frame"/>
 
             <LinearLayout
-                android:layout_width="fill_parent"
+                android:id="@+id/active_report_address_layout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
+                android:layout_below="@+id/activeReportStatus"
                 android:orientation="horizontal"
-                android:textStyle="bold"
-                android:layout_margin="@dimen/standard_padding">
+                android:paddingTop="@dimen/image_report_padding"
+                android:paddingBottom="@dimen/button_text_size">
 
                 <TextView
-                    android:id="@+id/activeReportStatus"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text=""
-                    android:textSize="32sp"
-                    android:gravity="center_horizontal"
-                    android:textStyle="bold" />
+                    android:text="@string/active_report_address"
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/active_report_text_size"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/black"/>
 
                 <TextView
-                    android:layout_width="0sp"
+                    android:id="@+id/activeReportLocation"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="3.7"
+                    android:gravity="center"
+                    android:textSize="@dimen/active_report_text_size"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/active_report_phone_number_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/active_report_address_layout"
+                android:textStyle="bold"
+                android:paddingBottom="@dimen/vet_list_padding">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:gravity="right"
-                    android:text="סטטוס"
+                    android:text="@string/active_report_phone"
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/active_report_text_size"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/black"/>
+
+                <TextView
+                    android:id="@+id/activeReportPhoneNumber"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.5"
+                    android:gravity="center"
                     android:textSize="@dimen/standard_text_size"
                     android:textStyle="bold" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:textStyle="bold"
-                android:layout_margin="@dimen/standard_padding">
-
-                <TextView
-                    android:id="@+id/activeReportyLoction"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text=""
-                    android:gravity="left"
-                    android:textStyle="bold"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:text="כתובת דיווח"
-                    android:gravity="right"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/standard_text_size"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/standard_padding"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:textStyle="bold">
 
                 <ImageButton
                     android:id="@+id/addPhoneNumber"
-                    android:layout_width="50sp"
-                    android:layout_height="50sp"
-                    android:src="@android:drawable/ic_input_add"
-                    android:backgroundTint="@android:color/white"/>
-
-                <TextView
-                    android:id="@+id/activeReportyPhoneNumber"
-                    android:layout_width="0sp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text=""
-                    android:textSize="@dimen/standard_text_size"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="0sp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="right"
-                    android:text="טלפון:"
-                    android:textSize="@dimen/standard_text_size"
-                    android:textStyle="bold" />
-
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:backgroundTint="@color/backgroundColor"
+                    android:foregroundGravity="top"
+                    android:src="@android:drawable/ic_input_add" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/addAnotherPhoneLinearLayout"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/standard_padding"
-                android:layout_weight="1"
-                android:gravity="center"
+                android:layout_below="@+id/active_report_phone_number_layout"
                 android:textStyle="bold"
-                android:visibility="gone"
-                >
+                android:paddingBottom="@dimen/vet_list_padding"
+                android:visibility="gone">
 
-                <ImageButton
-                    android:id="@+id/saveAnotherPhoneNumber"
-                    android:layout_width="50sp"
-                    android:layout_height="50sp"
-                    android:backgroundTint="@android:color/white"
-                    android:src="@android:drawable/ic_menu_save" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="@string/active_report_extra_phone"
+                    android:textSize="@dimen/active_report_text_size"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/black"/>
 
                 <EditText
                     android:id="@+id/addAnotherPhoneNumber"
-                    android:layout_width="0sp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.5"
                     android:gravity="center"
                     android:inputType="phone"
-                    android:singleLine="true"
-                    android:textColor="@android:color/black" />
+                    android:singleLine="true" />
 
-                <TextView
-                    android:layout_width="0sp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="right"
-                    android:text="טלפון נוסף:"
-                    android:textSize="@dimen/standard_text_size"
-                    android:textStyle="bold" />
-
+                <ImageButton
+                    android:id="@+id/saveAnotherPhoneNumber"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:backgroundTint="@color/backgroundColor"
+                    android:foregroundGravity="top"
+                    android:src="@android:drawable/ic_menu_save" />
 
             </LinearLayout>
 
+        </RelativeLayout>
 
-        </LinearLayout>
     </ScrollView>
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="0sp"
-        android:layout_weight="2"
-        android:gravity="bottom"
-        android:orientation="vertical"
-        android:textStyle="bold">
+    <Button
+        android:id="@+id/cancelReport"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="@string/delete_report"
+        android:textSize="23sp"
+        android:textColor="@color/backgroundColor"
+        style="@style/Widget.AppCompat.Button.Colored"/>
 
-
-
-        <Button
-            android:id="@+id/cancelReport"
-            style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/holo_red_dark"
-            android:text="בטל דיווח"
-            android:textSize="@dimen/button_text_size" />
-
-        <Button
-            android:id="@+id/whatNowInfo"
-            style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="מה עכשיו?"
-            android:textSize="@dimen/button_text_size" />
-
-    </LinearLayout>
-
+    <Button
+        android:id="@+id/whatNowInfo"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_gravity="center"
+        android:text="@string/so_what_now"
+        android:textSize="@dimen/button_text_size"
+        style="?android:attr/buttonBarButtonStyle"/>
 </LinearLayout>

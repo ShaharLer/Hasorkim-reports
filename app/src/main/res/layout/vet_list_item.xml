@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="@drawable/vet_item_selected"
+    android:background="@drawable/list_item_selected"
     android:padding="@dimen/vet_list_padding">
 
     <TextView
@@ -14,7 +14,8 @@
         android:textColor="@color/colorPrimaryDark"
         android:layout_gravity="start"
         android:textSize="17sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:paddingBottom="@dimen/details_buttons_padding"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -59,4 +60,5 @@
             android:textSize="17sp"
             android:textColor="@color/distanceToVetColor"/>
     </LinearLayout>
+
 </LinearLayout>

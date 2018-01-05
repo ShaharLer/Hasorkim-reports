@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,17 +34,17 @@ public class ActiveReportActivity extends AppCompatActivity {
 
         report = (Report) getIntent().getSerializableExtra("Report");
 
-        TextView activeReportystatus = findViewById(R.id.activeReportStatus);
-        activeReportystatus.setText(report.statusInHebrew());
+        TextView activeReportStatus = findViewById(R.id.activeReportStatus);
+        activeReportStatus.setText(report.statusInHebrew());
 
         //TextView activeReportExtraText = (TextView) findViewById(R.id.activeReportExtraText);
         //activeReportExtraText.setText((CharSequence) report.getFreeText());
 
-        TextView activeReportyPhoneNumber = findViewById(R.id.activeReportyPhoneNumber);
-        activeReportyPhoneNumber.setText(report.getPhoneNumber());
+        TextView activeReportPhoneNumber = findViewById(R.id.activeReportPhoneNumber);
+        activeReportPhoneNumber.setText(report.getPhoneNumber());
 
-        TextView activeReportyLoction = findViewById(R.id.activeReportyLoction);
-        activeReportyLoction.setText(report.getAddress());
+        TextView activeReportLocation = findViewById(R.id.activeReportLocation);
+        activeReportLocation.setText(report.getAddress());
 
         if (report.getExtraPhoneNumber() != null) {
             LinearLayout linearLayout = findViewById(R.id.addAnotherPhoneLinearLayout);

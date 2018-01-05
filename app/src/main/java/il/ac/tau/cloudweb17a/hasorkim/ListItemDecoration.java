@@ -11,7 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
 import android.view.View;
 
-public class VetListItemDecoration extends RecyclerView.ItemDecoration {
+public class ListItemDecoration extends RecyclerView.ItemDecoration {
     private final Paint mPaint;
 
     /**
@@ -21,8 +21,8 @@ public class VetListItemDecoration extends RecyclerView.ItemDecoration {
      * @param color    the color of the separator to draw.
      * @param heightDp the height of the separator in dp.
      */
-    public VetListItemDecoration(@NonNull Context context, @ColorInt int color,
-                                 @FloatRange(from = 0, fromInclusive = false) float heightDp) {
+    public ListItemDecoration(@NonNull Context context, @ColorInt int color,
+                              @FloatRange(from = 0, fromInclusive = false) float heightDp) {
         mPaint = new Paint();
         mPaint.setColor(color);
         final float thickness = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,

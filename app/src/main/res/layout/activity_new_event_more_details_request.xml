@@ -13,13 +13,12 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="9">
+        android:layout_weight="9"
+        android:scrollbars="vertical">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:scrollbars="vertical">
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:id="@+id/alert_message"
@@ -75,9 +74,9 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_marginEnd="@dimen/image_report_padding"
                     android:layout_gravity="center"
                     android:text="@string/ImageString"
                     android:textColor="@android:color/black"
@@ -86,10 +85,11 @@
 
                 <ImageButton
                     android:id="@+id/imageButtonReport"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2.3"
+                    android:layout_marginStart="@dimen/image_report_padding"
                     android:contentDescription="@string/add_photo"
+                    android:gravity="center"
                     app:srcCompat="@drawable/ic_add_a_photo_black_24dp"
                     style="@style/Widget.AppCompat.Button.Colored"/>
             </LinearLayout>

@@ -373,7 +373,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     private void suggestVet() {
-
         TextView title = new TextView(this);
         title.setText(R.string.vet_dialog_title);
         title.setPadding(10, 50, 64, 9);

@@ -52,7 +52,7 @@
             android:label="דיווח פעיל" />
         <activity
             android:name=".ReportListActivity"
-            android:label="רשימת דיווחים" />
+            android:label="@string/my_reports" />
         <activity
             android:name=".VetListMapActivity"
             android:label="@string/title_activity_vet_list" />

@@ -39,6 +39,7 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ReportView
     public static class ReportViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public final TextView StatusView;
         public final TextView AddressView;
+        public final TextView dateView;
         public final TextView timeView;
         final String TAG = "ViewHolder";
         private Report mReport;
@@ -49,6 +50,7 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ReportView
             v.setOnClickListener(this);
             StatusView = v.findViewById(R.id.report_status);
             AddressView = v.findViewById(R.id.report_address);
+            dateView = v.findViewById(R.id.report_date);
             timeView = v.findViewById(R.id.report_time);
             context = v.getContext();
         }
@@ -71,7 +73,12 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ReportView
             mReport = report;
             StatusView.setText(report.getStatus());
             AddressView.setText(report.getAddress());
-            timeView.setText(report.getStartTimeAsString());
+
+            String reportTime = report.getStartTimeAsString();
+            String date = reportTime.substring(6,reportTime.length());
+            String time = reportTime.substring(0,5);
+            dateView.setText(date);
+            timeView.setText(time);
         }
 
     }

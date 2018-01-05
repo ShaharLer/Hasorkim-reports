@@ -8,17 +8,14 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.os.Bundle;
-import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Layout;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +24,6 @@ import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
-
 
 import java.io.File;
 
@@ -47,7 +43,7 @@ public class NewEventMoreDetailsRequestActivity extends AppCompatActivity {
     private Report report;
     private Bitmap bitmap;
 
-    private static final double DEFAULT_LATITUDE  = 32.0820748;  // TODO handle this
+    private static final double DEFAULT_LATITUDE = 32.0820748;  // TODO handle this
     private static final double DEFAULT_LONGITUDE = 34.7717487; // TODO handle this
     private double Lat;
     private double Long;
@@ -60,13 +56,13 @@ public class NewEventMoreDetailsRequestActivity extends AppCompatActivity {
         setContentView(R.layout.activity_new_event_more_details_request);
 
         address = getIntent().getStringExtra("address");
-        if(address==null||address.equals(getString(R.string.unknown_address))){
+        if (address == null || address.equals(getString(R.string.unknown_address))) {
             Log.e(TAG, "no address wes received from the previous activity");
             Intent intent = new Intent(NewEventMoreDetailsRequestActivity.this, MapsActivity.class);
             startActivity(intent);
         }
 
-        Lat = getIntent().getDoubleExtra("lat",DEFAULT_LATITUDE);
+        Lat = getIntent().getDoubleExtra("lat", DEFAULT_LATITUDE);
         Long = getIntent().getDoubleExtra("long", DEFAULT_LONGITUDE);
 
         user = getUser(getApplicationContext());
@@ -74,14 +70,12 @@ public class NewEventMoreDetailsRequestActivity extends AppCompatActivity {
         TextView reporterPhoneNumber = findViewById(R.id.reporterPhoneNumber);
         TextView reportLocation = findViewById(R.id.reportLocation);
 
-        if(user.getName()!=null)
+        if (user.getName() != null)
             reporterName.setText(user.getName());
-        if(user.getPhoneNumber()!=null)
+        if (user.getPhoneNumber() != null)
             reporterPhoneNumber.setText(user.getPhoneNumber());
-        if(address!=null)
+        if (address != null)
             reportLocation.setText(address);
-
-
 
 
         ImageButton imageButtonReport = findViewById(R.id.imageButtonReport);
@@ -105,25 +99,24 @@ public class NewEventMoreDetailsRequestActivity extends AppCompatActivity {
                 CheckBox cb = findViewById(R.id.reportCheckbox);
                 address = reportLocation.getText().toString();
 
-                if(address.equals("")){
-                    address="אלנבי 9, תל אביב";
+                if (address.equals("")) {
+                    address = "אלנבי 9, תל אביב";
                 }
 
-                report.setReporterName(reporterName.getText().toString(),user);
-                report.setPhoneNumber(reporterPhoneNumber.getText().toString(),user);
+                report.setReporterName(reporterName.getText().toString(), user);
+                report.setPhoneNumber(reporterPhoneNumber.getText().toString(), user);
                 report.setMoreInformation(moreInformation.getText().toString());
                 report.setAddress(address);
                 report.setIsDogWithReporter(cb.isChecked());
 
 
-
-                String error =report.validate();
-                if(error.equals("")){
-                    if(report.isHasSimilarReports()){
+                String error = report.validate();
+                if (error.equals("")) {
+                    if (report.isHasSimilarReports()) {
                         popUpSimilarReport();
                         return;
                     }
-                    if(!report.getIsDogWithReporter()){
+                    if (!report.getIsDogWithReporter()) {
                         popUpNotChecked();
                         return;
                     }
@@ -131,8 +124,7 @@ public class NewEventMoreDetailsRequestActivity extends AppCompatActivity {
                     Intent intent = new Intent(NewEventMoreDetailsRequestActivity.this, ActiveReportActivity.class);
                     intent.putExtra("Report", report);
                     startActivity(intent);
-                }
-                else{
+                } else {
                     TextView errorMessage = findViewById(R.id.errorMessage);
                     errorMessage.setText(error);
                     errorMessage.setVisibility(VISIBLE);
@@ -143,7 +135,7 @@ public class NewEventMoreDetailsRequestActivity extends AppCompatActivity {
             }
         });
 
-        report = new Report(address,"",user,Lat,Long);
+        report = new Report(address, "", user, Lat, Long);
     }
 
     private void popUpNotChecked() {
@@ -170,7 +162,6 @@ public class NewEventMoreDetailsRequestActivity extends AppCompatActivity {
         }).setCustomTitle(title).create().show();
 
 
-
     }
 
 
@@ -190,10 +181,9 @@ public class NewEventMoreDetailsRequestActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int id) {
 
                         CheckBox cb = findViewById(R.id.reportCheckbox);
-                        if(!cb.isChecked()) {
+                        if (!cb.isChecked()) {
                             popUpNotChecked();
-                        }
-                        else {
+                        } else {
                             report.saveReport(bitmap);
                             Intent intent = new Intent(NewEventMoreDetailsRequestActivity.this, ActiveReportActivity.class);
                             intent.putExtra("Report", report);
@@ -201,15 +191,15 @@ public class NewEventMoreDetailsRequestActivity extends AppCompatActivity {
                         }
                     }
                 }).setNegativeButton(R.string.cancel_similar_report, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                    }
+            public void onClick(DialogInterface dialog, int id) {
+            }
         }).create().show();
 
     }
 
 
-
     static final int REQUEST_IMAGE_CAPTURE = 1;
+
     private void dispatchTakePictureIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
@@ -225,7 +215,7 @@ public class NewEventMoreDetailsRequestActivity extends AppCompatActivity {
                 Environment.DIRECTORY_PICTURES);
         Uri photoUri = Uri.parse(photoDirectory.getPath());
 
-        photoIntent.setDataAndType(photoUri,"image/*");
+        photoIntent.setDataAndType(photoUri, "image/*");
 
         startActivityForResult(photoIntent, PHOTO_INTENT_REQUEST_CODE);
     }
@@ -247,8 +237,8 @@ public class NewEventMoreDetailsRequestActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (resultCode == RESULT_OK){
-            if (requestCode == PHOTO_INTENT_REQUEST_CODE){
+        if (resultCode == RESULT_OK) {
+            if (requestCode == PHOTO_INTENT_REQUEST_CODE) {
                 Uri photoUri = data.getData();
                 ImageButton imageButton = thisContainer.findViewById(R.id.imageButtonReport);
                 imageButton.setImageURI(photoUri);
@@ -264,7 +254,7 @@ public class NewEventMoreDetailsRequestActivity extends AppCompatActivity {
                 ImageButton imb = findViewById(R.id.imageButtonReport);
                 imb.setBackground(new BitmapDrawable(getResources(), imageBitmap));
 
-                bitmap=imageBitmap;
+                bitmap = imageBitmap;
 
             }
 
@@ -273,11 +263,11 @@ public class NewEventMoreDetailsRequestActivity extends AppCompatActivity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode,
-                                            String permissions[], int[] grantResults){
-        switch (requestCode){
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
             case EXTERNAL_STORAGE_PERMISSION_REQUEST_CODE: {
                 if ((grantResults.length > 0) &&
-                        (grantResults[0] == PackageManager.PERMISSION_GRANTED)){
+                        (grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
                     createPhotoIntent();
                 } else Toast.makeText(this, "Gallery Permission Denied :(",
                         Toast.LENGTH_SHORT).show();

@@ -102,7 +102,7 @@ public class VetListActivity extends AppCompatActivity {
         LayoutManager vetListLayoutManager = new LinearLayoutManager(this);
         vetListRecyclerView.setLayoutManager(vetListLayoutManager);
 
-        VetListItemDecoration decoration = new VetListItemDecoration(this, Color.LTGRAY, 1f);
+        ListItemDecoration decoration = new ListItemDecoration(this, Color.LTGRAY, 1f);
         vetListRecyclerView.addItemDecoration(decoration);
 
         receivedIntent = getIntent();
@@ -112,7 +112,6 @@ public class VetListActivity extends AppCompatActivity {
             currLatitude = receivedIntent.getDoubleExtra("lat",DEFAULT_LATITUDE);
             currLongitude = receivedIntent.getDoubleExtra("long", DEFAULT_LONGITUDE);
             getNearbyVets(false);
-            getNearbyVets(true);
         }
         else {
             backToReport.setVisibility(View.GONE);
@@ -202,7 +201,6 @@ public class VetListActivity extends AppCompatActivity {
                         }
 
                         getNearbyVets(false);
-                        getNearbyVets(true);
                     }
                 });
             }
@@ -280,18 +278,17 @@ public class VetListActivity extends AppCompatActivity {
                     switch (parseType) {
                         case NEARBY_SEARCH_ALL:
                             allVetsList = DataParser.parsePlaces(returnedString);
-                            //distancesApiCall(allVetsList, DISTANCE_SEARCH_ALL);
                             run(distancesApiCall(allVetsList), DISTANCE_SEARCH_ALL);
-                            break;
-
-                        case NEARBY_SEARCH_OPEN:
-                            openVetsList = DataParser.parsePlaces(returnedString);
-                            //distancesApiCall(openVetsList, DISTANCE_SEARCH_OPEN);
-                            run(distancesApiCall(openVetsList), DISTANCE_SEARCH_OPEN);
                             break;
 
                         case DISTANCE_SEARCH_ALL:
                             DataParser.getDistances(returnedString, allVetsList);
+                            getNearbyVets(true);
+                            break;
+
+                        case NEARBY_SEARCH_OPEN:
+                            openVetsList = DataParser.parsePlaces(returnedString);
+                            run(distancesApiCall(openVetsList), DISTANCE_SEARCH_OPEN);
                             break;
 
                         case DISTANCE_SEARCH_OPEN:
@@ -306,7 +303,6 @@ public class VetListActivity extends AppCompatActivity {
     /**
      * @param vetList
      */
-    //private void distancesApiCall(List<VeterinaryClinic> vetList, QueryType distanceSearchType) {
     private String distancesApiCall(List<VeterinaryClinic> vetList) {
         int listSize = vetList.size();
         Log.d(TAG, "Vet list size is: " + listSize);
@@ -334,14 +330,6 @@ public class VetListActivity extends AppCompatActivity {
 
         String currentUrlDistances = urlMaps.build().toString();
         Log.d(TAG, currentUrlDistances);
-
-        /*
-        try {
-            run(currentUrlDistances, distanceSearchType);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        */
 
         return currentUrlDistances;
     }
