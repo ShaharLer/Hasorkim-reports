@@ -6,7 +6,8 @@
     android:background="@color/backgroundColor"
     android:orientation="vertical"
     android:padding="@dimen/vet_list_padding"
-    tools:context="il.ac.tau.cloudweb17a.hasorkim.ActiveReportActivity">
+    tools:context="il.ac.tau.cloudweb17a.hasorkim.ActiveReportActivity"
+    android:id="@+id/activity_active_report">
 
     <ScrollView
         android:layout_width="match_parent"

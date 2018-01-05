@@ -42,11 +42,15 @@ public class ClosedReportActivity extends AppCompatActivity {
         reportDate = reportDate.substring(6,reportDate.length());
         closedReportExtraDate.setText(reportDate);
 
+
         TextView closedReportLocation = findViewById(R.id.closedReportLocation);
         closedReportLocation.setText(report.getAddress());
 
+        TextView closedReportCancellationUserType = findViewById(R.id.closed_report_cancellation_user_type);
+        closedReportCancellationUserType.setText(report.getCancellationUserType());
+
         String comments = report.getFreeText();
-        if (comments == null) {
+        if (comments != null) {
             LinearLayout commentsLayout = findViewById(R.id.comments_layout);
             TextView closedReportExtraText = findViewById(R.id.closedReportExtraText);
             closedReportExtraText.setText(report.getFreeText());
