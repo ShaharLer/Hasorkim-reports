@@ -83,7 +83,7 @@ public class VetListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vet_list);
 
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // Connecting to the XML widgets
         progressBar = findViewById(R.id.vet_list_progress_bar);

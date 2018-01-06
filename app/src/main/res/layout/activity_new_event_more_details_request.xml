@@ -24,15 +24,15 @@
                 android:id="@+id/alert_message"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="@dimen/report_padding"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/report_padding">
 
                 <CheckBox
                     android:id="@+id/reportCheckbox"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
                     android:layout_gravity="center"
+                    android:layout_weight="1"
                     android:gravity="top|center_horizontal"
                     android:textSize="@dimen/standard_text_size"
                     android:textStyle="bold" />
@@ -69,14 +69,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/alert_message"
-                android:paddingBottom="@dimen/report_padding"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/report_padding">
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginEnd="@dimen/image_report_padding">
+                    android:layout_marginEnd="@dimen/image_report_padding"
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/report_details_photo_headline"
@@ -99,21 +99,33 @@
 
                 <ImageButton
                     android:id="@+id/imageButtonReport"
+                    style="@style/Widget.AppCompat.Button.Colored"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/image_report_padding"
                     android:contentDescription="@string/add_photo"
-                    app:srcCompat="@drawable/ic_add_a_photo_black_24dp"
-                    style="@style/Widget.AppCompat.Button.Colored"/>
+                    app:srcCompat="@drawable/ic_add_a_photo_black_24dp" />
+
             </LinearLayout>
+
+            <ImageView
+                android:id="@+id/ReportImageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/button_text_size"
+                android:contentDescription="@string/closed_report_photo_description"
+                android:layout_below="@id/image_layout"
+                android:visibility="gone"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="@dimen/report_padding"/>
 
             <LinearLayout
                 android:id="@+id/reporter_name_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/image_layout"
-                android:paddingBottom="@dimen/report_padding"
+                android:layout_below="@+id/ReportImageView"
                 android:orientation="horizontal"
+                android:paddingBottom="@dimen/report_padding"
                 android:textStyle="bold">
 
                 <TextView
@@ -131,9 +143,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1.8"
                     android:gravity="center"
+                    android:hint="@string/reporter_name_hint"
                     android:inputType="textPersonName"
-                    android:singleLine="true"
-                    android:hint="@string/reporter_name_hint"/>
+                    android:singleLine="true" />
             </LinearLayout>
 
             <LinearLayout
@@ -141,8 +153,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/reporter_name_layout"
-                android:paddingBottom="@dimen/report_padding"
                 android:orientation="horizontal"
+                android:paddingBottom="@dimen/report_padding"
                 android:textStyle="bold">
 
                 <TextView
@@ -160,9 +172,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1.8"
                     android:gravity="center"
+                    android:hint="@string/reporter_phone_number_hint"
                     android:inputType="phone"
-                    android:singleLine="true"
-                    android:hint="@string/reporter_phone_number_hint"/>
+                    android:singleLine="true" />
 
             </LinearLayout>
 
@@ -171,8 +183,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/phone_number_layout"
-                android:paddingBottom="@dimen/report_padding"
                 android:orientation="horizontal"
+                android:paddingBottom="@dimen/report_padding"
                 android:textStyle="bold">
 
                 <TextView
@@ -199,8 +211,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/my_location_layout"
-                android:paddingBottom="@dimen/report_padding"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/report_padding">
 
                 <TextView
                     android:layout_width="0dp"
@@ -217,9 +229,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1.8"
                     android:gravity="center"
+                    android:hint="@string/reporter_extra_info_hint"
                     android:inputType="textMultiLine"
-                    android:selectAllOnFocus="false"
-                    android:hint="@string/reporter_extra_info_hint"/>
+                    android:selectAllOnFocus="false" />
             </LinearLayout>
 
         </RelativeLayout>
@@ -228,6 +240,7 @@
 
     <Button
         android:id="@+id/submitReport"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_gravity="center"
@@ -235,7 +248,6 @@
         android:text="@string/button_new_event_more_details_submit"
         android:textColor="@color/backgroundColor"
         android:textSize="24sp"
-        android:textStyle="bold"
-        style="@style/Widget.AppCompat.Button.Colored"/>
+        android:textStyle="bold" />
 
 </LinearLayout>

@@ -3,10 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/backgroundColor"
     android:paddingEnd="@dimen/place_details_list_layout_padding"
     android:paddingStart="@dimen/place_details_list_layout_padding"
     android:paddingTop="@dimen/title_padding"
-    android:background="@color/backgroundColor"
     tools:context="il.ac.tau.cloudweb17a.hasorkim.VeterinaryClinicMoreDetailsActivity">
 
     <ProgressBar
@@ -60,9 +60,9 @@
                         android:layout_weight="1"
                         android:gravity="start"
                         android:text="@string/vet_clinic_address"
+                        android:textColor="@android:color/black"
                         android:textSize="17sp"
-                        android:textStyle="bold"
-                        android:textColor="@android:color/black"/>
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/vet_more_details_address"
@@ -73,7 +73,7 @@
                         android:textDirection="rtl"
                         android:textIsSelectable="true"
                         android:textSize="17sp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -89,9 +89,9 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="@string/vet_clinic_phone_number"
+                        android:textColor="@android:color/black"
                         android:textSize="17sp"
-                        android:textStyle="bold"
-                        android:textColor="@android:color/black"/>
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/vet_more_details_phone_number"
@@ -101,7 +101,7 @@
                         android:selectAllOnFocus="true"
                         android:textIsSelectable="true"
                         android:textSize="17sp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -116,9 +116,9 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="@string/vet_clinic_opening_hours"
+                        android:textColor="@android:color/black"
                         android:textSize="19sp"
-                        android:textStyle="bold"
-                        android:textColor="@android:color/black"/>
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/vet_opening_hours_unknown"
@@ -126,7 +126,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1.7"
                         android:textSize="17sp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -303,6 +303,7 @@
 
                     <Button
                         android:id="@+id/call_button"
+                        style="@style/Widget.AppCompat.Button.Colored"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/vet_list_padding"
@@ -311,13 +312,13 @@
                         android:gravity="center"
                         android:onClick="OnCallButtonClick"
                         android:text="@string/phone_call"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
                         android:textColor="@color/backgroundColor"
-                        style="@style/Widget.AppCompat.Button.Colored"/>
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
                     <Button
                         android:id="@+id/website_button"
+                        style="@style/Widget.AppCompat.Button.Colored"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/vet_list_padding"
@@ -326,13 +327,13 @@
                         android:gravity="center"
                         android:onClick="OnWebsiteButtonClick"
                         android:text="@string/vet_clinic_website"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
                         android:textColor="@color/backgroundColor"
-                        style="@style/Widget.AppCompat.Button.Colored"/>
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
                     <Button
                         android:id="@+id/route_button"
+                        style="@style/Widget.AppCompat.Button.Colored"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -341,10 +342,9 @@
                         android:drawableTop="@drawable/ic_navigation_black_24dp"
                         android:onClick="OnRouteButtonClick"
                         android:text="@string/get_route"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
                         android:textColor="@color/backgroundColor"
-                        style="@style/Widget.AppCompat.Button.Colored"/>
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
                 </LinearLayout>
 
             </RelativeLayout>

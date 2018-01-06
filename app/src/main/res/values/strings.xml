@@ -36,9 +36,9 @@
     <string name="title_activity_veterinay_clinic_more_details">פרטי המרפאה</string>
 
     <string name="action_settings">Settings</string>
-    <string name="addReportPhone">* טלפון</string>
+    <string name="addReportPhone">טלפון *</string>
     <string name="newReportAddInformation">מידע נוסף</string>
-    <string name="NewReportReporterName">* שם המדווח/ת</string>
+    <string name="NewReportReporterName">שם המדווח/ת *</string>
     <string name="newReportMyLocation">המיקום שלי</string>
     <string name="closed_report_details_headline"><u>פרטי הדיווח:</u></string>
     <string name="new_report">דיווח חדש</string>
@@ -106,7 +106,7 @@
     <string name="closed_report_date">תאריך:</string>
     <string name="closed_report_address">כתובת:</string>
     <string name="closed_reports_more_info">מידע נוסף</string>
-    <string name="report_photo_recommended">(מומלץ מאוד)</string>
+    <string name="report_photo_recommended">(מומלץ)</string>
     <string name="reporter_name_hint">יש להכניס שם</string>
     <string name="reporter_phone_number_hint">יש להכניס מספר טלפון</string>
     <string name="reporter_extra_info_hint">ניתן להכניס מידע נוסף</string>
@@ -117,4 +117,5 @@
     <string name="back_report">חזור</string>
     <string name="cancel_dialog_message">אנא הכנס את סיבת הביטול</string>
     <string name="thanks_for_reporting">תודה על הדיווח</string>
+    <string name="no_reports_exists">לא קיימים דיווחים</string>
 </resources>

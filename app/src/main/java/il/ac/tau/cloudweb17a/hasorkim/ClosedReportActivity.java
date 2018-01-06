@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 public class ClosedReportActivity extends AppCompatActivity {
 
     private Report report;
@@ -29,9 +31,8 @@ public class ClosedReportActivity extends AppCompatActivity {
         closedReportStatus.setText(report.statusInHebrew());
 
         if (report.getImageUrl() != null) {
-            bitmap = report.getBitmapFromURL(report.getImageUrl());
             ImageView closedReportImage = findViewById(R.id.closedReportImageView);
-            closedReportImage.setImageBitmap(bitmap);
+            Picasso.with(this).load(report.getImageUrl()).resize(600, 600).centerCrop().into(closedReportImage);
             closedReportImage.setVisibility(View.VISIBLE);
         }
 

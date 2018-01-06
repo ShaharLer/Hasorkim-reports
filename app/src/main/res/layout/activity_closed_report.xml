@@ -30,8 +30,8 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1.5"
-                    android:text="@string/report_details_status"
                     android:gravity="center"
+                    android:text="@string/report_details_status"
                     android:textSize="24sp"
                     android:textStyle="bold" />
 
@@ -47,23 +47,24 @@
 
             <ImageView
                 android:id="@+id/closedReportImageView"
-                android:layout_width="325dp"
-                android:layout_height="250dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/closed_report_status_layout"
                 android:layout_marginTop="@dimen/button_text_size"
                 android:contentDescription="@string/closed_report_photo_description"
-                android:visibility="gone"/>
+                android:visibility="gone"
+                android:layout_centerInParent="true"/>
 
             <TextView
                 android:id="@+id/closed_report_details_headline"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/closedReportImageView"
-                android:layout_marginTop="@dimen/title_padding"
                 android:layout_marginBottom="@dimen/place_details_list_layout_padding"
+                android:layout_marginTop="@dimen/title_padding"
                 android:text="@string/closed_report_details_headline"
-                android:textSize="22sp"
                 android:textColor="@android:color/black"
+                android:textSize="22sp"
                 android:textStyle="bold" />
 
             <LinearLayout

@@ -2,41 +2,34 @@ package il.ac.tau.cloudweb17a.hasorkim;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 
 public class ActiveReportActivity extends AppCompatActivity {
 
-    private LayoutInflater layoutInflater;
-    private ViewGroup thisContainer;
-
-    private PopupWindow popupWindow;
     private Report report;
     private static final String TAG = "Send Report";
+    private Bitmap bitmap;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
-
-        layoutInflater = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
-
 
         setContentView(R.layout.activity_active_report);
 
@@ -59,12 +52,13 @@ public class ActiveReportActivity extends AppCompatActivity {
             linearLayout.setVisibility(LinearLayout.VISIBLE);
             EditText addAnotherPhoneNumber = findViewById(R.id.addAnotherPhoneNumber);
             addAnotherPhoneNumber.setText(report.getExtraPhoneNumber());
-
-
         }
-        //ImageView activeReportImage = (ImageView) findViewById(R.id.activeReportImageView);
-        //bitmap = report.getBitmapFromURL("https://3milliondogs.com/blog-assets-two/2014/02/Fotolia_37994094_Subscription_Monthly_XL.jpg");
-        //activeReportImage.setImageBitmap(bitmap);
+
+        if (report.getImageUrl() != null) {
+            ImageView openReportImage = findViewById(R.id.activeReportImageView);
+            Picasso.with(this).load(report.getImageUrl()).resize(600, 600).centerCrop().into(openReportImage);
+            openReportImage.setVisibility(View.VISIBLE);
+        }
 
         ImageButton addPhoneNumber = findViewById(R.id.addPhoneNumber);
 

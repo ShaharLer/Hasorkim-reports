@@ -30,8 +30,8 @@
             android:scrollbars="vertical" />
 
         <ImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:layout_gravity="center"
             android:contentDescription="@string/icon_of_a_dog"
             android:src="@drawable/dog_icon" />

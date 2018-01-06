@@ -22,4 +22,14 @@
         android:theme="@style/ProgressTheme"
         android:visibility="visible" />
 
+    <TextView
+        style="@style/TextAppearance.AppCompat.Title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="@string/no_reports_exists"
+        android:visibility="gone"
+        android:id="@+id/no_reports"/>
+
 </FrameLayout>

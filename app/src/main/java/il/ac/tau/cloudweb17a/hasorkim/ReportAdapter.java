@@ -90,7 +90,7 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ReportView
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public ReportAdapter(final ProgressBar mProgressBar, final RecyclerView mRecyclerView) {
+    public ReportAdapter() {
 
         DatabaseReference reportsRef = FirebaseDatabase.getInstance().getReference().child("reports");
         Query lastQuery = reportsRef
@@ -105,8 +105,6 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ReportView
                 report.setId(key);
                 mDataset.add(report);
                 Collections.sort(mDataset, new SortbyId());
-                mProgressBar.setVisibility(View.GONE);
-                mRecyclerView.setVisibility(View.VISIBLE);
                 notifyDataSetChanged();
             }
 
@@ -151,6 +149,8 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ReportView
                 // Failed to read value
                 Log.w(TAG, "Failed to read value.", error.toException());
             }
+
+
         });
 
 

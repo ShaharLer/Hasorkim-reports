@@ -7,8 +7,6 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.Matrix;
-import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -19,14 +17,15 @@ import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.io.IOException;
@@ -41,8 +40,6 @@ public class NewEventMoreDetailsRequestActivity extends AppCompatActivity {
     public static final int EXTERNAL_STORAGE_PERMISSION_REQUEST_CODE = 20;
     private static final String TAG = "Send_Report";
 
-    private LayoutInflater layoutInflater;
-    private ViewGroup thisContainer;
     private String address;
     private User user;
     private Report report;
@@ -132,8 +129,7 @@ public class NewEventMoreDetailsRequestActivity extends AppCompatActivity {
                     Intent intent = new Intent(NewEventMoreDetailsRequestActivity.this, ActiveReportActivity.class);
                     intent.putExtra("Report", report);
                     startActivity(intent);
-                }
-                else {
+                } else {
                     if (!phoneError.equals("")) {
                         reporterPhoneNumber.setError(phoneError);
                         reporterPhoneNumber.requestFocus();
@@ -175,7 +171,6 @@ public class NewEventMoreDetailsRequestActivity extends AppCompatActivity {
 
 
     }
-
 
     private void popUpSimilarReport() {
 
@@ -265,40 +260,20 @@ public class NewEventMoreDetailsRequestActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == RESULT_OK) {
+            ImageView image = findViewById(R.id.ReportImageView);
+
             if (requestCode == PHOTO_INTENT_REQUEST_CODE) {
                 Uri photoUri = data.getData();
-                ImageButton imageButton = thisContainer.findViewById(R.id.imageButtonReport);
-                imageButton.setImageURI(photoUri);
+                Picasso.with(this).load(photoUri).resize(30, 30).centerCrop().into(image);
+                image.setVisibility(View.VISIBLE);
             }
             if (requestCode == REQUEST_TAKE_PHOTO) {
-
-                //BitmapFactory.Options bmOptions = new BitmapFactory.Options();
-                //bmOptions.inJustDecodeBounds = true;
-
-                //BitmapFactory.decodeFile(mCurrentPhotoPath);
-                //int photoW = bmOptions.outWidth;
-                //int photoH = bmOptions.outHeight;
-                // Determine how much to scale down the image
-                //int scaleFactor = Math.min(photoW/targetW, photoH/targetH);
-
-                // Decode the image file into a Bitmap sized to fill the View
-                //bmOptions.inJustDecodeBounds = false;
-                //bmOptions.inSampleSize = scaleFactor;
-                //bmOptions.inPurgeable = true;
-
-                Bitmap imageBitmap = BitmapFactory.decodeFile(mCurrentPhotoPath);
-
-                Matrix m = new Matrix();
-                m.preScale(-1, 1);
-                Bitmap flippedBitmap = Bitmap.createBitmap(imageBitmap, 0, 0, imageBitmap.getWidth(), imageBitmap.getHeight(), m, false);
-
-
-                ImageButton imb = findViewById(R.id.imageButtonReport);
-                imb.setBackground(new BitmapDrawable(getResources(), flippedBitmap));
-                bitmap = flippedBitmap;
+                Picasso.with(this).load("file://" + mCurrentPhotoPath).resize(30, 30).centerCrop().into(image);
+                image.setVisibility(View.VISIBLE);
 
             }
 
+            bitmap = BitmapFactory.decodeFile(mCurrentPhotoPath);
         }
     }
 
