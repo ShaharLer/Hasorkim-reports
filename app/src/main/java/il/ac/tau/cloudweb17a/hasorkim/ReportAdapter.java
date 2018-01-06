@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.firebase.database.ChildEventListener;
@@ -22,14 +23,10 @@ import java.util.Comparator;
 
 import static il.ac.tau.cloudweb17a.hasorkim.User.getUserWOContext;
 
-/**
- * Created by hen on 18/12/2017.
- */
 
 public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ReportViewHolder> {
-    private ArrayList<Report> mDataset= new ArrayList<>();
-    final String TAG = "ReportAdapter";
-
+    private ArrayList<Report> mDataset = new ArrayList<>();
+    final String TAG = ReportAdapter.class.getSimpleName();
 
 
     // Provide a reference to the views for each data item
@@ -37,10 +34,10 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ReportView
     // you provide access to all the views for a data item in a view holder
 
     public static class ReportViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        public final TextView StatusView;
-        public final TextView AddressView;
-        public final TextView dateView;
-        public final TextView timeView;
+        final TextView StatusView;
+        final TextView AddressView;
+        final TextView dateView;
+        final TextView timeView;
         final String TAG = "ViewHolder";
         private Report mReport;
         private Context context;
@@ -75,8 +72,8 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ReportView
             AddressView.setText(report.getAddress());
 
             String reportTime = report.getStartTimeAsString();
-            String date = reportTime.substring(6,reportTime.length());
-            String time = reportTime.substring(0,5);
+            String date = reportTime.substring(6, reportTime.length());
+            String time = reportTime.substring(0, 5);
             dateView.setText(date);
             timeView.setText(time);
         }
@@ -84,23 +81,22 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ReportView
     }
 
 
-    class SortbyId implements Comparator<Report>
-    {
+    class SortbyId implements Comparator<Report> {
         // Used for sorting in ascending order of
         // roll number
-        public int compare(Report a, Report b)
-        {
+        public int compare(Report a, Report b) {
             return (int) (a.getStartTime() - b.getStartTime());
         }
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public ReportAdapter() {
+    public ReportAdapter(final ProgressBar mProgressBar, final RecyclerView mRecyclerView) {
+
         DatabaseReference reportsRef = FirebaseDatabase.getInstance().getReference().child("reports");
         Query lastQuery = reportsRef
                 .orderByChild("userId").equalTo(getUserWOContext().getId());
-                //.orderByChild("startTime")
-                //.limitToLast(10);
+        //.orderByChild("startTime")
+        //.limitToLast(10);
         lastQuery.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String previousChildName) {
@@ -109,6 +105,8 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ReportView
                 report.setId(key);
                 mDataset.add(report);
                 Collections.sort(mDataset, new SortbyId());
+                mProgressBar.setVisibility(View.GONE);
+                mRecyclerView.setVisibility(View.VISIBLE);
                 notifyDataSetChanged();
             }
 
@@ -124,17 +122,16 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ReportView
                 //looking for report to update
                 int index = -1;
                 for (int i = 0; i < mDataset.size(); i++) {
-                    if (mDataset.get(i)!=null&&mDataset.get(i).getId()!=null&&mDataset.get(i).getId().equals(key)) {
+                    if (mDataset.get(i) != null && mDataset.get(i).getId() != null && mDataset.get(i).getId().equals(key)) {
                         index = i;
                     }
                 }
 
                 //updating
-                if (index != -1){
+                if (index != -1) {
                     mDataset.set(index, report);
                     notifyDataSetChanged();
-                }
-                else{
+                } else {
                     Log.w(TAG, "Failed to find value in local report list");
                 }
 
@@ -157,12 +154,11 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ReportView
         });
 
 
-
     }
 
     // Create new views (invoked by the layout manager)
     @Override
-    public ReportViewHolder onCreateViewHolder(ViewGroup parent,int viewType) {
+    public ReportViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         // create a new view
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.report_list_item, parent, false);
@@ -178,7 +174,6 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ReportView
     public void onBindViewHolder(ReportViewHolder holder, int position) {
         holder.bindReport(mDataset.get(position));
     }
-
 
 
     @Override

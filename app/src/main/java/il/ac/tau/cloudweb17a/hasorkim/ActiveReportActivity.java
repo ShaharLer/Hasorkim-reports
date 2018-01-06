@@ -1,11 +1,13 @@
 package il.ac.tau.cloudweb17a.hasorkim;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -86,18 +88,16 @@ public class ActiveReportActivity extends AppCompatActivity {
                 TextView extraPhoneNumber = findViewById(R.id.addAnotherPhoneNumber);
                 String extraPhoneNumberString = extraPhoneNumber.getText().toString();
                 String error = report.validatePhone(extraPhoneNumberString);
-                if (error.equals("")){
+                if (error.equals("")) {
                     report.setExtraPhoneNumber(extraPhoneNumberString);
                     report.reportUpdateExtraPhoneNumber();
 
                     Drawable myIcon = getResources().getDrawable(R.drawable.ic_done_24pp);
                     myIcon.setBounds(0, 0, myIcon.getIntrinsicWidth(), myIcon.getIntrinsicHeight());
                     extraPhoneNumber.setError("הטלפון נשמר", myIcon);
-                }
-                else{
+                } else {
                     extraPhoneNumber.setError(error);
                 }
-
 
 
             }
@@ -110,31 +110,36 @@ public class ActiveReportActivity extends AppCompatActivity {
         cancelReportButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //layoutInflater = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
-                final ViewGroup popupContainer = (ViewGroup) layoutInflater.inflate(R.layout.cancel_report_pop, null);
-                LinearLayout activity_active_report =  (LinearLayout) findViewById(R.id.activity_active_report);
 
-                popupWindow = new PopupWindow(popupContainer, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
-                popupWindow.showAtLocation(activity_active_report, Gravity.NO_GRAVITY, 140, 700);
-                //activity_active_report.setAlpha(0.5F);
-                //container.getBackground().setAlpha(120);
-                //container.setBackgroundColor(Color.GRAY);
+                TextView title = new TextView(ActiveReportActivity.this);
+                final EditText editText = new EditText(ActiveReportActivity.this);
 
-                Button confirmCancelReportButton = popupContainer.findViewById(R.id.confirmCancelReport);
-                confirmCancelReportButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        TextView cancelReport = (TextView) popupContainer.findViewById(R.id.cancelReportText);
-                        String cancelReportText = cancelReport.getText().toString();
+                title.setText(R.string.cancel_dialog_title);
+                title.setPadding(10, 50, 64, 9);
+                title.setTextColor(Color.BLACK);
+                title.setTextSize(20);
+                title.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
 
-                        report.reportUpdateCancellationText(cancelReportText);
-                        report.reportUpdateCancellationUserType();
-                        report.reportUpdateStatus("CANCELED");
+                new AlertDialog.Builder(ActiveReportActivity.this)
+                        .setMessage(R.string.cancel_dialog_message)
+                        .setCustomTitle(title)
+                        .setView(editText)
+                        .setPositiveButton(R.string.cancel_report, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                String cancelReportText = editText.getText().toString();
 
-                        Intent intent = new Intent(ActiveReportActivity.this, ReportListActivity.class);
-                        ActiveReportActivity.this.startActivity(intent);
-                    }
-                });
+                                report.reportUpdateCancellationText(cancelReportText);
+                                report.reportUpdateCancellationUserType();
+                                report.reportUpdateStatus("CANCELED");
+
+                                startActivity(new Intent(ActiveReportActivity.this, ReportListActivity.class));
+                            }
+                        })
+                        .setNegativeButton(R.string.back_report, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                            }
+                        })
+                        .create().show();
             }
         });
 
@@ -143,20 +148,15 @@ public class ActiveReportActivity extends AppCompatActivity {
         whatNowInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ViewGroup container = (ViewGroup) layoutInflater.inflate(R.layout.what_now_pop, null);
-                LinearLayout activity_active_report =  (LinearLayout) findViewById(R.id.activity_active_report);
+                AlertDialog.Builder builder = new AlertDialog.Builder(ActiveReportActivity.this);
+                LayoutInflater inflater = ActiveReportActivity.this.getLayoutInflater();
 
-                popupWindow = new PopupWindow(container, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
-                popupWindow.showAtLocation(activity_active_report, Gravity.NO_GRAVITY, 120, 400);
+                // Inflate and set the layout for the dialog
+                // Pass null as the parent view because its going in the dialog layout
+                builder.setView(inflater.inflate(R.layout.what_now_pop, null));
+                builder.setTitle(R.string.thanks_for_reporting);
+                builder.create().show();
 
-                Button confirmCancelReportButton = container.findViewById(R.id.whatNowgoToReportList);
-                confirmCancelReportButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Intent intent = new Intent(ActiveReportActivity.this, ReportListActivity.class);
-                        ActiveReportActivity.this.startActivity(intent);
-                    }
-                });
             }
         });
     }

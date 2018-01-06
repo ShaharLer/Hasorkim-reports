@@ -29,30 +29,45 @@
         <activity
             android:name=".VetListActivity"
             android:label="@string/title_activity_vet_list"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".MapsActivity" />
+            android:parentActivityName=".MapsActivity"
+            android:screenOrientation="portrait" />
 
         <activity
             android:name=".VeterinaryClinicMoreDetailsActivity"
             android:label="@string/title_activity_veterinay_clinic_more_details"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
 
         <activity
             android:name=".WhoWeAreActivity"
             android:label="מי אנחנו"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".MapsActivity"/>
+            android:parentActivityName=".MapsActivity"
+            android:screenOrientation="portrait" />
 
         <activity
             android:name=".NewEventMoreDetailsRequestActivity"
             android:label="@string/title_more_details_request"
-            android:windowSoftInputMode="stateHidden" />
+            android:parentActivityName=".MapsActivity"
+            android:windowSoftInputMode="stateHidden">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="il.ac.tau.cloudweb17a.hasorkim.MapsActivity" />
+        </activity>
         <activity
             android:name=".ActiveReportActivity"
-            android:label="דיווח פעיל" />
+            android:label="דיווח פעיל"
+            android:parentActivityName=".ReportListActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="il.ac.tau.cloudweb17a.hasorkim.ReportListActivity" />
+        </activity>
         <activity
             android:name=".ReportListActivity"
-            android:label="@string/my_reports" />
+            android:label="@string/my_reports"
+            android:parentActivityName=".MapsActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="il.ac.tau.cloudweb17a.hasorkim.MapsActivity" />
+        </activity>
         <activity
             android:name=".VetListMapActivity"
             android:label="@string/title_activity_vet_list" />

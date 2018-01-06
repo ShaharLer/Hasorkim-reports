@@ -9,6 +9,7 @@ exports.notifyReporterStatusChanged = functions.database.ref('/reports/{report}'
 
     const oldStatus = event.data.previous.val().status;
     const newStatus = event.data.val().status;
+    const address = event.data.val().address;
     const userId = event.data.previous.val().userId;
 
     if (!oldStatus || !newStatus || oldStatus == newStatus) {
@@ -20,8 +21,8 @@ exports.notifyReporterStatusChanged = functions.database.ref('/reports/{report}'
     // Notification details.
     const payload = {
         data: {
-            title: 'סטטוס הדיווח השתנה',
-            body: `סטטוס ישן: ${oldStatus}, סטטוס חדש: ${newStatus}`,
+            title: `סטטוס הדיווח ברחוב ${address} השתנה`,
+            body: `סטטוס קודם: ${oldStatus}, סטטוס עדכני: ${newStatus}`,
         }
     };
 
