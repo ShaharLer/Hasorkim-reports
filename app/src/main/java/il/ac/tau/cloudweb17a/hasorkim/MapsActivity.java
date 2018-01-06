@@ -46,6 +46,8 @@ import com.google.android.gms.tasks.Task;
 
 import java.util.Locale;
 
+import static il.ac.tau.cloudweb17a.hasorkim.User.getUser;
+
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnCameraIdleListener, View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
 
     private static final String TAG = MapsActivity.class.getSimpleName();
@@ -100,8 +102,12 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         // Retrieve the content view that renders the map.
         setContentView(R.layout.activity_maps);
 
+
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -112,6 +118,13 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        /*if(getUser(getApplicationContext()).getMyLastOpenReport()!=null){
+            navigationView.getMenu().findItem(R.id.nav_my_last_open_report).setVisible(true);
+        }
+        else{
+            navigationView.getMenu().findItem(R.id.nav_my_last_open_report).setVisible(false);
+        }*/
+        navigationView.getMenu().findItem(R.id.nav_my_last_open_report).setVisible(true);
 
         // Retrieve location and camera position from saved instance state.
         if (savedInstanceState != null) {
@@ -447,7 +460,12 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             Intent vet_intent = new Intent(this, VetListActivity.class);
             vet_intent.putExtra("from", "menu");
             startActivity(vet_intent);
-
+        } else if (id == R.id. nav_my_last_open_report) {
+            if(getUser(getApplicationContext()).getMyLastOpenReport()!=null){
+                Intent active_report_intent = new Intent(this, ActiveReportActivity.class);
+                active_report_intent.putExtra("Report", getUser(getApplicationContext()).getMyLastOpenReport());
+                startActivity(active_report_intent);
+            }
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {

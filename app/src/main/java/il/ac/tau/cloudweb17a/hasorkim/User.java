@@ -19,6 +19,7 @@ public class User {
     private Context applicationContext;
     public static final String USER_NAME = "USER_NAME";
     public static final String USER_PHONE_NUMBER = "USER_PHONE_NUMBER";
+    public Report myLastOpenReport=null;
 
 
 
@@ -64,4 +65,14 @@ public class User {
     public static User getUserWOContext(){
         return user;
     }
+
+    public Report getMyLastOpenReport(){
+        return myLastOpenReport;
+    }
+
+
+    public void setMyLastOpenReport(Report myLastOpenReport) {
+        this.myLastOpenReport = myLastOpenReport;
+    }
+
 }
