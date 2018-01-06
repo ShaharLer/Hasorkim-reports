@@ -111,6 +111,7 @@
     <string name="reporter_phone_number_hint">יש להכניס מספר טלפון</string>
     <string name="reporter_extra_info_hint">ניתן להכניס מידע נוסף</string>
     <string name="closed_by">נסגר על ידי:</string>
+    <string name="my_last_open_report">חזור לבקשה</string>
     <string name="cancel_dialog_title">ביטול הדיווח</string>
     <string name="cancel_report">בטל דיווח</string>
     <string name="back_report">חזור</string>

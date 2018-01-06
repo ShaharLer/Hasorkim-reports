@@ -116,6 +116,16 @@
         <activity
             android:name=".ClosedReportActivity"
             android:label="דיווח לא פעיל" />
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="il.ac.tau.cloudweb17a.hasorkim.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
     </application>
 
 </manifest>

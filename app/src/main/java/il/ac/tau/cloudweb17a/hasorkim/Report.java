@@ -33,6 +33,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+import static il.ac.tau.cloudweb17a.hasorkim.User.getUserWOContext;
+
 public class Report implements  java.io.Serializable{
 
 
@@ -385,6 +387,9 @@ public class Report implements  java.io.Serializable{
     }
 
     public void saveReport(Bitmap bitmap){
+
+        final Report report =this;
+
         if(bitmap !=null) {
             StorageReference imagesRef = FirebaseStorage.getInstance().getReference().child("images");
             String fileName = getUserId()+"_"+String.valueOf(new Date().getTime());
@@ -407,11 +412,14 @@ public class Report implements  java.io.Serializable{
                     Uri downloadUrl = taskSnapshot.getDownloadUrl();
                     imageUrl = downloadUrl.toString();
                     persistReport();
+                    getUserWOContext().setMyLastOpenReport(report);
                 }
             });
         }
-        else
+        else {
             persistReport();
+            getUserWOContext().setMyLastOpenReport(this);
+        }
 
     }
 

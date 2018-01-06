@@ -12,6 +12,12 @@
             android:id="@+id/nav_nearby_vet"
             android:icon="@drawable/ic_local_hospital_black_24dp"
             android:title="@string/nearby_vet" />
+
+        <item
+            android:id="@+id/nav_my_last_open_report"
+            android:icon="@drawable/ic_content_paste_black_24dp"
+            android:title="@string/my_last_open_report"
+            android:visible="false" />
     </group>
 
     <item android:title="@string/Community">
