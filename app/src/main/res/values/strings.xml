@@ -40,7 +40,7 @@
     <string name="newReportAddInformation">מידע נוסף</string>
     <string name="NewReportReporterName">* שם המדווח/ת</string>
     <string name="newReportMyLocation">המיקום שלי</string>
-    <string name="closed_report_details_headline"><u>פרטי הדוח:</u></string>
+    <string name="closed_report_details_headline"><u>פרטי הדיווח:</u></string>
     <string name="new_report">דיווח חדש</string>
     <string name="address_not_found">Address not found</string>
     <string name="icon_of_a_dog">Icon of a dog</string>
@@ -94,7 +94,7 @@
     <string name="facebook_app_id">537334766627732</string>
     <string name="report_address">כתובת:</string>
     <string name="time_of_report">זמן הדיווח:</string>
-    <string name="report_details_status">סטטוס:</string>
+    <string name="report_details_status"><u>סטטוס</u></string>
     <string name="active_report_address">כתובת</string>
     <string name="active_report_phone">טלפון</string>
     <string name="active_report_extra_phone">טלפון נוסף</string>
@@ -104,9 +104,10 @@
     <string name="closed_report_photo">תמונה</string>
     <string name="closed_report_date">תאריך:</string>
     <string name="closed_report_address">כתובת:</string>
-    <string name="closed_reports_comments">הערות:</string>
+    <string name="closed_reports_more_info">מידע נוסף</string>
     <string name="report_photo_recommended">(מומלץ מאוד)</string>
     <string name="reporter_name_hint">יש להכניס שם</string>
     <string name="reporter_phone_number_hint">יש להכניס מספר טלפון</string>
     <string name="reporter_extra_info_hint">ניתן להכניס מידע נוסף</string>
+    <string name="closed_by">נסגר על ידי:</string>
 </resources>

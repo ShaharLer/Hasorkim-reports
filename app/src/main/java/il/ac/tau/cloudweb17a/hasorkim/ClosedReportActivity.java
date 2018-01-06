@@ -29,11 +29,9 @@ public class ClosedReportActivity extends AppCompatActivity {
         closedReportStatus.setText(report.statusInHebrew());
 
         if (report.getImageUrl() != null) {
-            //TextView imageHeadline= findViewById(R.id.closed_report_image_headline);
             bitmap = report.getBitmapFromURL(report.getImageUrl());
             ImageView closedReportImage = findViewById(R.id.closedReportImageView);
             closedReportImage.setImageBitmap(bitmap);
-            //imageHeadline.setVisibility(View.VISIBLE);
             closedReportImage.setVisibility(View.VISIBLE);
         }
 
@@ -46,15 +44,20 @@ public class ClosedReportActivity extends AppCompatActivity {
         TextView closedReportLocation = findViewById(R.id.closedReportLocation);
         closedReportLocation.setText(report.getAddress());
 
-        TextView closedReportCancellationUserType = findViewById(R.id.closed_report_cancellation_user_type);
-        closedReportCancellationUserType.setText(report.getCancellationUserType());
+        String canceller = report.getCancellationUserType();
+        if ((canceller != null) && (!canceller.isEmpty())) {
+            TextView closedReportCancellationUserType = findViewById(R.id.closed_report_cancellation_user_type);
+            closedReportCancellationUserType.setText(report.getCancellationUserType());
+            LinearLayout closedByLayout = findViewById(R.id.report_closed_by);
+            closedByLayout.setVisibility(View.VISIBLE);
+        }
 
         String comments = report.getFreeText();
-        if (comments != null) {
-            LinearLayout commentsLayout = findViewById(R.id.comments_layout);
+        if ((comments != null) && (!comments.isEmpty())) {
             TextView closedReportExtraText = findViewById(R.id.closedReportExtraText);
             closedReportExtraText.setText(report.getFreeText());
-            commentsLayout.setVisibility(View.VISIBLE);
+            LinearLayout moreInfoLayout = findViewById(R.id.closed_report_more_info_layout);
+            moreInfoLayout.setVisibility(View.VISIBLE);
         }
     }
 }

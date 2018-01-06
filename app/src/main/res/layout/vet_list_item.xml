@@ -15,7 +15,7 @@
         android:layout_gravity="start"
         android:textSize="17sp"
         android:textStyle="bold"
-        android:paddingBottom="@dimen/details_buttons_padding"/>
+        android:paddingBottom="@dimen/vet_clinic_name_padding"/>
 
     <LinearLayout
         android:layout_width="match_parent"

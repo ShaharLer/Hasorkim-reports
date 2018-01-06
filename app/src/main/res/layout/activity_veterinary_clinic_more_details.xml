@@ -61,7 +61,8 @@
                         android:gravity="start"
                         android:text="@string/vet_clinic_address"
                         android:textSize="17sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:textColor="@android:color/black"/>
 
                     <TextView
                         android:id="@+id/vet_more_details_address"
@@ -71,7 +72,8 @@
                         android:selectAllOnFocus="true"
                         android:textDirection="rtl"
                         android:textIsSelectable="true"
-                        android:textSize="17sp" />
+                        android:textSize="17sp"
+                        android:textStyle="bold"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -88,7 +90,8 @@
                         android:layout_weight="1"
                         android:text="@string/vet_clinic_phone_number"
                         android:textSize="17sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:textColor="@android:color/black"/>
 
                     <TextView
                         android:id="@+id/vet_more_details_phone_number"
@@ -97,7 +100,8 @@
                         android:layout_weight="4.5"
                         android:selectAllOnFocus="true"
                         android:textIsSelectable="true"
-                        android:textSize="17sp" />
+                        android:textSize="17sp"
+                        android:textStyle="bold"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -113,14 +117,15 @@
                         android:layout_weight="1"
                         android:text="@string/vet_clinic_opening_hours"
                         android:textSize="19sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:textColor="@android:color/black"/>
 
                     <TextView
                         android:id="@+id/vet_opening_hours_unknown"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1.7"
-                        android:textSize="18sp" />
+                        android:textSize="17sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -143,8 +148,8 @@
                         android:id="@+id/vet_opening_hours_sunday"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="2.5"
-                        android:textSize="17sp" />
+                        android:layout_weight="2.2"
+                        android:textSize="18sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -159,15 +164,15 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:textSize="18sp"
+                        android:textSize="17sp"
                         android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/vet_opening_hours_monday"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="2.5"
-                        android:textSize="17sp" />
+                        android:layout_weight="2.2"
+                        android:textSize="18sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -182,15 +187,15 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:textSize="18sp"
+                        android:textSize="17sp"
                         android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/vet_opening_hours_tuesday"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="2.5"
-                        android:textSize="17sp" />
+                        android:layout_weight="2.2"
+                        android:textSize="18sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -205,15 +210,15 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:textSize="18sp"
+                        android:textSize="17sp"
                         android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/vet_opening_hours_wednesday"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="2.5"
-                        android:textSize="17sp" />
+                        android:layout_weight="2.2"
+                        android:textSize="18sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -228,15 +233,15 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:textSize="18sp"
+                        android:textSize="17sp"
                         android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/vet_opening_hours_thursday"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="2.5"
-                        android:textSize="17sp" />
+                        android:layout_weight="2.2"
+                        android:textSize="18sp" />
                 </LinearLayout>
 
 
@@ -252,15 +257,15 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:textSize="18sp"
+                        android:textSize="17sp"
                         android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/vet_opening_hours_friday"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="2.5"
-                        android:textSize="17sp" />
+                        android:layout_weight="2.2"
+                        android:textSize="18sp" />
                 </LinearLayout>
 
 
@@ -276,15 +281,15 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:textSize="18sp"
+                        android:textSize="17sp"
                         android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/vet_opening_hours_saturday"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="2.5"
-                        android:textSize="17sp" />
+                        android:layout_weight="2.2"
+                        android:textSize="18sp" />
                 </LinearLayout>
 
                 <LinearLayout

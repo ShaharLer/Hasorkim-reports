@@ -1,13 +1,10 @@
 package il.ac.tau.cloudweb17a.hasorkim;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Layout;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,11 +46,11 @@ public class ActiveReportActivity extends AppCompatActivity {
         //TextView activeReportExtraText = (TextView) findViewById(R.id.activeReportExtraText);
         //activeReportExtraText.setText((CharSequence) report.getFreeText());
 
-        //TextView activeReportPhoneNumber = findViewById(R.id.activeReportPhoneNumber);
-        //activeReportPhoneNumber.setText(report.getPhoneNumber());
+        TextView activeReportPhoneNumber = findViewById(R.id.activeReportPhoneNumber);
+        activeReportPhoneNumber.setText(report.getPhoneNumber());
 
-        //TextView activeReportLocation = findViewById(R.id.activeReportLocation);
-        //activeReportLocation.setText(report.getAddress());
+        TextView activeReportLocation = findViewById(R.id.activeReportLocation);
+        activeReportLocation.setText(report.getAddress());
 
         if (report.getExtraPhoneNumber() != null) {
             LinearLayout linearLayout = findViewById(R.id.addAnotherPhoneLinearLayout);
