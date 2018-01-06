@@ -118,4 +118,5 @@
     <string name="cancel_dialog_message">אנא הכנס את סיבת הביטול</string>
     <string name="thanks_for_reporting">תודה על הדיווח</string>
     <string name="no_reports_exists">לא קיימים דיווחים</string>
+    <string name="who_we_are_headline">מי אנחנו</string>
 </resources>
