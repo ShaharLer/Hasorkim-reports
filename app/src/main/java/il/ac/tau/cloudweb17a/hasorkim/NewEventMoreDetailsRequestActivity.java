@@ -264,11 +264,11 @@ public class NewEventMoreDetailsRequestActivity extends AppCompatActivity {
 
             if (requestCode == PHOTO_INTENT_REQUEST_CODE) {
                 Uri photoUri = data.getData();
-                Picasso.with(this).load(photoUri).resize(30, 30).centerCrop().into(image);
+                Picasso.with(this).load(photoUri).resize(600, 600).centerCrop().into(image);
                 image.setVisibility(View.VISIBLE);
             }
             if (requestCode == REQUEST_TAKE_PHOTO) {
-                Picasso.with(this).load("file://" + mCurrentPhotoPath).resize(30, 30).centerCrop().into(image);
+                Picasso.with(this).load("file://" + mCurrentPhotoPath).resize(600, 600).centerCrop().into(image);
                 image.setVisibility(View.VISIBLE);
 
             }
