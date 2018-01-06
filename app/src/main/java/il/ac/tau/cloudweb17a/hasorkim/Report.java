@@ -368,7 +368,7 @@ public class Report implements  java.io.Serializable{
 
     public void saveReport(Bitmap bitmap){
 
-        final Report report =this;
+        final Report report = this;
 
         if(bitmap !=null) {
             StorageReference imagesRef = FirebaseStorage.getInstance().getReference().child("images");

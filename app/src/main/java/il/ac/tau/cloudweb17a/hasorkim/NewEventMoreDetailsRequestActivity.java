@@ -43,7 +43,6 @@ public class NewEventMoreDetailsRequestActivity extends AppCompatActivity {
     private String address;
     private User user;
     private Report report;
-    private Bitmap bitmap;
 
     private static final double DEFAULT_LATITUDE = 32.0820748;  // TODO handle this
     private static final double DEFAULT_LONGITUDE = 34.7717487; // TODO handle this
@@ -125,7 +124,7 @@ public class NewEventMoreDetailsRequestActivity extends AppCompatActivity {
                         return;
                     }
 
-                    report.saveReport(bitmap);
+                    report.saveReport(BitmapFactory.decodeFile(mCurrentPhotoPath));
                     Intent intent = new Intent(NewEventMoreDetailsRequestActivity.this, ActiveReportActivity.class);
                     intent.putExtra("Report", report);
                     startActivity(intent);
@@ -159,7 +158,7 @@ public class NewEventMoreDetailsRequestActivity extends AppCompatActivity {
                 //.setTitle(R.string.not_checked_dialog_title)
                 .setPositiveButton(R.string.ok_not_checked, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        report.saveReport(bitmap);
+                        report.saveReport(BitmapFactory.decodeFile(mCurrentPhotoPath));
                         Intent intent = new Intent(NewEventMoreDetailsRequestActivity.this, ActiveReportActivity.class);
                         intent.putExtra("Report", report);
                         startActivity(intent);
@@ -191,7 +190,7 @@ public class NewEventMoreDetailsRequestActivity extends AppCompatActivity {
                         if (!cb.isChecked()) {
                             popUpNotChecked();
                         } else {
-                            report.saveReport(bitmap);
+                            report.saveReport(BitmapFactory.decodeFile(mCurrentPhotoPath));
                             Intent intent = new Intent(NewEventMoreDetailsRequestActivity.this, ActiveReportActivity.class);
                             intent.putExtra("Report", report);
                             startActivity(intent);
@@ -272,8 +271,6 @@ public class NewEventMoreDetailsRequestActivity extends AppCompatActivity {
                 image.setVisibility(View.VISIBLE);
 
             }
-
-            bitmap = BitmapFactory.decodeFile(mCurrentPhotoPath);
         }
     }
 

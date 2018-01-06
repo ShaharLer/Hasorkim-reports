@@ -154,8 +154,6 @@ public class ActiveReportActivity extends AppCompatActivity {
             }
         });
     }
-
-
 }
 
 
