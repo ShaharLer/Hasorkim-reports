@@ -3,7 +3,6 @@ package il.ac.tau.cloudweb17a.hasorkim;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.res.Configuration;
 import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
@@ -43,8 +42,6 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-
-import java.util.Locale;
 
 import static il.ac.tau.cloudweb17a.hasorkim.User.getUser;
 
@@ -97,10 +94,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         setContentView(R.layout.activity_maps);
 
 
-
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
 
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -454,8 +449,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             Intent vet_intent = new Intent(this, VetListActivity.class);
             vet_intent.putExtra("from", "menu");
             startActivity(vet_intent);
-        } else if (id == R.id. nav_my_last_open_report) {
-            if(getUser(getApplicationContext()).getMyLastOpenReport()!=null){
+        } else if (id == R.id.nav_my_last_open_report) {
+            if (getUser(getApplicationContext()).getMyLastOpenReport() != null) {
                 Intent active_report_intent = new Intent(this, ActiveReportActivity.class);
                 active_report_intent.putExtra("Report", getUser(getApplicationContext()).getMyLastOpenReport());
                 startActivity(active_report_intent);
@@ -465,6 +460,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         } else if (id == R.id.nav_send) {
             Intent who_we_are_intent = new Intent(this, WhoWeAreActivity.class);
             startActivity(who_we_are_intent);
+        } else if (id == R.id.nav_settings) {
+            startActivity(new Intent(this, SettingsActivity.class));
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

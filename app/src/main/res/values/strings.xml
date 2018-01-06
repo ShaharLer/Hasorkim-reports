@@ -119,4 +119,5 @@
     <string name="thanks_for_reporting">תודה על הדיווח</string>
     <string name="no_reports_exists">לא קיימים דיווחים</string>
     <string name="who_we_are_headline">מי אנחנו</string>
+    <string name="setting">הגדרות</string>
 </resources>

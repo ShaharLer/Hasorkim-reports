@@ -2,12 +2,10 @@ package il.ac.tau.cloudweb17a.hasorkim;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 
 import com.google.firebase.iid.FirebaseInstanceId;
 
-/**
- * Created by hen on 30/12/2017.
- */
 
 public class User {
 
@@ -16,19 +14,17 @@ public class User {
     private String id;
     private String name;
     private String phoneNumber;
-    private Context applicationContext;
-    public static final String USER_NAME = "USER_NAME";
-    public static final String USER_PHONE_NUMBER = "USER_PHONE_NUMBER";
+    private SharedPreferences prefs;
+    public static final String USER_NAME = "display_name";
+    public static final String USER_PHONE_NUMBER = "phone_number";
     public Report myLastOpenReport=null;
 
 
-
-
     private User(Context applicationContext){
-        this.applicationContext=applicationContext;
+        this.prefs = PreferenceManager.getDefaultSharedPreferences(applicationContext);
         this.id= FirebaseInstanceId.getInstance().getToken();
-        this.name = applicationContext.getSharedPreferences(USER_NAME, Context.MODE_PRIVATE).getString(USER_NAME, null);
-        this.phoneNumber=applicationContext.getSharedPreferences(USER_PHONE_NUMBER, Context.MODE_PRIVATE).getString(USER_PHONE_NUMBER, null);
+        this.name = prefs.getString(USER_NAME, null);
+        this.phoneNumber=prefs.getString(USER_PHONE_NUMBER, null);
     }
 
     public String getId() {
@@ -42,14 +38,14 @@ public class User {
     }
 
     public void setName(String name) {
-        SharedPreferences.Editor editor = applicationContext.getSharedPreferences(USER_NAME, Context.MODE_PRIVATE).edit();
+        SharedPreferences.Editor editor = this.prefs.edit();
         editor.putString(USER_NAME, name);
         editor.apply();
         this.name=name;
     }
 
     public void setPhoneNumber(String number) {
-        SharedPreferences.Editor editor = applicationContext.getSharedPreferences(USER_PHONE_NUMBER, Context.MODE_PRIVATE).edit();
+        SharedPreferences.Editor editor = this.prefs.edit();
         editor.putString(USER_PHONE_NUMBER, number);
         editor.apply();
         this.phoneNumber=number;
