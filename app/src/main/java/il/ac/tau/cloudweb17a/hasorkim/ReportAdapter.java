@@ -7,7 +7,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.firebase.database.ChildEventListener;
@@ -16,6 +15,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -97,6 +97,19 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ReportView
                 .orderByChild("userId").equalTo(getUserWOContext().getId());
         //.orderByChild("startTime")
         //.limitToLast(10);
+        lastQuery.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.getChildrenCount()==0){
+                    ReportListActivity.changeUI();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
         lastQuery.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String previousChildName) {
@@ -105,6 +118,7 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ReportView
                 report.setId(key);
                 mDataset.add(report);
                 Collections.sort(mDataset, new SortbyId());
+                ReportListActivity.changeUI();
                 notifyDataSetChanged();
             }
 
@@ -143,14 +157,11 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ReportView
             public void onChildMoved(DataSnapshot dataSnapshot, String previousChildName) {
             }
 
-
             @Override
             public void onCancelled(DatabaseError error) {
                 // Failed to read value
                 Log.w(TAG, "Failed to read value.", error.toException());
             }
-
-
         });
 
 

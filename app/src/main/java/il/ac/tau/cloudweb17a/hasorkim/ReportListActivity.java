@@ -12,9 +12,10 @@ import android.widget.TextView;
 
 public class ReportListActivity extends AppCompatActivity {
     final String TAG = "ReportListActivity";
-    ProgressBar mProgressBar;
-    RecyclerView mRecyclerView;
-    TextView mNoReports;
+    private static ProgressBar mProgressBar;
+    private static RecyclerView mRecyclerView;
+    private static TextView mNoReports;
+    private static RecyclerView.Adapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,16 +38,24 @@ public class ReportListActivity extends AppCompatActivity {
         //setting up a user object for the list
         User.getUser(getApplicationContext());
 
-        RecyclerView.Adapter mAdapter = new ReportAdapter();
+        mAdapter = new ReportAdapter();
         //RecyclerView.Adapter mAdapter = new ReportAdapter(FirebaseDatabase.getInstance().getReference().child("reports").limitToLast(70)); TODO delete after debug
         //mRecyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL)); TODO delete this after debug
         mRecyclerView.setAdapter(mAdapter);
+
+
+    }
+
+
+    public static void changeUI() {
+
         mProgressBar.setVisibility(View.INVISIBLE);
+
         if (mAdapter.getItemCount() == 0) {
             mNoReports.setVisibility(View.VISIBLE);
         } else {
             mRecyclerView.setVisibility(View.VISIBLE);
         }
-
     }
+
 }
