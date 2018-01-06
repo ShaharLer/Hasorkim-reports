@@ -152,7 +152,7 @@
         android:layout_height="0dp"
         android:layout_weight="1.3"
         android:text="@string/delete_report"
-        android:textSize="23sp"
+        android:textSize="25sp"
         android:textColor="@color/backgroundColor"
         style="@style/Widget.AppCompat.Button.Colored"/>
 
@@ -165,4 +165,5 @@
         android:text="@string/so_what_now"
         android:textSize="@dimen/button_text_size"
         style="?android:attr/buttonBarButtonStyle"/>
+
 </LinearLayout>
