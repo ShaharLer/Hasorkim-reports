@@ -7,63 +7,36 @@
     android:background="@drawable/list_item_selected"
     android:padding="@dimen/nav_header_vertical_spacing">
 
-    <!--
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingBottom="@dimen/details_buttons_padding">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/report_status"
-            android:textSize="17sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/report_status"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2.8"
-            android:gravity="end"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:textColor="@color/reportStatusColor"/>
-    </LinearLayout>
-    -->
-
     <RelativeLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="3.5">
+        android:layout_weight="3.3">
 
         <LinearLayout
             android:id="@+id/status_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingBottom="@dimen/details_buttons_padding">
+            android:paddingBottom="@dimen/report_date_padding">
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/report_details_status"
-                android:textSize="24sp"
+                android:textSize="17sp"
                 android:textStyle="bold"
-                android:textColor="@color/reportListColor"/>
+                android:textColor="@android:color/black"/>
 
             <TextView
                 android:id="@+id/report_status"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"
+                android:layout_weight="3"
                 android:gravity="end"
-                android:textSize="22sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
-                android:textColor="@color/reportListColor"/>
+                android:textColor="@android:color/black"/>
         </LinearLayout>
 
         <TextView
@@ -74,53 +47,8 @@
             android:textSize="16sp"
             android:textStyle="bold"
             android:textColor="@color/reportListColor"
-            android:paddingBottom="@dimen/nav_header_vertical_spacing"/>
+            android:paddingBottom="@dimen/report_date_padding"/>
     </RelativeLayout>
-
-    <!--
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingBottom="@dimen/report_list_padding">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/report_address"
-            android:textSize="17sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/report_address"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2.8"
-            android:textSize="17sp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/time_of_report"
-            android:textSize="17sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/report_time"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2.8"
-            android:textSize="17sp" />
-    </LinearLayout>
-    -->
 
     <RelativeLayout
         android:layout_width="0dp"
@@ -132,7 +60,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:paddingTop="@dimen/report_date_padding"
+            android:paddingTop="@dimen/report_list_padding"
             android:paddingBottom="@dimen/report_list_padding"
             android:textSize="14sp"
             android:textColor="@android:color/black"/>
