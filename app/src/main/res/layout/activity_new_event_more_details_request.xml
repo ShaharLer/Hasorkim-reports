@@ -102,7 +102,7 @@
                     style="@style/Widget.AppCompat.Button.Colored"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/image_report_padding"
+                    android:layout_marginStart="@dimen/status_report_padding"
                     android:contentDescription="@string/add_photo"
                     app:srcCompat="@drawable/ic_add_a_photo_black_24dp" />
 
@@ -134,7 +134,7 @@
                     android:layout_weight="1"
                     android:text="@string/NewReportReporterName"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/active_report_text_size"
+                    android:textSize="@dimen/report_text_size"
                     android:textStyle="bold" />
 
                 <EditText
@@ -163,7 +163,7 @@
                     android:layout_weight="1"
                     android:text="@string/addReportPhone"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/active_report_text_size"
+                    android:textSize="@dimen/report_text_size"
                     android:textStyle="bold" />
 
                 <EditText
@@ -193,7 +193,7 @@
                     android:layout_weight="1"
                     android:text="@string/newReportMyLocation"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/active_report_text_size"
+                    android:textSize="@dimen/report_text_size"
                     android:textStyle="bold" />
 
                 <TextView
@@ -220,7 +220,7 @@
                     android:layout_weight="1"
                     android:text="@string/newReportAddInformation"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/active_report_text_size"
+                    android:textSize="@dimen/report_text_size"
                     android:textStyle="bold" />
 
                 <EditText

@@ -29,10 +29,10 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1.5"
+                    android:layout_weight="1"
                     android:gravity="center"
                     android:text="@string/report_details_status"
-                    android:textSize="24sp"
+                    android:textSize="26sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -41,7 +41,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:textColor="@android:color/black"
-                    android:textSize="24sp"
+                    android:textSize="26sp"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -57,14 +57,13 @@
 
             <TextView
                 android:id="@+id/closed_report_details_headline"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/closedReportImageView"
                 android:layout_marginBottom="@dimen/place_details_list_layout_padding"
-                android:layout_marginTop="@dimen/title_padding"
+                android:layout_marginTop="@dimen/new_report_size"
                 android:text="@string/closed_report_details_headline"
-                android:textColor="@android:color/black"
-                android:textSize="22sp"
+                android:textSize="26sp"
                 android:textStyle="bold" />
 
             <LinearLayout
@@ -87,8 +86,9 @@
                     android:id="@+id/closedReportDate"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2"
+                    android:layout_weight="2.4"
                     android:textSize="@dimen/standard_text_size"
+                    android:textColor="@android:color/black"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -113,8 +113,9 @@
                     android:id="@+id/closedReportLocation"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2"
+                    android:layout_weight="2.4"
                     android:textSize="@dimen/standard_text_size"
+                    android:textColor="@android:color/black"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -140,8 +141,9 @@
                     android:id="@+id/closedReportExtraText"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2"
+                    android:layout_weight="2.4"
                     android:textSize="@dimen/standard_text_size"
+                    android:textColor="@android:color/black"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -167,8 +169,9 @@
                     android:id="@+id/closed_report_cancellation_user_type"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2"
+                    android:layout_weight="2.4"
                     android:textSize="@dimen/standard_text_size"
+                    android:textColor="@android:color/black"
                     android:textStyle="bold" />
             </LinearLayout>
 
