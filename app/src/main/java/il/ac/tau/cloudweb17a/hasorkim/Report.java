@@ -1,10 +1,7 @@
 package il.ac.tau.cloudweb17a.hasorkim;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -19,12 +16,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import java.io.File;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -35,7 +27,7 @@ import java.util.Objects;
 
 import static il.ac.tau.cloudweb17a.hasorkim.User.getUserWOContext;
 
-public class Report implements  java.io.Serializable{
+public class Report implements java.io.Serializable {
 
 
     private String id;
@@ -54,25 +46,23 @@ public class Report implements  java.io.Serializable{
     private boolean hasSimilarReports;
     private boolean isDogWithReporter;
     private String imageUrl;
-
+    private String photoPath;
     private String cancellationUserType;
-
-
     private double Lat;
     private double Long;
 
 
     private int nextIncrementalId;
-    private static final String TAG = "Report";
+    private static final String TAG = Report.class.getSimpleName();
 
-    public Report(){
+    public Report() {
         // Default constructor required for calls to DataSnapshot.getValue(Report.class)
     }
 
 
     public Report(String address, String freeText, User user, double Lat, double Long) {
 
-        this.startTime =  -Calendar.getInstance().getTime().getTime();
+        this.startTime = -Calendar.getInstance().getTime().getTime();
         this.address = address;
         this.status = "NEW";
         this.freeText = freeText;
@@ -80,23 +70,23 @@ public class Report implements  java.io.Serializable{
         this.assignedScanner = "";
         this.availableScanners = 0;
 
-        if(user.getName()!=null)
+        if (user.getName() != null)
             this.reporterName = user.getName();
         else
-            this.reporterName="";
+            this.reporterName = "";
 
-        if(user.getPhoneNumber()!=null)
+        if (user.getPhoneNumber() != null)
             this.phoneNumber = user.getPhoneNumber();
         else
-            this.phoneNumber="";
+            this.phoneNumber = "";
 
         this.userId = user.getId();
         //this.incrementalReportId = this.setIncrementalReportId();
 
-        this.hasSimilarReports=false;
+        this.hasSimilarReports = false;
 
-        this.Lat=Lat;
-        this.Long=Long;
+        this.Lat = Lat;
+        this.Long = Long;
 
         setListenerOnReportWithUserId();
     }
@@ -110,7 +100,7 @@ public class Report implements  java.io.Serializable{
     }
 
     private void setListenerOnReportWithUserId() {
-        if(userId!=null) {
+        if (userId != null) {
             // Initialize Database
             Query sameReportQuery = FirebaseDatabase.getInstance().getReference()
                     .child("reports").orderByChild("userId").equalTo(userId);
@@ -122,9 +112,9 @@ public class Report implements  java.io.Serializable{
                     //Log.d(TAG, userId);
                     //Log.d(TAG, String.valueOf(dataSnapshot.getChildrenCount()));
                     hasSimilarReports = false;
-                    for(DataSnapshot reportSnapShot : dataSnapshot.getChildren()){
+                    for (DataSnapshot reportSnapShot : dataSnapshot.getChildren()) {
                         Report report = reportSnapShot.getValue(Report.class);
-                        if(report.isOpenReport()){
+                        if (report.isOpenReport()) {
                             hasSimilarReports = true;
                             return;
                         }
@@ -145,7 +135,9 @@ public class Report implements  java.io.Serializable{
     }
 
 
-    public String getId() {return id;   }
+    public String getId() {
+        return id;
+    }
 
     public String getReporterName() {
         return reporterName;
@@ -167,31 +159,44 @@ public class Report implements  java.io.Serializable{
         return assignedScanner;
     }
 
-    public String getStatus() { return this.status; }
+    public String getStatus() {
+        return this.status;
+    }
 
     public String getCancellationUserType() {
         return cancellationUserType;
     }
 
-    public long getStartTime(){
+    public long getStartTime() {
         return this.startTime;
     }
+
     public String getStartTimeAsString() {
         Format format = new SimpleDateFormat("HH:mm dd/MM/yyyy");
         return format.format(new Date(-this.startTime));
     }
 
-    public String getAddress() { return this.address; }
-    public String getUserId() {return userId;   }
-    public int getAvailableScanners() { return this.availableScanners; }
+    public String getAddress() {
+        return this.address;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public int getAvailableScanners() {
+        return this.availableScanners;
+    }
 
     public String getCancellationText() {
         return cancellationText;
     }
 
-    public int getIncrementalReportId() { return incrementalReportId; }
+    public int getIncrementalReportId() {
+        return incrementalReportId;
+    }
 
-    public void persistReport(){
+    public void persistReport() {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
         DatabaseReference reportsRef = ref.child("reports");
         reportsRef.push().setValue(this);
@@ -201,13 +206,13 @@ public class Report implements  java.io.Serializable{
         this.extraPhoneNumber = extraPhoneNumber;
     }
 
-    public void setReporterName(String reporterName,User user) {
+    public void setReporterName(String reporterName, User user) {
         this.reporterName = reporterName;
         user.setName(reporterName);
     }
 
     public void setPhoneNumber(String phoneNumber, User user) {
-        this.phoneNumber=phoneNumber;
+        this.phoneNumber = phoneNumber;
         user.setPhoneNumber(phoneNumber);
     }
 
@@ -225,7 +230,7 @@ public class Report implements  java.io.Serializable{
     }
 
     public void setStartTime() {
-        this.startTime =  -Calendar.getInstance().getTime().getTime();
+        this.startTime = -Calendar.getInstance().getTime().getTime();
     }
 
     public void setAddress(String address) {
@@ -263,6 +268,7 @@ public class Report implements  java.io.Serializable{
                     nextIncrementalId = lastReport.getIncrementalReportId() + 1;
                 }
             }
+
             @Override
             public void onCancelled(DatabaseError firebaseError) {
             }
@@ -271,49 +277,49 @@ public class Report implements  java.io.Serializable{
         this.incrementalReportId = nextIncrementalId;
     }
 
-    public void reportUpdateStatus(String status){
+    public void reportUpdateStatus(String status) {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
         DatabaseReference reportsRef = ref.child("reports").child(this.id).child("status");
         reportsRef.setValue(status);
     }
 
-    public void reportUpdateExtraPhoneNumber(){
+    public void reportUpdateExtraPhoneNumber() {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
         DatabaseReference reportsRef = ref.child("reports").child(this.id);
-        Map<String,Object> reportMap = new HashMap<String,Object>();
+        Map<String, Object> reportMap = new HashMap<String, Object>();
         reportMap.put("extraPhoneNumber", this.extraPhoneNumber);
         reportsRef.updateChildren(reportMap);
     }
 
-    public void reportUpdateIncrementalReportId(){
+    public void reportUpdateIncrementalReportId() {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
         DatabaseReference reportsRef = ref.child("reports").child(this.id).child("incrementalReportId");
         reportsRef.setValue(this.incrementalReportId);
     }
 
-    public void reportUpdateCancellationText(String cancellationText){
+    public void reportUpdateCancellationText(String cancellationText) {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
         DatabaseReference reportsRef = ref.child("reports").child(this.id);
-        Map<String,Object> reportMap = new HashMap<String,Object>();
+        Map<String, Object> reportMap = new HashMap<String, Object>();
         reportMap.put("cancellationText", cancellationText);
         reportsRef.updateChildren(reportMap);
     }
 
-    public void reportUpdateCancellationUserType(){
+    public void reportUpdateCancellationUserType() {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
         DatabaseReference reportsRef = ref.child("reports").child(this.id);
-        Map<String,Object> reportMap = new HashMap<String,Object>();
+        Map<String, Object> reportMap = new HashMap<String, Object>();
         reportMap.put("cancellationUserType", "המדווח/ת");
         reportsRef.updateChildren(reportMap);
     }
 
-    public boolean isOpenReport(){
+    public boolean isOpenReport() {
         if ((Objects.equals(this.status, "CANCELED")) || (Objects.equals(this.status, "CLOSED")))
-                return false;
+            return false;
         else return true;
     }
 
-    public String statusInHebrew(){
+    public String statusInHebrew() {
         Map<String, String> map = new HashMap<String, String>();
         map.put("NEW", "דיווח חדש");
         map.put("SCANNER_ENLISTED", "דיווח חדש");
@@ -344,10 +350,9 @@ public class Report implements  java.io.Serializable{
         return error;
     }
 
-    public boolean isHasSimilarReports(){
+    public boolean isHasSimilarReports() {
         return this.hasSimilarReports;
     }
-
 
 
     @Override
@@ -366,20 +371,18 @@ public class Report implements  java.io.Serializable{
                 '}';
     }
 
-    public void saveReport(Bitmap bitmap){
+    public void saveReport() {
 
         final Report report = this;
 
-        if(bitmap !=null) {
+        if (this.photoPath != null) {
             StorageReference imagesRef = FirebaseStorage.getInstance().getReference().child("images");
-            String fileName = getUserId()+"_"+String.valueOf(new Date().getTime());
+            String fileName = getUserId() + "_" + String.valueOf(new Date().getTime());
             StorageReference imageRef = imagesRef.child(fileName);
 
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-            byte[] data = baos.toByteArray();
+            Uri file = Uri.fromFile(new File(this.photoPath));
 
-            UploadTask uploadTask = imageRef.putBytes(data);
+            UploadTask uploadTask = imageRef.putFile(file);
             uploadTask.addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception exception) {
@@ -388,15 +391,15 @@ public class Report implements  java.io.Serializable{
             }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
                     Uri downloadUrl = taskSnapshot.getDownloadUrl();
-                    imageUrl = downloadUrl.toString();
+                    if (downloadUrl != null) {
+                        imageUrl = downloadUrl.toString();
+                    }
                     persistReport();
                     getUserWOContext().setMyLastOpenReport(report);
                 }
             });
-        }
-        else {
+        } else {
             persistReport();
             getUserWOContext().setMyLastOpenReport(this);
         }
@@ -405,5 +408,14 @@ public class Report implements  java.io.Serializable{
 
     public String getImageUrl() {
         return imageUrl;
+    }
+
+
+    public String getPhotoPath() {
+        return photoPath;
+    }
+
+    public void setPhotoPath(String photoPath) {
+        this.photoPath = photoPath;
     }
 }

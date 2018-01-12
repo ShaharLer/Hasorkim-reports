@@ -2,6 +2,7 @@ package il.ac.tau.cloudweb17a.hasorkim;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.preference.PreferenceManager;
 
 import com.google.firebase.iid.FirebaseInstanceId;
@@ -15,9 +16,10 @@ public class User {
     private String name;
     private String phoneNumber;
     private SharedPreferences prefs;
+    public Report myLastOpenReport=null;
+
     public static final String USER_NAME = "display_name";
     public static final String USER_PHONE_NUMBER = "phone_number";
-    public Report myLastOpenReport=null;
 
 
     private User(Context applicationContext){
@@ -70,5 +72,6 @@ public class User {
     public void setMyLastOpenReport(Report myLastOpenReport) {
         this.myLastOpenReport = myLastOpenReport;
     }
+
 
 }

@@ -53,7 +53,11 @@
                 android:layout_marginTop="@dimen/button_text_size"
                 android:contentDescription="@string/closed_report_photo_description"
                 android:visibility="gone"
-                android:layout_centerInParent="true"/>
+                android:layout_centerInParent="true"
+                android:adjustViewBounds="true"
+                android:maxHeight="300dp"
+                android:maxWidth="300dp"
+                />
 
             <TextView
                 android:id="@+id/closed_report_details_headline"

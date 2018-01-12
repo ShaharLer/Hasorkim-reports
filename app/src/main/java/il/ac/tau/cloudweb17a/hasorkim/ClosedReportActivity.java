@@ -1,6 +1,5 @@
 package il.ac.tau.cloudweb17a.hasorkim;
 
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
@@ -9,12 +8,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 
 public class ClosedReportActivity extends AppCompatActivity {
 
     private Report report;
-    private Bitmap bitmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,15 +28,16 @@ public class ClosedReportActivity extends AppCompatActivity {
         TextView closedReportStatus = findViewById(R.id.closedReportStatus);
         closedReportStatus.setText(report.statusInHebrew());
 
-        if (report.getImageUrl() != null) {
+
+        if (report.getPhotoPath() != null) {
             ImageView closedReportImage = findViewById(R.id.closedReportImageView);
-            Picasso.with(this).load(report.getImageUrl()).resize(600, 600).centerCrop().into(closedReportImage);
             closedReportImage.setVisibility(View.VISIBLE);
+            Glide.with(this).load(report.getPhotoPath()).into(closedReportImage);
         }
 
         TextView closedReportExtraDate = findViewById(R.id.closedReportDate);
         String reportDate = report.getStartTimeAsString();
-        reportDate = reportDate.substring(6,reportDate.length());
+        reportDate = reportDate.substring(6, reportDate.length());
         closedReportExtraDate.setText(reportDate);
 
 

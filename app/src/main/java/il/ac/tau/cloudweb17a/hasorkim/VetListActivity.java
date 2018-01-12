@@ -125,7 +125,7 @@ public class VetListActivity extends AppCompatActivity {
      * The listener for the "Back to report" button
      */
     public void OnButtonClick(View v) {
-        Intent newReportIntent = new Intent(this, NewEventMoreDetailsRequestActivity.class);
+        Intent newReportIntent = new Intent(this, NewReportActivity.class);
         newReportIntent.putExtra("lat", currLatitude);
         newReportIntent.putExtra("long", currLongitude);
         newReportIntent.putExtra("address", receivedIntent.getStringExtra("address"));

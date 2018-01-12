@@ -1,11 +1,8 @@
 package il.ac.tau.cloudweb17a.hasorkim;
 
-import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -25,20 +22,22 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import static android.os.Environment.getExternalStoragePublicDirectory;
 import static il.ac.tau.cloudweb17a.hasorkim.User.getUser;
 
-public class NewEventMoreDetailsRequestActivity extends AppCompatActivity {
+public class NewReportActivity extends AppCompatActivity {
 
-    public static final int PHOTO_INTENT_REQUEST_CODE = 10;
-    public static final int EXTERNAL_STORAGE_PERMISSION_REQUEST_CODE = 20;
-    private static final String TAG = "Send_Report";
+    private static final String TAG = NewReportActivity.class.getSimpleName();
+
+    private static final int REQUEST_IMAGE_CAPTURE = 101;
+    private static final int EXTERNAL_STORAGE_PERMISSION_REQUEST_CODE = 102;
 
     private String address;
     private User user;
@@ -49,17 +48,21 @@ public class NewEventMoreDetailsRequestActivity extends AppCompatActivity {
     private double Lat;
     private double Long;
 
+    ImageView dogImage;
+    TextView reporterName;
+    TextView reporterPhoneNumber;
+    TextView reportLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_event_more_details_request);
+        setContentView(R.layout.activity_new_report);
 
         address = getIntent().getStringExtra("address");
         if (address == null || address.equals(getString(R.string.unknown_address))) {
             Log.e(TAG, "no address wes received from the previous activity");
-            Intent intent = new Intent(NewEventMoreDetailsRequestActivity.this, MapsActivity.class);
+            Intent intent = new Intent(NewReportActivity.this, MapsActivity.class);
             startActivity(intent);
         }
 
@@ -67,9 +70,10 @@ public class NewEventMoreDetailsRequestActivity extends AppCompatActivity {
         Long = getIntent().getDoubleExtra("long", DEFAULT_LONGITUDE);
 
         user = getUser(getApplicationContext());
-        TextView reporterName = findViewById(R.id.reporterName);
-        TextView reporterPhoneNumber = findViewById(R.id.reporterPhoneNumber);
-        TextView reportLocation = findViewById(R.id.reportLocation);
+        reporterName = findViewById(R.id.reporterName);
+        reporterPhoneNumber = findViewById(R.id.reporterPhoneNumber);
+        reportLocation = findViewById(R.id.reportLocation);
+        dogImage = findViewById(R.id.ReportImageView);
 
         if (user.getName() != null)
             reporterName.setText(user.getName());
@@ -124,8 +128,8 @@ public class NewEventMoreDetailsRequestActivity extends AppCompatActivity {
                         return;
                     }
 
-                    report.saveReport(BitmapFactory.decodeFile(mCurrentPhotoPath));
-                    Intent intent = new Intent(NewEventMoreDetailsRequestActivity.this, ActiveReportActivity.class);
+                    report.saveReport();
+                    Intent intent = new Intent(NewReportActivity.this, ActiveReportActivity.class);
                     intent.putExtra("Report", report);
                     startActivity(intent);
                 } else {
@@ -145,6 +149,52 @@ public class NewEventMoreDetailsRequestActivity extends AppCompatActivity {
         report = new Report(address, "", user, Lat, Long);
     }
 
+    private void dispatchTakePictureIntent() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            File photoFile = null;
+            try {
+                photoFile = createImageFile();
+            } catch (IOException ex) {
+                Log.e(TAG, "Error creating photo file");
+            }
+
+            if (photoFile != null) {
+                Uri photoURI = FileProvider.getUriForFile(this,
+                        "il.ac.tau.cloudweb17a.hasorkim.fileprovider",
+                        photoFile);
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+            }
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            if (requestCode == REQUEST_IMAGE_CAPTURE) {
+                dogImage.setVisibility(View.VISIBLE);
+                Glide.with(this).load(report.getPhotoPath()).into(dogImage);
+            }
+        }
+    }
+
+    private File createImageFile() throws IOException {
+        // Create an dogImage file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+        File image = File.createTempFile(
+                imageFileName,  /* prefix */
+                ".jpg",         /* suffix */
+                storageDir      /* directory */
+        );
+
+        // Save a file: path for use with ACTION_VIEW intents
+        report.setPhotoPath(image.getAbsolutePath());
+        return image;
+    }
+
     private void popUpNotChecked() {
 
         TextView title = new TextView(this);
@@ -158,8 +208,8 @@ public class NewEventMoreDetailsRequestActivity extends AppCompatActivity {
                 //.setTitle(R.string.not_checked_dialog_title)
                 .setPositiveButton(R.string.ok_not_checked, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        report.saveReport(BitmapFactory.decodeFile(mCurrentPhotoPath));
-                        Intent intent = new Intent(NewEventMoreDetailsRequestActivity.this, ActiveReportActivity.class);
+                        report.saveReport();
+                        Intent intent = new Intent(NewReportActivity.this, ActiveReportActivity.class);
                         intent.putExtra("Report", report);
                         startActivity(intent);
                     }
@@ -167,8 +217,6 @@ public class NewEventMoreDetailsRequestActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int id) {
             }
         }).setCustomTitle(title).create().show();
-
-
     }
 
     private void popUpSimilarReport() {
@@ -190,8 +238,8 @@ public class NewEventMoreDetailsRequestActivity extends AppCompatActivity {
                         if (!cb.isChecked()) {
                             popUpNotChecked();
                         } else {
-                            report.saveReport(BitmapFactory.decodeFile(mCurrentPhotoPath));
-                            Intent intent = new Intent(NewEventMoreDetailsRequestActivity.this, ActiveReportActivity.class);
+                            report.saveReport();
+                            Intent intent = new Intent(NewReportActivity.this, ActiveReportActivity.class);
                             intent.putExtra("Report", report);
                             startActivity(intent);
                         }
@@ -200,77 +248,17 @@ public class NewEventMoreDetailsRequestActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int id) {
             }
         }).create().show();
-
-    }
-
-
-    static final int REQUEST_TAKE_PHOTO = 1;
-
-    private void dispatchTakePictureIntent() {
-        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        // Ensure that there's a camera activity to handle the intent
-        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-            // Create the File where the photo should go
-            File photoFile = null;
-            try {
-                photoFile = createImageFile();
-            } catch (IOException ex) {
-                // Error occurred while creating the File
-            }
-            // Continue only if the File was successfully created
-            if (photoFile != null) {
-                Uri photoURI = FileProvider.getUriForFile(this,
-                        "il.ac.tau.cloudweb17a.hasorkim.fileprovider",
-                        photoFile);
-                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
-                startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
-            }
-        }
-    }
-
-
-    private void createPhotoIntent() {
-        Intent photoIntent = new Intent(Intent.ACTION_PICK);
-
-        File photoDirectory = Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_PICTURES);
-        Uri photoUri = Uri.parse(photoDirectory.getPath());
-
-        photoIntent.setDataAndType(photoUri, "image/*");
-
-        startActivityForResult(photoIntent, PHOTO_INTENT_REQUEST_CODE);
     }
 
     private void requestPermission() {
         if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.READ_EXTERNAL_STORAGE)
+                android.Manifest.permission.READ_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                    new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE},
                     EXTERNAL_STORAGE_PERMISSION_REQUEST_CODE);
         } else {
             dispatchTakePictureIntent();
-            //createPhotoIntent();
-        }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (resultCode == RESULT_OK) {
-            ImageView image = findViewById(R.id.ReportImageView);
-
-            if (requestCode == PHOTO_INTENT_REQUEST_CODE) {
-                Uri photoUri = data.getData();
-                Picasso.with(this).load(photoUri).resize(600, 600).centerCrop().into(image);
-                image.setVisibility(View.VISIBLE);
-            }
-            if (requestCode == REQUEST_TAKE_PHOTO) {
-                Picasso.with(this).load("file://" + mCurrentPhotoPath).resize(600, 600).centerCrop().into(image);
-                image.setVisibility(View.VISIBLE);
-
-            }
         }
     }
 
@@ -281,32 +269,10 @@ public class NewEventMoreDetailsRequestActivity extends AppCompatActivity {
             case EXTERNAL_STORAGE_PERMISSION_REQUEST_CODE: {
                 if ((grantResults.length > 0) &&
                         (grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
-                    createPhotoIntent();
-                } else Toast.makeText(this, "Gallery Permission Denied :(",
+                    dispatchTakePictureIntent();
+                } else Toast.makeText(this, R.string.need_permission,
                         Toast.LENGTH_SHORT).show();
-
             }
         }
-
     }
-
-
-    String mCurrentPhotoPath;
-
-    private File createImageFile() throws IOException {
-        // Create an image file name
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String imageFileName = "JPEG_" + timeStamp + "_";
-        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-        File image = File.createTempFile(
-                imageFileName,  /* prefix */
-                ".jpg",         /* suffix */
-                storageDir      /* directory */
-        );
-
-        // Save a file: path for use with ACTION_VIEW intents
-        mCurrentPhotoPath = image.getAbsolutePath();
-        return image;
-    }
-
 }

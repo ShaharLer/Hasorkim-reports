@@ -396,7 +396,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     }
                 }).setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                Intent newReportIntent = new Intent(getApplicationContext(), NewEventMoreDetailsRequestActivity.class);
+                Intent newReportIntent = new Intent(getApplicationContext(), NewReportActivity.class);
                 newReportIntent.putExtra("lat", mMap.getCameraPosition().target.latitude);
                 newReportIntent.putExtra("long", mMap.getCameraPosition().target.longitude);
                 newReportIntent.putExtra("address", getDisplayStreet());

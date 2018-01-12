@@ -17,8 +17,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
-
+import com.bumptech.glide.Glide;
 
 public class ActiveReportActivity extends AppCompatActivity {
 
@@ -54,10 +53,10 @@ public class ActiveReportActivity extends AppCompatActivity {
             addAnotherPhoneNumber.setText(report.getExtraPhoneNumber());
         }
 
-        if (report.getImageUrl() != null) {
+        if (report.getPhotoPath() != null) {
             ImageView openReportImage = findViewById(R.id.activeReportImageView);
-            Picasso.with(this).load(report.getImageUrl()).resize(600, 600).centerCrop().into(openReportImage);
             openReportImage.setVisibility(View.VISIBLE);
+            Glide.with(this).load(report.getPhotoPath()).into(openReportImage);
         }
 
         ImageButton addPhoneNumber = findViewById(R.id.addPhoneNumber);
