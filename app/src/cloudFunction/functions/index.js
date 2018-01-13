@@ -23,6 +23,7 @@ exports.notifyReporterStatusChanged = functions.database.ref('/reports/{report}'
         data: {
             title: `סטטוס הדיווח ברחוב ${address} השתנה`,
             body: `סטטוס קודם: ${oldStatus}, סטטוס עדכני: ${newStatus}`,
+            report: `${report}`
         }
     };
 
@@ -60,6 +61,7 @@ exports.notifyManagersAndScannersNewReport = functions.database.ref('/reports/{r
             lat: `${data_lat}`,
             long: `${data_long}`,
             address: `${data_address}`,
+            report: `${report}`
         }
     };
 

@@ -57,7 +57,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     // A default location (Tel Aviv, Israel) and default zoom to use when location permission is
     // not granted.
     private final LatLng mDefaultLocation = new LatLng(32.077714, 34.774457);
-    private static final int DEFAULT_ZOOM = 17;
+    private static final int DEFAULT_ZOOM = 15;
 
     // Permission related variable
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
