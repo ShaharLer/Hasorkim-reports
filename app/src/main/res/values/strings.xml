@@ -121,4 +121,5 @@
     <string name="who_we_are_headline">מי אנחנו</string>
     <string name="setting">הגדרות</string>
     <string name="need_permission">אין אפשרות לצלם תמונה מבלי הרשאה זו</string>
+    <string name="location_error">קרתה תקלה שקשורה למיקום</string>
 </resources>

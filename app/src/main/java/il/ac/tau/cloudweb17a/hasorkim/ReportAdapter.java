@@ -68,7 +68,7 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ReportView
 
         public void bindReport(Report report) {
             mReport = report;
-            StatusView.setText(report.getStatus());
+            StatusView.setText(report.statusInHebrew());
             AddressView.setText(report.getAddress());
 
             String reportTime = report.getStartTimeAsString();
