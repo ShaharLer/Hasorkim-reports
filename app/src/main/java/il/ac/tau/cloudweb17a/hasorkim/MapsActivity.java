@@ -378,29 +378,29 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         TextView title = new TextView(this);
         title.setText(R.string.vet_dialog_title);
         title.setPadding(10, 50, 64, 9);
-        title.setTextColor(Color.BLACK);
-        title.setTextSize(20);
-        title.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
+        title.setTextColor(Color.RED);
+        title.setTextSize(22);
+        //title.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
 
         new AlertDialog.Builder(this).setMessage(R.string.vet_dialog_message)
                 //.setTitle(R.string.vet_dialog_title)
                 .setCustomTitle(title)
-                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        Intent vetIntent = new Intent(getApplicationContext(), VetListActivity.class);
-                        vetIntent.putExtra("lat", mMap.getCameraPosition().target.latitude);
-                        vetIntent.putExtra("long", mMap.getCameraPosition().target.longitude);
-                        vetIntent.putExtra("address", getDisplayStreet());
-                        vetIntent.putExtra("from", "dialog");
-                        startActivity(vetIntent);
+                        Intent newReportIntent = new Intent(getApplicationContext(), NewReportActivity.class);
+                        newReportIntent.putExtra("lat", mMap.getCameraPosition().target.latitude);
+                        newReportIntent.putExtra("long", mMap.getCameraPosition().target.longitude);
+                        newReportIntent.putExtra("address", getDisplayStreet());
+                        startActivity(newReportIntent);
                     }
-                }).setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                }).setNegativeButton(R.string.ok, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                Intent newReportIntent = new Intent(getApplicationContext(), NewReportActivity.class);
-                newReportIntent.putExtra("lat", mMap.getCameraPosition().target.latitude);
-                newReportIntent.putExtra("long", mMap.getCameraPosition().target.longitude);
-                newReportIntent.putExtra("address", getDisplayStreet());
-                startActivity(newReportIntent);
+                Intent vetIntent = new Intent(getApplicationContext(), VetListActivity.class);
+                vetIntent.putExtra("lat", mMap.getCameraPosition().target.latitude);
+                vetIntent.putExtra("long", mMap.getCameraPosition().target.longitude);
+                vetIntent.putExtra("address", getDisplayStreet());
+                vetIntent.putExtra("from", "dialog");
+                startActivity(vetIntent);
             }
         }).create().show();
     }

@@ -21,6 +21,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -60,6 +61,7 @@ public class VetListActivity extends AppCompatActivity {
     private RadioGroup vetTypeButtons;
     private RadioButton all_vets_button;
     private RadioButton open_vets_button;
+    private TextView more_details;
     private LinearLayout vetListLayout;
     private RecyclerView vetListRecyclerView;
     private List<VeterinaryClinic> allVetsList;
@@ -90,6 +92,9 @@ public class VetListActivity extends AppCompatActivity {
         vetTypeButtons = findViewById(R.id.vet_type_buttons_group);
         all_vets_button = findViewById(R.id.all_vets_button);
         open_vets_button = findViewById(R.id.open_vets_button);
+        more_details = findViewById(R.id.press_for_vet_details);
+        
+
         vetListLayout = findViewById(R.id.vet_list_layout);
         vetListRecyclerView = findViewById(R.id.vet_list_recycler_view);
         Button backToReport = findViewById(R.id.going_to_report_btn);
@@ -361,10 +366,18 @@ public class VetListActivity extends AppCompatActivity {
                         switch (checkedId) {
                             case R.id.all_vets_button:
                                 vetListRecyclerView.setAdapter(new VeterinaryClinicAdapter(allVetsList, buttonsListener));
+                                if (allVetsList.size() > 0)
+                                    more_details.setVisibility(View.VISIBLE);
+                                else
+                                    more_details.setVisibility(View.GONE);
                                 break;
 
                             case R.id.open_vets_button:
                                 vetListRecyclerView.setAdapter(new VeterinaryClinicAdapter(openVetsList, buttonsListener));
+                                if (openVetsList.size() > 0)
+                                    more_details.setVisibility(View.VISIBLE);
+                                else
+                                    more_details.setVisibility(View.GONE);
                         }
                     }
                 });

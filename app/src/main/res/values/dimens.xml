@@ -12,6 +12,7 @@
     <dimen name="title_padding">24dp</dimen>
     <dimen name="standard_text_size">18sp</dimen>
     <dimen name="report_text_size">17sp</dimen>
+    <dimen name="vet_list_buttons_size">16sp</dimen>
     <dimen name="active_report_text_size">20sp</dimen>
     <dimen name="double_padding">32sp</dimen>
     <dimen name="report_padding">30sp</dimen>
@@ -22,6 +23,7 @@
     <dimen name="report_date_padding">5dp</dimen>
     <dimen name="details_buttons_padding">4dp</dimen>
     <dimen name="vet_clinic_name_padding">3dp</dimen>
+    <dimen name="for_more_details_padding">3dp</dimen>
     <dimen name="report_list_padding">1dp</dimen>
     <dimen name="nav_header_height">176dp</dimen>
 </resources>
