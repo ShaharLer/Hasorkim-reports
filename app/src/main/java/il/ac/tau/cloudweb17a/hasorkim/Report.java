@@ -88,7 +88,7 @@ public class Report implements java.io.Serializable {
         this.Lat = Lat;
         this.Long = Long;
 
-        setListenerOnReportWithUserId();
+        //setListenerOnReportWithUserId();
     }
 
     public void setIsDogWithReporter(boolean isDogWithReporter) {
@@ -119,9 +119,7 @@ public class Report implements java.io.Serializable {
                             return;
                         }
                     }
-
                 }
-
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
                     //do nothing

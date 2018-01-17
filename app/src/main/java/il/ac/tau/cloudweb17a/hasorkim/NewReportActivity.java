@@ -17,7 +17,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -95,8 +94,6 @@ public class NewReportActivity extends AppCompatActivity {
         submitReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
                 TextView moreInformation = findViewById(R.id.moreInformation);
                 TextView reporterName = findViewById(R.id.reporterName);
                 TextView reporterPhoneNumber = findViewById(R.id.reporterPhoneNumber);
