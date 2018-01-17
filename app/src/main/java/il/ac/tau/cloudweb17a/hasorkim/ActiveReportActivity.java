@@ -2,7 +2,6 @@ package il.ac.tau.cloudweb17a.hasorkim;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -23,6 +22,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.Objects;
 
 public class ActiveReportActivity extends AppCompatActivity {
 
@@ -101,7 +102,7 @@ public class ActiveReportActivity extends AppCompatActivity {
 
         });
 
-        Button whatNowInfo = findViewById(R.id.whatNowInfo);
+        final Button whatNowInfo = findViewById(R.id.whatNowInfo);
 
         whatNowInfo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -168,6 +169,10 @@ public class ActiveReportActivity extends AppCompatActivity {
             }
         });
 
+
+        final View reporter_buttons = findViewById(R.id.reporter_buttons);
+
+
         DatabaseReference statusManagerRef = FirebaseDatabase.getInstance()
                 .getReference("reports").child(report.getId()).child("status");
 
@@ -177,6 +182,14 @@ public class ActiveReportActivity extends AppCompatActivity {
                 String status = dataSnapshot.getValue(String.class);
                 report.setStatus(status);
                 activeReportStatus.setText(report.statusInHebrew());
+
+
+                if ((Objects.equals(status, "CANCELED")) || Objects.equals(status, "CLOSED")){
+                    reporter_buttons.setVisibility(View.GONE);
+                    whatNowInfo.setVisibility(View.GONE);
+                }
+
+
             }
 
             @Override
