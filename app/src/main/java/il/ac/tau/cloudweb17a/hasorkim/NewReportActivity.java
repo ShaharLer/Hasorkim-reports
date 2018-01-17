@@ -63,6 +63,7 @@ public class NewReportActivity extends AppCompatActivity {
         if (address == null || address.equals(getString(R.string.unknown_address))) {
             Log.e(TAG, "no address wes received from the previous activity");
             Intent intent = new Intent(NewReportActivity.this, MapsActivity.class);
+            Toast.makeText(this, R.string.location_error, Toast.LENGTH_SHORT).show();
             startActivity(intent);
         }
 

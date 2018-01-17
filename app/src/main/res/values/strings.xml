@@ -122,4 +122,5 @@
     <string name="setting">הגדרות</string>
     <string name="need_permission">אין אפשרות לצלם תמונה מבלי הרשאה זו</string>
     <string name="for_more_details_press">לפרטים נוספים לחץ/י על המרפאה</string>
+    <string name="location_error">קרתה תקלה שקשורה למיקום</string>
 </resources>
