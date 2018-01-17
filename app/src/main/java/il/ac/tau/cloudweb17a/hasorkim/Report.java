@@ -380,6 +380,7 @@ public class Report implements java.io.Serializable {
         final Report report = this;
         id = persistReportGetID();
         setId(id);
+        setStatus("NEW");
 
 
 
