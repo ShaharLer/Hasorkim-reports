@@ -323,7 +323,11 @@ public class Report implements java.io.Serializable {
         else return true;
     }
 
-    public String statusInHebrew() {
+    public String statusInHebrew(){
+        return translateStatus(this.getStatus());
+    }
+
+    public String translateStatus(String status){
         Map<String, String> map = new HashMap<String, String>();
         map.put("NEW", "דיווח חדש");
         map.put("SCANNER_ENLISTED", "דיווח חדש");
@@ -333,7 +337,7 @@ public class Report implements java.io.Serializable {
         map.put("CLOSED", "סגור");
         map.put("CANCELED", "בוטל");
 
-        return map.get(this.status);
+        return map.get(status);
     }
 
     public String validatePhone(String phoneNumberToCheck) {
