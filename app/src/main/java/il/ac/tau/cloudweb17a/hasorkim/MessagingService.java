@@ -14,13 +14,16 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
+import static il.ac.tau.cloudweb17a.hasorkim.Report.translateStatus;
+
 
 public class MessagingService extends FirebaseMessagingService {
     private static final String TAG = MessagingService.class.getSimpleName();
 
     String reportId;
     String title;
-    String body;
+    String oldStatus;
+    String newStatus;
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
@@ -28,11 +31,11 @@ public class MessagingService extends FirebaseMessagingService {
         if (remoteMessage.getData() != null) {
             reportId = remoteMessage.getData().get("report");
             title = remoteMessage.getData().get("title");
-            body = remoteMessage.getData().get("body");
+            newStatus = translateStatus(remoteMessage.getData().get("newStatus"));
 
             Log.d(TAG, "Message Data reportId: " + reportId);
             Log.d(TAG, "Message Data title: " + title);
-            Log.d(TAG, "Message Data body: " + body);
+            Log.d(TAG, "Message Data newStatus: " + newStatus);
         } else {
             return;
         }
@@ -66,7 +69,7 @@ public class MessagingService extends FirebaseMessagingService {
 
                 Notification n = new Notification.Builder(MessagingService.this)
                         .setContentTitle(title)
-                        .setContentText(body)
+                        .setContentText("סטטוס עדכני: "+ newStatus)
                         .setSmallIcon(R.drawable.dog_icon)
                         .setColor(getResources().getColor(R.color.colorAccent))
                         .setPriority(Notification.PRIORITY_HIGH)

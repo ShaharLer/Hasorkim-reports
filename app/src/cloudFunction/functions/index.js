@@ -22,7 +22,7 @@ exports.notifyReporterStatusChanged = functions.database.ref('/reports/{report}'
     const payload = {
         data: {
             title: `סטטוס הדיווח ברחוב ${address} השתנה`,
-            body: `סטטוס קודם: ${oldStatus}, סטטוס עדכני: ${newStatus}`,
+            newStatus: `${newStatus}`,
             report: `${report}`
         }
     };
