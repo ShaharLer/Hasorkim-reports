@@ -18,12 +18,16 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class ActiveReportActivity extends AppCompatActivity {
 
     private Report report;
     private static final String TAG = "Send Report";
-    private Bitmap bitmap;
 
 
     @Override
@@ -34,7 +38,7 @@ public class ActiveReportActivity extends AppCompatActivity {
 
         report = (Report) getIntent().getSerializableExtra("Report");
 
-        TextView activeReportStatus = findViewById(R.id.activeReportStatus);
+        final TextView activeReportStatus = findViewById(R.id.activeReportStatus);
         activeReportStatus.setText(report.statusInHebrew());
 
         //TextView activeReportExtraText = (TextView) findViewById(R.id.activeReportExtraText);
@@ -149,6 +153,23 @@ public class ActiveReportActivity extends AppCompatActivity {
                 builder.setView(inflater.inflate(R.layout.what_now_pop, null));
                 builder.setTitle(R.string.thanks_for_reporting);
                 builder.create().show();
+
+            }
+        });
+
+        DatabaseReference statusManagerRef = FirebaseDatabase.getInstance()
+                .getReference("reports").child(report.getId()).child("status");
+
+        statusManagerRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String status = dataSnapshot.getValue(String.class);
+                report.setStatus(status);
+                activeReportStatus.setText(report.statusInHebrew());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
 
             }
         });
