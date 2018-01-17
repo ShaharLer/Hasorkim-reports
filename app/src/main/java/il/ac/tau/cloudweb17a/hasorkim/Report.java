@@ -199,7 +199,11 @@ public class Report implements java.io.Serializable {
     public void persistReport() {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
         DatabaseReference reportsRef = ref.child("reports");
-        reportsRef.push().setValue(this);
+        String id =reportsRef.push().getKey();
+        setId(id);
+
+        FirebaseDatabase.getInstance().getReference("reports").child(getId()).setValue(this);
+
     }
 
     public void setExtraPhoneNumber(String extraPhoneNumber) {
