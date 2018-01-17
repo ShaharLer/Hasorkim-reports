@@ -83,8 +83,7 @@ public class NewReportActivity extends AppCompatActivity {
             reportLocation.setText(address);
 
 
-        ImageButton imageButtonReport = findViewById(R.id.imageButtonReport);
-        imageButtonReport.setOnClickListener(new View.OnClickListener() {
+        dogImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 requestPermission();
