@@ -57,7 +57,7 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ReportView
 
             Intent intent;
 
-            if (mReport.isOpenReport())
+            if (mReport.CheckIfReportOpen())
                 intent = new Intent(context, ActiveReportActivity.class);
             else
                 intent = new Intent(context, ClosedReportActivity.class);
@@ -71,7 +71,7 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ReportView
             StatusView.setText(report.statusInHebrew());
             AddressView.setText(report.getAddress());
 
-            String reportTime = report.getStartTimeAsString();
+            String reportTime = report.startTimeAsString();
             String date = reportTime.substring(6, reportTime.length());
             String time = reportTime.substring(0, 5);
             dateView.setText(date);
@@ -93,10 +93,7 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ReportView
     public ReportAdapter() {
 
         DatabaseReference reportsRef = FirebaseDatabase.getInstance().getReference().child("reports");
-        Query lastQuery = reportsRef
-                .orderByChild("userId").equalTo(getUserWOContext().getId());
-        //.orderByChild("startTime")
-        //.limitToLast(10);
+        Query lastQuery = reportsRef.orderByChild("userId").equalTo(getUserWOContext().getId());
         lastQuery.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

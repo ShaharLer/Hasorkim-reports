@@ -272,4 +272,10 @@ public class NewReportActivity extends AppCompatActivity {
             }
         }
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Glide.get(this).clearMemory();//clear memory
+    }
 }

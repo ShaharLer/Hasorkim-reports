@@ -162,8 +162,8 @@ public class ActiveReportActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent vetIntent = new Intent(getApplicationContext(), VetListActivity.class);
-                vetIntent.putExtra("lat", report.getLat());
-                vetIntent.putExtra("long", report.getLong());
+                vetIntent.putExtra("lat", report.getLatitude());
+                vetIntent.putExtra("long", report.getLongitude());
                 vetIntent.putExtra("from", "menu");
                 startActivity(vetIntent);
             }
@@ -197,6 +197,12 @@ public class ActiveReportActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Glide.get(this).clearMemory();//clear memory
     }
 }
 

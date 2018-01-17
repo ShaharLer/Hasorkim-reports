@@ -36,7 +36,7 @@ public class ClosedReportActivity extends AppCompatActivity {
         }
 
         TextView closedReportExtraDate = findViewById(R.id.closedReportDate);
-        String reportDate = report.getStartTimeAsString();
+        String reportDate = report.startTimeAsString();
         reportDate = reportDate.substring(6, reportDate.length());
         closedReportExtraDate.setText(reportDate);
 
@@ -59,6 +59,12 @@ public class ClosedReportActivity extends AppCompatActivity {
             LinearLayout moreInfoLayout = findViewById(R.id.closed_report_more_info_layout);
             moreInfoLayout.setVisibility(View.VISIBLE);
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Glide.get(this).clearMemory();//clear memory
     }
 }
 

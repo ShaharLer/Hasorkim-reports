@@ -48,8 +48,8 @@ public class Report implements java.io.Serializable {
     private String imageUrl;
     private String photoPath;
     private String cancellationUserType;
-    private double Lat;
-    private double Long;
+    private double latitude;
+    private double longitude;
 
 
     private int nextIncrementalId;
@@ -85,8 +85,8 @@ public class Report implements java.io.Serializable {
 
         this.hasSimilarReports = false;
 
-        this.Lat = Lat;
-        this.Long = Long;
+        this.latitude = Lat;
+        this.longitude = Long;
 
         //setListenerOnReportWithUserId();
     }
@@ -114,12 +114,13 @@ public class Report implements java.io.Serializable {
                     hasSimilarReports = false;
                     for (DataSnapshot reportSnapShot : dataSnapshot.getChildren()) {
                         Report report = reportSnapShot.getValue(Report.class);
-                        if (report.isOpenReport()) {
+                        if (report.CheckIfReportOpen()) {
                             hasSimilarReports = true;
                             return;
                         }
                     }
                 }
+
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
                     //do nothing
@@ -169,7 +170,7 @@ public class Report implements java.io.Serializable {
         return this.startTime;
     }
 
-    public String getStartTimeAsString() {
+    public String startTimeAsString() {
         Format format = new SimpleDateFormat("HH:mm dd/MM/yyyy");
         return format.format(new Date(-this.startTime));
     }
@@ -194,10 +195,10 @@ public class Report implements java.io.Serializable {
         return incrementalReportId;
     }
 
-    public String persistReportGetID(){
+    public String persistReportGetID() {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
         DatabaseReference reportsRef = ref.child("reports");
-        String id =reportsRef.push().getKey();
+        String id = reportsRef.push().getKey();
         setId(id);
 
         return id;
@@ -224,7 +225,7 @@ public class Report implements java.io.Serializable {
 
     public void setId(String id) {
         this.id = id;
-        setListenerOnReportWithUserId();
+        //setListenerOnReportWithUserId();
     }
 
     public void setStatus(String status) {
@@ -246,15 +247,6 @@ public class Report implements java.io.Serializable {
     public void setCancellationUserType(String cancellationUserType) {
         this.cancellationUserType = cancellationUserType;
     }
-
-    public double getLat() {
-        return Lat;
-    }
-
-    public double getLong() {
-        return Long;
-    }
-
 
     @Exclude
     public void setIncrementalReportId() {
@@ -315,17 +307,17 @@ public class Report implements java.io.Serializable {
         reportsRef.updateChildren(reportMap);
     }
 
-    public boolean isOpenReport() {
+    public boolean CheckIfReportOpen() {
         if ((Objects.equals(this.status, "CANCELED")) || (Objects.equals(this.status, "CLOSED")))
             return false;
         else return true;
     }
 
-    public String statusInHebrew(){
+    public String statusInHebrew() {
         return translateStatus(this.getStatus());
     }
 
-    public static String translateStatus(String status){
+    public static String translateStatus(String status) {
         Map<String, String> map = new HashMap<String, String>();
         map.put("NEW", "דיווח חדש");
         map.put("SCANNER_ENLISTED", "דיווח חדש");
@@ -385,7 +377,6 @@ public class Report implements java.io.Serializable {
         setStatus("NEW");
 
 
-
         if (this.photoPath != null) {
             StorageReference imagesRef = FirebaseStorage.getInstance().getReference().child("images");
             String fileName = getUserId() + "_" + String.valueOf(new Date().getTime());
@@ -434,5 +425,21 @@ public class Report implements java.io.Serializable {
 
     public void setPhotoPath(String photoPath) {
         this.photoPath = photoPath;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
 }
