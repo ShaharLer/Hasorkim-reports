@@ -196,15 +196,15 @@ public class Report implements java.io.Serializable {
         return incrementalReportId;
     }
 
-    public void persistReport() {
+    public String persistReportGetID(){
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
         DatabaseReference reportsRef = ref.child("reports");
         String id =reportsRef.push().getKey();
         setId(id);
 
-        FirebaseDatabase.getInstance().getReference("reports").child(getId()).setValue(this);
-
+        return id;
     }
+
 
     public void setExtraPhoneNumber(String extraPhoneNumber) {
         this.extraPhoneNumber = extraPhoneNumber;
@@ -375,9 +375,13 @@ public class Report implements java.io.Serializable {
                 '}';
     }
 
-    public void saveReport() {
-
+    public String saveReport() {
+        String id = null;
         final Report report = this;
+        id = persistReportGetID();
+        setId(id);
+
+
 
         if (this.photoPath != null) {
             StorageReference imagesRef = FirebaseStorage.getInstance().getReference().child("images");
@@ -408,6 +412,12 @@ public class Report implements java.io.Serializable {
             getUserWOContext().setMyLastOpenReport(this);
         }
 
+        return id;
+
+    }
+
+    private void persistReport() {
+        FirebaseDatabase.getInstance().getReference("reports").child(getId()).setValue(this);
     }
 
     public String getImageUrl() {
