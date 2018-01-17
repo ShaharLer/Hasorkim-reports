@@ -180,11 +180,13 @@ public class ActiveReportActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String status = dataSnapshot.getValue(String.class);
-                report.setStatus(status);
-                activeReportStatus.setText(report.statusInHebrew());
+                if (status != null) {
+                    report.setStatus(status);
+                    activeReportStatus.setText(report.statusInHebrew());
+                }
 
 
-                if ((Objects.equals(status, "CANCELED")) || Objects.equals(status, "CLOSED")){
+                if ((Objects.equals(status, "CANCELED")) || Objects.equals(status, "CLOSED")) {
                     reporter_buttons.setVisibility(View.GONE);
                     whatNowInfo.setVisibility(View.GONE);
                 }
