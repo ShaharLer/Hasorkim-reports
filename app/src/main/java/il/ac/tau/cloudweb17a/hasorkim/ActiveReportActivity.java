@@ -97,6 +97,22 @@ public class ActiveReportActivity extends AppCompatActivity {
 
         });
 
+        Button whatNowInfo = findViewById(R.id.whatNowInfo);
+
+        whatNowInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(ActiveReportActivity.this);
+                LayoutInflater inflater = ActiveReportActivity.this.getLayoutInflater();
+
+                // Inflate and set the layout for the dialog
+                // Pass null as the parent view because its going in the dialog layout
+                builder.setView(inflater.inflate(R.layout.what_now_pop, null));
+                builder.setTitle(R.string.thanks_for_reporting);
+                builder.create().show();
+
+            }
+        });
 
         Button cancelReportButton = findViewById(R.id.cancelReport);
 
@@ -136,20 +152,15 @@ public class ActiveReportActivity extends AppCompatActivity {
             }
         });
 
-        Button whatNowInfo = findViewById(R.id.whatNowInfo);
-
-        whatNowInfo.setOnClickListener(new View.OnClickListener() {
+        Button vetListButton = findViewById(R.id.VetListButton);
+        vetListButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(ActiveReportActivity.this);
-                LayoutInflater inflater = ActiveReportActivity.this.getLayoutInflater();
-
-                // Inflate and set the layout for the dialog
-                // Pass null as the parent view because its going in the dialog layout
-                builder.setView(inflater.inflate(R.layout.what_now_pop, null));
-                builder.setTitle(R.string.thanks_for_reporting);
-                builder.create().show();
-
+                Intent vetIntent = new Intent(getApplicationContext(), VetListActivity.class);
+                vetIntent.putExtra("lat", report.getLat());
+                vetIntent.putExtra("long", report.getLong());
+                vetIntent.putExtra("from", "menu");
+                startActivity(vetIntent);
             }
         });
     }
