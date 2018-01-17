@@ -327,7 +327,7 @@ public class Report implements java.io.Serializable {
         return translateStatus(this.getStatus());
     }
 
-    public String translateStatus(String status){
+    public static String translateStatus(String status){
         Map<String, String> map = new HashMap<String, String>();
         map.put("NEW", "דיווח חדש");
         map.put("SCANNER_ENLISTED", "דיווח חדש");
