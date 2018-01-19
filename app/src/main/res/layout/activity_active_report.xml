@@ -166,7 +166,8 @@
         android:layout_gravity="center"
         android:layout_weight="1.3"
         android:text="@string/so_what_now"
-        android:textSize="@dimen/button_text_size" />
+        android:textSize="@dimen/button_text_size"
+        android:textStyle="bold"/>
 
     <LinearLayout
         android:id="@+id/reporter_buttons"
@@ -176,16 +177,6 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/cancelReport"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/delete_report"
-            android:textColor="@color/backgroundColor"
-            android:textSize="20sp" />
-
-        <Button
             android:id="@+id/VetListButton"
             style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="0dp"
@@ -193,7 +184,19 @@
             android:layout_weight="1"
             android:text="@string/nearby_vet"
             android:textColor="@color/backgroundColor"
-            android:textSize="20sp" />
+            android:textSize="@dimen/standard_text_size"
+            android:textStyle="bold"/>
+
+        <Button
+            android:id="@+id/cancelReport"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/delete_report"
+            android:textColor="@color/backgroundColor"
+            android:textSize="@dimen/standard_text_size"
+            android:textStyle="bold"/>
 
     </LinearLayout>
 

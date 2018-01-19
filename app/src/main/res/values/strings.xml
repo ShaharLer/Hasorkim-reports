@@ -34,7 +34,6 @@
     <string name="phone_call">חייג</string>
     <string name="get_route">מסלול</string>
     <string name="title_activity_veterinay_clinic_more_details">פרטי המרפאה</string>
-
     <string name="action_settings">Settings</string>
     <string name="addReportPhone">טלפון *</string>
     <string name="newReportAddInformation">מידע נוסף</string>
@@ -112,15 +111,29 @@
     <string name="reporter_extra_info_hint">ניתן להכניס מידע נוסף</string>
     <string name="closed_by">נסגר על ידי:</string>
     <string name="my_last_open_report">חזור לבקשה</string>
-    <string name="cancel_dialog_title">ביטול הדיווח</string>
-    <string name="cancel_report">בטל דיווח</string>
-    <string name="back_report">חזור</string>
-    <string name="cancel_dialog_message">אנא הכנס את סיבת הביטול</string>
-    <string name="thanks_for_reporting">תודה על הדיווח</string>
+    <string name="cancel_dialog_title"><b>ביטול הדיווח</b></string>
+    <string name="cancel_report"><b>בטל דיווח</b></string>
+    <string name="back_report"><b>חזור</b></string>
+    <string name="cancel_dialog_message"><b>אנא הכנס/י את סיבת הביטול</b></string>
+    <string name="what_now"><b>מה עכשיו?</b></string>
     <string name="no_reports_exists">לא קיימים דיווחים</string>
     <string name="who_we_are_headline">מי אנחנו</string>
     <string name="setting">הגדרות</string>
     <string name="need_permission">אין אפשרות לצלם תמונה מבלי הרשאה זו</string>
     <string name="for_more_details_press">לפרטים נוספים לחץ/י על המרפאה</string>
     <string name="location_error">קרתה תקלה שקשורה למיקום</string>
+    <string name="what_now_string1">שלחתם לנו דיווח? מעולה!</string>
+    <string name="what_now_string2">אנחנו מטפלים מיידית כמעט בכל דיווח שעולה, גם אם עוד לא יצרנו קשר.</string>
+    <string name="what_now_string3">אנא, התאזרו בסבלנות עד שנמצא סורק באיזורכם - והכי חשוב: שמרו על הכלב שמצאתם, קישרו אותו ברצועה או סיגרו אותו במקום בטוח והישארו איתו.</string>
+    <string name="what_now_string4">אנחנו יודעים שיש לכם תוכניות, ולא בניתם להיתקע עכשיו עם כלב, אבל אם זה היה הכלב שלכם שאבד?</string>
+    <string name="what_now_string5">החיים שלהם - בידיים שלכם!</string>
+    <string name="who_we_are_string1">אנחנו הסורקים!</string>
+    <string name="who_we_are_string2"><u>המטרה העיקרית שלנו:</u></string>
+    <string name="who_we_are_string3">החזרת כלבים אבודים הביתה!</string>
+    <string name="who_we_are_string4"><u>השאיפה שלנו:</u></string>
+    <string name="who_we_are_string5">בכל נקודה בארץ בה תמצאו כלב, יהיה סורק בקרבתו ונוכל להחזיר אותו לבעלים.</string>
+    <string name="who_we_are_string6">בנוסף,</string>
+    <string name="who_we_are_string7">אנו פועלים להעלאת המודעות לחשיבות השבב, הקמת מערך אומנה וקליטת כלבים ללא בעלים.</string>
+    <string name="who_we_are_string8"><u>בשביל זה אנחנו צריכים אתכם!</u></string>
+    <string name="who_we_are_string9">רכשו סורק, או פנו אלינו לשמש כאומנה והצטרפו אלינו!</string>
 </resources>

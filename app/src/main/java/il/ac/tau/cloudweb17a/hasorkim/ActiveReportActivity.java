@@ -110,12 +110,21 @@ public class ActiveReportActivity extends AppCompatActivity {
                 AlertDialog.Builder builder = new AlertDialog.Builder(ActiveReportActivity.this);
                 LayoutInflater inflater = ActiveReportActivity.this.getLayoutInflater();
 
+                TextView title = new TextView(getApplicationContext());
+                title.setText(R.string.what_now);
+                title.setPadding(10, 50, 64, 9);
+                title.setTextColor(Color.BLACK);
+                title.setTextSize(22);
+
                 // Inflate and set the layout for the dialog
                 // Pass null as the parent view because its going in the dialog layout
                 builder.setView(inflater.inflate(R.layout.what_now_pop, null));
-                builder.setTitle(R.string.thanks_for_reporting);
+                builder.setCustomTitle(title);
+                builder.setNegativeButton(R.string.back_report, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                    }
+                });
                 builder.create().show();
-
             }
         });
 
