@@ -43,8 +43,8 @@ exports.notifyManagersAndScannersNewReport = functions.database.ref('/reports/{r
 
     const report = event.params.report;
 
-    const data_lat = event.data.val().lat;
-    const data_long = event.data.val().long;
+    const data_lat = event.data.val().latitude;
+    const data_long = event.data.val().longitude;
     const data_address = event.data.val().address;
 
 
