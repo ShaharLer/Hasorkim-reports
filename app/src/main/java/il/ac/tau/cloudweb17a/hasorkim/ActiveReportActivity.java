@@ -215,6 +215,13 @@ public class ActiveReportActivity extends AppCompatActivity {
         super.onDestroy();
         Glide.get(this).clearMemory();//clear memory
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(this, ReportListActivity.class));
+        finish();
+    }
 }
 
 

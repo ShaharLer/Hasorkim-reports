@@ -1,5 +1,6 @@
 package il.ac.tau.cloudweb17a.hasorkim;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +9,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import java.util.Map;
 
 
 public class ReportListActivity extends AppCompatActivity {
@@ -56,6 +59,13 @@ public class ReportListActivity extends AppCompatActivity {
         } else {
             mRecyclerView.setVisibility(View.VISIBLE);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(this, MapsActivity.class));
+        finish();
     }
 
 }
