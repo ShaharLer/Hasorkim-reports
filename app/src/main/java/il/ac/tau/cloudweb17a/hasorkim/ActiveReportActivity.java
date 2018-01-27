@@ -4,10 +4,16 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.content.FileProvider;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.ShareActionProvider;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,12 +29,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.File;
 import java.util.Objects;
 
 public class ActiveReportActivity extends AppCompatActivity {
 
     private Report report;
-    private static final String TAG = "Send Report";
+    private static final String TAG = ActiveReportActivity.class.getSimpleName();
+    private ShareActionProvider mShareActionProvider;
 
 
     @Override
@@ -214,6 +222,43 @@ public class ActiveReportActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         Glide.get(this).clearMemory();//clear memory
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate menu resource file.
+        getMenuInflater().inflate(R.menu.share_menu, menu);
+
+        // Locate MenuItem with ShareActionProvider
+        MenuItem item = menu.findItem(R.id.menu_share);
+
+        // Fetch and store ShareActionProvider
+        mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
+
+        setShareIntent();
+
+        // Return true to display menu
+        return true;
+    }
+
+    // Call to update the share intent
+    private void setShareIntent() {
+        Intent shareIntent = new Intent();
+        shareIntent.setType("text/plain");
+
+        if (report.getPhotoPath() != null) {
+            Uri photoURI = FileProvider.getUriForFile(ActiveReportActivity.this,
+                    BuildConfig.APPLICATION_ID + ".fileprovider",
+                    new File(report.getPhotoPath()));
+            shareIntent.putExtra(Intent.EXTRA_STREAM, photoURI);
+            shareIntent.setType("image/jpeg");
+        }
+        shareIntent.setAction(Intent.ACTION_SEND);
+        shareIntent.putExtra(Intent.EXTRA_TEXT, "פתחתי דיווח על כלב אבוד ברחוב " + report.getAddress() + " דרך אפליקציית הסורקים" +
+                "\n" +
+                "רוצה לדווח גם?" +
+                " הורד את האפליקיה https://play.google.com/store/apps/details?id=il.ac.tau.cloudweb17a.hasorkim");
+        mShareActionProvider.setShareIntent(shareIntent);
     }
 
     @Override

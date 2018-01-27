@@ -457,6 +457,11 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 startActivity(active_report_intent);
             }
         } else if (id == R.id.nav_share) {
+            Intent shareIntent = new Intent();
+            shareIntent.setAction(Intent.ACTION_SEND);
+            shareIntent.putExtra(Intent.EXTRA_TEXT,"הורידו גם אתם את אפליקציית הסורקים" + "\nhttps://play.google.com/store/apps/details?id=il.ac.tau.cloudweb17a.hasorkim ");
+            shareIntent.setType("text/plain");
+            startActivity(shareIntent);
 
         } else if (id == R.id.nav_send) {
             Intent who_we_are_intent = new Intent(this, WhoWeAreActivity.class);
