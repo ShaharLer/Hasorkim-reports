@@ -61,7 +61,8 @@ exports.notifyManagersAndScannersNewReport = functions.database.ref('/reports/{r
             lat: `${data_lat}`,
             long: `${data_long}`,
             address: `${data_address}`,
-            report: `${report}`
+            report: `${report}`,
+            type: `notifyManagersAndScannersNewReport`
         }
     };
 
@@ -79,5 +80,38 @@ exports.notifyManagersAndScannersNewReport = functions.database.ref('/reports/{r
       .catch(function(error) {
         console.log("Error sending message:", error);
       });
+
+});
+
+exports.notifyScannerEnlisted = functions.database.ref('/reports/{report}').onUpdate(event => {
+    const report = event.params.report;
+
+    const oldAssignedScanner = event.data.previous.val().assignedScanner;
+    const newAssignedScanner = event.data.val().assignedScanner;
+    const address = event.data.val().address;
+
+    if (!newAssignedScanner || (oldAssignedScanner && (oldAssignedScanner == newAssignedScanner))) {
+        return;
+    }
+
+    console.log('Report ', report, 'scanner has changed. from: ', oldAssignedScanner, "to: ", newAssignedScanner);
+
+    // Notification details.
+    const payload = {
+        data: {
+            title: `נבחרת לדיווח ברחוב ${address}`,
+            report: `${report}`,
+            type: `notifyScannerEnlisted`
+        }
+    };
+
+
+    var options = {
+        priority: "high",
+        timeToLive: 60 * 60 * 24
+    };
+
+    // Send notifications to user.
+    return admin.messaging().sendToDevice(newAssignedScanner, payload, options);
 
 });

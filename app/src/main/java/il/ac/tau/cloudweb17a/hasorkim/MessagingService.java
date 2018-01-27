@@ -22,7 +22,6 @@ public class MessagingService extends FirebaseMessagingService {
 
     String reportId;
     String title;
-    String oldStatus;
     String newStatus;
 
     @Override
