@@ -23,10 +23,12 @@
             android:name=".VetListActivity"
             android:label="@string/title_activity_vet_list"
             android:parentActivityName=".MapsActivity"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait" />
 
         <activity
             android:name=".VeterinaryClinicMoreDetailsActivity"
+            android:parentActivityName=".VetListActivity"
             android:label="@string/title_activity_veterinay_clinic_more_details"
             android:screenOrientation="portrait" />
 
@@ -59,6 +61,7 @@
             android:name=".ReportListActivity"
             android:label="@string/my_reports"
             android:parentActivityName=".MapsActivity"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -68,6 +71,7 @@
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
