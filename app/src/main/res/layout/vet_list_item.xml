@@ -3,64 +3,80 @@
     android:id="@+id/vet_list_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
     android:background="@drawable/list_item_selected"
-    android:padding="@dimen/vet_list_padding">
+    android:orientation="horizontal"
+    android:paddingTop="@dimen/vet_list_padding"
+    android:paddingBottom="@dimen/vet_list_padding"
+    android:paddingStart="@dimen/nav_header_vertical_spacing"
+    android:paddingEnd="@dimen/nav_header_vertical_spacing">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="21"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/vet_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:paddingBottom="@dimen/vet_clinic_name_padding"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/report_text_size"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/vet_clinic_address"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/report_text_size"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/vet_address"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="4.55"
+                android:textDirection="rtl"
+                android:textSize="@dimen/report_text_size" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/vet_clinic_walking_distance"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/report_text_size"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/vet_distance_from_origin"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="4.55"
+                android:textColor="@color/distanceToVetColor"
+                android:textSize="@dimen/report_text_size" />
+        </LinearLayout>
+    </LinearLayout>
 
     <TextView
-        android:id="@+id/vet_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/colorPrimaryDark"
-        android:layout_gravity="start"
-        android:textSize="17sp"
-        android:textStyle="bold"
-        android:paddingBottom="@dimen/vet_clinic_name_padding"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/vet_clinic_address"
-            android:textColor="@android:color/black"
-            android:textSize="17sp"
-            android:textStyle="bold"/>
-
-        <TextView
-            android:id="@+id/vet_address"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="4.7"
-            android:textDirection="rtl"
-            android:textSize="17sp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/vet_clinic_walking_distance"
-            android:textColor="@android:color/black"
-            android:textSize="17sp"
-            android:textStyle="bold"/>
-
-        <TextView
-            android:id="@+id/vet_distance_from_origin"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="4.7"
-            android:textSize="17sp"
-            android:textColor="@color/distanceToVetColor"/>
-    </LinearLayout>
-
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:drawableEnd="@drawable/ic_chevron_left_black_24dp"/>
 </LinearLayout>

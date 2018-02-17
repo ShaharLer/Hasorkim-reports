@@ -48,20 +48,6 @@
                 android:textStyle="bold" />
         </RadioGroup>
 
-        <TextView
-            android:id="@+id/press_for_vet_details"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="@dimen/for_more_details_padding"
-            android:paddingBottom="@dimen/for_more_details_padding"
-            android:gravity="center"
-            android:background="@drawable/press_for_more_details_border_line"
-            android:textSize="@dimen/vet_list_buttons_size"
-            android:text="@string/for_more_details_press"
-            android:textColor="@color/distanceToVetColor"
-            android:textStyle="bold"
-            android:visibility="gone"/>
-
         <android.support.v7.widget.RecyclerView
             android:id="@+id/vet_list_recycler_view"
             android:layout_width="match_parent"

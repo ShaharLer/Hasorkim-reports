@@ -40,6 +40,7 @@ public class Report implements java.io.Serializable {
     private String phoneNumber;
     private String extraPhoneNumber;
     private String assignedScanner;
+    private String managerInCharge;
     private int availableScanners;
     private String cancellationText;
     private String userId;
@@ -69,6 +70,7 @@ public class Report implements java.io.Serializable {
 
         this.assignedScanner = "";
         this.availableScanners = 0;
+        this.managerInCharge = "";
 
         if (user.getName() != null)
             this.reporterName = user.getName();
@@ -156,6 +158,10 @@ public class Report implements java.io.Serializable {
 
     public String getAssignedScanner() {
         return assignedScanner;
+    }
+
+    public String getManagerInCharge() {
+        return managerInCharge;
     }
 
     public String getStatus() {
@@ -365,7 +371,8 @@ public class Report implements java.io.Serializable {
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", extraPhoneNumber='" + extraPhoneNumber + '\'' +
                 ", assignedScanner='" + assignedScanner + '\'' +
-                ", availableScanners=" + availableScanners +
+                ", availableScanners=" + availableScanners + '\'' +
+                ", managerInCharge=" + managerInCharge +
                 '}';
     }
 

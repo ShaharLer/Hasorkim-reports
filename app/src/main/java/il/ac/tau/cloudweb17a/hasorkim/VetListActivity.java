@@ -21,7 +21,6 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -61,7 +60,6 @@ public class VetListActivity extends AppCompatActivity {
     private RadioGroup vetTypeButtons;
     private RadioButton all_vets_button;
     private RadioButton open_vets_button;
-    private TextView more_details;
     private LinearLayout vetListLayout;
     private RecyclerView vetListRecyclerView;
     private List<VeterinaryClinic> allVetsList;
@@ -85,17 +83,11 @@ public class VetListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vet_list);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        // Connecting to the XML widgets
-        progressBar = findViewById(R.id.vet_list_progress_bar);
-        vetTypeButtons = findViewById(R.id.vet_type_buttons_group);
-        all_vets_button = findViewById(R.id.all_vets_button);
-        open_vets_button = findViewById(R.id.open_vets_button);
-        more_details = findViewById(R.id.press_for_vet_details);
-        
-
-        vetListLayout = findViewById(R.id.vet_list_layout);
+        progressBar         = findViewById(R.id.vet_list_progress_bar);
+        vetTypeButtons      = findViewById(R.id.vet_type_buttons_group);
+        all_vets_button     = findViewById(R.id.all_vets_button);
+        open_vets_button    = findViewById(R.id.open_vets_button);
+        vetListLayout       = findViewById(R.id.vet_list_layout);
         vetListRecyclerView = findViewById(R.id.vet_list_recycler_view);
         Button backToReport = findViewById(R.id.going_to_report_btn);
 
@@ -217,9 +209,6 @@ public class VetListActivity extends AppCompatActivity {
         }
     }
 
-    /**
-     *
-     */
     private void getNearbyVets(boolean onlyOpen) {
         Uri.Builder url = new Uri.Builder()
                 .scheme("https")
@@ -252,11 +241,6 @@ public class VetListActivity extends AppCompatActivity {
         }
     }
 
-    /**
-     * @param url
-     * @param parseType
-     * @throws IOException
-     */
     private void run(String url, final QueryType parseType) throws IOException {
         Request request = new Request.Builder()
                 .url(url)
@@ -305,9 +289,6 @@ public class VetListActivity extends AppCompatActivity {
         });
     }
 
-    /**
-     * @param vetList
-     */
     private String distancesApiCall(List<VeterinaryClinic> vetList) {
         int listSize = vetList.size();
         Log.d(TAG, "Vet list size is: " + listSize);
@@ -339,9 +320,6 @@ public class VetListActivity extends AppCompatActivity {
         return currentUrlDistances;
     }
 
-    /**
-     *
-     */
     private void updateUI() {
         runOnUiThread(new Runnable() {
             @Override
@@ -366,24 +344,15 @@ public class VetListActivity extends AppCompatActivity {
                         switch (checkedId) {
                             case R.id.all_vets_button:
                                 vetListRecyclerView.setAdapter(new VeterinaryClinicAdapter(allVetsList, buttonsListener));
-                                if (allVetsList.size() > 0)
-                                    more_details.setVisibility(View.VISIBLE);
-                                else
-                                    more_details.setVisibility(View.GONE);
                                 break;
 
                             case R.id.open_vets_button:
                                 vetListRecyclerView.setAdapter(new VeterinaryClinicAdapter(openVetsList, buttonsListener));
-                                if (openVetsList.size() > 0)
-                                    more_details.setVisibility(View.VISIBLE);
-                                else
-                                    more_details.setVisibility(View.GONE);
                         }
                     }
                 });
 
-                // updating the screen with the open clinics showed
-
+                // updating the screen with the open clinics list showed (if the list is not empty)
                 if (openVetsList.isEmpty())
                     all_vets_button.setChecked(true);
                 else
@@ -394,14 +363,4 @@ public class VetListActivity extends AppCompatActivity {
             }
         });
     }
-
-    /****************************************************************************************************/
-    /*
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        startActivity(new Intent(this, MapsActivity.class));
-        //finish(); // TODO what is this method???
-    }
-    */
 }
