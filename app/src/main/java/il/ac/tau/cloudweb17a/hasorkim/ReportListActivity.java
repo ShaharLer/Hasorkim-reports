@@ -42,8 +42,6 @@ public class ReportListActivity extends AppCompatActivity {
         User.getUser(getApplicationContext());
 
         mAdapter = new ReportAdapter();
-        //RecyclerView.Adapter mAdapter = new ReportAdapter(FirebaseDatabase.getInstance().getReference().child("reports").limitToLast(70)); TODO delete after debug
-        //mRecyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL)); TODO delete this after debug
         mRecyclerView.setAdapter(mAdapter);
 
 

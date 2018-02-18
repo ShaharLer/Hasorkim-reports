@@ -55,7 +55,6 @@ public class VetListActivity extends AppCompatActivity {
     public static final String ORIGIN_LATITUDE  = "com.example.hasorkim.origin_latitude";
     public static final String ORIGIN_LONGITUDE = "com.example.hasorkim.origin_longitude";
 
-    // TODO should I declare them here or inside OcCreate
     private ProgressBar progressBar;
     private RadioGroup vetTypeButtons;
     private RadioButton all_vets_button;
@@ -192,11 +191,6 @@ public class VetListActivity extends AppCompatActivity {
                             currLatitude = mLastKnownLocation.getLatitude();
                             currLongitude = mLastKnownLocation.getLongitude();
                         }
-                        else {
-                            System.out.println("Current location is null. Using defaults.");
-                            System.out.println("Exception: " + task.getException());
-                        }
-
                         getNearbyVets(false);
                     }
                 });
@@ -259,10 +253,6 @@ public class VetListActivity extends AppCompatActivity {
                         throw new IOException("Unexpected code " + response);
 
                     String returnedString = responseBody.string();
-
-                    // delete this 2 lines
-                    System.out.println("RETURNED STRING IS:");
-                    System.out.println(returnedString);
 
                     switch (parseType) {
                         case NEARBY_SEARCH_ALL:

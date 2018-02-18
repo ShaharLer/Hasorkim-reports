@@ -38,8 +38,6 @@ public class DataParser {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-        System.out.println("Vet list size is: " + vetsList.size());
         return vetsList;
     }
 

@@ -106,7 +106,6 @@ public class VeterinaryClinicMoreDetailsActivity extends AppCompatActivity {
      * @param url
      * @throws IOException
      */
-    // TODO consider to take this function to another class
     private void run(String url) throws IOException {
         Request request = new Request.Builder()
                 .url(url)
@@ -124,9 +123,7 @@ public class VeterinaryClinicMoreDetailsActivity extends AppCompatActivity {
                     if (!response.isSuccessful())
                         throw new IOException("Unexpected code " + response);
 
-                    System.out.println("RETURNED STRING IS:");
                     String returnedString = responseBody.string();
-                    System.out.println(returnedString);
 
                     Map<String, Object> placeDetails = DataParser.parsePlaceDetails(returnedString);
                     updateTextViews(placeDetails);
@@ -270,7 +267,6 @@ public class VeterinaryClinicMoreDetailsActivity extends AppCompatActivity {
                 .appendQueryParameter("saddr",(originLatitude + "," + originLongitude))
                 .appendQueryParameter("daddr", (destLatitude + "," + destLongitude));
 
-        System.out.println("The URL is: " + urlRoute.toString());
         Intent routeIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(urlRoute.toString()));
 
         // TODO got problem with merging google maps and waze in this case
