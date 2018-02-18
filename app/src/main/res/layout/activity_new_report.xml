@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/reportDetailsBack"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backgroundColor"
-    android:orientation="vertical"
     android:padding="@dimen/nav_header_vertical_spacing"
     tools:context="il.ac.tau.cloudweb17a.hasorkim.NewReportActivity">
 
     <ScrollView
+        android:id="@+id/details_scroll_view"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="8.5"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/submitReport"
         android:scrollbars="vertical">
 
         <RelativeLayout
@@ -25,7 +24,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingBottom="@dimen/report_padding">
+                android:paddingBottom="@dimen/report_image_padding">
 
                 <CheckBox
                     android:id="@+id/reportCheckbox"
@@ -71,14 +70,12 @@
                 android:layout_below="@id/alert_message"
                 android:layout_centerInParent="true"
                 android:layout_marginBottom="@dimen/report_padding"
-                android:layout_marginTop="@dimen/button_text_size"
                 android:contentDescription="@string/closed_report_photo_description"
-                android:maxHeight="300dp"
-                android:maxWidth="300dp"
+                android:maxHeight="275dp"
+                android:maxWidth="275dp"
                 android:adjustViewBounds="true"
                 android:src="@drawable/add_dog"
-                android:background="@null"
-                />
+                android:background="@null" />
 
             <LinearLayout
                 android:id="@+id/reporter_name_layout"
@@ -86,7 +83,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/ReportImageView"
                 android:orientation="horizontal"
-                android:paddingBottom="@dimen/report_padding"
+                android:paddingBottom="@dimen/vet_list_padding"
                 android:textStyle="bold">
 
                 <TextView
@@ -191,8 +188,7 @@
                     android:layout_weight="1.8"
                     android:gravity="center"
                     android:hint="@string/reporter_extra_info_hint"
-                    android:inputType="textMultiLine"
-                    android:selectAllOnFocus="false" />
+                    android:inputType="textImeMultiLine" />
             </LinearLayout>
 
         </RelativeLayout>
@@ -203,12 +199,11 @@
         android:id="@+id/submitReport"
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_gravity="center"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:text="@string/button_new_event_more_details_submit"
         android:textColor="@color/backgroundColor"
-        android:textSize="24sp"
+        android:textSize="@dimen/submit_report_text_size"
         android:textStyle="bold" />
 
-</LinearLayout>
+</RelativeLayout>

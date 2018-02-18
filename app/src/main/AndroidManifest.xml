@@ -50,7 +50,7 @@
         </activity>
         <activity
             android:name=".ActiveReportActivity"
-            android:label="דיווח פעיל"
+            android:label="@string/active_report"
             android:parentActivityName=".ReportListActivity"
             android:screenOrientation="portrait">
             <meta-data
