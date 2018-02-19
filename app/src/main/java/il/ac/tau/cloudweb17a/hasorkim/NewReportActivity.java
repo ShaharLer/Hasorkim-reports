@@ -129,6 +129,7 @@ public class NewReportActivity extends AppCompatActivity {
                     Intent intent = new Intent(NewReportActivity.this, ActiveReportActivity.class);
                     intent.putExtra("Report", report);
                     startActivity(intent);
+                    finish();
                 } else {
                     if (!phoneError.equals("")) {
                         reporterPhoneNumber.setError(phoneError);

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="new_report_size">36sp</dimen>
-    <dimen name="what_now_size">30sp</dimen>
+    <dimen name="what_now_size">25sp</dimen>
     <dimen name="button_text_size">24sp</dimen>
     <dimen name="submit_report_text_size">25sp</dimen>
     <dimen name="standard_padding">16dp</dimen>
@@ -19,6 +19,7 @@
     <dimen name="vet_list_buttons_size">16sp</dimen>
     <dimen name="report_list_text_size">16sp</dimen>
     <dimen name="active_report_text_size">20sp</dimen>
+    <dimen name="report_details_headline_size">23sp</dimen>
     <dimen name="double_padding">32dp</dimen>
     <dimen name="report_padding">16dp</dimen>
     <dimen name="report_image_padding">20dp</dimen>
@@ -36,4 +37,6 @@
     <dimen name="date_and_time_size">12sp</dimen>
     <dimen name="status_label_size">40sp</dimen>
     <dimen name="current_status_size">50sp</dimen>
+    <dimen name="report_icon_size">40dp</dimen>
+    <dimen name="active_report_photo_size">175dp</dimen>
 </resources>

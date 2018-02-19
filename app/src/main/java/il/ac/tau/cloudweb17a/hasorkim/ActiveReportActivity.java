@@ -59,11 +59,18 @@ public class ActiveReportActivity extends AppCompatActivity {
         TextView activeReportLocation = findViewById(R.id.activeReportLocation);
         activeReportLocation.setText(report.getAddress());
 
+        final LinearLayout extraPhoneNumberLayout = findViewById(R.id.addAnotherPhoneLinearLayout);
+        final ImageButton savePhoneNumber = findViewById(R.id.saveAnotherPhoneNumber);
+        final TextView extraPhoneNumber = findViewById(R.id.addAnotherPhoneNumber);
+        final ImageButton addPhoneNumber = findViewById(R.id.addPhoneNumber);
+        final ImageButton removeExtraPhoneNumber = findViewById(R.id.removeExtraPhoneNumber);
+        LinearLayout addressLayout = findViewById(R.id.active_report_address_layout);
+
         if (report.getExtraPhoneNumber() != null) {
-            LinearLayout linearLayout = findViewById(R.id.addAnotherPhoneLinearLayout);
-            linearLayout.setVisibility(LinearLayout.VISIBLE);
-            EditText addAnotherPhoneNumber = findViewById(R.id.addAnotherPhoneNumber);
-            addAnotherPhoneNumber.setText(report.getExtraPhoneNumber());
+            extraPhoneNumber.setText(report.getExtraPhoneNumber());
+            extraPhoneNumberLayout.setVisibility(LinearLayout.VISIBLE);
+            addPhoneNumber.setVisibility(View.GONE);
+            removeExtraPhoneNumber.setVisibility(View.VISIBLE);
         }
 
         if (report.getPhotoPath() != null) {
@@ -71,27 +78,39 @@ public class ActiveReportActivity extends AppCompatActivity {
             openReportImage.setVisibility(View.VISIBLE);
             Glide.with(this).load(report.getPhotoPath()).into(openReportImage);
         }
-
-        ImageButton addPhoneNumber = findViewById(R.id.addPhoneNumber);
+        else {
+            System.out.println("PaddingTop: " + addressLayout.getPaddingTop());
+            System.out.println("PaddingBottom: " + addressLayout.getPaddingBottom());
+            System.out.println("PaddingStart: " + addressLayout.getPaddingStart());
+            System.out.println("PaddingEnd: " + addressLayout.getPaddingEnd());
+            addressLayout.setPadding(30,180,30,42);
+        }
 
         addPhoneNumber.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LinearLayout linearLayout = findViewById(R.id.addAnotherPhoneLinearLayout);
-                if (linearLayout.getVisibility() == LinearLayout.GONE)
-                    linearLayout.setVisibility(LinearLayout.VISIBLE);
-                else
-                    linearLayout.setVisibility(LinearLayout.GONE);
+                extraPhoneNumberLayout.setVisibility(LinearLayout.VISIBLE);
+                addPhoneNumber.setVisibility(View.GONE);
+                removeExtraPhoneNumber.setVisibility(View.VISIBLE);
             }
 
         });
 
-        ImageButton savePhoneNumber = findViewById(R.id.saveAnotherPhoneNumber);
+        removeExtraPhoneNumber.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                extraPhoneNumberLayout.setVisibility(LinearLayout.GONE);
+                removeExtraPhoneNumber.setVisibility(View.GONE);
+                addPhoneNumber.setVisibility(View.VISIBLE);
+            }
+
+        });
+
+
 
         savePhoneNumber.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                TextView extraPhoneNumber = findViewById(R.id.addAnotherPhoneNumber);
                 String extraPhoneNumberString = extraPhoneNumber.getText().toString();
                 String error = report.validatePhone(extraPhoneNumberString);
                 if (error.equals("")) {
@@ -189,7 +208,6 @@ public class ActiveReportActivity extends AppCompatActivity {
 
         final View reporter_buttons = findViewById(R.id.reporter_buttons);
 
-
         DatabaseReference statusManagerRef = FirebaseDatabase.getInstance()
                 .getReference("reports").child(report.getId()).child("status");
 
@@ -206,9 +224,10 @@ public class ActiveReportActivity extends AppCompatActivity {
                 if ((Objects.equals(status, "CANCELED")) || Objects.equals(status, "CLOSED")) {
                     reporter_buttons.setVisibility(View.GONE);
                     whatNowInfo.setVisibility(View.GONE);
+                    savePhoneNumber.setVisibility(View.INVISIBLE);
+                    extraPhoneNumber.setError(null);
+                    extraPhoneNumber.setKeyListener(null);
                 }
-
-
             }
 
             @Override

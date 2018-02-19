@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,10 +8,32 @@
     android:padding="@dimen/vet_list_padding"
     tools:context="il.ac.tau.cloudweb17a.hasorkim.ClosedReportActivity">
 
+    <TextView
+        android:id="@+id/closedReportStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@color/reportListColor"
+        android:textSize="@dimen/new_report_size"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/closedReportImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/closedReportStatus"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="@dimen/standard_padding"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/closed_report_photo_description"
+        android:maxHeight="250dp"
+        android:maxWidth="250dp"
+        android:visibility="gone" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/closedReportImageView"
         android:scrollbars="vertical">
 
         <RelativeLayout
@@ -19,55 +41,17 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:id="@+id/closed_report_status_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/standard_padding"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="@string/report_details_status"
-                    android:textSize="26sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/closedReportStatus"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:textColor="@android:color/black"
-                    android:textSize="26sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <ImageView
-                android:id="@+id/closedReportImageView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/closed_report_status_layout"
-                android:layout_marginTop="@dimen/button_text_size"
-                android:contentDescription="@string/closed_report_photo_description"
-                android:visibility="gone"
-                android:layout_centerInParent="true"
-                android:adjustViewBounds="true"
-                android:maxHeight="300dp"
-                android:maxWidth="300dp"
-                />
-
             <TextView
                 android:id="@+id/closed_report_details_headline"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/closedReportImageView"
-                android:layout_marginBottom="@dimen/place_details_list_layout_padding"
-                android:layout_marginTop="@dimen/new_report_size"
+                android:background="@drawable/what_now_info_border"
+                android:layout_marginTop="@dimen/vet_list_padding"
+                android:paddingBottom="@dimen/report_list_item_start_end_padding"
+                android:paddingTop="@dimen/vet_list_padding"
                 android:text="@string/closed_report_details_headline"
-                android:textSize="26sp"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/report_details_headline_size"
                 android:textStyle="bold" />
 
             <LinearLayout
@@ -90,9 +74,9 @@
                     android:id="@+id/closedReportDate"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2.4"
-                    android:textSize="@dimen/standard_text_size"
+                    android:layout_weight="2.1"
                     android:textColor="@android:color/black"
+                    android:textSize="@dimen/report_text_size"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -117,9 +101,9 @@
                     android:id="@+id/closedReportLocation"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2.4"
-                    android:textSize="@dimen/standard_text_size"
+                    android:layout_weight="2.1"
                     android:textColor="@android:color/black"
+                    android:textSize="@dimen/standard_text_size"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -145,14 +129,14 @@
                     android:id="@+id/closedReportExtraText"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2.4"
-                    android:textSize="@dimen/standard_text_size"
+                    android:layout_weight="2.1"
                     android:textColor="@android:color/black"
+                    android:textSize="@dimen/standard_text_size"
                     android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/report_closed_by"
+                android:id="@+id/report_deleted_by"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/closed_report_more_info_layout"
@@ -162,10 +146,10 @@
                 android:visibility="gone">
 
                 <TextView
+                    android:id="@+id/deleted_by_label"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/closed_by"
                     android:textSize="@dimen/standard_text_size"
                     android:textStyle="bold" />
 
@@ -173,9 +157,37 @@
                     android:id="@+id/closed_report_cancellation_user_type"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2.4"
-                    android:textSize="@dimen/standard_text_size"
+                    android:layout_weight="2.1"
                     android:textColor="@android:color/black"
+                    android:textSize="@dimen/standard_text_size"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/closing_or_cancellation_reason_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/report_deleted_by"
+                android:layout_marginTop="@dimen/nav_header_vertical_spacing"
+                android:orientation="horizontal"
+                android:textStyle="bold"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/closing_or_cancellation_reason_label"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/standard_text_size"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/closing_or_cancellation_reason"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2.1"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/standard_text_size"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -183,4 +195,4 @@
 
     </ScrollView>
 
-</FrameLayout>
+</RelativeLayout>
