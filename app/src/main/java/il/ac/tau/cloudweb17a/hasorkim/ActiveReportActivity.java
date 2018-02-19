@@ -79,13 +79,8 @@ public class ActiveReportActivity extends AppCompatActivity {
             openReportImage.setVisibility(View.VISIBLE);
             Glide.with(this).load(report.getPhotoPath()).into(openReportImage);
         }
-        else {
-            System.out.println("PaddingTop: " + addressLayout.getPaddingTop());
-            System.out.println("PaddingBottom: " + addressLayout.getPaddingBottom());
-            System.out.println("PaddingStart: " + addressLayout.getPaddingStart());
-            System.out.println("PaddingEnd: " + addressLayout.getPaddingEnd());
+        else
             addressLayout.setPadding(30,180,30,42);
-        }
 
         addPhoneNumber.setOnClickListener(new View.OnClickListener() {
             @Override
