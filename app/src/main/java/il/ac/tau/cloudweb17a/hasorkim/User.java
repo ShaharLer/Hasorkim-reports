@@ -16,7 +16,7 @@ public class User {
     private String name;
     private String phoneNumber;
     private SharedPreferences prefs;
-    public Report myLastOpenReport=null;
+    //public Report myLastOpenReport=null;
 
     public static final String USER_NAME = "display_name";
     public static final String USER_PHONE_NUMBER = "phone_number";
@@ -64,14 +64,14 @@ public class User {
         return user;
     }
 
-    public Report getMyLastOpenReport(){
+/*    public Report getMyLastOpenReport(){
         return myLastOpenReport;
     }
 
 
     public void setMyLastOpenReport(Report myLastOpenReport) {
         this.myLastOpenReport = myLastOpenReport;
-    }
+    }*/
 
 
 }

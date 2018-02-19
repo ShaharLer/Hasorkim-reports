@@ -113,7 +113,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         else{
             navigationView.getMenu().findItem(R.id.nav_my_last_open_report).setVisible(false);
         }*/
-        navigationView.getMenu().findItem(R.id.nav_my_last_open_report).setVisible(true);
+        //navigationView.getMenu().findItem(R.id.nav_my_last_open_report).setVisible(true);
 
         // Retrieve location and camera position from saved instance state.
         if (savedInstanceState != null) {
@@ -450,13 +450,13 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             Intent vet_intent = new Intent(this, VetListActivity.class);
             vet_intent.putExtra("from", "menu");
             startActivity(vet_intent);
-        } else if (id == R.id.nav_my_last_open_report) {
+        } /*else if (id == R.id.nav_my_last_open_report) {
             if (getUser(getApplicationContext()).getMyLastOpenReport() != null) {
                 Intent active_report_intent = new Intent(this, ActiveReportActivity.class);
                 active_report_intent.putExtra("Report", getUser(getApplicationContext()).getMyLastOpenReport());
                 startActivity(active_report_intent);
             }
-        } else if (id == R.id.nav_share) {
+        }*/ else if (id == R.id.nav_share) {
             Intent shareIntent = new Intent();
             shareIntent.setAction(Intent.ACTION_SEND);
             shareIntent.putExtra(Intent.EXTRA_TEXT,"דווחו על כלבים אבודים דרך אפליקציית הסורקים" + "\nhttps://play.google.com/store/apps/details?id=il.ac.tau.cloudweb17a.hasorkim");

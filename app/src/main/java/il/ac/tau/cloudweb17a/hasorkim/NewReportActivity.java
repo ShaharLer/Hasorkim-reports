@@ -51,12 +51,60 @@ public class NewReportActivity extends AppCompatActivity {
     TextView reporterName;
     TextView reporterPhoneNumber;
     TextView reportLocation;
+    private View new_report_all_view;
+
+
+    public interface MyCallBackClass {
+        void execute();
+    }
+
+    final MyCallBackClass  popupSimilarReportCallBack  = new MyCallBackClass() {
+        @Override
+        public void execute() {
+            new_report_all_view.setVisibility(View.VISIBLE);
+            if(!report.isHasSimilarReports()) {
+                report.saveReport();
+                Intent intent = new Intent(NewReportActivity.this, ActiveReportActivity.class);
+                intent.putExtra("Report", report);
+                startActivity(intent);
+            }
+            else{
+                popUpSimilarReport();
+            }
+        }
+    };
+
+    private void popUpSimilarReport() {
+
+        TextView title = new TextView(this);
+        title.setText(R.string.similar_report_dialog_title);
+        title.setPadding(10, 50, 64, 9);
+        title.setTextColor(Color.BLACK);
+        title.setTextSize(20);
+        title.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
+
+        new AlertDialog.Builder(this).setMessage(R.string.similar_report_dialog_message)
+                //.setTitle(R.string.similar_report_dialog_title)
+                .setCustomTitle(title)
+                .setPositiveButton(R.string.ok_similar_report, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        report.saveReport();
+                        Intent intent = new Intent(NewReportActivity.this, ActiveReportActivity.class);
+                        intent.putExtra("Report", report);
+                        startActivity(intent);
+                    }
+                }).setNegativeButton(R.string.cancel_similar_report, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+            }
+        }).create().show();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_report);
+
 
         address = getIntent().getStringExtra("address");
         if (address == null || address.equals(getString(R.string.unknown_address))) {
@@ -70,6 +118,10 @@ public class NewReportActivity extends AppCompatActivity {
         Long = getIntent().getDoubleExtra("long", DEFAULT_LONGITUDE);
 
         user = getUser(getApplicationContext());
+
+        new_report_all_view = findViewById(R.id.new_report_all_view);
+
+
         reporterName = findViewById(R.id.reporterName);
         reporterPhoneNumber = findViewById(R.id.reporterPhoneNumber);
         reportLocation = findViewById(R.id.reportLocation);
@@ -89,6 +141,8 @@ public class NewReportActivity extends AppCompatActivity {
                 requestPermission();
             }
         });
+
+
 
         Button submitReport = findViewById(R.id.submitReport);
         submitReport.setOnClickListener(new View.OnClickListener() {
@@ -115,20 +169,15 @@ public class NewReportActivity extends AppCompatActivity {
                 String phoneError = report.validatePhone(report.getPhoneNumber());
 
                 if (nameError.equals("") && phoneError.equals("")) {
-                    if (report.isHasSimilarReports()) {
-                        popUpSimilarReport();
-                        return;
-                    }
-
                     if (!report.getIsDogWithReporter()) {
                         popUpNotChecked();
                         return;
                     }
 
-                    report.saveReport();
-                    Intent intent = new Intent(NewReportActivity.this, ActiveReportActivity.class);
-                    intent.putExtra("Report", report);
-                    startActivity(intent);
+                    new_report_all_view.setVisibility(View.INVISIBLE);
+                    report.checkForSimilarReportAndSubmit(popupSimilarReportCallBack);
+
+
                 } else {
                     if (!phoneError.equals("")) {
                         reporterPhoneNumber.setError(phoneError);
@@ -205,10 +254,8 @@ public class NewReportActivity extends AppCompatActivity {
                 //.setTitle(R.string.not_checked_dialog_title)
                 .setPositiveButton(R.string.ok_not_checked, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        report.saveReport();
-                        Intent intent = new Intent(NewReportActivity.this, ActiveReportActivity.class);
-                        intent.putExtra("Report", report);
-                        startActivity(intent);
+                        new_report_all_view.setVisibility(View.INVISIBLE);
+                        report.checkForSimilarReportAndSubmit(popupSimilarReportCallBack);
                     }
                 }).setNegativeButton(R.string.cancel_not_checked, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
@@ -216,36 +263,7 @@ public class NewReportActivity extends AppCompatActivity {
         }).setCustomTitle(title).create().show();
     }
 
-    private void popUpSimilarReport() {
 
-        TextView title = new TextView(this);
-        title.setText(R.string.similar_report_dialog_title);
-        title.setPadding(10, 50, 64, 9);
-        title.setTextColor(Color.BLACK);
-        title.setTextSize(20);
-        title.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
-
-        new AlertDialog.Builder(this).setMessage(R.string.similar_report_dialog_message)
-                //.setTitle(R.string.similar_report_dialog_title)
-                .setCustomTitle(title)
-                .setPositiveButton(R.string.ok_similar_report, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-
-                        CheckBox cb = findViewById(R.id.reportCheckbox);
-                        if (!cb.isChecked()) {
-                            popUpNotChecked();
-                        } else {
-                            report.saveReport();
-                            Intent intent = new Intent(NewReportActivity.this, ActiveReportActivity.class);
-                            intent.putExtra("Report", report);
-                            startActivity(intent);
-                        }
-                    }
-                }).setNegativeButton(R.string.cancel_similar_report, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-            }
-        }).create().show();
-    }
 
     private void requestPermission() {
         if (ContextCompat.checkSelfPermission(this,
@@ -278,4 +296,5 @@ public class NewReportActivity extends AppCompatActivity {
         super.onDestroy();
         Glide.get(this).clearMemory();//clear memory
     }
+
 }
