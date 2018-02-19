@@ -53,7 +53,7 @@ public class ActiveReportActivity extends AppCompatActivity {
         //TextView activeReportExtraText = (TextView) findViewById(R.id.activeReportExtraText);
         //activeReportExtraText.setText((CharSequence) report.getFreeText());
 
-        TextView activeReportPhoneNumber = findViewById(R.id.activeReportPhoneNumber);
+        final TextView activeReportPhoneNumber = findViewById(R.id.activeReportPhoneNumber);
         activeReportPhoneNumber.setText(report.getPhoneNumber());
 
         TextView activeReportLocation = findViewById(R.id.activeReportLocation);
@@ -61,7 +61,7 @@ public class ActiveReportActivity extends AppCompatActivity {
 
         final LinearLayout extraPhoneNumberLayout = findViewById(R.id.addAnotherPhoneLinearLayout);
         final ImageButton savePhoneNumber = findViewById(R.id.saveAnotherPhoneNumber);
-        final TextView extraPhoneNumber = findViewById(R.id.addAnotherPhoneNumber);
+        final EditText extraPhoneNumber = findViewById(R.id.addAnotherPhoneNumber);
         final ImageButton addPhoneNumber = findViewById(R.id.addPhoneNumber);
         final ImageButton removeExtraPhoneNumber = findViewById(R.id.removeExtraPhoneNumber);
         LinearLayout addressLayout = findViewById(R.id.active_report_address_layout);
@@ -73,8 +73,9 @@ public class ActiveReportActivity extends AppCompatActivity {
             removeExtraPhoneNumber.setVisibility(View.VISIBLE);
         }
 
+        final ImageView openReportImage = findViewById(R.id.activeReportImageView);
+
         if (report.getPhotoPath() != null) {
-            ImageView openReportImage = findViewById(R.id.activeReportImageView);
             openReportImage.setVisibility(View.VISIBLE);
             Glide.with(this).load(report.getPhotoPath()).into(openReportImage);
         }
@@ -227,6 +228,16 @@ public class ActiveReportActivity extends AppCompatActivity {
                     savePhoneNumber.setVisibility(View.INVISIBLE);
                     extraPhoneNumber.setError(null);
                     extraPhoneNumber.setKeyListener(null);
+                    extraPhoneNumber.setHint("");
+                    addPhoneNumber.setVisibility(View.GONE);
+                    removeExtraPhoneNumber.setVisibility(View.GONE);
+                    activeReportPhoneNumber.setLayoutParams(new LinearLayout.LayoutParams
+                                                                (0, LinearLayout.LayoutParams.MATCH_PARENT, 2.8f));
+                    extraPhoneNumber.setLayoutParams(new LinearLayout.LayoutParams
+                            (0, LinearLayout.LayoutParams.MATCH_PARENT, 1.3f));
+                    openReportImage.setPadding(0,60,0,0);
+                    openReportImage.setMaxHeight(700);
+                    openReportImage.setMaxWidth(700);
                 }
             }
 

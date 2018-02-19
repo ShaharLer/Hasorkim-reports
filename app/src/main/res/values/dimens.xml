@@ -35,8 +35,8 @@
     <dimen name="report_list_padding">2dp</dimen>
     <dimen name="nav_header_height">176dp</dimen>
     <dimen name="date_and_time_size">12sp</dimen>
-    <dimen name="status_label_size">40sp</dimen>
-    <dimen name="current_status_size">50sp</dimen>
+    <dimen name="status_label_size">38sp</dimen>
+    <dimen name="current_status_size">46sp</dimen>
     <dimen name="report_icon_size">40dp</dimen>
     <dimen name="active_report_photo_size">175dp</dimen>
 </resources>

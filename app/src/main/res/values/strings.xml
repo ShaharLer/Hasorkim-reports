@@ -144,5 +144,6 @@
     <string name="report_delete_reason">סיבת ביטול:</string>
     <string name="report_close_reason">סיבת סגירה:</string>
     <string name="the_report_string">הדיווח</string>
+    <string name="extra_phone_number_hint">ניתן להכניס מס\' נוסף</string>
 
 </resources>

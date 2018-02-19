@@ -42,7 +42,7 @@
                 android:textStyle="bold"
                 android:paddingStart="@dimen/vet_list_padding"
                 android:paddingEnd="@dimen/vet_list_padding"
-                android:paddingBottom="@dimen/report_padding"/>
+                android:paddingBottom="@dimen/title_padding"/>
 
             <LinearLayout
                 android:id="@+id/active_report_address_layout"
@@ -50,7 +50,6 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/activeReportStatus"
                 android:orientation="horizontal"
-                android:paddingTop="@dimen/report_padding"
                 android:paddingStart="@dimen/vet_list_padding"
                 android:paddingEnd="@dimen/vet_list_padding"
                 android:paddingBottom="@dimen/vet_list_padding">
@@ -88,6 +87,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
+                    android:paddingBottom="@dimen/vet_clinic_name_padding"
                     android:text="@string/active_report_phone"
                     android:textSize="@dimen/active_report_text_size"
                     android:textStyle="bold" />
@@ -134,9 +134,10 @@
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
+                    android:paddingBottom="@dimen/report_list_item_start_end_padding"
                     android:text="@string/active_report_extra_phone"
                     android:textSize="@dimen/active_report_text_size"
                     android:textStyle="bold" />
@@ -148,6 +149,7 @@
                     android:layout_weight="1.5"
                     android:gravity="center"
                     android:inputType="phone"
+                    android:hint="@string/extra_phone_number_hint"
                     android:singleLine="true"
                     android:textColor="@android:color/black" />
 

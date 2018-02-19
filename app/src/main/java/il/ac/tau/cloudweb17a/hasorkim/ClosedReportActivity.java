@@ -37,7 +37,7 @@ public class ClosedReportActivity extends AppCompatActivity {
         report = (Report) getIntent().getSerializableExtra("Report");
 
         TextView closedReportStatus = findViewById(R.id.closedReportStatus);
-        String reportStatus = (getString(R.string.the_report_string) + report.statusInHebrew());
+        String reportStatus = (getString(R.string.the_report_string) + " " + report.statusInHebrew());
         closedReportStatus.setText(reportStatus);
 
 
@@ -69,7 +69,7 @@ public class ClosedReportActivity extends AppCompatActivity {
         LinearLayout closing_or_cancellation_reason_layout = findViewById(R.id.closing_or_cancellation_reason_layout);
 
         if (report.getStatus().equals("CLOSED")) {
-            String closingReason = report.getClosingText();
+            String closingReason = report.getCancellationText();
             if ((closingReason != null) && (!closingReason.isEmpty())) {
                 closing_or_cancellation_reason_label.setText(R.string.report_close_reason);
                 closing_or_cancellation_reason.setText(closingReason);
@@ -85,13 +85,13 @@ public class ClosedReportActivity extends AppCompatActivity {
                 deleted_by_label.setText(R.string.deleted_by);
                 closedReportCancellationUserType.setText(report.getCancellationUserType());
                 closedByLayout.setVisibility(View.VISIBLE);
+            }
 
-                String cancellationReason = report.getCancellationText();
-                if ((cancellationReason != null) && (!cancellationReason.isEmpty())) {
-                    closing_or_cancellation_reason_label.setText(R.string.report_delete_reason);
-                    closing_or_cancellation_reason.setText(cancellationReason);
-                    closing_or_cancellation_reason_layout.setVisibility(View.VISIBLE);
-                }
+            String cancellationReason = report.getCancellationText();
+            if ((cancellationReason != null) && (!cancellationReason.isEmpty())) {
+                closing_or_cancellation_reason_label.setText(R.string.report_delete_reason);
+                closing_or_cancellation_reason.setText(cancellationReason);
+                closing_or_cancellation_reason_layout.setVisibility(View.VISIBLE);
             }
         }
     }
