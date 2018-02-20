@@ -167,7 +167,11 @@ public class ActiveReportActivity extends AppCompatActivity {
                         .setMessage(R.string.cancel_dialog_message)
                         .setCustomTitle(title)
                         .setView(editText)
-                        .setPositiveButton(R.string.cancel_report, new DialogInterface.OnClickListener() {
+                        .setPositiveButton(R.string.back_report, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                            }
+                        })
+                        .setNegativeButton(R.string.cancel_report, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 String cancelReportText = editText.getText().toString();
 
@@ -176,10 +180,6 @@ public class ActiveReportActivity extends AppCompatActivity {
                                 report.reportUpdateStatus("CANCELED");
 
                                 startActivity(new Intent(ActiveReportActivity.this, ReportListActivity.class));
-                            }
-                        })
-                        .setNegativeButton(R.string.back_report, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
                             }
                         })
                         .create().show();
