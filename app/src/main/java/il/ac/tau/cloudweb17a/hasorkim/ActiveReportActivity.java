@@ -50,9 +50,6 @@ public class ActiveReportActivity extends AppCompatActivity {
         final TextView activeReportStatus = findViewById(R.id.activeReportStatus);
         activeReportStatus.setText(report.statusInHebrew());
 
-        //TextView activeReportExtraText = (TextView) findViewById(R.id.activeReportExtraText);
-        //activeReportExtraText.setText((CharSequence) report.getFreeText());
-
         final TextView activeReportPhoneNumber = findViewById(R.id.activeReportPhoneNumber);
         activeReportPhoneNumber.setText(report.getPhoneNumber());
 
