@@ -37,7 +37,8 @@ public class ClosedReportActivity extends AppCompatActivity {
         report = (Report) getIntent().getSerializableExtra("Report");
 
         TextView closedReportStatus = findViewById(R.id.closedReportStatus);
-        closedReportStatus.setText(report.statusInHebrew());
+        String reportStatus = (getString(R.string.the_report_string) + " " + report.statusInHebrew());
+        closedReportStatus.setText(reportStatus);
 
 
         if (report.getPhotoPath() != null) {
@@ -55,20 +56,43 @@ public class ClosedReportActivity extends AppCompatActivity {
         TextView closedReportLocation = findViewById(R.id.closedReportLocation);
         closedReportLocation.setText(report.getAddress());
 
-        String canceller = report.getCancellationUserType();
-        if ((canceller != null) && (!canceller.isEmpty())) {
-            TextView closedReportCancellationUserType = findViewById(R.id.closed_report_cancellation_user_type);
-            closedReportCancellationUserType.setText(report.getCancellationUserType());
-            LinearLayout closedByLayout = findViewById(R.id.report_closed_by);
-            closedByLayout.setVisibility(View.VISIBLE);
-        }
-
         String comments = report.getFreeText();
         if ((comments != null) && (!comments.isEmpty())) {
             TextView closedReportExtraText = findViewById(R.id.closedReportExtraText);
             closedReportExtraText.setText(report.getFreeText());
             LinearLayout moreInfoLayout = findViewById(R.id.closed_report_more_info_layout);
             moreInfoLayout.setVisibility(View.VISIBLE);
+        }
+
+        TextView closing_or_cancellation_reason_label = findViewById(R.id.closing_or_cancellation_reason_label);
+        TextView closing_or_cancellation_reason = findViewById(R.id.closing_or_cancellation_reason);
+        LinearLayout closing_or_cancellation_reason_layout = findViewById(R.id.closing_or_cancellation_reason_layout);
+
+        if (report.getStatus().equals("CLOSED")) {
+            String closingReason = report.getCancellationText();
+            if ((closingReason != null) && (!closingReason.isEmpty())) {
+                closing_or_cancellation_reason_label.setText(R.string.report_close_reason);
+                closing_or_cancellation_reason.setText(closingReason);
+                closing_or_cancellation_reason_layout.setVisibility(View.VISIBLE);
+            }
+        }
+        else {
+            String canceller = report.getCancellationUserType();
+            if ((canceller != null) && (!canceller.isEmpty())) {
+                LinearLayout closedByLayout = findViewById(R.id.report_deleted_by);
+                TextView deleted_by_label = findViewById(R.id.deleted_by_label);
+                TextView closedReportCancellationUserType = findViewById(R.id.closed_report_cancellation_user_type);
+                deleted_by_label.setText(R.string.deleted_by);
+                closedReportCancellationUserType.setText(report.getCancellationUserType());
+                closedByLayout.setVisibility(View.VISIBLE);
+            }
+
+            String cancellationReason = report.getCancellationText();
+            if ((cancellationReason != null) && (!cancellationReason.isEmpty())) {
+                closing_or_cancellation_reason_label.setText(R.string.report_delete_reason);
+                closing_or_cancellation_reason.setText(cancellationReason);
+                closing_or_cancellation_reason_layout.setVisibility(View.VISIBLE);
+            }
         }
     }
 

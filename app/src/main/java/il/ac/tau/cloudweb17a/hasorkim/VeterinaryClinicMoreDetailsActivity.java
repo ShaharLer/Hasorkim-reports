@@ -236,51 +236,30 @@ public class VeterinaryClinicMoreDetailsActivity extends AppCompatActivity {
         openingHoursSaturdayTextView.setText(openingHours[6]);
     }
 
-    /**
-     * @param view
-     */
     public void OnCallButtonClick(View view) {
         Intent callIntent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + parsedVetPhoneNumber));
         if (callIntent.resolveActivity(getPackageManager()) != null)
             startActivity(callIntent);
     }
 
-    /**
-     * @param view
-     */
     public void OnWebsiteButtonClick(View view) {
         Intent websiteIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(vetWebsite));
         if (websiteIntent.resolveActivity(getPackageManager()) != null)
             startActivity(websiteIntent);
     }
 
-    /**
-     * @param view
-     */
     public void OnRouteButtonClick(View view) {
         Uri.Builder urlRoute = new Uri.Builder()
                 .scheme("https")
                 .authority("maps.google.com")
                 .appendPath("maps")
-                //.appendQueryParameter("f", "d")
-                //.appendQueryParameter("hl", "iw")
                 .appendQueryParameter("saddr",(originLatitude + "," + originLongitude))
                 .appendQueryParameter("daddr", (destLatitude + "," + destLongitude));
 
         Intent routeIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(urlRoute.toString()));
 
-        // TODO got problem with merging google maps and waze in this case
-        //Uri nav = Uri.parse("geo:" + destLatitude + "," + destLongitude);                 // works perfect for Waze
-        //Uri nav = Uri.parse("google.navigation:q=" + destLatitude + "," + destLongitude); // works good for Google Maps (default is driving)
-        //Intent routeIntent = new Intent(Intent.ACTION_VIEW, nav);
-
-        //Intent chooser = Intent.createChooser(routeIntent, OPEN_WITH); // Create intent to show chooser
-
-        // Verify the intent will resolve to at least one activity
-        if (routeIntent.resolveActivity(getPackageManager()) != null) {
-            //startActivity(chooser);
+        if (routeIntent.resolveActivity(getPackageManager()) != null)
             startActivity(routeIntent);
-        }
         else
             Toast.makeText(getApplicationContext(), R.string.route_unavailable, Toast.LENGTH_LONG).show();
     }

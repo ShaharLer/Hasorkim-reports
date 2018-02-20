@@ -43,6 +43,7 @@ public class Report implements java.io.Serializable {
     private String managerInCharge;
     private int availableScanners;
     private String cancellationText;
+    private String closingText;
     private String userId;
     private boolean hasSimilarReports;
     private boolean isDogWithReporter;
@@ -455,5 +456,13 @@ public class Report implements java.io.Serializable {
 
     public void setLongitude(double longitude) {
         this.longitude = longitude;
+    }
+
+    public String getClosingText() {
+        return closingText;
+    }
+
+    public void setClosingText(String closingText) {
+        this.closingText = closingText;
     }
 }

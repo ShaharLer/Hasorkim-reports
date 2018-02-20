@@ -50,48 +50,60 @@ public class ActiveReportActivity extends AppCompatActivity {
         final TextView activeReportStatus = findViewById(R.id.activeReportStatus);
         activeReportStatus.setText(report.statusInHebrew());
 
-        //TextView activeReportExtraText = (TextView) findViewById(R.id.activeReportExtraText);
-        //activeReportExtraText.setText((CharSequence) report.getFreeText());
-
-        TextView activeReportPhoneNumber = findViewById(R.id.activeReportPhoneNumber);
+        final TextView activeReportPhoneNumber = findViewById(R.id.activeReportPhoneNumber);
         activeReportPhoneNumber.setText(report.getPhoneNumber());
 
         TextView activeReportLocation = findViewById(R.id.activeReportLocation);
         activeReportLocation.setText(report.getAddress());
 
+        final LinearLayout extraPhoneNumberLayout = findViewById(R.id.addAnotherPhoneLinearLayout);
+        final ImageButton savePhoneNumber = findViewById(R.id.saveAnotherPhoneNumber);
+        final EditText extraPhoneNumber = findViewById(R.id.addAnotherPhoneNumber);
+        final ImageButton addPhoneNumber = findViewById(R.id.addPhoneNumber);
+        final ImageButton removeExtraPhoneNumber = findViewById(R.id.removeExtraPhoneNumber);
+        LinearLayout addressLayout = findViewById(R.id.active_report_address_layout);
+
         if (report.getExtraPhoneNumber() != null) {
-            LinearLayout linearLayout = findViewById(R.id.addAnotherPhoneLinearLayout);
-            linearLayout.setVisibility(LinearLayout.VISIBLE);
-            EditText addAnotherPhoneNumber = findViewById(R.id.addAnotherPhoneNumber);
-            addAnotherPhoneNumber.setText(report.getExtraPhoneNumber());
+            extraPhoneNumber.setText(report.getExtraPhoneNumber());
+            extraPhoneNumberLayout.setVisibility(LinearLayout.VISIBLE);
+            addPhoneNumber.setVisibility(View.GONE);
+            removeExtraPhoneNumber.setVisibility(View.VISIBLE);
         }
 
+        final ImageView openReportImage = findViewById(R.id.activeReportImageView);
+
         if (report.getPhotoPath() != null) {
-            ImageView openReportImage = findViewById(R.id.activeReportImageView);
             openReportImage.setVisibility(View.VISIBLE);
             Glide.with(this).load(report.getPhotoPath()).into(openReportImage);
         }
-
-        ImageButton addPhoneNumber = findViewById(R.id.addPhoneNumber);
+        else
+            addressLayout.setPadding(30,180,30,42);
 
         addPhoneNumber.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LinearLayout linearLayout = findViewById(R.id.addAnotherPhoneLinearLayout);
-                if (linearLayout.getVisibility() == LinearLayout.GONE)
-                    linearLayout.setVisibility(LinearLayout.VISIBLE);
-                else
-                    linearLayout.setVisibility(LinearLayout.GONE);
+                extraPhoneNumberLayout.setVisibility(LinearLayout.VISIBLE);
+                addPhoneNumber.setVisibility(View.GONE);
+                removeExtraPhoneNumber.setVisibility(View.VISIBLE);
             }
 
         });
 
-        ImageButton savePhoneNumber = findViewById(R.id.saveAnotherPhoneNumber);
+        removeExtraPhoneNumber.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                extraPhoneNumberLayout.setVisibility(LinearLayout.GONE);
+                removeExtraPhoneNumber.setVisibility(View.GONE);
+                addPhoneNumber.setVisibility(View.VISIBLE);
+            }
+
+        });
+
+
 
         savePhoneNumber.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                TextView extraPhoneNumber = findViewById(R.id.addAnotherPhoneNumber);
                 String extraPhoneNumberString = extraPhoneNumber.getText().toString();
                 String error = report.validatePhone(extraPhoneNumberString);
                 if (error.equals("")) {
@@ -155,7 +167,11 @@ public class ActiveReportActivity extends AppCompatActivity {
                         .setMessage(R.string.cancel_dialog_message)
                         .setCustomTitle(title)
                         .setView(editText)
-                        .setPositiveButton(R.string.cancel_report, new DialogInterface.OnClickListener() {
+                        .setPositiveButton(R.string.back_report, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                            }
+                        })
+                        .setNegativeButton(R.string.cancel_report, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 String cancelReportText = editText.getText().toString();
 
@@ -164,10 +180,6 @@ public class ActiveReportActivity extends AppCompatActivity {
                                 report.reportUpdateStatus("CANCELED");
 
                                 startActivity(new Intent(ActiveReportActivity.this, ReportListActivity.class));
-                            }
-                        })
-                        .setNegativeButton(R.string.back_report, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
                             }
                         })
                         .create().show();
@@ -189,7 +201,6 @@ public class ActiveReportActivity extends AppCompatActivity {
 
         final View reporter_buttons = findViewById(R.id.reporter_buttons);
 
-
         DatabaseReference statusManagerRef = FirebaseDatabase.getInstance()
                 .getReference("reports").child(report.getId()).child("status");
 
@@ -206,9 +217,20 @@ public class ActiveReportActivity extends AppCompatActivity {
                 if ((Objects.equals(status, "CANCELED")) || Objects.equals(status, "CLOSED")) {
                     reporter_buttons.setVisibility(View.GONE);
                     whatNowInfo.setVisibility(View.GONE);
+                    savePhoneNumber.setVisibility(View.INVISIBLE);
+                    extraPhoneNumber.setError(null);
+                    extraPhoneNumber.setKeyListener(null);
+                    extraPhoneNumber.setHint("");
+                    addPhoneNumber.setVisibility(View.GONE);
+                    removeExtraPhoneNumber.setVisibility(View.GONE);
+                    activeReportPhoneNumber.setLayoutParams(new LinearLayout.LayoutParams
+                                                                (0, LinearLayout.LayoutParams.MATCH_PARENT, 2.8f));
+                    extraPhoneNumber.setLayoutParams(new LinearLayout.LayoutParams
+                            (0, LinearLayout.LayoutParams.MATCH_PARENT, 1.3f));
+                    openReportImage.setPadding(0,60,0,0);
+                    openReportImage.setMaxHeight(700);
+                    openReportImage.setMaxWidth(700);
                 }
-
-
             }
 
             @Override

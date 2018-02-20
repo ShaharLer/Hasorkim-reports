@@ -50,9 +50,10 @@
         </activity>
         <activity
             android:name=".ActiveReportActivity"
-            android:label="דיווח פעיל"
+            android:label="@string/active_report"
             android:parentActivityName=".ReportListActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="il.ac.tau.cloudweb17a.hasorkim.ReportListActivity" />
@@ -106,7 +107,8 @@
 
         <activity
             android:name=".ClosedReportActivity"
-            android:label="דיווח לא פעיל"
+            android:label="@string/closed_report"
+            android:parentActivityName=".ReportListActivity"
             android:screenOrientation="portrait" />
 
         <meta-data

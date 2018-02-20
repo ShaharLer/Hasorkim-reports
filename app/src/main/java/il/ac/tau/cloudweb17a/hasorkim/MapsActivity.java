@@ -380,7 +380,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         title.setPadding(10, 50, 64, 9);
         title.setTextColor(Color.RED);
         title.setTextSize(22);
-        //title.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
 
         new AlertDialog.Builder(this).setMessage(R.string.vet_dialog_message)
                 //.setTitle(R.string.vet_dialog_title)

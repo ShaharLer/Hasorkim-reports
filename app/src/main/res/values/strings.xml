@@ -92,21 +92,21 @@
     <string name="report_address">כתובת:</string>
     <string name="time_of_report">זמן הדיווח:</string>
     <string name="report_details_status">סטטוס:</string>
-    <string name="active_report_address">כתובת</string>
-    <string name="active_report_phone">טלפון</string>
-    <string name="active_report_extra_phone">טלפון נוסף</string>
+    <string name="report_status"><u>סטטוס</u></string>
+    <string name="active_report_address">כתובת:</string>
+    <string name="active_report_phone">טלפון:</string>
+    <string name="active_report_extra_phone">טלפון נוסף:</string>
     <string name="delete_report">ביטול דיווח</string>
     <string name="so_what_now">מה קורה עכשיו?</string>
     <string name="closed_report_photo_description">The dog\'s photo</string>
     <string name="closed_report_photo">תמונה</string>
     <string name="closed_report_date">תאריך:</string>
     <string name="closed_report_address">כתובת:</string>
-    <string name="closed_reports_more_info">מידע נוסף:</string>
+    <string name="closed_reports_more_info">הערות:</string>
     <string name="report_photo_recommended">(מומלץ)</string>
     <string name="reporter_name_hint">יש להכניס שם</string>
     <string name="reporter_phone_number_hint">יש להכניס מספר טלפון</string>
     <string name="reporter_extra_info_hint">ניתן להכניס מידע נוסף</string>
-    <string name="closed_by">נסגר על ידי:</string>
     <string name="my_last_open_report">חזור לבקשה</string>
     <string name="cancel_dialog_title"><b>ביטול הדיווח</b></string>
     <string name="cancel_report"><b>בטל דיווח</b></string>
@@ -138,5 +138,12 @@
     <string name="google_maps_key">AIzaSyCUlK4p2XDeYowxS67p6gC2GjqEHzLfSCo</string>
     <string name="google_places_key">AIzaSyBcSLd55VIpNE_MRmt5GyRini-d7cENn1w</string>
     <string name="share">שתף</string>
+    <string name="active_report">דיווח פעיל</string>
+    <string name="closed_report">דיווח לא פעיל</string>
+    <string name="deleted_by">בוטל ע\"י:</string>
+    <string name="report_delete_reason">סיבת ביטול:</string>
+    <string name="report_close_reason">סיבת סגירה:</string>
+    <string name="the_report_string">הדיווח</string>
+    <string name="extra_phone_number_hint">ניתן להכניס מס\' נוסף</string>
 
 </resources>
