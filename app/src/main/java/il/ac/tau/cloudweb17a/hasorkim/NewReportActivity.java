@@ -120,7 +120,7 @@ public class NewReportActivity extends AppCompatActivity {
 
         user = getUser(getApplicationContext());
 
-        new_report_all_view = findViewById(R.id.new_report_all_view);
+        new_report_all_view = findViewById(R.id.details_scroll_view);
 
 
         reporterName = findViewById(R.id.reporterName);
