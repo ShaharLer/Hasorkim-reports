@@ -266,7 +266,24 @@ public class Report implements java.io.Serializable {
         this.incrementalReportId = nextIncrementalId;
     }
 
+    public void logReportUpdateStatus(String status){
+
+        String previousStatus = this.getStatus();
+        User user = getUserWOContext();
+        String timeStamp = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss-SS")
+                .format(new java.util.Date());
+
+        DatabaseReference logRef = FirebaseDatabase.getInstance().getReference("status_logs")
+                .child(this.getId()).child(timeStamp);
+
+        logRef.child("report").setValue(this);
+        logRef.child("user").setValue(user);
+        logRef.child("oldStatus").setValue(previousStatus);
+        logRef.child("newStatus").setValue(status);
+    }
+
     public void reportUpdateStatus(String status) {
+        this.logReportUpdateStatus(status);
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
         DatabaseReference reportsRef = ref.child("reports").child(this.id).child("status");
         reportsRef.setValue(status);
@@ -407,6 +424,7 @@ public class Report implements java.io.Serializable {
     }
 
     private void persistReport() {
+        this.logReportUpdateStatus("CREATE");
         FirebaseDatabase.getInstance().getReference("reports").child(getId()).setValue(this);
     }
 
