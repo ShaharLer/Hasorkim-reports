@@ -1,7 +1,10 @@
 package il.ac.tau.cloudweb17a.hasorkim;
 
 
+import android.content.Context;
+import android.content.res.Configuration;
 import android.util.Log;
+import android.view.View;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -24,6 +27,14 @@ public class DataParser {
     private static final int SATURDAY = 6;
     private static final String TAG = DataParser.class.getSimpleName();
     private static final int MAXIMUM_PLACES = 10;
+    private Context context;
+    private int layoutDirection;
+
+    public DataParser(Context context) {
+        this.context = context;
+        Configuration config =  this.context.getResources().getConfiguration();
+        this.layoutDirection = config.getLayoutDirection();
+    }
 
     static List<VeterinaryClinic> parsePlaces(String jsonData) {
         List<VeterinaryClinic> vetsList = new ArrayList<>();
@@ -86,7 +97,7 @@ public class DataParser {
         }
     }
 
-    static Map<String, Object> parsePlaceDetails(String jsonData) {
+    Map<String, Object> parsePlaceDetails(String jsonData) {
         Map<String, Object> placeDetails = new HashMap<>();
         String vetLatitude = null, vetLongitude = null, phoneNumber = null;
         String[] openingHours = null;
@@ -148,7 +159,7 @@ public class DataParser {
         return placeDetails;
     }
 
-    private static String getOpeningHours(String currParsedString, int index) {
+    private String getOpeningHours(String currParsedString, int index) {
         switch (index) {
             case SUNDAY:
             case TUESDAY:
@@ -167,12 +178,14 @@ public class DataParser {
                 currParsedString = null;
         }
 
+        if (this.layoutDirection != View.LAYOUT_DIRECTION_RTL)
+            return currParsedString;
+
         boolean keepParsing = (currParsedString.contains(":") && currParsedString.contains("–"));
 
         if (!keepParsing)
             return currParsedString;
 
-        // TODO change to String Builder
         String parsedHours = "";
         int specialCharIndex;
 

@@ -93,11 +93,13 @@ public class NewReportActivity extends AppCompatActivity {
                         Intent intent = new Intent(NewReportActivity.this, ActiveReportActivity.class);
                         intent.putExtra("Report", report);
                         startActivity(intent);
+                        //finish(); TODO this needs to be added some way
                     }
-                }).setNegativeButton(R.string.cancel_similar_report, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-            }
-        }).create().show();
+                })
+                .setNegativeButton(R.string.cancel_similar_report, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                    }
+                }).create().show();
     }
 
     @Override
@@ -113,6 +115,7 @@ public class NewReportActivity extends AppCompatActivity {
             Intent intent = new Intent(NewReportActivity.this, MapsActivity.class);
             Toast.makeText(this, R.string.location_error, Toast.LENGTH_SHORT).show();
             startActivity(intent);
+            finish();
         }
 
         Lat = getIntent().getDoubleExtra("lat", DEFAULT_LATITUDE);

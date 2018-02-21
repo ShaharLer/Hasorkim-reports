@@ -102,10 +102,6 @@ public class VeterinaryClinicMoreDetailsActivity extends AppCompatActivity {
         }
     }
 
-    /**
-     * @param url
-     * @throws IOException
-     */
     private void run(String url) throws IOException {
         Request request = new Request.Builder()
                 .url(url)
@@ -125,16 +121,14 @@ public class VeterinaryClinicMoreDetailsActivity extends AppCompatActivity {
 
                     String returnedString = responseBody.string();
 
-                    Map<String, Object> placeDetails = DataParser.parsePlaceDetails(returnedString);
+                    DataParser data = new DataParser(getApplicationContext());
+                    Map<String, Object> placeDetails = data.parsePlaceDetails(returnedString);
                     updateTextViews(placeDetails);
                 }
             }
         });
     }
 
-    /**
-     * @param placeDetails
-     */
     private void updateTextViews(final Map<String,Object> placeDetails) {
         runOnUiThread(new Runnable() {
             @Override
@@ -177,10 +171,6 @@ public class VeterinaryClinicMoreDetailsActivity extends AppCompatActivity {
         });
     }
 
-    /**
-     * @param phoneNumber
-     * @return
-     */
     private String parsePhoneNumber(String phoneNumber) {
         StringBuilder parsedNumber = new StringBuilder(phoneNumber);
 
@@ -195,9 +185,6 @@ public class VeterinaryClinicMoreDetailsActivity extends AppCompatActivity {
         return parsedNumber.toString();
     }
 
-    /**
-     * @param openingHours
-     */
     private void setOpeningHoursTextViews(String[] openingHours) {
         // Text views for the days labels
         TextView sundayLabelTextView    = findViewById(R.id.sundayLabel);
