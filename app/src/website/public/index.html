@@ -1,0 +1,654 @@
+<html dir="rtl" lang="he">
+<head>
+<meta charset="utf-8">
+	
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	
+
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+	
+	<!-- Angular Material requires Angular.js Libraries -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+
+		
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap-tpls.js"></script>
+	
+	<script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/4.9.0/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/4.9.0/firebase-auth.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/4.9.0/firebase-database.js"></script>
+	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		
+
+	<style>
+/* elements */
+body {
+  //font: 400 16px 'Muli', sans-serif !important;
+  margin: 0;
+  padding: 0;
+}
+
+/* table */
+table{
+  margin: 10px auto;
+}
+
+th {
+  padding: 10px;
+  background: #e6faff;
+  text-align: center;
+}
+
+td{
+  border: 4px solid #fff;
+  padding: 10px;
+  background: #f8f8f8;
+}
+
+.no_borders{
+	border-left: 0;
+    border-right: 0;
+    border-top: 0;
+}
+	</style>
+	
+	
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+.loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 154px;
+}
+
+.small{
+    margin-top: 0px;
+    width: 50px;
+    height: 50px;
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid #3498db;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+</style>
+
+	</head>
+	<body ng-app="myApp" ng-controller="myCtrl" ng-cloak>
+	  
+	
+		<img src="logo.png" style="/* float: left; */position: absolute;left: 34px;top: 10px;width: 62px;">
+		<div style="height: 58px;background-color: #012d6a;margin-top: 20px; margin-left: 119px;    margin-right: 38px;">
+		
+		<div class="btn-group" uib-dropdown >
+		  <button id="single-button" type="button" class="btn btn-default" uib-dropdown-toggle ng-disabled="disabled" style="margin-right: 15px;    margin-bottom: 8px;">
+			<i class="fa fa-bars" aria-hidden="true"></i></span>
+		  </button>
+		  <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button" style="left: -124px;text-align: right;">
+			<li role="menuitem"><a ng-click="state = 'reports'" style="cursor:pointer">דוחות</a></li>
+			<li role="menuitem"><a ng-click="state = 'users'" style="cursor:pointer">משתמשים</a></li>
+		  </ul>
+		</div>
+		
+		<div style="color: #ffffff; padding-top: 8px; padding-right: 12px; font-size: 30px; display:inline-block;">הסורקים</div>
+
+
+		<div ng-if="state == 'reports'">
+			<div class="loader" ng-show="data.length==0"></div>
+			
+			<div ng-show="data.length!=0" style= "margin-top: 50px; margin-left: auto; margin-right: auto; display: block; width: 61%; height: 20px; ">
+				<div class="btn-group"  style="float:left;">
+					<button type="button" class="btn" ng-click="setFilter(2)" ng-class="getFilterClass(2)">רק פתוחים</button>
+					<button type="button" class="btn" ng-click="setFilter(1)" ng-class="getFilterClass(1)" >הכל</button>
+				</div>
+				<button type="button" class="btn" ng-click="showPictures=!showPictures" ng-class="showPictures ? 'btn-primary' : 'btn-default'" ng-bind="showPictures ? 'הסתר תמונות' :'הצג תמונות'" style="float:left;    margin-left: 14px;"></button>
+			</div>
+
+			<table style="margin-top: 21px;width: 61%; " ng-style="{display:none}" ng-show="data.length!=0">
+
+			<tr ng-repeat="row in data  | orderBy:'-open_time'"" ng-show="filter(row)">
+
+				<td class="no_borders" ng-if="!showPictures">
+					<div>
+						<span uib-dropdown  on-toggle="toggled(open)" style="    margin-left: 5px;">
+						  <a ng-disabled = "row.status=='CLOSED'||row.status=='CANCELED'" ng-style="isDisabled(row.status=='CLOSED'||row.status=='CANCELED')" 
+						  href style="text-decoration: none;" id="simple-dropdown" uib-dropdown-toggle>
+							<i class="fa fa-wrench" aria-hidden="true"></i>
+						  </a>
+						  <ul class="dropdown-menu dropdown-menu-right" uib-dropdown-menu aria-labelledby="simple-dropdown" style="text-align: right; padding-top: 0;">
+							<li style="padding: 3px 20px; background-color: lavenderblush;    font-size: larger;font-weight: bolder;    text-align: center;">שנה סטטוס</li>
+							<li ng-repeat="choice in statusList">
+							  <a ng-click="openModal(row.report_id,choice[0])" style="cursor:pointer">{{choice[1]}}</a>
+							</li>
+						  </ul>
+						</span>
+						<span ng-bind="statusTranslate[row.status]"></span>
+					</div>
+					
+					<div ng-if="row.status=='NEW'">		
+						<span uib-dropdown ng-click="toggleDropdown($event,row.report_id)" is-open="row.is_scanner_list_open " style=" margin-left: 8px; margin-right: 4px;">
+							<a ng-disabled = "row.scannersCount==0||row.status=='CLOSED'||row.status=='CANCELED'" ng-style="isDisabled(row.scannersCount==0||row.status=='CLOSED'||row.status=='CANCELED')" href style="text-decoration: none;" id="simple-dropdown" uib-dropdown-toggle>
+								<i class="fa fa-arrows-v" aria-hidden="true"></i>
+							</a>
+							<ul class="dropdown-menu dropdown-menu-right" uib-dropdown-menu aria-labelledby="simple-dropdown" style="text-align: right; padding-top: 0;">
+								<li style="padding: 3px 20px; background-color: lavenderblush;  ng-show="!row.loading_scanners"  font-size: larger;font-weight: bolder;    text-align: center;">סורקים זמינים</li>
+								<li ng-repeat="sc in row.scnnaer_list_details" ng-show="!row.loading_scanners" style="">
+									<a ng-click="setScanner(row,$index);" style="cursor:pointer">
+										<span ng-bind="sc.name" style="margin-left: 23px;"></span>
+										<span ng-bind="sc.time" style="margin-left: 23px;"></span>
+									</a>
+								</li>
+								<li ng-show="row.loading_scanners">
+									<div class="loader small"></div>
+								</li>
+							</ul>
+						</span>
+						<span>סורקים זמינים:</span>
+						<span ng-bind="row.scannersCount"></span>
+		
+					</div>
+					<div ng-if="row.status=='MANAGER_ASSIGNED_SCANNER' || row.status=='SCANNER_ON_THE_WAY'">	
+						<a href ng-click="cancelScanner(row)" style="text-decoration: none; margin-left: 5px;">
+							<i class="fa fa-ban" aria-hidden="true"></i>
+						</a>
+						<span ng-show="row.status=='MANAGER_ASSIGNED_SCANNER'">נשלח לסורק:</span>
+						<span ng-show="row.status=='SCANNER_ON_THE_WAY'">סורק יצא לדרך:</span>
+						<span ng-bind="row.assignedScannerName"></span>
+						
+
+					</div>
+					
+				</td>
+				<td class="no_borders" ng-if="!showPictures">
+					<div ng-bind="getDateString(row.open_time)"></div>
+				</td>
+				<td class="no_borders" style="border:0" ng-if="!showPictures">
+					<div ng-bind="row.address"></div>
+					<div ng-bind="row.name"></div>
+					<div ng-bind="row.phone"  style="   white-space: nowrap;"></div>
+					<div style="    width: 180px;     margin-top: 9px;">
+						<div title="{{row.comments}}" ng-bind="row.comments" style="width: 183px;">
+						<!-- text-overflow: ellipsis; white-space: nowrap; overflow: hidden; width: 393px -->
+						</div>
+					</div>
+				</td>
+
+				<td style="padding:0" valign="top" ng-if="showPictures">
+					<table style="width:100%">
+						<tr>   
+							<td class="no_borders">
+								<div>
+									<span uib-dropdown  on-toggle="toggled(open)" style="    margin-left: 5px;">
+									  <a ng-disabled = "row.status=='CLOSED'||row.status=='CANCELED'" ng-style="isDisabled(row.status=='CLOSED'||row.status=='CANCELED')" 
+									  href style="text-decoration: none;" id="simple-dropdown" uib-dropdown-toggle>
+										<i class="fa fa-wrench" aria-hidden="true"></i>
+									  </a>
+									  <ul class="dropdown-menu dropdown-menu-right" uib-dropdown-menu aria-labelledby="simple-dropdown" style="text-align: right; padding-top: 0;">
+										<li style="padding: 3px 20px; background-color: lavenderblush;    font-size: larger;font-weight: bolder;    text-align: center;">שנה סטטוס</li>
+										<li ng-repeat="choice in statusList">
+										  <a ng-click="openModal(row.report_id,choice[0])" style="cursor:pointer">{{choice[1]}}</a>
+										</li>
+									  </ul>
+									</span>
+									<span ng-bind="statusTranslate[row.status]"></span>
+								</div>
+								
+								<div ng-if="row.status=='NEW'">		
+									<span uib-dropdown ng-click="toggleDropdown($event,row.report_id)" is-open="row.is_scanner_list_open " style=" margin-left: 8px; margin-right: 4px;">
+										<a ng-disabled = "row.scannersCount==0||row.status=='CLOSED'||row.status=='CANCELED'" ng-style="isDisabled(row.scannersCount==0||row.status=='CLOSED'||row.status=='CANCELED')" href style="text-decoration: none;" id="simple-dropdown" uib-dropdown-toggle>
+											<i class="fa fa-arrows-v" aria-hidden="true"></i>
+										</a>
+										<ul class="dropdown-menu dropdown-menu-right" uib-dropdown-menu aria-labelledby="simple-dropdown" style="text-align: right; padding-top: 0;">
+											<li style="padding: 3px 20px; background-color: lavenderblush;  ng-show="!row.loading_scanners"  font-size: larger;font-weight: bolder;    text-align: center;">סורקים זמינים</li>
+											<li ng-repeat="sc in row.scnnaer_list_details" ng-show="!row.loading_scanners" style="">
+												<a ng-click="setScanner(row,$index);" style="cursor:pointer">
+													<span ng-bind="sc.name" style="margin-left: 23px;"></span>
+													<span ng-bind="sc.time" style="margin-left: 23px;"></span>
+												</a>
+											</li>
+											<li ng-show="row.loading_scanners">
+												<div class="loader small"></div>
+											</li>
+										</ul>
+									</span>
+									<span>סורקים זמינים:</span>
+									<span ng-bind="row.scannersCount"></span>
+					
+								</div>
+								<div ng-if="row.status=='MANAGER_ASSIGNED_SCANNER' || row.status=='SCANNER_ON_THE_WAY'">	
+									<a href ng-click="cancelScanner(row)" style="text-decoration: none; margin-left: 5px;">
+										<i class="fa fa-ban" aria-hidden="true"></i>
+									</a>
+									<span ng-show="row.status=='MANAGER_ASSIGNED_SCANNER'">נשלח לסורק:</span>
+									<span ng-show="row.status=='SCANNER_ON_THE_WAY'">סורק יצא לדרך:</span>
+									<span ng-bind="row.assignedScannerName"></span>
+									
+
+								</div>
+								
+							</td>
+						</tr>
+						<tr>
+							<td class="no_borders">
+								<div ng-bind="getDateString(row.open_time)"></div>
+							</td>
+						</tr>
+						<tr>
+							<td class="no_borders" style="border:0">
+								<div ng-bind="row.address"></div>
+								<div ng-bind="row.name"></div>
+								<div ng-bind="row.phone"  style="   white-space: nowrap;"></div>
+								<div style="    width: 180px;     margin-top: 9px;">
+									<div title="{{row.comments}}" ng-bind="row.comments" style="width: 183px;">
+									<!-- text-overflow: ellipsis; white-space: nowrap; overflow: hidden; width: 393px -->
+									</div>
+								</div>
+							</td>
+						</tr>
+						<!-- <tr>
+							<td class="no_borders" style="border: 0; /* margin-left: auto; margin-right: auto; */  width: 323px; display: block;">
+								<iframe
+								  width="510"
+								  height="160"
+								  frameborder="0" style="border:0"
+								  ng-src="{{trustSrc(row.address)}}"
+								  >
+								</iframe>
+							</td>
+						</tr> -->
+					</table>	
+				</td>
+				<td ng-if="showPictures" style="height: 343.3px;"><img ng-src="{{row.image}}" ng-show="row.image!=null" style="    width: 160px;
+		margin-left: auto;
+		margin-right: auto;
+		display: block;"></td>
+
+			</tr>
+			</table>
+			<button  ng-show="data.length!=0" type="button" class="btn btn-default" ng-class="isLoadingDisabled()" ng-click ="getReportsNumberAndLoadReports()" style="margin-left: auto; margin-right: auto; width: 135px; display: block; margin-bottom: 16px;">טען עוד</button>
+		</div>
+		<div ng-if="state == 'users'">
+			<table style="margin-top: 99px;width: 61%;">
+			<tr ng-repeat="user in users">
+				<td ng-bind="user.name"></td>
+				<td>
+					<div ng-if="user.isApproved">מאושר<a ng-click="aprove(user.key,false)" style="float: left;cursor:pointer;">בטל</a></div>
+					<div ng-if="!user.isApproved">לא מאושר<a ng-click="aprove(user.key,true)" style="float: left;cursor:pointer;">אשר</a></div>
+				</td>
+				<td>
+					<div ng-if="user.isManager">מנהל<a ng-click="makeManager(user.key,false)" style="float: left;cursor:pointer;">שנה לסורק</a></div>
+					<div ng-if="!user.isManager">סורק<a ng-click="makeManager(user.key,true)" style="float: left; cursor:pointer;">שנה למנהל</a></div>
+				</td>
+			</tr>
+			</table>
+		</div>
+		
+		<script>
+		
+			// Initialize Firebase
+			var config = {
+				apiKey: "AIzaSyC8kwd-Jja17g_R1LTUM1Qd8CXpWJfoXOY",
+				authDomain: "hasorkim-80088.firebaseapp.com",
+				databaseURL: "https://hasorkim-80088.firebaseio.com",
+				projectId: "hasorkim-80088",
+				storageBucket: "hasorkim-80088.appspot.com",
+				messagingSenderId: "954851196181"
+			};
+			firebase.initializeApp(config);
+			var database = firebase.database();
+			
+			
+			
+			var app = angular.module('myApp', ['ui.bootstrap']);
+			
+			
+
+			app.controller('myCtrl', function($scope,$timeout,$sce,$uibModal) {
+				
+				$scope.state = "reports"; 
+				$scope.showPictures= false; 
+			
+				//users controller
+						$scope.users = []
+						
+						var usersRef = firebase.database().ref('users').orderByChild("name");
+						usersRef.on('child_added', function(data) {
+							
+							var user = data.val();
+							user.key= data.key;
+							$scope.users.push(user);
+							$scope.$apply();
+							
+						});
+						
+						usersRef.on('child_changed', function(data) {
+							//forcing this to run async, as to not interfere with digest/apply
+							$timeout(function() {
+								for( user_index in $scope.users){
+									if($scope.users[user_index].key ==data.key){	
+										var user = data.val();
+										user.key= data.key;
+										$scope.users[user_index] = user;;
+									}
+								}
+							}, 0);		
+						});
+						
+						$scope.aprove = function (key,value){
+							if(key!=null){
+								firebase.database().ref('users/'+key+'/isApproved').set(value);
+							}
+						}
+						
+						$scope.makeManager = function (key,value){
+							if(key!=null){
+								firebase.database().ref('users/'+key+'/isManager').set(value);
+							}
+						}
+			
+				//reports controller
+				
+					//cancelation reason 
+					$scope.openModal = function (report_id,choice) {
+						var modalInstance = $uibModal.open({
+							templateUrl: 'modal.html',
+							controller: function ($scope, $uibModalInstance) {
+								$scope.cancelation_reason = ""; 
+								
+								$scope.ok = function () {								
+									$uibModalInstance.close($scope.cancelation_reason);
+								};
+
+								$scope.cancel = function () {
+									$uibModalInstance.dismiss('cancel');
+								};
+							}
+						})
+						
+						modalInstance.result.then(function (text) {
+							$scope.setCancelationReason(report_id,text);
+							$scope.changeStatus(report_id,choice)
+						});
+						
+					};
+					
+					//filters
+					$scope.class = 1;
+					
+					$scope.getFilterClass = function(btn){
+						if($scope.class == btn){
+							return "btn-primary";
+						}
+						return "btn-default";
+					}
+					
+					$scope.setFilter= function(btn){
+						$scope.class=btn;
+					}
+					
+					$scope.filter= function(row){
+						if($scope.class == 1)
+							return true;
+						if($scope.class == 2){
+							if(row.status=='NEW')
+								return true;
+							else
+								return false;
+						}
+						
+					}
+					
+					// get list and load more
+					$scope.maxPageReports = 1;
+					$scope.reportsPerPage = 20;
+					$scope.reportsToShow = 0;
+
+					
+					$scope.data = []
+					$scope.idsOfReportsInList ={};
+
+					$scope.loadReports = function (){
+					
+						var reportsRef = firebase.database().ref('reports').orderByChild("startTime").limitToFirst($scope.reportsToShow);
+						reportsRef.on('child_added', function(data) {
+							var assignedScanner = data.val().assignedScanner;
+							var report = $scope.parseReport(data.val());
+				
+							if($scope.idsOfReportsInList[report.report_id] == null){
+								$scope.idsOfReportsInList[report.report_id] = "";
+								if(report.status=='MANAGER_ASSIGNED_SCANNER'||report.status=='SCANNER_ON_THE_WAY'){
+									$scope.getAssignedScanner(report,assignedScanner).then(function() {
+										$scope.data.push(report);	
+										$scope.$apply();
+									});
+								
+								}	
+								else{
+									$scope.data.push(report);
+									$scope.$apply();
+								}
+							}
+						});
+						
+						reportsRef.on('child_changed', function(data) {
+							//forcing this to run async, as to not interfere with digest/apply
+							$timeout(function() {
+								for( report_index in $scope.data){
+									if($scope.data[report_index].report_id ==data.key){								
+										var assignedScanner = data.val().assignedScanner;
+										var oldAssignedScanner = $scope.data[report_index].assignedScanner;
+										$scope.data[report_index] = $scope.parseReport(data.val());
+										
+										if(oldAssignedScanner!=assignedScanner){
+			
+											if($scope.data[report_index].status=='MANAGER_ASSIGNED_SCANNER'||$scope.data[report_index].status=='SCANNER_ON_THE_WAY'){
+													$scope.getAssignedScanner($scope.data[report_index],assignedScanner)
+													.then(function() {
+														$scope.$apply();
+													});
+											}	
+											
+										}
+				
+										
+									}
+								}
+							}, 0);		
+						});
+					}
+					
+					
+					$scope.getReportsNumberAndLoadReports = function(){
+						$scope.reportsToShow = $scope.reportsToShow + $scope.reportsPerPage;
+						firebase.database().ref('reports').once('value').then(function(snapshot) {
+							$scope.maxPageReports = snapshot.numChildren(); 
+							$scope.loadReports();
+						});									
+			
+					}
+					$scope.getReportsNumberAndLoadReports();
+					
+					
+					$scope.isLoadingDisabled = function(){
+						if($scope.reportsToShow>= $scope.maxPageReports){
+							return "disabled"
+						}
+					}
+					
+				
+
+							
+					$scope.parseReport =function(reportData){
+						return {			
+							"status":reportData.status,
+							"open_time":-reportData.startTime,
+							"address":reportData.address,
+							"name":reportData.reporterName,
+							"phone":reportData.phoneNumber,
+							"comments":reportData.freeText,
+							"scannersCount":reportData.availableScanners,
+							"image":reportData.imageUrl!=null ? reportData.imageUrl : "add_dog.jpg",
+							"scanners":reportData.potentialScanners,
+							"report_id":reportData.id,
+							"is_scanner_list_open": false,
+							"loading_scanners": false
+						}
+					}
+					
+					
+					
+					$scope.statusList = [
+						["CANCELED","בטל"],
+						["CLOSED","סגור"]
+					];
+							
+					$scope.statusTranslate = {"NEW":"דיווח חדש","MANAGER_ASSIGNED_SCANNER":"סורק קיבל את הקריאה","SCANNER_ON_THE_WAY":"סורק יצא לדרך","CLOSED":"סגור","CANCELED":"בוטל"}
+
+					$scope.getDateString = function(time){
+						return new Date(time).toLocaleString();
+						//dateFormat(date, "HH:mm dd/MM/yyyy"); new SimpleDateFormat()
+					}
+
+					$scope.setCancelationReason = function(report_id,text){
+						firebase.database().ref('reports/'+report_id+'/cancellationText').set(text);
+						firebase.database().ref('reports/'+report_id+'/cancellationUserType').set("המנהל/ת");
+					}
+					
+					$scope.changeStatus = function(report_id,status){
+						firebase.database().ref('reports/'+report_id+'/status').set(status);
+					}
+
+					
+					$scope.isDisabled = function(isDisabled){
+						if(isDisabled){
+							return {color:"grey",    cursor: "default"}
+						}
+					}
+					
+					$scope.trustSrc = function(src) {
+						return $sce.trustAsResourceUrl("https://www.google.com/maps/embed/v1/search?key=AIzaSyBmMIdtTk5HrSs6oed3KOmFeJFa6-uKWjw&q="+src);
+					}
+					
+					
+					//scanners stuff
+					
+					$scope.getAssignedScanner = function(report,assignedScanner){
+						return firebase.database().ref('users/').orderByChild('id').equalTo(assignedScanner).once('value').then(function(snapshot) {
+							snapshot.forEach(function(childSnapshot) {
+								var childData = childSnapshot.val();
+								report.assignedScannerName = childData.name;
+							});									
+						});	
+						
+					}
+					
+					
+					$scope.toggleDropdown = function($event,report_id) {
+						$event.preventDefault();
+						$event.stopPropagation();
+						report_index =0;
+						
+						for(report in $scope.data){
+							if($scope.data[report].report_id == report_id){
+								report_index= report;
+							}
+						}
+						
+						
+						if($scope.data[report_index].is_scanner_list_open){
+							$scope.data[report_index].loading_scanners = true;
+							
+							if($scope.data[report_index].scnnaer_list_details==null){
+								$scope.data[report_index].scnnaer_list_details=[];
+							}	
+							for(scanner_id in $scope.data[report_index].scanners){
+								//console.log(scanner_id+"-"+$scope.data[report_index].scanners[scanner_id]);
+								
+								
+								firebase.database().ref('users/').orderByChild('id').equalTo(scanner_id).once('value').then(function(snapshot) {
+									snapshot.forEach(function(childSnapshot) {
+										var childData = childSnapshot.val();
+										
+										var scanner = {}
+										scanner.time = $scope.data[report_index].scanners[scanner_id];
+										scanner.id = childData.id;
+										scanner.name = childData.name;
+										
+										InList = false;
+										for(scanner_index in $scope.data[report_index].scnnaer_list_details){
+											if($scope.data[report_index].scnnaer_list_details[scanner_index].id==scanner.id){
+												InList=true
+											}
+										}
+										if(!InList){
+											$scope.data[report_index].scnnaer_list_details.push(scanner);
+										}
+										
+										
+								
+										$scope.data[report_index].loading_scanners = false; //stop loading when first returns
+									}.bind(scanner_id));		
+									$scope.$apply();								
+								});
+							}
+							
+							
+						}
+						
+						//$scope.data[report_index].is_scanner_list_open = !$scope.data[report_index].is_scanner_list_open
+						//console.log($scope.data[report_index].is_scanner_list_open)
+					};
+					
+					$scope.setScanner = function(report,index){
+						//console.log(index);
+						//console.log(report.scnnaer_list_details[index].id);
+						report.is_scanner_list_open=false
+						
+						firebase.database().ref('reports/'+report.report_id+'/assignedScanner').set(report.scnnaer_list_details[index].id);
+						firebase.database().ref('reports/'+report.report_id+'/status').set('MANAGER_ASSIGNED_SCANNER');
+						
+						//unneccecary, also updates for every status change
+						report.assignedScannerName = report.scnnaer_list_details[index].name
+
+					}				
+					
+					$scope.cancelScanner = function(report){
+						firebase.database().ref('reports/'+report.report_id+'/assignedScanner').set("");
+						firebase.database().ref('reports/'+report.report_id+'/status').set('NEW');
+
+					}
+
+			
+
+  
+			});
+		</script>
+</body>
+</html>
