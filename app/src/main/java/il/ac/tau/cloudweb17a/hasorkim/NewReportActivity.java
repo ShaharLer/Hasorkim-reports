@@ -58,49 +58,13 @@ public class NewReportActivity extends AppCompatActivity {
         void execute();
     }
 
-    final MyCallBackClass  popupSimilarReportCallBack  = new MyCallBackClass() {
+    final MyCallBackClass popupSimilarReportCallBack = new MyCallBackClass() {
         @Override
         public void execute() {
-            new_report_all_view.setVisibility(View.VISIBLE);
-            if(!report.isHasSimilarReports()) {
-                report.saveReport();
-                Intent intent = new Intent(NewReportActivity.this, ActiveReportActivity.class);
-                intent.putExtra("Report", report);
-                startActivity(intent);
-                finish();
-            }
-            else{
-                popUpSimilarReport();
-            }
+
+
         }
     };
-
-    private void popUpSimilarReport() {
-
-        TextView title = new TextView(this);
-        title.setText(R.string.similar_report_dialog_title);
-        title.setPadding(10, 50, 64, 9);
-        title.setTextColor(Color.BLACK);
-        title.setTextSize(20);
-        title.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
-
-        new AlertDialog.Builder(this).setMessage(R.string.similar_report_dialog_message)
-                //.setTitle(R.string.similar_report_dialog_title)
-                .setCustomTitle(title)
-                .setPositiveButton(R.string.ok_similar_report, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        report.saveReport();
-                        Intent intent = new Intent(NewReportActivity.this, ActiveReportActivity.class);
-                        intent.putExtra("Report", report);
-                        startActivity(intent);
-                        //finish(); TODO this needs to be added some way
-                    }
-                })
-                .setNegativeButton(R.string.cancel_similar_report, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                    }
-                }).create().show();
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -147,8 +111,7 @@ public class NewReportActivity extends AppCompatActivity {
         });
 
 
-
-        Button submitReport = findViewById(R.id.submitReport);
+        final Button submitReport = findViewById(R.id.submitReport);
         submitReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -179,7 +142,7 @@ public class NewReportActivity extends AppCompatActivity {
                     }
 
                     new_report_all_view.setVisibility(View.INVISIBLE);
-                    report.checkForSimilarReportAndSubmit(popupSimilarReportCallBack);
+                    saveReport();
 
 
                 } else {
@@ -197,6 +160,15 @@ public class NewReportActivity extends AppCompatActivity {
         });
 
         report = new Report(address, "", user, Lat, Long);
+    }
+
+    private void saveReport() {
+        new_report_all_view.setVisibility(View.VISIBLE);
+        report.saveReport();
+        Intent intent = new Intent(NewReportActivity.this, ActiveReportActivity.class);
+        intent.putExtra("Report", report);
+        startActivity(intent);
+        finish();
     }
 
     private void dispatchTakePictureIntent() {
@@ -259,14 +231,13 @@ public class NewReportActivity extends AppCompatActivity {
                 .setPositiveButton(R.string.ok_not_checked, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         new_report_all_view.setVisibility(View.INVISIBLE);
-                        report.checkForSimilarReportAndSubmit(popupSimilarReportCallBack);
+                        saveReport();
                     }
                 }).setNegativeButton(R.string.cancel_not_checked, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
             }
         }).setCustomTitle(title).create().show();
     }
-
 
 
     private void requestPermission() {

@@ -102,30 +102,6 @@ public class Report implements java.io.Serializable {
         return isDogWithReporter;
     }
 
-    public void checkForSimilarReportAndSubmit(final NewReportActivity.MyCallBackClass moveToNewActivitey) {
-        if (userId != null) {
-            // Initialize Database
-            Query sameReportQuery = FirebaseDatabase.getInstance().getReference()
-                    .child("reports").orderByChild("userId").equalTo(userId);
-
-
-            sameReportQuery.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    hasSimilarReports = dataSnapshot.getChildrenCount() != 0;
-                    moveToNewActivitey.execute();
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
-            });
-
-        }
-    }
-
-
     public String getId() {
         return id;
     }
