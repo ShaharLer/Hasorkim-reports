@@ -299,12 +299,12 @@ td{
 			<tr ng-repeat="user in users">
 				<td ng-bind="user.name"></td>
 				<td>
-					<div ng-if="user.isApproved">מאושר<a ng-click="aprove(user.key,false)" style="float: left;cursor:pointer;">בטל</a></div>
-					<div ng-if="!user.isApproved">לא מאושר<a ng-click="aprove(user.key,true)" style="float: left;cursor:pointer;">אשר</a></div>
+					<div ng-if="user.approved">מאושר<a ng-click="aprove(user.key,false)" style="float: left;cursor:pointer;">בטל</a></div>
+					<div ng-if="!user.approved">לא מאושר<a ng-click="aprove(user.key,true)" style="float: left;cursor:pointer;">אשר</a></div>
 				</td>
 				<td>
-					<div ng-if="user.isManager">מנהל<a ng-click="makeManager(user.key,false)" style="float: left;cursor:pointer;">שנה לסורק</a></div>
-					<div ng-if="!user.isManager">סורק<a ng-click="makeManager(user.key,true)" style="float: left; cursor:pointer;">שנה למנהל</a></div>
+					<div ng-if="user.manager">מנהל<a ng-click="makeManager(user.key,false)" style="float: left;cursor:pointer;">שנה לסורק</a></div>
+					<div ng-if="!user.manager">סורק<a ng-click="makeManager(user.key,true)" style="float: left; cursor:pointer;">שנה למנהל</a></div>
 				</td>
 			</tr>
 			</table>
@@ -363,13 +363,13 @@ td{
 						
 						$scope.aprove = function (key,value){
 							if(key!=null){
-								firebase.database().ref('users/'+key+'/isApproved').set(value);
+								firebase.database().ref('users/'+key+'/approved').set(value);
 							}
 						}
 						
 						$scope.makeManager = function (key,value){
 							if(key!=null){
-								firebase.database().ref('users/'+key+'/isManager').set(value);
+								firebase.database().ref('users/'+key+'/manager').set(value);
 							}
 						}
 			
