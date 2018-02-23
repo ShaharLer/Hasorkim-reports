@@ -24,6 +24,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
@@ -107,13 +108,13 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        /*if(getUser(getApplicationContext()).getMyLastOpenReport()!=null){
-            navigationView.getMenu().findItem(R.id.nav_my_last_open_report).setVisible(true);
-        }
-        else{
-            navigationView.getMenu().findItem(R.id.nav_my_last_open_report).setVisible(false);
-        }*/
-        //navigationView.getMenu().findItem(R.id.nav_my_last_open_report).setVisible(true);
+        LinearLayout header = (LinearLayout) navigationView.getHeaderView(0);
+
+        TextView navName = (TextView) header.getChildAt(1);
+        TextView navPhone = (TextView) header.getChildAt(2);
+
+        navName.setText(User.getUser(getApplicationContext()).getName());
+        navPhone.setText(getUser(getApplicationContext()).getPhoneNumber());
 
         // Retrieve location and camera position from saved instance state.
         if (savedInstanceState != null) {
