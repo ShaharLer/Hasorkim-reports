@@ -298,6 +298,7 @@ td{
 			<table style="margin-top: 99px;width: 61%;">
 			<tr ng-repeat="user in users">
 				<td ng-bind="user.name"></td>
+				<td ng-bind="user.phoneNumber"></td>
 				<td>
 					<div ng-if="user.approved">מאושר<a ng-click="aprove(user.key,false)" style="float: left;cursor:pointer;">בטל</a></div>
 					<div ng-if="!user.approved">לא מאושר<a ng-click="aprove(user.key,true)" style="float: left;cursor:pointer;">אשר</a></div>
