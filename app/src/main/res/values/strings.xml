@@ -133,8 +133,6 @@
     <string name="who_we_are_string7">אנו פועלים להעלאת המודעות לחשיבות השבב, הקמת מערך אומנה וקליטת כלבים ללא בעלים.</string>
     <string name="who_we_are_string8"><u>בשביל זה אנחנו צריכים אתכם!</u></string>
     <string name="who_we_are_string9">רכשו סורק, או פנו אלינו לשמש כאומנה והצטרפו אלינו!</string>
-
-    <!-- Keys and Ids -->
     <string name="share">שתף</string>
     <string name="active_report">דיווח פעיל</string>
     <string name="closed_report">דיווח לא פעיל</string>
@@ -144,5 +142,6 @@
     <string name="the_report_string">הדיווח</string>
     <string name="extra_phone_number_hint">ניתן להכניס מס\' נוסף</string>
     <string name="title_activity_maps2">Map</string>
+    <string name="general_key">AIzaSyDVTZm5FPoWIsqLkYH_EW7AZDEe5Q3uZ50</string>
 
 </resources>

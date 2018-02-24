@@ -216,7 +216,7 @@ public class VetListActivity extends AppCompatActivity {
                 .appendQueryParameter("type", "veterinary_care")
                 .appendQueryParameter("rankby", "distance")
                 .appendQueryParameter("language", "iw")
-                .appendQueryParameter("key", getString(R.string.google_maps_key));
+                .appendQueryParameter("key", getString(R.string.general_key));
 
 
         if (onlyOpen)
@@ -302,7 +302,7 @@ public class VetListActivity extends AppCompatActivity {
                 .appendQueryParameter("destinations", nearVetsID.toString())
                 .appendQueryParameter("mode","driving")
                 .appendQueryParameter("language", "iw")
-                .appendQueryParameter("key", getString(R.string.google_maps_key));
+                .appendQueryParameter("key", getString(R.string.general_key));
 
         String currentUrlDistances = urlMaps.build().toString();
         Log.d(TAG, currentUrlDistances);

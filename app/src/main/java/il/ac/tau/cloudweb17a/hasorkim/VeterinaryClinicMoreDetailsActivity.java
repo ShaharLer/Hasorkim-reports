@@ -90,7 +90,7 @@ public class VeterinaryClinicMoreDetailsActivity extends AppCompatActivity {
                 .appendPath("json")
                 .appendQueryParameter("placeid", intent.getStringExtra(VetListActivity.PLACE_ID))
                 .appendQueryParameter("language", "iw")
-                .appendQueryParameter("key", getString(R.string.google_maps_key));
+                .appendQueryParameter("key", getString(R.string.general_key));
 
         String currentUrlPlaces = urlPlaces.build().toString();
         Log.d(TAG, currentUrlPlaces);
