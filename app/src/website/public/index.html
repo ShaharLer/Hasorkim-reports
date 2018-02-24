@@ -98,6 +98,17 @@ td{
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+@media screen and (max-width: 600px) {
+  .hide-mobile {
+     display: none;
+  }
+
+  .enlarge-mobile {
+    width:124px
+  }
+}
+
 </style>
 
 	</head>
@@ -107,18 +118,18 @@ td{
 		<img src="logo.png" style="/* float: left; */position: absolute;left: 34px;top: 10px;width: 62px;">
 		<div style="height: 58px;background-color: #012d6a;margin-top: 20px; margin-left: 119px;    margin-right: 38px;">
 		
-		<div class="btn-group" uib-dropdown >
-		  <button id="single-button" type="button" class="btn btn-default" uib-dropdown-toggle ng-disabled="disabled" style="margin-right: 15px;    margin-bottom: 8px;">
-			<i class="fa fa-bars" aria-hidden="true"></i></span>
-		  </button>
-		  <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button" style="left: -124px;text-align: right;">
-			<li role="menuitem"><a ng-click="state = 'reports'" style="cursor:pointer">דוחות</a></li>
-			<li role="menuitem"><a ng-click="state = 'users'" style="cursor:pointer">משתמשים</a></li>
-		  </ul>
-		</div>
-		
-		<div style="color: #ffffff; padding-top: 8px; padding-right: 12px; font-size: 30px; display:inline-block;">הסורקים</div>
+			<div class="btn-group" uib-dropdown >
+			  <button id="single-button" type="button" class="btn btn-default" uib-dropdown-toggle ng-disabled="disabled" style="margin-right: 15px;    margin-bottom: 8px;">
+				<i class="fa fa-bars" aria-hidden="true"></i></span>
+			  </button>
+			  <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button" style="left: -124px;text-align: right;">
+				<li role="menuitem"><a ng-click="state = 'reports'" style="cursor:pointer">דוחות</a></li>
+				<li role="menuitem"><a ng-click="state = 'users'" style="cursor:pointer">משתמשים</a></li>
+			  </ul>
+			</div>
 
+			<div style="color: #ffffff; padding-top: 8px; padding-right: 12px; font-size: 30px; display:inline-block;">הסורקים</div>
+		</div>
 
 		<div ng-if="state == 'reports'">
 			<div class="loader" ng-show="data.length==0"></div>
@@ -128,7 +139,7 @@ td{
 					<button type="button" class="btn" ng-click="setFilter(2)" ng-class="getFilterClass(2)">רק פתוחים</button>
 					<button type="button" class="btn" ng-click="setFilter(1)" ng-class="getFilterClass(1)" >הכל</button>
 				</div>
-				<button type="button" class="btn" ng-click="showPictures=!showPictures" ng-class="showPictures ? 'btn-primary' : 'btn-default'" ng-bind="showPictures ? 'הסתר תמונות' :'הצג תמונות'" style="float:left;    margin-left: 14px;"></button>
+				<button type="button" class="hide-mobile btn" ng-click="showPictures=!showPictures" ng-class="showPictures ? 'btn-primary' : 'btn-default'" ng-bind="showPictures ? 'הסתר תמונות' :'הצג תמונות'" style="float:left;    margin-left: 14px;"></button>
 			</div>
 
 			<table style="margin-top: 21px;width: 61%; " ng-style="{display:none}" ng-show="data.length!=0">
@@ -136,7 +147,7 @@ td{
 			<tr ng-repeat="row in data  | orderBy:'-open_time'"" ng-show="filter(row)">
 
 				<td class="no_borders" ng-if="!showPictures">
-					<div>
+					<div class="enlarge-mobile">
 						<span uib-dropdown  on-toggle="toggled(open)" style="    margin-left: 5px;">
 						  <a ng-disabled = "row.status=='CLOSED'||row.status=='CANCELED'" ng-style="isDisabled(row.status=='CLOSED'||row.status=='CANCELED')" 
 						  href style="text-decoration: none;" id="simple-dropdown" uib-dropdown-toggle>
@@ -193,7 +204,7 @@ td{
 					<div ng-bind="row.address"></div>
 					<div ng-bind="row.name"></div>
 					<div ng-bind="row.phone"  style="   white-space: nowrap;"></div>
-					<div style="    width: 180px;     margin-top: 9px;">
+					<div style="    width: 180px;     margin-top: 9px;" class="hide-mobile">
 						<div title="{{row.comments}}" ng-bind="row.comments" style="width: 183px;">
 						<!-- text-overflow: ellipsis; white-space: nowrap; overflow: hidden; width: 393px -->
 						</div>
@@ -265,7 +276,7 @@ td{
 								<div ng-bind="row.address"></div>
 								<div ng-bind="row.name"></div>
 								<div ng-bind="row.phone"  style="   white-space: nowrap;"></div>
-								<div style="    width: 180px;     margin-top: 9px;">
+								<div  style="    width: 180px;     margin-top: 9px;">
 									<div title="{{row.comments}}" ng-bind="row.comments" style="width: 183px;">
 									<!-- text-overflow: ellipsis; white-space: nowrap; overflow: hidden; width: 393px -->
 									</div>
