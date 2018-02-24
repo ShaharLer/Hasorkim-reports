@@ -144,5 +144,6 @@
     <string name="general_key">AIzaSyDVTZm5FPoWIsqLkYH_EW7AZDEe5Q3uZ50</string>
     <string name="channel_name">hasorkim</string>
     <string name="channel_description">hasorkim</string>
+    <string name="userId">userId</string>
 
 </resources>
