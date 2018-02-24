@@ -38,5 +38,5 @@
     <dimen name="status_label_size">36sp</dimen>
     <dimen name="current_status_size">44sp</dimen>
     <dimen name="report_icon_size">40dp</dimen>
-    <dimen name="active_report_photo_size">175dp</dimen>
+    <dimen name="active_report_photo_size">300dp</dimen>
 </resources>
