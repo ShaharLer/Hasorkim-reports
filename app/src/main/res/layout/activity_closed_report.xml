@@ -41,12 +41,18 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <View
+                android:id="@+id/line_separator"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/vet_clinic_name_padding"
+                android:layout_marginTop="@dimen/vet_list_padding"
+                android:background="@android:color/black" />
+
             <TextView
                 android:id="@+id/closed_report_details_headline"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/what_now_info_border"
-                android:layout_marginTop="@dimen/vet_list_padding"
+                android:layout_below="@+id/line_separator"
                 android:paddingBottom="@dimen/report_list_item_start_end_padding"
                 android:paddingTop="@dimen/vet_list_padding"
                 android:text="@string/closed_report_details_headline"

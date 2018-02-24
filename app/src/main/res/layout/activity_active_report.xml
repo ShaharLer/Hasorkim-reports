@@ -178,6 +178,12 @@
 
     </ScrollView>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/vet_clinic_name_padding"
+        android:layout_marginTop="@dimen/report_list_padding"
+        android:background="@android:color/black" />
+
     <Button
         android:id="@+id/whatNowInfo"
         style="?android:attr/buttonBarButtonStyle"
@@ -190,8 +196,7 @@
         android:textStyle="bold"
         android:layout_marginTop="@dimen/report_list_padding"
         android:paddingStart="@dimen/vet_list_padding"
-        android:paddingEnd="@dimen/vet_list_padding"
-        android:background="@drawable/what_now_info_border"/>
+        android:paddingEnd="@dimen/vet_list_padding" />
 
     <LinearLayout
         android:id="@+id/reporter_buttons"
