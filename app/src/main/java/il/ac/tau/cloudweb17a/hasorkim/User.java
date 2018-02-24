@@ -4,12 +4,12 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-import java.util.UUID;
+import com.google.firebase.iid.FirebaseInstanceId;
+
 
 public class User {
 
-    private static User user;
-
+    public static User user;
     private String id;
     private String name;
     private String phoneNumber;
@@ -22,17 +22,13 @@ public class User {
 
     private User(Context applicationContext) {
         this.prefs = PreferenceManager.getDefaultSharedPreferences(applicationContext);
-        if (this.prefs.contains(applicationContext.getString(R.string.userId))) {
-            this.id = this.prefs.getString(applicationContext.getString(R.string.userId), "");
-        } else {
-            UUID uuid = UUID.randomUUID();
-            this.id = uuid.toString();
-            SharedPreferences.Editor editor = this.prefs.edit();
-            editor.putString(applicationContext.getString(R.string.userId), this.id);
-            editor.apply();
-        }
+        this.id = FirebaseInstanceId.getInstance().getToken();
         this.name = prefs.getString(USER_NAME, null);
         this.phoneNumber = prefs.getString(USER_PHONE_NUMBER, null);
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getId() {
