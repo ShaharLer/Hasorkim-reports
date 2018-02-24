@@ -28,8 +28,7 @@
                 android:layout_weight="1"
                 android:text="@string/report_details_status"
                 android:textSize="@dimen/report_text_size"
-                android:textStyle="bold"
-                android:textColor="@android:color/black"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/report_status"
@@ -48,14 +47,14 @@
             android:layout_below="@+id/status_layout"
             android:textSize="@dimen/report_list_text_size"
             android:textStyle="bold"
-            android:textColor="@color/reportListColor" />
+            android:textColor="@android:color/black" />
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:paddingTop="@dimen/for_more_details_padding">
+        android:paddingTop="@dimen/report_list_padding">
 
         <LinearLayout
             android:id="@+id/time_and_date"
