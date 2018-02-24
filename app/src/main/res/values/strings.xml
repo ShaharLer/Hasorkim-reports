@@ -142,5 +142,7 @@
     <string name="the_report_string">הדיווח</string>
     <string name="extra_phone_number_hint">ניתן להכניס מס\' נוסף</string>
     <string name="general_key">AIzaSyDVTZm5FPoWIsqLkYH_EW7AZDEe5Q3uZ50</string>
+    <string name="channel_name">hasorkim</string>
+    <string name="channel_description">hasorkim</string>
 
 </resources>
