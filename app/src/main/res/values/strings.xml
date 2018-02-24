@@ -135,8 +135,7 @@
     <string name="who_we_are_string9">רכשו סורק, או פנו אלינו לשמש כאומנה והצטרפו אלינו!</string>
 
     <!-- Keys and Ids -->
-    <string name="google_maps_key">AIzaSyCUlK4p2XDeYowxS67p6gC2GjqEHzLfSCo</string>
-    <string name="google_places_key">AIzaSyBcSLd55VIpNE_MRmt5GyRini-d7cENn1w</string>
+    <string name="google_maps_key">AIzaSyCHKjTI4oj1n4-RF-pXNND5Ux2fzTCsNYQ</string>
     <string name="share">שתף</string>
     <string name="active_report">דיווח פעיל</string>
     <string name="closed_report">דיווח לא פעיל</string>
